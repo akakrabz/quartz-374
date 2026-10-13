@@ -1,0 +1,159 @@
+OK   running example: L(C) as stated (Earley |w| <= 12, exact |w| <= 14)  [first difference None]
+OK   running example: L(A) as stated (Earley |w| <= 12, exact |w| <= 14)  [first difference None]
+OK   running example: L(B) as stated (Earley |w| <= 12, exact |w| <= 14)  [first difference None]
+OK   running example: L(S) as stated (Earley |w| <= 12, exact |w| <= 14)  [first difference None]
+OK   derivation S ⇝ A ⇝ 0C ⇝ 00C1 ⇝ 000C11 ⇝ 00011: every step applies one rule
+OK   00011 = 0^3 1^2 has m = 3 > n = 2, so it is in L(A) ⊆ L(S)
+OK   rules as equations: L(C) = {ε} ∪ 0 L(C) 1 (|w| <= 12)
+OK   A -> 0A | 0C: a string of A is one or more 0s followed by a string of C (|w| <= 12)
+OK   B -> B1 | C1: a string of B is a string of C followed by one or more 1s (|w| <= 12)
+OK   figure: left tree is a parse tree from C with yield 0011
+OK   figure: right tree is a parse tree from S with yield 00011
+OK   figure: the highlighted subtree of the right tree is the left tree
+OK   the right tree's leftmost derivation is the derivation of §5.1  [['S', 'A', '0C', '00C1', '000C11', '00011']]
+OK   0011 and 00011 have exactly one parse tree each (from C and from S)
+OK   S -> 1 | S+S: k = 1..8 ones have 1, 1, 2, 5, 14, 42, 132, 429 parse trees (Catalan numbers)  [[1, 1, 2, 5, 14, 42, 132, 429]]
+OK   own tree enumerator agrees on those counts
+OK   figure: both trees of 1+1+1 are valid, different, and are all its parse trees
+OK   figure: highlighted subtrees are 1+1 = the first two 1s (left) and the last two (right)
+OK   the two leftmost derivations of 1+1+1 are leftmost derivations, of the left and right tree
+OK   1+1: S ⇝ S+S ⇝ 1+S ⇝ 1+1 and S ⇝ S+S ⇝ S+1 ⇝ 1+1 are derivations; 1+1 has one parse tree
+OK   L(S -> 1 | S+S) = {(1+)^k 1 : k >= 0} (all strings over {1,+}, |w| <= 15)
+OK   S -> 1 | 1+S generates the same language (|w| <= 15)
+OK   S -> 1 | 1+S groups from the right: 1+1+1+1 has the single tree 1+(1+(1+1))
+OK   S -> 1 | 1+S is unambiguous: every string up to length 15 has exactly one parse tree
+OK   {a^i b^j c^k : i = j or j = k}: S -> XC | AY, X -> aXb | ε, C -> cC | ε, A -> aA | ε, Y -> bYc | ε (Earley, all strings over a,b,c with |w| <= 10)
+OK   ... X, C, A, Y generate a^i b^i, c*, a*, b^j c^j (|w| <= 8)
+OK   ... and a^n b^n c^n has exactly two parse trees (n = 0..4), while aabbc and abbcc have one
+OK   Lemma 5.1: C ⇝ 0C1 ⇝ ... ⇝ 0^nC1^n ⇝ 0^n1^n is a derivation, n = 0..10
+OK   Lemma 5.2: every string in L(C) is 0^n1^n (Earley |w| <= 12, exact |w| <= 14)
+OK   proof of Lemma 5.2: if C ⇝* w via C -> 0C1, then w = 0x1 with x in L(C) (|w| <= 14)
+OK   Lemma 5.3 grammar S -> ε | SS | 0S1 | 1S0 generates exactly #0 = #1 (Earley |w| <= 12, exact |w| <= 14)
+OK   arbitrarily long derivations: S (⇝ SS ⇝ S)^k ⇝ 0S1 ⇝ 01 is a derivation of 01 with 2k+2 steps, k <= 6
+OK   so even ε has infinitely many parse trees: S -> ε, S -> SS -> εε, ... (8 distinct trees built; the enumerator also detects the cycle S ⇝ SS ⇝ S)
+OK   shortest derivations: when a shortest derivation of w ≠ ε starts with S -> SS, both parts are non-empty (all balanced w, |w| <= 10)
+OK   Lemma 5.4: L(S) = (01)* (Earley |w| <= 12, exact |w| <= 14)
+OK   Lemma 5.4: L(A) = (10)* (Earley |w| <= 12, exact |w| <= 14)
+OK   (01)^n = 0(10)^(n-1)1 and (10)^n = 1(01)^(n-1)0 for n = 1..12
+OK   palindromes: S -> 0S0 | 1S1 | 0 | 1 | ε (Earley |w| <= 12, exact |w| <= 14)
+OK   non-palindromes: S -> 0S0 | 1S1 | 0Z1 | 1Z0 (Earley |w| <= 12, exact |w| <= 14)
+OK   non-palindromes: L(Z) = {0,1}* (Earley |w| <= 12, exact |w| <= 14)
+OK   every non-palindrome is x a z b x^R with a ≠ b (outermost mismatch), |w| <= 12
+OK   #0 = #1: S -> 0S1 | 1S0 | SS | ε (Earley |w| <= 12, exact |w| <= 14)
+OK   #0 = #1: S -> 0S1S | 1S0S | ε (Earley |w| <= 12, exact |w| <= 14)
+OK   shortest non-empty balanced prefix: starts and ends with different symbols, middle and rest balanced (|w| <= 14)
+OK   the figure's string 00111001 = 0·01·1·1001 splits at its first return to 0
+OK   S -> 0S1S | 1S0S | ε is ambiguous: 0101 has two parse trees (0·ε·1·01 and 0·10·1·ε)
+OK   #0 >= #1: S -> 0S1 | 1S0 | SS | 0 | ε (Earley |w| <= 12, exact |w| <= 14)
+OK   #0 ≠ #1 grammar: L(S) = {w : #0 ≠ #1} (Earley |w| <= 12, exact |w| <= 14)
+OK   #0 ≠ #1 grammar: L(O) = {w : #0 > #1} (Earley |w| <= 12, exact |w| <= 14)
+OK   #0 ≠ #1 grammar: L(I) = {w : #0 < #1} (Earley |w| <= 12, exact |w| <= 14)
+OK   #0 ≠ #1 grammar: L(E) = {w : #0 = #1} (Earley |w| <= 12, exact |w| <= 14)
+OK   more 0s than 1s: w = x0y at the first prefix with one extra 0; x balanced, #0(y) >= #1(y) (|w| <= 12)
+OK   balanced parentheses: S -> (S) | SS | ε (|w| <= 16)
+OK   balanced parentheses: S -> (S)S | ε (|w| <= 16)
+OK   S -> (S)S | ε is unambiguous: exactly one parse tree for every balanced string, |w| <= 14
+OK   S -> (S) | SS | ε is ambiguous: ()()() has the two parse trees SS·S and S·SS
+OK   ... and ε alone has infinitely many: S -> ε, S -> SS -> εε, ... (8 different trees checked)
+OK   expressions: E grammar = well-formed expressions, Earley on all strings over X,Y,+,×,(,) with |w| <= 6
+OK   the generator enumerates exactly the well-formed expressions (vs brute force, |w| <= 6)
+OK   expressions: exact language of E equals the well-formed expressions up to length 11  [20804 strings]
+OK   expression grammar is unambiguous: one parse tree for every expression of length <= 9
+OK   X+Y×X parses as X+(Y×X): root E -> E+T with E ⇝* X and T ⇝* Y×X
+OK   X×Y+X parses as (X×Y)+X
+OK   X+Y+X parses as (X+Y)+X (left to right)
+OK   design 1: L(S) = {0^i1^j : i <= j <= 2i} (Earley |w| <= 12, exact |w| <= 14)
+OK   design 1: L(T) = {0^b 1^2b} (Earley |w| <= 12, exact |w| <= 14)
+OK   design 1: unambiguous (one parse tree per string, |w| <= 14)
+OK   design 1 is not regular: F = 0*; for i < j <= 14, z = 1^i gives 0^i1^i in L and 0^j1^i not in L
+OK   ... (the suffix 1^i does not work when j < i, e.g. 0^2 1^3 is in L, so name the strings with i < j)
+OK   design 1: S -> 0S1 | 0S11 | ε generates the same language (Earley |w| <= 12, exact |w| <= 14)
+OK   design 1: ... but gives 00111 two parse trees
+OK   design 1: 0^i 1^j = 0^a (0^b 1^2b) 1^a with a = 2i - j, b = j - i (all i <= j <= 2i <= 20)
+OK   design 1, one mistake: S -> 0S1 | 0S11 | 01 | 011 generates the language minus ε (Earley |w| <= 12, exact |w| <= 14)
+OK   design 1, wrong: S -> 0S1 | S1 | ε generates {0^i1^j : j >= i} (Earley |w| <= 12, exact |w| <= 14), which contains 0111, 01111, ...
+OK   design 1 tests: ε, 01, 011, 0011, 00111, 001111 are in; 0, 1, 001, 0111, 0101 are out
+OK   design 2: L(S) = {0,1}* minus {0^n1^n} (Earley |w| <= 12, exact |w| <= 14)
+OK   design 2: L(N) = strings containing 10 = strings not in 0*1* (Earley |w| <= 12, exact |w| <= 14)
+OK   design 2: L(X) = {0,1}* (Earley |w| <= 12, exact |w| <= 14)
+OK   design 2 tests: 0, 1, 10, 001, 0110 are in; ε, 01, 0011 are out
+OK   design 2: S -> A | B alone (the running example) misses 10, 110, 0110, ... (every string containing 10)
+OK   naive grammar S -> 0 | 1 | S+S | SS | S* | (S) = well-formed regular expressions over 0, 1 (Earley, all strings |w| <= 6)
+OK   naive grammar: exact language = well-formed expressions, all strings of length <= 7  [8786 expressions]
+OK   precedence grammar S -> S+T | T, T -> TF | F, F -> F* | (S) | 0 | 1: same language (exact, |w| <= 9)  [162452 strings]
+OK   precedence grammar: Earley agrees with well-formedness on all strings |w| <= 6
+OK   0*+1* has 2 parse trees in the naive grammar and 1 in the precedence grammar
+OK   precedence grammar is unambiguous: one parse tree for every expression of length <= 7
+OK   precedence grammar parses 0*+1* as (0*)+(1*): root S -> S+T
+OK   precedence grammar: L(T) = expressions with no + outside parentheses (exact, |w| <= 9)
+OK   precedence grammar: L(F) = 0, 1 or (expression), followed by zero or more stars (exact, |w| <= 9)
+OK   figure: the two trees of 0*+1* are valid naive-grammar trees and are all of them
+OK   figure: left tree has root S -> S+S, right tree root S -> S* over 0*+1 (the meaning (0*+1)*)
+OK   §5.5 table: the construction on 0+1(0+1)*00 gives exactly the grammar on the page  [S -> A | B; A -> 0; B -> CD; C -> 1; D -> EI; E -> ε | FE; F -> G | H; G -> 0; H -> 1; I -> 00]
+OK   ... and it generates exactly L(0+1(0+1)*00) (Earley |w| <= 12, exact |w| <= 14)
+OK   L(0+1(0+1)*00) = binary numerals of multiples of 4 without leading 0s (|w| <= 14)
+OK   hand-made grammar S -> 0 | 1X00, X -> ε | 0X | 1X generates the same language (Earley |w| <= 12, exact |w| <= 14)
+OK   the construction is correct on all 852 expression trees of size <= 5 over ∅, ε, 0, 1 (exact, |w| <= 7)
+OK   {0^n1^n} is not regular: fooling set 0*, x = 0^i, y = 0^j, z = 1^i (i ≠ j <= 12)
+OK   closure: S -> CR, C -> 0C1 | 01, R -> 0R | ε generates {0^i 1^i 0^j : i >= 1, j >= 0} (Earley |w| <= 12, exact |w| <= 14)
+OK   closure: S -> PD, P -> 0P | ε, D -> 1D0 | 10 generates {0^i 1^j 0^j : i >= 0, j >= 1} (Earley |w| <= 12, exact |w| <= 14)
+OK   their intersection is {0^n 1^n 0^n : n >= 1}, all strings |w| <= 15
+OK   without the forced 1s, both languages contain every 0^k (k <= 10), so their intersection does too
+OK   reversal: reversing every right side of the running example generates {1^n 0^m : m ≠ n} (Earley |w| <= 12, exact |w| <= 14)
+OK   figure automaton accepts exactly {0^m1^n : m ≠ n} (all strings |w| <= 12)
+OK   ... and the search was exhaustive: no configuration needed a stack deeper than |w| + 2
+OK   module E alone accepts exactly {0^n1^n} (|w| <= 12)
+OK   trace on 001: every line is one legal transition after the previous one; starts (001, s_S, ε), ends (ε, t_S, ε)
+OK   Lemma 5.5 on the running example: the automaton accepts L(S) = {0^m1^n : m ≠ n} (|w| <= 10, stack <= 2|w|+4)
+OK   Lemma 5.5: module E of the figure is exactly the construction for E -> 0E1 | ε (states renamed)
+OK   Lemma 5.6 on the figure: the conversion gives exactly the grammar on the page
+OK   Lemma 5.6 grammar: L([sS]) = 0^m1^n, m ≠ n (|w| <= 12)
+OK   Lemma 5.6 grammar: L([a]) = 0^m1^n, m >= n (|w| <= 12)
+OK   Lemma 5.6 grammar: L([b]) = 1^+ (|w| <= 12)
+OK   Lemma 5.6 grammar: L([tS]) = ε (|w| <= 12)
+OK   Lemma 5.6 grammar: L([sE]) = 0^n1^n (|w| <= 12)
+OK   Lemma 5.6 grammar: L([c]) = 0^n1^(n+1) (|w| <= 12)
+OK   Lemma 5.6 grammar: L([d]) = 1 (|w| <= 12)
+OK   Lemma 5.6 grammar: L([tE]) = ε (|w| <= 12)
+OK   an NFA with no calls (the parity DFA of §3.3) becomes [s] -> 0[s] | 1[t], [t] -> 0[t] | 1[s] | ε
+OK   ... which generates the strings with an odd number of 1s (Earley |w| <= 12, exact |w| <= 14)
+OK   the book's CNF grammar is in CNF (CFG.is_cnf)  [(True, None)]
+OK   the book's CNF grammar generates {0^m1^n : m ≠ n} (Earley |w| <= 12, exact |w| <= 14)
+OK   figure: CNF tree is a valid parse tree of 00011
+OK   figure: it has 9 = 2·5 - 1 nonterminal nodes: 5 of the form A -> a, 4 of the form A -> BC
+OK   figure: it is the only parse tree of 00011
+OK   2n - 1: every parse tree of every string of length 1..9 has 2n - 1 nonterminal nodes (50 trees)
+OK   every derivation of 00011 in the CNF grammar has exactly 9 steps  [{9: 384} derivations]
+OK   CYK (dynamic programming) agrees with Earley on the CNF grammar for all strings |w| <= 12
+OK   CNF step 0: the algorithm's grammar is the one on the page  [S' -> S; S -> A | B; A -> 0A | 0C; B -> B1 | C1; C -> ε | 0C1]
+OK   CNF step 0: the grammar still generates {0^m1^n : m ≠ n} (Earley |w| <= 12, exact |w| <= 14)  [None]
+OK   CNF step 1: the algorithm's grammar is the one on the page  [S' -> S; S -> A | B; A -> 0A | 0C; B -> B1 | C1; C -> ε | 0D; D -> C1]
+OK   CNF step 1: the grammar still generates {0^m1^n : m ≠ n} (Earley |w| <= 12, exact |w| <= 14)  [None]
+OK   CNF step 2: the algorithm's grammar is the one on the page  [S -> A | B; A -> 0A | 0C; B -> B1 | C1; C -> ε | 0D; D -> C1]
+OK   CNF step 2: the grammar still generates {0^m1^n : m ≠ n} (Earley |w| <= 12, exact |w| <= 14)  [None]
+OK   CNF step 3: the algorithm's grammar is the one on the page  [S -> A | B; A -> 0A | 0C | 0; B -> B1 | C1 | 1; C -> 0D; D -> C1 | 1]
+OK   CNF step 3: the grammar still generates {0^m1^n : m ≠ n} (Earley |w| <= 12, exact |w| <= 14)  [None]
+OK   CNF step 4: the algorithm's grammar is the one on the page  [S -> A | B; A -> 0A | 0C | 0; B -> B1 | C1 | 1; C -> 0D; D -> C1 | 1]
+OK   CNF step 4: the grammar still generates {0^m1^n : m ≠ n} (Earley |w| <= 12, exact |w| <= 14)  [None]
+OK   CNF step 5: the algorithm's grammar is the one on the page  [S -> 0A | 0C | 0 | B1 | C1 | 1; A -> 0A | 0C | 0; B -> B1 | C1 | 1; C -> 0D; D -> C1 | 1]
+OK   CNF step 5: the grammar still generates {0^m1^n : m ≠ n} (Earley |w| <= 12, exact |w| <= 14)  [None]
+OK   CNF step 6: the algorithm's grammar is the one on the page  [S -> EA | EC | 0 | BF | CF | 1; A -> EA | EC | 0; B -> BF | CF | 1; C -> ED; D -> CF | 1; E -> 0; F -> 1]
+OK   CNF step 6: the grammar still generates {0^m1^n : m ≠ n} (Earley |w| <= 12, exact |w| <= 14)  [None]
+OK   CNF step 2: C is the only nullable nonterminal, so S' -> S is dropped (S is on no right side)
+OK   CNF step 3: no ε-rules remain; L(C) = {0^n1^n : n >= 1}, L(D) = {0^n 1^(n+1)} (Earley |w| <= 12, exact |w| <= 14)
+OK   CNF step 4: no unit-rule cycles, nothing merged
+OK   CNF step 5: no unit rules remain
+OK   CNF step 6 = the book's CNF grammar, and is_cnf
+OK   step 0: on S -> 0S | 1 (S on a right side, not nullable) the page's rule keeps S'; the result is in CNF and generates 0*1 (Earley |w| <= 12, exact |w| <= 14)
+OK   step 0: the book's rule (drop S' whenever it is not nullable) leaves the start symbol S on a right side there, so its result is not in CNF
+OK   step 3 adds S' -> ε when S' is nullable: on S -> ε | SS | 0S1 | 1S0 the result's only ε-rule is S' -> ε
+OK   step 4 deletes every rule A -> A: there step 3 turns S -> SS into S -> S, and step 4 drops it
+OK   the conversion on palindromes: CNF, same language (|w| <= 12)  [(True, None)]
+OK   the conversion on #0 = #1 (S -> 0S1 | 1S0 | SS | ε): CNF, same language (|w| <= 12)  [(True, None)]
+OK   the conversion on balanced parentheses (S -> (S)S | ε): CNF, same language (|w| <= 14)  [(True, None)]
+OK   the conversion on Lemma 5.3 grammar: CNF, same language (|w| <= 12)  [(True, None)]
+OK   the conversion on #0 ≠ #1: CNF, same language (|w| <= 10)  [(True, None)]
+OK   the conversion on expressions: CNF, same language (|w| <= 5)  [(True, None)]
+OK   step 5 order: on S -> A, A -> B | 1, B -> 0B | 0, reverse topological order removes every unit rule, the wrong order leaves S -> B
+
+ALL OK

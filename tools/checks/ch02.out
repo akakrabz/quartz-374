@@ -1,0 +1,114 @@
+OK   ∅•L = ∅ and {ε}•L = L (all 128 languages L ⊆ Σ^{<=2})
+OK   ∅* = {ε}* = {ε}
+OK   as expressions: ∅* ≡ ε ≡ ε*, ∅(0+1)* ≡ ∅, ε(0+11)* ≡ (0+11)*
+OK   ∅ and {ε} differ: ε matches ε but not ∅
+OK   {HOCUS, ABRACA}•{POCUS, DABRA} = {HOCUSPOCUS, HOCUSDABRA, ABRACAPOCUS, ABRACADABRA}  [['ABRACADABRA', 'ABRACAPOCUS', 'HOCUSDABRA', 'HOCUSPOCUS']]
+OK   {0, 00}•{0, 00} = {00, 000, 0000}: only 3 strings, not 4
+OK   {0, 11}* starts ε, 0, 00, 11, 000, 011, 110 (all its strings of length <= 3)  [['', '0', '11', '00', '011', '000', '110']]
+OK   L* is infinite for every L other than ∅ and {ε} (L ⊆ Σ^{<=2}: L* has strings of length >= 7 among those <= 8)
+OK   Σ* is the star of Σ: (0+1)* matches every string (|w| <= 12)
+OK   L+ = L•L* consists of concatenations of one or more strings of L: {0,11}+ up to length 3
+OK   Lemma 2.1(a,b): ∪ is commutative and associative
+OK   Lemma 2.1(c,d): ∅ annihilates and {ε} is the identity for concatenation
+OK   Lemma 2.1(e): (A•B)•C = A•(B•C) (600+ triples, truncated at length 7)
+OK   Lemma 2.1(f,g): concatenation distributes over ∪ on both sides
+OK   (0+1)*(0+1)* ≡ (0+1)* (Lemma 2.2(a): L*L* = L*)
+OK   {HOCUS, ABRACA}•{POCUS, DABRA} has |A|·|B| = 4 strings
+OK   concatenation is not commutative: {0}•{1} ≠ {1}•{0}
+OK   concatenation does not distribute over ∩: A = {ε, 0}, B = {0}, C = {00} gives A(B∩C) = ∅ ≠ AB∩AC = {00}
+OK   A(B ∩ C) ⊆ AB ∩ AC for all 600+ triples (the inclusion that does hold)
+OK   Lemma 2.2(a): L* = {ε} ∪ L+ = L*L* = (L ∪ {ε})* = (L \ {ε})* = {ε} ∪ L ∪ L+L+ (278 languages)
+OK   Lemma 2.2(b): L+ = LL* = L*L = L+L* = L*L+ = L ∪ L+L+
+OK   Lemma 2.2(c): L+ = L* iff ε ∈ L
+OK   ε ∈ L+ iff ε ∈ L (278 languages)
+OK   for L = {0}: L+ is 00* and L* is 0* (up to length 7)
+OK   Arden step 1 distributed: 0*(1L_s ∪ {ε}) = 0*1L_s ∪ 0* (with L_s = (0+10*1)*10*)
+OK   Arden step 2: 0L_s ∪ 1L_t = 0L_s ∪ 10*1L_s ∪ 10* (with the solved L_s, L_t)
+OK   Lemma 2.3 (Arden): A*B always satisfies L = AL ∪ B (400 pairs A, B)
+OK   Lemma 2.3 (Arden): if ε ∉ A, the only solution is A*B (pairs with ε ∉ A)
+OK   Arden example: L = 0L ∪ {1} forces L = 0*1 (unique solution, |w| <= 12)
+OK   ... and 0*1 satisfies it exactly: 0(0*1) + 1 ≡ 0*1
+OK   with ε ∈ A the solution is not unique: for A = {ε, 0}, B = {1} both 0*1 and Σ* solve L = AL ∪ B
+OK   A*B for A = ε+0, B = 1 is (ε+0)*1 ≡ 0*1, the smallest solution
+OK   L_s := {w : δ*(s,w) ∈ A} is 'odd number of 1s' and L_t is 'even number of 1s' (|w| <= 12)
+OK   equations: L_s = 0L_s ∪ 1L_t and L_t = 0L_t ∪ 1L_s ∪ {ε} (|w| <= 12)
+OK   solution: L_s = (0+10*1)*10* exactly
+OK   and L_t = 0*(1L_s ∪ {ε}) = 0*(1(0+10*1)*10*+ε) is exactly 'even number of 1s'
+OK   intermediate step: L_s = (0+10*1)L_s ∪ 10* has the solution (0+10*1)*10* (substitute and compare)
+OK   the same method on the even-0s DFA gives (1+01*0)*, equivalent to the table's 1*(01*01*)*
+OK   table: 0* matches exactly its described language  [dfa/pred diff None, regex witness None]
+OK   table: 00000* matches exactly its described language  [dfa/pred diff None, regex witness None]
+OK   table: (00000)* matches exactly its described language  [dfa/pred diff None, regex witness None]
+OK   table: (0+1)* matches exactly its described language  [dfa/pred diff None, regex witness None]
+OK   table: (ε+1)(01)*(ε+0) matches exactly its described language  [dfa/pred diff None, regex witness None]
+OK   table: (0+1)*0000(0+1)* matches exactly its described language  [dfa/pred diff None, regex witness None]
+OK   table: ((ε+0+00+000)1)*(ε+0+00+000) matches exactly its described language  [dfa/pred diff None, regex witness None]
+OK   table: ((0+1)(0+1))* matches exactly its described language  [dfa/pred diff None, regex witness None]
+OK   table: 1*(01*01*)* matches exactly its described language  [dfa/pred diff None, regex witness None]
+OK   table: 0+1(0+1)*00 matches exactly its described language  [dfa/pred diff None, regex witness None]
+OK   table: 0*0+0*1(10*1+01*0)*10* matches exactly its described language  [dfa/pred diff None, regex witness None]
+OK   table: 0+1(0+1)*00 matches 0, 100, 1000, 1100 and not 00, 0100, 10, ε
+OK   table: the multiples-of-3 expression does not match ε but matches 0, 11, 0110, 1001
+OK   multiples of 3: the expression is exactly the 4-state DFA (start s, non-accepting, plus remainder states 0, 1, 2), and the book's unsimplified 00*+(00*1+1)(10*1+01*0)*10* is equivalent
+OK   ... while the three remainder states alone (start 0) also accept ε: their language is ε + the expression
+OK   reading 0+1(0+1)*00 as {0} ∪ ({1}•{0,1}*•{00})
+OK   10* = {1, 10, 100, ...} and (10)* = {ε, 10, 1010, ...} (all strings of length <= 4)
+OK   precedence: 10* ≢ (10)* (ε matches only the second), and 10* ≡ 1(0*)
+OK   precedence: 0+10 ≡ 0+(10) and 0+10 ≢ (0+1)0
+OK   precedence: 00000* ≢ (00000)*; 00000* means 0000(0*)
+OK   precedence: 0+1* is {0} ∪ 1*, not (0+1)*
+OK   (1+0)* ≡ (0+1)*
+OK   (0*1*)* ≡ (0+1)*
+OK   (00+01+10+11)*(0+1+ε) ≡ (0+1)*
+OK   (00+01+10+11)* alone is only the even-length strings
+OK   example 1: the DFA for 'every 1 is immediately followed by 00' is right (|w| <= 14)
+OK   example 1: (0+100)* is exactly 'every 1 is immediately followed by 00'
+OK   example 1 lists: ε, 0, 100, 1000, 0100100 in; 1, 10, 11, 1001 out (predicate and expression agree)
+OK   example 1: every string of the language splits into blocks 0 and 100 in exactly one way (|w| <= 14)
+OK   example 1: the block decomposition in the figure, 0|100|0|100|100|0
+OK   example 1, wrong answer (0*100)* misses 0, 00 and 1000 (strings ending in 0s after the last block)
+OK   example 1: (0*100)* is exactly ε plus the strings of the language that end in 100
+OK   example 1, wrong answer (0*100)*: misses 0, and in fact every 0^n with n >= 1  [0]
+OK   example 2: the DFA for 'even number of 0s and no 11' is right (|w| <= 14)
+OK   example 2: ((0+10)(0+10))*(ε+1) is exactly 'even number of 0s and no substring 11'
+OK   example 2: a string has no 11 iff it is in (0+10)*(ε+1)
+OK   example 2: in every string without 11, every 1 except a final one is followed by 0 (|w| <= 14)
+OK   example 2: each block 0 or 10 holds exactly one 0
+OK   example 2 lists: ε, 1, 00, 010, 1001 in; 0, 11, 101, 0110 out (predicate and expression agree)
+OK   example 2: the figure's string 10|0|0|10|1 is in the language
+OK   example 2, wrong answer without (ε+1): misses 1, and every 0^(2k)1  [1]
+OK   example 2, wrong answer (0+10)*(ε+1) ignores the parity: accepts 0, 000, 00000, ...  [0]
+OK   true/false: ∅* = ∅ is false; L+ = L* fails for L = {0}; (10)* and 10* are not equivalent
+OK   a subset of a regular language need not be regular: {0^n1^n} ⊆ L((0+1)*), and 0* is a fooling set for it (x = 0^i, y = 0^j, z = 1^i: xz in, yz out, for all i ≠ j <= 10)
+OK   regex shorthands: a+ = aa*, a? = ε+a, a{2,3} = aa(a+ε) (as in programming regexen)
+OK   in a programming regex, 0+1 means one or more 0s then 1 (= 00*1), union is 0|1, and [01] is 0+1
+OK   the regex (.*)\1 (back-reference) matches exactly the squares ww (|w| <= 12)
+OK   {ww} is not regular: F = 0*1, x = 0^i1, y = 0^j1, z = 0^i1 (i ≠ j <= 10)
+OK   size of 0+1(0+1)*00 is 10 (its string has 11 characters)
+OK   book: size of 0*0+0*1(10*1+01*0)*10* is 29, its length 22
+OK   figure tree has 10 nodes: internal + • • * +, leaves 0 1 0 1 00
+OK   figure tree denotes 0+1(0+1)*00  [(0)+((1)((((0)+(1))*)(00)))]
+OK   highlighted subtree denotes (0+1)*00
+OK   subexpressions of 0+1(0+1)*00 include (0+1)*00, 1(0+1)*, (0+1)* and 0+1  [['(0+1)*', '(0+1)*00', '0', '0+1', '0+1(0+1)*00', '00', '1', '1(0+1)*', '1(0+1)*00']]
+OK   ... but not the well-formed substring 0+1(0+1)* (no subtree spells it)
+OK   the two groupings 1•((0+1)*00) and (1(0+1)*)•00 are both trees of 1(0+1)*00
+OK   0+1(0+1)* is a substring of 0+1(0+1)*00 and a well-formed expression
+OK   book: 10*1 is a subexpression of 0*0+0*1(10*1+01*0)*10*; 0*0+0*1 and 0*1+01*0 are not
+OK   every subexpression of 0+1(0+1)*00 (and of the book's 29-node example) is a substring of it
+OK   Lemma 2.4: all 1674 ∅-free expressions of size <= 6 over ε, 0, 1 denote non-empty languages
+OK   the converse fails: ∅* and 0+∅ use ∅ but are not empty
+OK   Lemma 2.5 proof: an expression with a non-empty language (0+∅) can have a subexpression (∅) with an empty one
+OK   Lemma 2.4 proof, star case: ε matches S* for every S (sizes <= 5)
+OK   Lemma 2.5: the proof's construction works on all 852 expressions of size <= 5 over ∅, ε, 0, 1
+OK   Lemma 2.5 examples: ∅* becomes ε, (0+∅)1 becomes 01, 0∅ + 1* becomes 1*
+OK   L(rev(R)) = L(R)^R for every expression of size <= 5 over ∅, ε, 0, 1 (exact)
+OK   rev(0+1(0+1)*00) = 0+00(0+1)*1, and it denotes exactly L(0+1(0+1)*00)^R
+OK   rev((0+100)*) = (0+001)*, and it denotes exactly L((0+100)*)^R
+OK   rev(0*1) = 10*, and it denotes exactly L(0*1)^R
+OK   (A∪B)^R = A^R ∪ B^R, (A•B)^R = B^R•A^R, (A*)^R = (A^R)* (300 pairs, truncated at length 7)
+OK   7 symbols read as base-8 digits 1-7: different strings (length <= 5) get different integers
+OK   well-formed expressions over {0,1} are not a regular language: x = (^i, y = (^j, z = 0)^i (i ≠ j <= 8)
+OK   L_alpha = {1^n : bit n+1 of alpha is 1}: the 256 reals k/256 give 256 different languages
+OK   a finite language is regular: {ε, 01, 110} = ε+01+110 (exact)
+
+ALL OK

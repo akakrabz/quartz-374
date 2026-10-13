@@ -1,0 +1,96 @@
+OK   2.1(a) No: ∅•{ε} = ∅ ≠ {ε}
+OK   2.1(b) No: {0, 01}•{1, 11} = {01, 011, 0111}, three strings, since 0•11 = 01•1 = 011  [['01', '011', '0111']]
+OK   2.1(c) Yes: (L*)* = L* (all 128 languages ⊆ Σ^{<=2} and 300 random ones ⊆ Σ^{<=3}, truncated at 7)
+OK   2.1(c) reason: L ⊆ L* for every L
+OK   2.1(d) No: A = {0}, B = {1}: 01 ∈ (A∪B)* but 01 ∉ A* ∪ B*
+OK   2.1(d) only A* ∪ B* ⊆ (A∪B)* holds (random pairs)
+OK   2.1(e) Yes: ∅+ = ∅•∅* = ∅•{ε} = ∅, while ∅* = {ε}
+OK   2.1(f) No: L = {ε, 0} contains ε but L•L = {ε, 0, 00} ≠ L
+OK   2.1(f) what holds: ε ∈ L implies L ⊆ L•L (all test languages containing ε)
+OK   2.2(a) DFA for 'every 0 is immediately followed by a 1' matches its predicate (|w| <= 14)
+OK   2.2(a) (1+01)* is exactly 'every 0 is immediately followed by a 1'
+OK   2.2(a) ... equivalently: no 00 and does not end in 0 (|w| <= 14)
+OK   2.2(a) length <= 2: ε, 1, 01, 11
+OK   2.2(b) DFA for 'ε or an even, positive number of 1s' matches its predicate
+OK   2.2(b) (0*10*10*)* is exactly ε plus the strings with an even, positive number of 1s
+OK   2.2(b) watch out: 0, 00, 000 have an even number (zero) of 1s but do not match
+OK   2.2(b) length <= 2: ε, 11
+OK   2.2(c) DFA for {0^n : n ≠ 1} matches its predicate
+OK   2.2(c) (00+000)* is exactly {0^n : n ≠ 1}, and equivalent to ε+000*
+OK   2.2(c) every n ≠ 1 is 2i + 3j
+OK   2.2(c) length <= 2: ε, 00
+OK   2.2(d) DFA for 0^k1 matches its predicate
+OK   2.2(d) (0+∅)*1∅* ≡ 0*1 exactly; L(0+∅) = {0}, L(∅*) = {ε}
+OK   2.2(d) length <= 2: 1, 01
+OK   2.3 DFA for 'every 0 is followed somewhere later by a 1' matches its predicate
+OK   2.3 the language is {ε} ∪ {strings ending in 1} (|w| <= 14)
+OK   2.3 the student's (0+1)*1 is exactly L minus ε: it misses ε and nothing else
+OK   2.3 fixes: ε+(0+1)*1 and (0*1)* are both exactly L
+OK   2.4(a) DFA for 'contains 00 and 11' matches its predicate
+OK   2.4(a) the expression is exactly 'contains both 00 and 11'
+OK   2.4(a) occurrences of 00 and 11 never overlap (|w| <= 12)
+OK   2.4(a) checks: 0011, 1100, 10011 match; 0110, 0101, ε do not
+OK   2.4(b) DFA for 'even number of 0s between consecutive 1s' matches its predicate
+OK   2.4(b) 0* + 0*1((00)*1)*0* is exactly that language
+OK   2.4(b) checks: ε, 000, 0110, 1001, 01001100 match; 101, 10001, 11011 do not
+OK   2.4(b) watch out: 0*(1(00)*)* misses 10 and every 10^(2k+1) (k <= 6), all in the language
+OK   2.4(c) DFA for 'w_i = 0 whenever 3 divides i' matches its predicate
+OK   2.4(c) ((0+1)(0+1)0)*(ε+0+1)(ε+0+1) is exactly that language
+OK   2.4(c) (ε+0+1)(ε+0+1) is exactly the strings of length <= 2
+OK   2.4(c) checks: ε, 11, 110, 11011 match; 111, 000001 do not
+OK   2.4(c) watch out: ((0+1)(0+1)0)* alone is the language restricted to lengths divisible by 3
+OK   2.5(a) DFA for 'contains 01' matches its predicate
+OK   2.5(a) equivalent: (0+1)*0(0+1)*1(0+1)* ≡ (0+1)*01(0+1)* ≡ 'contains 01'
+OK   2.5(a) reason: if w has a 0 before a 1, the first 1 after that 0 is immediately preceded by a 0 (|w| <= 12)
+OK   2.5(b) equivalent: 1(01)* ≡ (10)*1
+OK   2.5(b) 1(01)^n = (10)^n1 for n <= 10, the alternating string of length 2n+1
+OK   2.5(c) not equivalent; shortest witness 1001, matched only by (01+10)*  [1001]
+OK   2.5(c) L((01)*(10)*) ⊊ L((01+10)*)
+OK   2.5(c) length 4: left 0101, 0110, 1001, 1010; right 0101, 0110, 1010; lengths <= 3 agree
+OK   2.5(d) not equivalent; shortest witness 010, matched only by (0+01)*  [010]
+OK   2.5(d) L(0*(01)*) ⊊ L((0+01)*); 010 is the only witness of length <= 3
+OK   2.6 Z = 1* solves Z = 1Z ∪ {ε}
+OK   2.6 1 1* ∪ {ε} = 1*
+OK   2.6 Y = 0X ∪ 1* solves Y = 0X ∪ 1Z ∪ {ε} (with the solved X, Z)
+OK   2.6 X = (0+10)*1* solves X = 0X ∪ 1Y ∪ {ε}
+OK   2.6 X solves X = (0+10)X ∪ 1*
+OK   2.6 substitution: 0X ∪ 1(0X ∪ 1*) ∪ {ε} = (0 ∪ 10)X ∪ 1* for arbitrary X (200 random X, truncated)
+OK   2.6 the unique solution of the system (computed length by length) equals X, Y, Z (|w| <= 12)
+OK   2.6 DFA for 'no substring 110' matches its predicate
+OK   2.6(b) X = (0+10)*1* is exactly the strings with no substring 110
+OK   2.6 Y = {y : 1y has no 110} and Z = {z : 11z has no 110}, exactly
+OK   2.6 checks: 0, 1011, 0101, 111 ∈ X; 110, 01101 ∉ X
+OK   2.6 (0+10)* is the strings in which every 1 is immediately followed by a 0
+OK   2.6 coefficients 1 and 0+10 do not contain ε
+OK   2.7(a) DFA for 'exactly one occurrence of 11' matches its predicate
+OK   2.7(a) (0+10)*11(0+01)* is exactly 'contains 11 exactly once'
+OK   2.7(a) 111 contains 11 twice
+OK   2.7(a) (0+10)* = no 11, and empty or ending in 0; (0+01)* = no 11, and empty or starting with 0 (|w| <= 12)
+OK   2.7(a) test: of the strings of length <= 3, exactly 11, 011, 110 match, and they are the language
+OK   2.7(a) wrong answer (0+1)*11(0+1)* matches 111 and every 1^k with k >= 3 (two or more occurrences)
+OK   2.7(a) wrong answer (0+10)*11(0+10)*: matches 1110 (two occurrences), misses 11(01)^k (k = 1..6, one occurrence)
+OK   2.7(b) DFA for 'every 0 has a 1 as a neighbor' matches its predicate
+OK   2.7(b) ε+(ε+0)1(1+01+001)*(ε+0) is exactly that language
+OK   2.7(b) test: of the strings of length <= 3 it matches exactly ε, 1, 01, 10, 11, 010, 011, 101, 110, 111
+OK   2.7(b) rejected: 0, 00, 000, 001, 100; 1001 matches, 10001 does not
+OK   2.7(b) a non-empty string with no 1 is never in the language
+OK   2.7(b) forgetting ε loses exactly one string
+OK   2.7(b) allowing 00 at an end is wrong on infinitely many strings: 001^k and 1^k00 (k = 1..8) match but are out
+OK   2.8 the exact prefix language of (01)*1 agrees with brute force (|x| <= 7, completions |y| <= 6)
+OK   2.8 the exact prefix language of 0(0+1)*1 agrees with brute force (|x| <= 7, completions |y| <= 6)
+OK   2.8 the exact prefix language of (0+10)*11(0+01)* agrees with brute force (|x| <= 7, completions |y| <= 6)
+OK   2.8 the exact prefix language of 1*0 agrees with brute force (|x| <= 7, completions |y| <= 6)
+OK   2.8(b) L(pre(R)) = Pre(L(R)) exactly for all 1674 ∅-free expression trees of size <= 6 over ε, 0, 1  [[]]
+OK   2.8(b) ... and for ten larger expressions (including strings longer than one symbol)  [[]]
+OK   2.8(a) pre((01)*1) = (01)*(ε+0+01) + (01)*(ε+1), equivalent to (01)*(ε+0+1) and exactly Pre(L((01)*1))  [((01)*(ε+0+01))+((01)*)(ε+1)]
+OK   2.8 check: strings of length <= 3 of Pre(L((01)*1)): ε, 0, 1, 01, 010, 011
+OK   2.8 check: those are the prefixes of length <= 3 of 1, 011, 01011; longer strings of L((01)*1) add none
+OK   2.8 (01)*01 ⊆ (01)*, so (01)*(ε+0+01) ≡ (01)*(ε+0)
+OK   2.8(c) with pre(∅) := ∅: pre(0∅) ≡ ε+0, but Pre(L(0∅)) = L(∅)  [(ε+0)+(0)(∅)]
+OK   2.8(c) with pre(∅) := ∅: pre(∅*) ≡ ∅, but Pre(L(∅*)) = L(ε)  [(∅)*(∅)]
+OK   2.8(c) with ∅ allowed the construction fails on some expressions (all of them use ∅)  [116 failures, e.g. ['∅*', '∅**', 'ε∅', '0∅']]
+OK   2.8(b) proof identities: Pre(A∪B) = Pre(A)∪Pre(B); Pre(AB) = Pre(A) ∪ A·Pre(B) when B ≠ ∅; Pre(A*) = A*·Pre(A) when A ≠ ∅
+OK   2.8(c) the concatenation identity fails when B = ∅ (A = {0}: Pre(A∅) = ∅ but Pre(A) = {ε, 0})
+OK   2.8(b) Lemma 2.4 is what the proof needs: every ∅-free expression of size <= 6 has a non-empty language
+
+ALL OK

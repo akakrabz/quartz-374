@@ -1,0 +1,41 @@
+OK   6.2(a) run on 000: the nine configurations of the solution, accept after 8 steps  [[('start', '000', 0), ('look', '100', 1), ('look', '100', 0), ('start', '100', 1), ('look', '110', 2), ('look', '110', 1), ('start', '110', 2), ('look', '111', 3), ('accept', '1111', 2)]]
+OK   6.2(b) epsilon: start reads blank, no transition: reject after 1 step
+OK   6.2(b) 1: start reads 1 at cell 0 and moves left: crash after 1 step
+OK   6.2(b) 01: (start,01,0) => (look,11,1) => (start,11,2) => reject  [[('start', '01', 0), ('look', '11', 1), ('start', '11', 2), ('reject', '11', 2)]]
+OK   6.2(b) 011: (start,011,0) => (look,111,1) => (start,111,2) => (look,111,1) repeats: runs forever  [[('start', '011', 0), ('look', '111', 1), ('start', '111', 2), ('look', '111', 1), ('start', '111', 2)]]
+OK   6.2 going further: Accept = (0+01)*0, Reject = eps+(0+01)*01, crash = 1(0+1)*, loop = (0+01)*011(0+1)* (a partition; every run on |w| <= 12)  [[]]
+OK   6.2(c) M accepts 000 and 010 (so Accept(M) is not just 0+)
+OK   6.3 fixed machine (delete the seek1-blank entry) decides E: accepts E, rejects the rest, |w| <= 12
+OK   6.3(a) student on 100: (start,100,0) => (seek0,⊢00,1) => (rewind,⊢x0,0) => (next,⊢x0,1) => (next,⊢x0,2) => (seek1,⊢xx,3) => (seek1,⊢xx,4) => ...  [[('start', '100', 0), ('seek0', '⊢00', 1), ('rewind', '⊢x0', 0), ('next', '⊢x0', 1), ('next', '⊢x0', 2), ('seek1', '⊢xx', 3), ('seek1', '⊢xx', 4)]]
+OK   6.3(a) ... and it then moves right over blanks in seek1 forever
+OK   6.3(d) student's machine: Accept = E exactly (|w| <= 11)
+OK   6.3(d) it rejects exactly the strings with more 1s than 0s
+OK   6.3(d) it runs forever on exactly the strings with more 0s (each reaches seek1 on a blank and walks right)  [1872 strings]
+OK   6.3 never crashes (the ⊢ in cell 0 stops rewind)
+OK   6.4 machine decides the palindromes: accept/reject correct on every |w| <= 14
+OK   6.4 exactly (n+1)(n+2)/2 steps on every palindrome of length n <= 14
+OK   6.4 at most (n+1)(n+2)/2 steps on every input of length n <= 12 (so O(n^2))
+OK   6.4 check: 0110 accepted after 15 steps
+OK   6.4 check: 0100: round 1 erases both 0s, then last1 reads 0 and rejects after 13 steps  [[('have1', '□□0', 3), ('last1', '□□0', 2), ('reject', '□□0', 2)]]
+OK   6.4 check: 010 (odd length) accepted via last1 reading a blank, 10 steps
+OK   6.4 check: epsilon accepted in 1 step
+OK   6.5(a) two-tape machine decides Z = {0^n 1^n 0^n}: correct on every |w| <= 14
+OK   6.5(a) it halts within n + 2 steps on every input of length n <= 14 (linear time)
+OK   6.5(b) exactly 3k + 2 steps on 0^k 1^k 0^k for 1 <= k <= 30, and 1 step on epsilon
+OK   6.5 trace 010: 5 steps; 0110: rejected (match0 reads 1); 00110: rejected (match0 reads blank and x)
+OK   6.5(b) the chapter's one-tape machine decides Z (|w| <= 12) and takes 4k^2 + 9k + 1 steps on 0^k1^k0^k
+OK   6.5(b) k = 100: two tapes 302 steps, one tape 40901 steps
+OK   6.6 copier halts with output ww on every w, |w| <= 12 (and never crashes)
+OK   6.6(d) exactly 2n^2 + 2n + 1 steps on every input of length n <= 12
+OK   6.6(c) run on 10: 13 steps; next is entered at (next,10,0), (next,10b,1), (next,10ba,2); halts as (halt,1010,5)  [[('next', '10', 0), ('carry1', 'B0', 1), ('carry1', 'B0', 2), ('back', 'B0b', 1), ('back', 'B0b', 0), ('next', '10b', 1), ('carry0', '1Ab', 2), ('carry0', '1Ab', 3), ('back', '1Aba', 2), ('back', '1Aba', 1), ('next', '10ba', 2), ('clean', '101a', 3), ('clean', '1010', 4), ('halt', '1010', 5)]]
+OK   6.6(c) full trace on 10 as printed in the solution  [[('next', '10', 0), ('carry1', 'B0', 1), ('carry1', 'B0', 2), ('back', 'B0b', 1), ('back', 'B0b', 0), ('next', '10b', 1), ('carry0', '1Ab', 2), ('carry0', '1Ab', 3), ('back', '1Aba', 2), ('back', '1Aba', 1), ('next', '10ba', 2), ('clean', '101a', 3), ('clean', '1010', 4), ('halt', '1010', 5)]]
+OK   6.6 at most one cell is ever marked A/B (the pointer), so back never needs the left end
+OK   6.6 watch out: a copier that keeps every original marked and unmarks them walking left crashes on every w != eps
+OK   6.6 watch out: with copies written as plain 0/1 the machine keeps copying its own copies: still running, tape still growing, on every w != eps (|w| <= 6)
+OK   6.1(a) 300 random right-moving machines: the DFA (states Q + 2 sinks; accepting = ACC and the states whose blank walk accepts) agrees on every |w| <= 8  [300 machines]
+OK   6.1(b) counterexample: M_Accept halts on every input and accepts eps, but also accepts 0 (not in {eps})
+OK   6.1(d) stay-put removal on 300 random machines: same outcome and tape, at most 2t steps  [max ratio 2.00]
+OK   6.1(e) two-track folding on 250 random two-way machines: same outcome, never crashes, at most 2t + 2 steps  [7043 halting runs, max (t'-2)/t = 1.75]
+OK   6.1(f) a two-tape machine decides {w#w^R} within n + 2 steps (all strings over {0,1,#} of length <= 9)
+
+ALL OK

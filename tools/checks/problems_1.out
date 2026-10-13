@@ -1,0 +1,110 @@
+== Problem 1: sort
+OK   examples: sort(0110) = 0011, sort(1010) = 0011, sort(101) = 011, sort(111) = 111, sort(ε) = ε
+OK   unfolding sort(101): sort(1) = 1, sort(01) = 01, sort(101) = sort(01)•1 = 011
+OK   (a) |sort(w)| = |w| for all |w| <= 14
+OK   Lemma: sort(y•1) = sort(y)•1 for all |y| <= 14
+OK   (b) sort(sort(w)) = sort(w) for all |w| <= 14
+OK   closed form: sort(w) = 0^#(0,w) 1^#(1,w) for all |w| <= 14
+OK   trap: for w = 1x the string sort(x)•1 is as long as w (the hypothesis does not cover it), |w| <= 12
+OK   for w = 1x the lemma is used with y = sort(x), which is shorter than w (|sort(x)| = |w| - 1), on the string sort(x)•1, which is exactly as long as w, |w| <= 12
+OK   the first symbol of sort(x)•1 is the attached 1 only when x = ε (otherwise it is the first symbol of sort(x)), |x| <= 12
+OK   trap: the look-alike 'sort(y•0) = sort(y)•0' fails at y = 1 (sort(10) = 01, sort(1)•0 = 10)
+OK   trap: sort does not distribute over •: sort(1•0) = 01 but sort(1)•sort(0) = 10
+== Problem 2: the substring 01 occurs exactly twice
+OK   DFA accepts exactly the strings with exactly two occurrences of 01, |w| <= 14
+OK   every state means what the table says (count of 01 so far, last symbol 0 or not), |w| <= 12
+OK   DFA is exactly equivalent to the counting machine built from the statement
+OK   regular expression 1*00*11*00*11*0* is exactly equivalent to the DFA
+OK   the 7-state DFA is minimal
+OK   representatives ε, 0, 01, 010, 0101, 01010, 010101 reach the seven states in order
+OK   they form a fooling set (every pair has a distinguishing suffix)  [ε/0:'101'; ε/01:'01'; ε/010:'1'; ε/0101:''; ε/01010:''; ε/010101:'0101'; 0/01:'01'; 0/010:'1'; 0/0101:''; 0/01010:''; 0/010101:'101'; 01/010:'1'; 01/0101:''; 01/01010:''; 01/010101:'01'; 010/0101:''; 010/01010:''; 010/010101:'1'; 0101/01010:'1'; 0101/010101:''; 01010/010101:'']
+OK   in L: 0101, 01010, 1001101, 00110011; not in L: ε, 01, 0110, 1100, 010101
+OK   run on 1001101: ones0 ones0 zeros0 zeros0 ones1 ones1 zeros1 ones2 (accept)
+OK   run on 010101 ends in dead; ε stays in ones0 (reject)
+OK   trap: 0110 has two symbol switches but only one occurrence of 01
+OK   what the wrong answers describe, exactly: at least two / at most two / L and starts with 0 / L and ends in 1
+OK   wrong answer (0+1)*01(0+1)*01(0+1)*: shortest counterexample '010101', and wrong on a whole infinite family  [cex='010101']
+OK   wrong answer 1*0*1*0*1*0*: shortest counterexample '', and wrong on a whole infinite family  [cex='']
+OK   wrong answer 00*11*00*11*0*: shortest counterexample '10101', and wrong on a whole infinite family  [cex='10101']
+OK   wrong answer 1*00*11*00*11*: shortest counterexample '01010', and wrong on a whole infinite family  [cex='01010']
+== Problem 3: {0^i 1^j 0^k : j = i + k}
+OK   grammar S -> AB, A -> 0A1 | ε, B -> 1B0 | ε generates exactly L, all |w| <= 12
+OK   L(A) = {0^n 1^n} and L(B) = {1^n 0^n}, |w| <= 12
+OK   examples in L: ε, 01, 10, 0110, 001110; not in L: 0, 1, 0101, 1001
+OK   001110 = (0011)(10) with A =>* 0011 and B =>* 10
+OK   every string in L has equally many 0s and 1s (|w| <= 14)
+OK   fooling set 0*: x = 0^m, y = 0^n (m != n, 0..18), z = 1^m: xz in L, yz not
+OK   edge case m = 0: yz = 0^n (n >= 1) is not in L, although it splits as 0^i 1^0 0^k in n+1 ways
+OK   trap: the finite set {ε, 0, 00} is a fooling set for L (every pair has a distinguishing suffix)
+OK   closure: L ∩ 0*1* = {0^n 1^n}, |w| <= 14
+OK   wrong grammar S -> 0S1 | T, T -> 1T0 | ε (nested): generates 0101 not in L, misses 0110 in L
+OK   wrong grammar A -> 0A1 | 01, B -> 1B0 | 10: misses ε, 01, 10 and every 0^n1^n
+OK   wrong grammar S -> 0S1 | 1S0 | SS | ε (all strings with #0 = #1): generates 1001 and 0101, not in L
+== Problem 4: Insert1 and Delete1
+OK   Insert1 construction matches the definition on 300 random DFAs (2-4 states), all |w| <= 8  [[]]
+OK   Delete1 construction matches the definition on 300 random DFAs (2-4 states), all |w| <= 8  [[]]
+OK   edge case L = ∅: Insert1(L) = ∅ and Delete1(L) = ∅ (exact)
+OK   edge case L = {ε}: Insert1(L) = 1 and Delete1(L) = ∅ (exact)
+OK   edge case L = 1*: Insert1(L) = 11* and Delete1(L) = 1* (exact)
+OK   edge case L = Σ*: Insert1(L) = (0+1)*1(0+1)* and Delete1(L) = (0+1)* (exact)
+OK   edge case L = 0*: Insert1(L) = 0*10* and Delete1(L) = ∅ (exact)
+OK   example: Insert1(odd number of 1s) = even and positive number of 1s = 0*10*1(0*10*1)*0* (exact)
+OK   example: Delete1(odd number of 1s) = even number of 1s = (0*10*1)*0* (exact)
+OK   example: Insert1(odd number of 1s) on 0110: guess the second 1 -> path (E,0),(E,0),(O,0),(O,1),(O,1)
+OK   trap ins-accept-phase0: wrong already on a small edge case, first wrong string ''  [got '']
+OK   trap ins-any-symbol: wrong already on a small edge case, first wrong string '0'  [got '0']
+OK   trap del-reads-the-1: wrong already on a small edge case, first wrong string '1'  [got '1']
+OK   trap ins-no-flag: wrong already on a small edge case, first wrong string ''  [got '']
+OK   trap del-no-advance: wrong already on a small edge case, first wrong string ''  [got '']
+OK   trap del-reads-the-1: wrong already on a small edge case, first wrong string ''  [got '']
+OK   trap del-no-flag: wrong already on a small edge case, first wrong string ''  [got '']
+OK   trap languages, exactly: no-flag insertion on {ε} gives 1*; reading the 1 on 1* gives 11*; not feeding the 1 on {ε} gives {ε}; no-flag deletion on {11} gives {ε, 1, 11}
+OK   Delete1(Insert1({01})) = {01, 10}, which is more than {01}
+OK   trap: showing the inserted 1 to M (as an Insert1 construction) accepts nothing for L = {ε}
+OK   trap languages on all 300 random DFAs (exact): not feeding the 1 gives L; reading the 1 gives L ∩ (contains 1)
+OK   'why it works' invariants for both NFAs hold on 100 random DFAs, all |w| <= 6
+OK   Delete1(Insert1(L)) ⊇ L on the 300 random languages (strings of length <= 5)
+== Problem 5: #(1,w) divisible by 3, and no 00
+OK   M1 (count of 1s mod 3) is correct, and delta1*(0,w) = #(1,w) mod 3, |w| <= 14
+OK   M2 (no 00) is correct and its states mean safe / zero / dead, |w| <= 14
+OK   product (intersection) accepts exactly L, |w| <= 14
+OK   the page's 9-row transition table is the product's transition function
+OK   start (0, safe); accepting {(0, safe), (0, zero)}
+OK   all 9 product states are reachable; 1^r 00 reaches (r, dead)
+OK   the three (r, dead) states are pairwise equivalent; every other pair is distinguishable
+OK   the minimal DFA for L has 7 states
+OK   fooling-set strings reach (0,safe), (1,safe), (2,safe), (0,zero), (1,zero), (2,zero), (·,dead)
+OK   page's suffix rule: for every pair, x z in L and y z not in L (21 pairs)  [ε/1:ε; ε/11:ε; ε/0:0; ε/10:ε; ε/110:ε; ε/00:ε; 1/11:11; 1/0:11; 1/10:011; 1/110:11; 1/00:11; 11/0:1; 11/10:1; 11/110:01; 11/00:1; 0/10:ε; 0/110:ε; 0/00:ε; 10/110:11; 10/00:11; 110/00:1]
+OK   examples: ε, 0, 111, 10101, 0111 in L; 1, 00, 1001, 11 not in L
+OK   run on 0111: (0,safe) (0,zero) (1,safe) (2,safe) (0,safe) — accept
+OK   run on 1001: (0,safe) (1,safe) (1,zero) (1,dead) (2,dead) — reject
+OK   1^r reaches (r,safe) and 1^r 0 reaches (r,zero)
+OK   trap: the union accepting set accepts 1, which is not in L
+OK   safe and zero differ on the suffix 0
+OK   both factors are minimal (3 states each)
+OK   for mode or the 9-state product is already minimal
+OK   for mode diff the 9-state product is already minimal
+OK   for mode xor the 9-state product is already minimal
+OK   L2 \ L1 and the complement of L1 ∩ L2 need only 7 states (their dead states merge too)
+== Problem 6: subset construction for an NFA of 0*(01)*1*
+OK   the NFA accepts exactly 0^i (01)^j 1^k, |w| <= 12
+OK   the NFA is exactly equivalent to 0*(01)*1*
+OK   epsilon-reach: s -> {s,p,t}, p -> {p,t}, q -> {q}, t -> {t}
+OK   row 1 in full: delta(s,0), delta(p,0), delta(t,0) = {s}, {q}, ∅ and delta(s,1), delta(p,1), delta(t,1) = ∅, ∅, {t}
+OK   incremental subset construction: the page's 7-row table, row by row, in discovery order  [{s} {s,p,t} True {s,q} {t} | {s,q} {s,p,q,t} True {s,q} {p,t} | {t} {t} True ∅ {t} | {p,t} {p,t} True {q} {t} | ∅ ∅ False ∅ ∅ | {q} {q} False ∅ {p} | {p} {p,t} True {q} {t}]
+OK   the DFA has 7 states (of 2^4 = 16 subsets), 5 of them accepting
+OK   the DFA is exactly equivalent to 0*(01)*1*
+OK   run on 0011: {s}, {s,q}, {s,q}, {p,t}, {t} — accept
+OK   run on 010: {s}, {s,q}, {p,t}, {q} — reject; run on 10 ends in ∅
+OK   minimal DFA has 6 states: only {p} and {p,t} merge  [[{'{p,t}', '{p}'}]]
+OK   representatives ε, 0, 1, 01, 10, 010 reach {s}, {s,q}, {t}, {p,t}, ∅, {q}
+OK   the page's suffix table distinguishes all 15 pairs (exactly one of xz, yz in L)
+OK   each table entry is a shortest distinguishing suffix
+OK   trap: accepting S when S itself meets A (no ε-reach) rejects ε, 0, 00 and 0101, all in L — wrong
+OK   trap: forgetting ε-reach before reading a symbol loses 0*(01)*1*'s middle and end (rejects 1 and 01)
+OK   trap: tabulating all 16 subsets still gives a correct DFA for 0*(01)*1*, with 9 unreachable states
+OK   closed-sets convention: 6 states, the same language (rows {p} and {p,t} coincide there)
+OK   the example memberships: 0011, 0, 1, ε in L; 010, 10 not in L
+OK   rows 4 and 7 ({p,t} and {p}) are identical: both accepting, 0 -> {q}, 1 -> {t}
+
+ALL OK

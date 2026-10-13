@@ -1,0 +1,26 @@
+OK   figure: the computation tree of N on 011 (to depth 5) is exactly the drawn tree, with the drawn choice labels  [11 nodes]
+OK   figure: one accepting leaf (depth 3), two rejecting leaves (depth 4)
+OK   figure: the loop branch is infinite (loop only moves right and stays in loop)
+OK   N accepts exactly the strings containing 11 (|w| <= 10)
+OK   on strings without 11, N neither accepts nor rejects (no accepting leaf; the loop branch never halts)
+OK   N' (no looping choice) decides 'contains 11': accepts with 11, rejects without (|w| <= 10)
+OK   N' with accept and reject swapped accepts every string (|w| <= 10), not the complement
+OK   N' on 010: every branch rejects; N on 010: not every branch halts
+OK   figure: breadth-first search dequeues the configurations in the drawn order; the 7th accepts
+OK   depth-first search (choice 1 first) visits 2000 configurations without reaching the accepting leaf
+OK   figure: the red edges are the first edges depth-first search explores
+OK   Theorem 1 counting: at most r^t configurations at depth t (200 random machines, depth <= 6)
+OK   advice: on 011, the advice strings of length 3 that make M accept are exactly those with second symbol 2
+OK   N and N': breadth-first search and dovetailing give identical outcomes (|w| <= 8)
+OK   random machines: breadth-first and dovetailing agree on accept / reject / undetermined (300 x 15)  [{'accept': 1022, 'reject': 3347, 'None': 131}]
+OK   dovetailing cost: sum_{s<=t} s r^s <= (r/(r-1)) t r^t <= 2 t r^t, so O(t r^t) (r = 2..6, t <= 40)
+OK   Cook-Levin: Phi_w (constraints evaluated literally) is satisfiable iff some advice makes the toy verifier accept within N steps  [45 (w, N) cases, 12 satisfiable]
+OK   variables: (N+1)(N+3)(|Q|+|Gamma|) for the window of cells 0..N+2
+OK   formula size grows quadratically: size(2N)/size(N) -> 4 (N = 20, 40)  [3.853]
+OK   advice view (page's form): 'some t, every advice of length t rejects within t steps' iff N rejects (BFS)  [1654 cases]
+OK   the book's form fails on 010: every advice string (|x| <= 8) makes M reject — for N if M rejects when the advice runs out, for N with a give-up option in 'loop' if M then takes the last option — yet neither machine rejects 010 (each has an infinite branch)  [N: True, give-up variant: True]
+OK   page's window 0..N+2: Phi_w agrees with direct simulation for a verifier that accepts with a final right move (and with the first evaluator on the toy verifier)
+OK   book's window 0..N+1 misses an accepting run: w = 0, N = 3, the verifier accepts w□1 at step N = 3 with its head on cell N+1 = 4, but the formula on cells 0..N+1 is unsatisfiable (on cells 0..N+2 it is satisfiable)  [('accept', 3)]
+OK   Cook-Levin: only advice cells need 'exactly one symbol'. For w = 0, N = 4 the forced assignment accepts at time 3, every cell 1..N+1 holds one symbol at times 0..3, and the head's cell 4 is empty at time 4 (no move after accept)
+
+ALL OK

@@ -1,0 +1,106 @@
+OK   4.1 the NFA s, a, b, c accepts exactly the strings that contain 00 or 11 (|w| <= 14)
+OK   4.1 two transitions out of s for each symbol; a has none on 1, b none on 0; c loops on both
+OK   4.1 0110: the walk s,s,b,c,c is legal and accepts; the walk that stays in s ends in s; s -0-> a gets stuck
+OK   4.1 the recursive δ*(s, w) equals the set C obtained by tracking current states (|w| <= 10)
+OK   4.1 run on 10010: {s}, {s,b}, {s,a}, {s,a,c}, {s,b,c}, {s,a,c}; accepted  [['s', 'sb', 'sa', 'sac', 'sbc', 'sac']]
+OK   4.1 run on 0101: {s}, {s,a}, {s,b}, {s,a}, {s,b}; rejected  [['s', 'sa', 'sb', 'sa', 'sb']]
+OK   4.1 the thread in b dies on the second symbol of 10010 (δ(b,0) = ∅)
+OK   4.1 trap: with A = {s,a,b} the NFA accepts every string (|w| <= 12), not the complement
+OK   4.2 M accepts w iff some ω ∈ Q^|w| makes the verifier DFA over Σ×Q accept (|w| <= 6)
+OK   4.2 the proof for 0110 is ω = s b c c
+OK   4.3 E accepts exactly the strings whose 1s form a single block (|w| <= 14)
+OK   4.3 L(E) = 0*1*0* (exact)
+OK   4.3 ε-reach(p) = {p,q,r}, ε-reach(q) = {q,r}, ε-reach(r) = {r}
+OK   4.3 the recursive δ* with ε-reach equals set tracking from every state (|w| <= 10)
+OK   4.3 on 0010 the sets are {p,q,r}, {p,q,r}, {p,q,r}, {q,r}, {r}: accepted  [['pqr', 'pqr', 'pqr', 'qr', 'r']]
+OK   4.3 on 01010 the set becomes empty after the second 1  [['pqr', 'pqr', 'qr', 'r', '∅', '∅']]
+OK   4.3 ε-removal on E: A' = {p,q,r}
+OK   4.3 ε-removal table: δ'(p,0) = {p,r}, δ'(p,1) = {q}, δ'(q,0) = {r}, δ'(q,1) = {q}, δ'(r,0) = {r}, δ'(r,1) = ∅  [{('p', '0'): 'pr', ('p', '1'): 'q', ('q', '0'): 'r', ('q', '1'): 'q', ('r', '0'): 'r', ('r', '1'): '∅'}]
+OK   4.3 the new edges are exactly p -1-> q, p -0-> r, q -0-> r
+OK   4.3 E' has no ε-transitions and accepts the same language (exact); the library's remove_epsilon agrees
+OK   4.3 proof claim ε-reach(δ'*(q,w)) = δ*(q,w) for every q (E and 60 random ε-NFAs, |w| <= 9 / 7)
+OK   4.3 ε-removal preserves the language of 60 random ε-NFAs (exact)
+OK   4.3 trap: keeping A' = A = {r} rejects ε, 1 and 01 (all in L(E)) but still accepts 0
+OK   4.5 incremental table for E: rows {p}, {p,r}, {q}, {r}, ∅ exactly as printed  [[('p', 'pqr', True, 'pr', 'q'), ('pr', 'pqr', True, 'pr', 'q'), ('q', 'qr', True, 'r', 'q'), ('r', 'r', True, 'r', '∅'), ('∅', '∅', False, '∅', '∅')]]
+OK   4.5 5 of the 2^3 = 8 subsets are reachable, and the DFA accepts 0*1*0* (|w| <= 14)
+OK   4.5 'reached by' column: ε, 0+, 0*1+, 0*1+0+, and every string outside 0*1*0* (|w| <= 12)
+OK   4.5 {p} and {p,r} have the same ε-reach; the minimal DFA has 4 states and merges exactly these two
+OK   4.5 the 4.1 NFA: subsets {s}, {s,a}, {s,b}, {s,a,c}, {s,b,c} (5 of 16); the two accepting ones merge: 4 states
+OK   4.5 proof claim for every subset S: ε-reach(δ'*(S,w)) = union of δ*(p,w) over p ∈ S (E, the 4.1 NFA; |w| <= 8)
+OK   4.5 the subset DFA of 60 random ε-NFAs is equivalent to the NFA and has at most 2^n states
+OK   4.5 k = 1: the 2-state NFA accepts 'k-th symbol from the end is 1'; the subset construction builds exactly the 2 subsets containing 0, none redundant; Σ^1 with z = 0^(i-1) is a fooling set
+OK   4.5 L_1 = (0+1)*1(0+1)^0: the expression is equivalent to the NFA (exact)
+OK   4.5 k = 2: the 3-state NFA accepts 'k-th symbol from the end is 1'; the subset construction builds exactly the 4 subsets containing 0, none redundant; Σ^2 with z = 0^(i-1) is a fooling set
+OK   4.5 L_2 = (0+1)*1(0+1)^1: the expression is equivalent to the NFA (exact)
+OK   4.5 k = 3: the 4-state NFA accepts 'k-th symbol from the end is 1'; the subset construction builds exactly the 8 subsets containing 0, none redundant; Σ^3 with z = 0^(i-1) is a fooling set
+OK   4.5 L_3 = (0+1)*1(0+1)^2: the expression is equivalent to the NFA (exact)
+OK   4.5 k = 4: the 5-state NFA accepts 'k-th symbol from the end is 1'; the subset construction builds exactly the 16 subsets containing 0, none redundant; Σ^4 with z = 0^(i-1) is a fooling set
+OK   4.5 L_4 = (0+1)*1(0+1)^3: the expression is equivalent to the NFA (exact)
+OK   4.5 k = 5: the 6-state NFA accepts 'k-th symbol from the end is 1'; the subset construction builds exactly the 32 subsets containing 0, none redundant; Σ^5 with z = 0^(i-1) is a fooling set
+OK   4.5 L_5 = (0+1)*1(0+1)^4: the expression is equivalent to the NFA (exact)
+OK   4.5 k = 6: the 7-state NFA accepts 'k-th symbol from the end is 1'; the subset construction builds exactly the 64 subsets containing 0, none redundant; Σ^6 with z = 0^(i-1) is a fooling set
+OK   4.5 k = 7: the 8-state NFA accepts 'k-th symbol from the end is 1'; the subset construction builds exactly the 128 subsets containing 0, none redundant; Σ^7 with z = 0^(i-1) is a fooling set
+OK   4.5 k = 8: the 9-state NFA accepts 'k-th symbol from the end is 1'; the subset construction builds exactly the 256 subsets containing 0, none redundant; Σ^8 with z = 0^(i-1) is a fooling set
+OK   4.6 Lemma 4.2 with the book's gadgets: L(NFA) = L(R) for all 852 expressions of size <= 5 over ∅, ε, 0, 1
+OK   4.6 every one of them has exactly one accepting state, different from its start state
+OK   4.6 two states per leaf, + and *, none per concatenation (all of them)
+OK   4.6 the common variant (loop t_S -> s_S) is correct too (same expressions)
+OK   4.6 (0+10*1)*: 4 symbols, one +, two stars -> 2(4+1+2) = 14 states; 14 ε-transitions and 4 symbol transitions, exactly the edges of the figure
+OK   4.6 the incremental table for (0+10*1)* exactly as printed (the book's table)  [[('s', 'sabjm', True, 'k', 'c'), ('k', 'sabjklm', True, 'k', 'c'), ('c', 'cdegh', False, 'f', 'i'), ('f', 'defgh', False, 'f', 'i'), ('i', 'sabijlm', True, 'k', 'c')]]
+OK   4.6 5 DFA states instead of up to 2^14 = 16384; the DFA accepts the strings with an even number of 1s
+OK   4.6 minimization merges {s},{k},{i} (even number of 1s so far) and {c},{f} (odd): 2 states
+OK   4.6 with the common loop t_S -> s_S: same rows, acceptance and transitions; only the ε-reaches of {k}, {f}, {i} lose s or d  [[('s', 'sabjm', True, 'k', 'c'), ('k', 'abjklm', True, 'k', 'c'), ('c', 'cdegh', False, 'f', 'i'), ('f', 'efgh', False, 'f', 'i'), ('i', 'abijlm', True, 'k', 'c')]]
+OK   4.6 trap: identifying t_S with s_T makes the NFA for 0*1* accept 10 (not in 0*1*)
+OK   4.6 trap: the star without new states (ε-edges s_S <-> t_S) makes the NFA for (0*1)* accept 0
+OK   4.7 the literal construction has 2(8+3+2) = 26 states; with each 0+1 as one two-state gadget, 18  [[(26, 9, 6, 4, True), (18, 9, 6, 4, True), (26, 9, 6, 4, True), (26, 9, 6, 4, True)]]
+OK   4.7 every version: a 9-state DFA with 6 accepting states, minimal DFA 4 states, correct language  [[(26, 9, 6, 4, True), (18, 9, 6, 4, True), (26, 9, 6, 4, True), (26, 9, 6, 4, True)]]
+OK   4.7 same language as the 4.1 NFA (exact), which has only 4 states
+OK   4.7 the DFA's states, acceptance and transitions with the book's names, in the book's order  [[('s', False, 'cj', 'en'), ('cj', False, 'cjl', 'en'), ('en', False, 'cj', 'enp'), ('cjl', True, 'cjlv', 'enx'), ('enp', True, 'cjv', 'enpx'), ('cjlv', True, 'cjlv', 'enx'), ('enx', True, 'cjv', 'enpx'), ('cjv', True, 'cjlv', 'enx'), ('enpx', True, 'cjv', 'enpx')]]
+OK   4.7 letters: c, e entered by 0, 1 in the first (0+1)*; j, l by the 0s of 00; n, p by the 1s of 11; v, x by 0, 1 in the last (0+1)*
+OK   4.7 the 'strings that reach S' column holds exactly (|w| <= 11)
+OK   4.7 minimization merges exactly the six accepting states
+OK   4.8 the book's DFA (start s, states 0, 1, 2, accepting 0) accepts exactly the non-empty binary multiples of 3 (|w| <= 14)
+OK   4.8 its transition table: s -> 0, 1; 0 -> 0, 1; 1 -> 2, 0; 2 -> 1, 2; s has no incoming edges
+OK   4.8 step 1, eliminate 2 (loop 1): R(1->1) = 01*0  [('1', {(1, 1): '01*0'})]
+OK   4.8 step 2, eliminate 0 (loop 0): R(s->1) = 1+00*1, R(s->t) = 00*, R(1->1) = 01*0+10*1, R(1->t) = 10*  [('0', {('s', 1): '1+00*1', ('s', 't'): '00*', (1, 1): '01*0+10*1', (1, 't'): '10*'})]
+OK   4.8 step 3, eliminate 1 (loop 01*0+10*1): R(s->t) = 00*+(1+00*1)(01*0+10*1)*10*  [('01*0+10*1', {('s', 't'): '00*+(1+00*1)(01*0+10*1)*10*'})]
+OK   4.8 the library's eliminate_states (same order) gives the same expression
+OK   4.8 the result is equivalent to the DFA (exact)
+OK   4.8 it is the book's 00*+(00*1+1)(10*1+01*0)*10* with the terms of two unions swapped (exact)
+OK   4.8 00* = 0*0 and 1+00*1 = 0*1, so the result equals §2.3's 0*0+0*1(10*1+01*0)*10* (exact)
+OK   4.8 neither expression matches ε
+OK   4.8 trap: the 3-state DFA (start = accepting state 0) accepts ε and every multiple of 3 (|w| <= 14)
+OK   4.8 trap: with a new start, order 2,0,1 gives 0*+0*1(01*0+10*1)*10* and order 2,1,0 gives (0+1(01*0)*1)*  [0*+0*1(01*0+10*1)*10* | (0+1(01*0)*1)*]
+OK   4.8 trap: both are equivalent to the 3-state DFA and to ε + 0*0+0*1(10*1+01*0)*10* (exact)
+OK   4.8 order (0, 1, 2): the result is equivalent to the DFA (exact)
+OK   4.8 order (0, 2, 1): the result is equivalent to the DFA (exact)
+OK   4.8 order (1, 0, 2): the result is equivalent to the DFA (exact)
+OK   4.8 order (1, 2, 0): the result is equivalent to the DFA (exact)
+OK   4.8 order (2, 0, 1): the result is equivalent to the DFA (exact)
+OK   4.8 order (2, 1, 0): the result is equivalent to the DFA (exact)
+OK   4.8 the six orders give expressions with 12 to 31 symbol occurrences; the order 2,0,1 gives 14  [{(0, 1, 2): 31, (0, 2, 1): 14, (1, 0, 2): 31, (1, 2, 0): 20, (2, 0, 1): 14, (2, 1, 0): 12}]
+OK   4.8 growth: on complete automata with distinct labels the length grows by a factor approaching 4 per state  [lengths [12, 61, 261, 1077, 4373], ratios [5.08, 4.28, 4.13, 4.06]]
+OK   4.9 test set: 300 random DFAs with 2-4 states plus DFAs for ∅, {ε}, 1*, Σ*
+OK   4.9 Lemma 4.4 proof 1: L(rev(R)) = L(R)^R for all 852 expressions of size <= 5 (|w| <= 8)
+OK   4.9 §2.7's example: rev(0+1(0+1)*00) = 0+00(0+1)*1
+OK   4.9 Lemma 4.4 proof 2: M^R accepts w iff M accepts w^R (304 DFAs, |w| <= 10)
+OK   4.9 M^R has |Q|+1 states, ε-transitions only out of s^R, and no symbol transitions out of s^R
+OK   4.9 'why': M^R has a walk from q to p labeled x^R iff δ*(p, x) = q (60 DFAs, |x| <= 6)
+OK   4.9 reversing the edges of a DFA is not a DFA in general (some state has 0 or 2+ incoming a-edges)
+OK   4.9 Lemma 4.5: M' accepts w iff M accepts ww (304 DFAs, |w| <= 7)
+OK   4.9 half: |Q|^3 + 1 states; the middle component never changes; only the first move is nondeterministic
+OK   4.9 half 'why': after w, M' can be in (p,h,q) iff p = δ*(s,w) and q = δ*(h,w) (60 DFAs, |w| <= 5)
+OK   4.9 double(011) = 001111
+OK   4.9 double: the DFA accepts w iff M accepts double(w) (304 DFAs, |w| <= 9)
+OK   4.9 double, mod-3 example: δ'(q, a) = (4q+3a) mod 3 = q for every q, a; M' accepts every string
+OK   4.9 double(w) read in binary is 3 times w read in base 4 (|w| <= 12)
+OK   4.9 ones: the NFA accepts y iff y = 1^|w| for some w ∈ L (304 DFAs, |y| <= 8)
+OK   4.9 ones 'why': after 1^i, M' can be in q iff some string of length i leads M from s to q (60 DFAs, i <= 6)
+OK   4.9 ones maps ∅, {ε}, 1*, Σ* to ∅, {ε}, 1*, 1*; and (01)* to (11)* (exact)
+OK   4.9 edge cases: reversal, half and the double-preimage map ∅, {ε}, 1*, Σ* to themselves (exact)
+OK   4.9 trap: for L = Σ*, {w : double(w) ∈ L} = Σ* but {double(w) : w ∈ L} = (00+11)* (|y| <= 12)
+OK   4.9 trap: {ww : w ∈ 0*1} = {0^n 1 0^n 1 : n >= 0} (|y| <= 14)
+OK   4.9 trap: 0* is a fooling set for it: the suffix 1 0^i 1 puts 0^i·10^i1 in and 0^j·10^i1 out (i != j <= 12)
+OK   4.9 trap: half(0*1) is regular although {ww : w ∈ 0*1} is not — half(0*1) = ∅ (exact)
+
+ALL OK

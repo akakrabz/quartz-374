@@ -1,0 +1,34 @@
+OK   M_Accept accepts every input (|w| <= 8)
+OK   M_Reject rejects every input
+OK   M_Diverge runs forever on every input (moves right forever)
+OK   7.4(a) N accepts exactly {01} and rejects everything else (|w| <= 10)
+OK   7.4(a) Accept(N) = {01} is not closed under reversal: 01 in, 10 out
+OK   7.4(a) Accept(M_Accept) is closed under reversal (|w| <= 8)
+OK   7.4(a) Accept(M_Reject) is closed under reversal (|w| <= 8)
+OK   7.4(b) Y rejects exactly one string (epsilon) and accepts all others
+OK   7.4(b) N = M_Accept rejects no string: Reject(N) has 0 elements, not 1
+OK   7.4(b) watch out: Y' = same accepted language as Y, but diverges on epsilon, so rejects nothing
+OK   7.4(c) Y = M_Diverge: Accept = Reject = empty; N = M_Accept: Accept = Sigma* != Reject = empty
+OK   7.4(c) on 300 random machines, Accept and Reject are disjoint, so Accept = Reject only when both are empty
+OK   7.5(a) on 400 random machines (k = 2..4, inputs |w| <= 6, some longer than k): every run visits cell k, halts, crashes, or repeats a configuration of cells 0..k-1 within |Q| k |Gamma|^k steps  [largest t/bound = 0.167]
+OK   7.5(a) the bounded decider agrees with 20000-step simulations  [3368 visits, 95 decided by a repeated configuration]
+OK   7.5(b) on 400 random machines (60% of them using # themselves): M' behaves like M (one extra step when M accepts) and writes # exactly when M accepts -- including machines whose step into accept would crash  [25200 runs, 4291 accepting]
+OK   7.5(b) watch out: writing # in the step into accept fails when that step moves left off cell 0 (the machine crashes, never accepts, but the # was written)
+OK   7.6 example: M1 runs forever on epsilon, accepts 0
+OK   7.6 serial search (M1 on epsilon first) is still stuck after 100000 steps
+OK   7.6 dovetailing finds the common string 0 in round 2
+OK   7.6 on 300 random pairs: dovetailing finds a common accepted string, by round max(i+1, t1, t2) for the first string the pair has in common, and only real common strings  [27 pairs with a common string]
+OK   7.7(a) copying wrapper: both answers of D on <W> contradict 'D decides L'
+OK   7.7 watch out: the flipping wrapper gives no contradiction in either case
+OK   7.7 watch out: a copying wrapper that does not accept eps is consistent with D rejecting <W>
+OK   7.7(d) M1 accepts only eps and rejects every non-empty string (strings over 0 1 [ ] | up to length 5)
+OK   7.7(d) M2: same accepted language {eps}, but runs forever on every non-empty string
+OK   7.7(d) M4: same rejected language as M1, but runs forever on eps (so does not accept it)
+OK   7.7(d) M1 and M_Accept both halt on every input (same Halt, same empty Diverge); M_Accept accepts every string, so it rejects no encoding, its own included
+OK   7.8(a) P accepts the even-length strings and rejects the odd-length ones (both infinite: P in BothInf)
+OK   7.8(a) P' accepts the even-length strings and runs forever on the odd-length ones (Reject empty)
+OK   7.8(a) P'' rejects the odd-length strings and runs forever on the even-length ones (Accept empty)
+OK   7.8(a) so Accept(P) = Accept(P') and Reject(P) = Reject(P''), with P in BothInf and P', P'' not
+OK   7.1(c) 'try all |w|+1 splits' decides PAL . {0^n1^n} on every |w| <= 8 (vs enumerating the pairs)
+
+ALL OK

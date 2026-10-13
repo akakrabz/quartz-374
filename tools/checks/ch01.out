@@ -1,0 +1,60 @@
+OK   STRING = (S, (T, (R, (I, (N, (G, ε))))))  [(S, (T, (R, (I, (N, (G, ε))))))]
+OK   the suffixes drawn under the pairs: STRING, TRING, RING, ING, NG, G, ε
+OK   0ε1 is the string 01 (ε contributes nothing)
+OK   recursive |w| agrees with the number of symbols, |w| <= 8 over {0,1} and <= 6 over {a,b,c}
+OK   recursive w•z agrees with juxtaposition for all w, z with |w|, |z| <= 8 over {0,1}
+OK   NOW•HERE = NOWHERE, HERE•NOW = HERENOW (concatenation is not commutative)
+OK   unfolding NOW•HERE = N·(OW•HERE) = N·(O·(W•HERE)) = N·(O·(W·(ε•HERE))) = NOWHERE  [['NOWHERE', 'NOWHERE', 'NOWHERE', 'NOWHERE', 'NOWHERE']]
+OK   figure: NOW•HERE makes one new pair per symbol of NOW and then reuses HERE
+OK   Lemma 1.1: w•ε = w for |w| <= 8 over {0,1} and |w| <= 6 over {a,b,c}
+OK   Lemma 1.2: |w•x| = |w| + |x| for all |w|, |x| <= 8 over {0,1}
+OK   Lemma 1.3: (w•x)•y = w•(x•y) for all |w|, |x|, |y| <= 5 over {0,1}
+OK   model proof of Lemma 1.2: every line of both cases is an equality (|w|, |x| <= 6)
+OK   proof of Lemma 1.1: (ax)•ε = a·(x•ε) = a·x (|w| <= 8)
+OK   proof of Lemma 1.3 (standard): every line is an equality (|w| <= 5, |x|, |y| <= 4)
+OK   every non-empty w is a single symbol or u•v with u, v non-empty and |u|, |v| < |w| (|w| <= 8)
+OK   a single symbol is never u•v with u, v both non-empty (so w = a is a second base case)
+OK   a single symbol as a string: a•z = (a·ε)•z = a·(ε•z) = a·z (|z| <= 8)
+OK   §1.4 case w = a: (a•x)•y = (a·x)•y = a·(x•y) = a•(x•y) (|x|, |y| <= 6)
+OK   peeling the last symbol: every non-empty w is x•a with |x| = |w| - 1 (|w| <= 8)
+OK   figure: STRING = S·TRING = STR•ING
+OK   §1.4 proof of Lemma 1.3: the four uses of the hypothesis chain correctly (|u|, |v| <= 4, |x|, |y| <= 3)
+OK   §1.4 trap: only the third step, (v•x)•y = v•(x•y), has the fixed second and third arguments x and y
+OK   recursive index w_i agrees with the i-th symbol for 1 <= i <= |w| (|w| <= 8), undefined at 0 and |w|+1
+OK   recursive w[i..j] agrees with symbols i..j for 1 <= i <= j+1 <= |w|+1 (|w| <= 8)
+OK   y is a substring of w (w = xyz) iff y = w[i..j] for some i, j (|w|, |y| <= 6)
+OK   p is a prefix of w iff p = w[1..j] for some 0 <= j <= |w|; s is a suffix iff s = w[i..|w|] (|w|, |p| <= 6)
+OK   HEADACHE: HE = w[1..2] is a proper prefix and HE = w[7..8] a proper suffix
+OK   HEADACHE: w[3..5] = ADA
+OK   METAL = symbols 1, 2, 4, 6, 7 of MEATBALL
+OK   deleting A, B and one L (positions 3, 5, 8) from MEATBALL leaves METAL
+OK   METAL is a subsequence but not a substring of MEATBALL
+OK   recursive subsequence definition = 'delete zero or more symbols' (all z, w with |z|, |w| <= 8 over {0,1})
+OK   ... and the same over {a,b,c} for |z|, |w| <= 6
+OK   every substring is a subsequence (|w| <= 8)
+OK   0110 has 00 as a subsequence but not as a substring
+OK   length n: exactly n+1 prefixes and n+1 suffixes; at most n(n+1)/2 non-empty substrings; at most 2^n subsequences
+OK   with n distinct symbols both bounds are attained (n <= 8)
+OK   0000: its distinct substrings and its distinct subsequences are the same five strings ε, 0, 00, 000, 0000
+OK   recursive reversal agrees with reading backwards (|w| <= 8)
+OK   #(a, x•y) = #(a, x) + #(a, y) for a in {0,1}, |x|, |y| <= 7
+OK   |w| = #(0, w) + #(1, w) over {0,1} (|w| <= 8)
+OK   |w| = #(a, w) + #(b, w) + #(c, w) over {a,b,c} (|w| <= 6)
+OK   |w^R| = |w| and (w^R)^R = w (|w| <= 8, both alphabets)
+OK   (w•x)^R = x^R • w^R for |w|, |x| <= 7
+OK   #(a, w^R) = #(a, w) (|w| <= 8)
+OK   the tempting (w•x)^R = w^R • x^R is false: w = 0, x = 1 gives 10 vs 01
+OK   model proof of (w•x)^R = x^R•w^R: every line of both cases is an equality (|w| <= 8, |x| <= 6)
+OK   (w^R)^R = w from the reversal fact: ((ax)^R)^R = (x^R•a)^R = a^R•(x^R)^R = a•x (|x| <= 7)
+OK   swap: recursive definition swaps adjacent pairs; swap(0110) = 1001, swap(011) = 101
+OK   |swap(w)| = |w| and swap(swap(w)) = w (|w| <= 8, both alphabets)
+OK   swap(abx) applies the hypothesis to x with |x| = |w| - 2
+OK   w^m • w^n = w^(m+n) (|w| <= 4, m, n <= 5)
+OK   |w^n| = n|w|, #(a, w^n) = n·#(a, w), (w^R)^n = (w^n)^R (|w| <= 4, n <= 6)
+OK   complement: |w^c| = |w|, (w^c)^c = w, #(1, w) = #(0, w^c), (w^R)^c = (w^c)^R (|w| <= 8)
+OK   (x•y)^c = x^c • y^c (|x|, |y| <= 7)
+OK   cancellation: x•z = y•z implies x = y, and x•y = x•z implies y = z (|x|, |y|, |z| <= 4)
+OK   powers recurse on n: 01^3 = 010101 and (01)^0 = ε
+OK   example values: #(0, 0110) = 2, (0110)^R = 0110, (001)^R = 100, (001)^c = 110
+
+ALL OK

@@ -1,0 +1,38 @@
+OK   0^n1^n decider: 11 transitions, as in the table
+OK   halts on every input of length <= 14 (never crashes, never times out)  [{'accept', 'reject'}]
+OK   accepts exactly {0^n 1^n}, |w| <= 14
+OK   near-miss 0110 rejected
+OK   on 0011: accepts after 15 steps  [('accept', 15)]
+OK   on 0101: rejects when skip1 reads a 0  [('skip1', '□101', 2)]
+OK   on 0^k1^k (k <= 30): k passes of at most 4k+1 steps; 2k^2+3k+1 steps in all (O(n^2))
+OK   back never moves off cell 0: no crash on any input of length <= 14
+OK   example codes follow the conventions: start = 1...1, reject = 0...0, accept = 0...01 (2 bits for 3 states)
+OK   <M> = [00•00][[11•10|01•10•1]]  [[00•00][[11•10|01•10•1]]]
+OK   <10> = [10•01]
+OK   initial configuration on 10 is [[11•10][00•01]]  [[[11•10][00•01]]]
+OK   initial configuration on 01 is [[11•01][00•10]]  [[[11•01][00•10]]]
+OK   U accepts <M,10> after one simulated step  [('accept', 1)]
+OK   U rejects <M,01> (no block begins 11•01)
+OK   U agrees with M on every non-empty input of length <= 8
+OK   U agrees with the 0^n1^n decider on every non-empty input of length <= 8
+OK   U runs forever when M does (M_Diverge: no halt within 2000 simulated steps)
+OK   strings() lists eps, 0, 1, 00, 01 first (length-lexicographic)
+OK   dovetailing accepts by round max{j, s} for every accepted j-th string (400 random toy machines)
+OK   dovetailing never accepts when no string is accepted
+OK   running one string at a time to completion gets stuck: toy machine diverges on string 1, accepts string 2
+OK   table: decidable implies acceptable
+OK   table: decidable languages are closed under complement
+OK   table: Lemma 5 — acceptable and co-acceptable iff decidable
+OK   table: Lemma 4 — SelfHalt = SelfAccept ∪ SelfReject is acceptable
+OK   Cantor: for all 512 functions f: X -> 2^X (|X| = 3), the sad set differs from each f(y) at y
+OK   M_Accept accepts every input (|w| <= 8)
+OK   M_Reject rejects every input (|w| <= 8)
+OK   M_Diverge never enters accept or reject, so it halts on nothing
+OK   M_Reject and M_Diverge accept the same language (empty) but only M_Reject halts everywhere
+OK   M halts on w after s = 15 steps -> Accept(M') = {x : |x| >= 15} (all x, |x| <= 18)
+OK   M never halts on w -> Accept(M') is empty (|x| <= 14)
+OK   1^n composite iff some d with 2 <= d <= n-1 divides n (n < 500)
+OK   (a ∨ b) ∧ (¬a ∨ ¬b) ∧ (a ∨ ¬b): the only satisfying assignment is a = True, b = False  [[(True, False)]]
+OK   adding (¬a ∨ b) makes it unsatisfiable
+
+ALL OK
