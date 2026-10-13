@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr"><head><title>How exams are graded</title><meta charset="utf-8"/><link rel="preload" href="../index.css" as="style"/><link rel="preload" href="../prescript.js" as="script"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source Serif 4:wght@400;700&amp;family=Source Sans 3:ital,wght@0,400;0,600;1,400;1,600&amp;family=JetBrains Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="CS 374 · Algorithms &amp; Models of Computation"/><meta property="og:title" content="How exams are graded"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="How exams are graded"/><meta name="twitter:description" content="Exam dates, scope and cheat-sheet rules; the Midterm 1 format; and a paraphrase of every standard rubric — induction, regular expressions and grammars, DFAs and NFAs, fooling sets, language transformations, diagonalization, reductions and Rice's theorem — with what loses points, the matching template and a worked problem for each."/><meta property="og:description" content="Exam dates, scope and cheat-sheet rules; the Midterm 1 format; and a paraphrase of every standard rubric — induction, regular expressions and grammars, DFAs and NFAs, fooling sets, language transformations, diagonalization, reductions and Rice's theorem — with what loses points, the matching template and a worked problem for each."/><meta property="og:image:alt" content="Exam dates, scope and cheat-sheet rules; the Midterm 1 format; and a paraphrase of every standard rubric — induction, regular expressions and grammars, DFAs and NFAs, fooling sets, language transformations, diagonalization, reductions and Rice's theorem — with what loses points, the matching template and a worked problem for each."/><meta property="og:image" content="https://quartz-374.vops.ch/static/og-image.png"/><meta property="og:image:url" content="https://quartz-374.vops.ch/static/og-image.png"/><meta name="twitter:image" content="https://quartz-374.vops.ch/static/og-image.png"/><meta property="og:image:type" content="image/.png"/><meta property="twitter:domain" content="quartz-374.vops.ch"/><meta property="og:url" content="https://quartz-374.vops.ch/0-toolkit/06-how-exams-are-graded"/><meta property="twitter:url" content="https://quartz-374.vops.ch/0-toolkit/06-how-exams-are-graded"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="Exam dates, scope and cheat-sheet rules; the Midterm 1 format; and a paraphrase of every standard rubric — induction, regular expressions and grammars, DFAs and NFAs, fooling sets, language transformations, diagonalization, reductions and Rice's theorem — with what loses points, the matching template and a worked problem for each."/><meta name="generator" content="Quartz"/><link href="../index.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-735924e0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-7f220492.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-53b25b2b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-c93c6a44.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-77d6a441.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-6ee21cee.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-1ea6ad18.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-34bdfded.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-788c9ca3.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-9857b007.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-d3a1a224.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../prescript.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../static/contentIndex.json").then(data => data.json())</script><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted%20Grotesk%3Awght%40400%3B700&amp;family=Source%20Sans%20Pro%3Aital%2Cwght%400%2C400%3B0%2C600%3B1%2C400%3B1%2C600&amp;family=IBM%20Plex%20Mono%3Awght%40400%3B600&amp;display=swap"/></head><body data-slug="0-toolkit/06-how-exams-are-graded" data-basepath><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">CS 374 · Algorithms &amp; Models of Computation</a></h2><div class="mobile-only"><div class="spacer"></div></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="Search" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>Search</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Search for something..." placeholder="Search for something..."/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode" aria-label="Dark mode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode" aria-label="Reader mode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="Reader mode"><title>Reader mode</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer nav-files-container" data-behavior="collapse" data-collapsed="open" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a2, b2) => {\n    if (!a2.isFolder &amp;&amp; !b2.isFolder || a2.isFolder &amp;&amp; b2.isFolder) {\n      return (a2.displayName || \&quot;\&quot;).localeCompare(b2.displayName || \&quot;\&quot;, void 0, {\n        numeric: true,\n        sensitivity: \&quot;base\&quot;\n      });\n    }\n    if (!a2.isFolder &amp;&amp; b2.isFolder) {\n      return 1;\n    }\n    return -1;\n  }&quot;,&quot;filterFn&quot;:&quot;(node) => node.slugSegment !== \&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;(node) => {\n    return node;\n  }&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-5" aria-label="Explorer"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>Course map</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-5" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#" class="nav-file-title tree-item-self"></a></li></template><template id="template-folder"><li><div class="folder-container nav-folder-title tree-item-self"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon nav-folder-collapse-indicator collapse-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content tree-item-children"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">CS 374</a><p> › </p></div><div class="breadcrumb-element"><a href="../0-toolkit/">Toolkit</a><p> › </p></div><div class="breadcrumb-element"><a href>How exams are graded</a></div></nav><h1 class="article-title">How exams are graded</h1><p show-comma="true" class="content-meta"><time datetime="2026-10-13T07:22:12.000Z">Oct 13, 2026</time><span>10 min read</span></p><ul class="tags"><li><a href="../tags/toolkit" class="internal tag-link">toolkit</a></li><li><a href="../tags/strings" class="internal tag-link">strings</a></li><li><a href="../tags/regular" class="internal tag-link">regular</a></li><li><a href="../tags/context-free" class="internal tag-link">context-free</a></li><li><a href="../tags/undecidability" class="internal tag-link">undecidability</a></li><li><a href="../tags/midterm-1" class="internal tag-link">midterm-1</a></li></ul></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><p><em>Toolkit · reference page · the course’s standard rubrics, paraphrased — the course website is authoritative.</em></p>
+<blockquote class="callout warning" data-callout="warning">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>A paraphrase, not the rubrics themselves </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p>Everything on this page paraphrases the CS/ECE 374 A (Fall 2026) course website: its exam schedule, the Midterm 1 practice exams and the standard grading rubrics. The course website is authoritative. Where this page disagrees with it, or with the instructions printed on an exam, they win.</p>
+</div>
+</blockquote>
+<h2 id="1-all-rubrics-at-a-glance">1. All rubrics at a glance<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#1-all-rubrics-at-a-glance" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Each standard rubric is out of 10 points.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>rubric</th><th>where the 10 points go</th><th>template</th><th>worked problem</th></tr></thead><tbody><tr><td><a href="#4-induction" class="internal internal-link alias">induction</a></td><td>1 arbitrary object · 2 explicit strong hypothesis · 2 exhaustive cases · 1 base cases · 2 correct use of the hypothesis · 2 other details</td><td><a href="../0-toolkit/02-proof-templates#1-induction-on-strings" class="internal internal-link alias" data-slug="0-toolkit/02-proof-templates">string induction</a></td><td><a href="../problems/induction-on-a-recursive-string-function" class="internal internal-link alias" data-slug="problems/induction-on-a-recursive-string-function">sorting a string</a></td></tr><tr><td><a href="#5-regular-expressions-and-grammars" class="internal internal-link alias">regular expression or grammar</a></td><td>2 syntax · 8 correctness on exams: −2 for one mistake, −4 for a few wrong strings, −8 for infinitely many</td><td><a href="../0-toolkit/02-proof-templates#2-writing-up-a-regular-expression-or-a-grammar" class="internal internal-link alias" data-slug="0-toolkit/02-proof-templates">write-up</a></td><td><a href="../problems/regular-expression-and-dfa-for-one-language" class="internal internal-link alias" data-slug="problems/regular-expression-and-dfa-for-one-language">01 exactly twice</a> (b)</td></tr><tr><td><a href="#6-dfas-and-nfas" class="internal internal-link alias">DFA or NFA</a></td><td>2 unambiguous, complete description · 6 correctness on exams · 2 mnemonic state names</td><td><a href="../0-toolkit/02-proof-templates#5-describing-a-dfa" class="internal internal-link alias" data-slug="0-toolkit/02-proof-templates">describing a DFA</a></td><td><a href="../problems/regular-expression-and-dfa-for-one-language" class="internal internal-link alias" data-slug="problems/regular-expression-and-dfa-for-one-language">01 exactly twice</a> (a)</td></tr><tr><td><a href="#7-fooling-sets" class="internal internal-link alias">fooling set</a></td><td>4 explicit infinite fooling set · 2 explicit suffix <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.044em;">z</span></span></span></span> · 2 one of <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span><span class="mord mathnormal" style="margin-right:0.044em;">z</span></span></span></span>, <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mord mathnormal" style="margin-right:0.044em;">z</span></span></span></span> in <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span></span></span></span> · 2 the other not</td><td><a href="../0-toolkit/02-proof-templates#7-fooling-set-proof" class="internal internal-link alias" data-slug="0-toolkit/02-proof-templates">fooling set</a></td><td><a href="../problems/fooling-set-and-grammar-for-one-language" class="internal internal-link alias" data-slug="problems/fooling-set-and-grammar-for-one-language">fooling set and grammar</a> (a)</td></tr><tr><td><a href="#8-language-transformations" class="internal internal-link alias">language transformation</a></td><td>2 formal description of <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7519em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.109em;">M</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span> from an arbitrary DFA · 2 English explanation · 6 correctness: 1 states, 1 start, 1 accepting, 3 transitions</td><td><a href="../0-toolkit/02-proof-templates#9-language-transformation" class="internal internal-link alias" data-slug="0-toolkit/02-proof-templates">transformation</a></td><td><a href="../problems/two-language-transformations" class="internal internal-link alias" data-slug="problems/two-language-transformations">insert and delete a 1</a></td></tr><tr><td><a href="#diagonalization" class="internal internal-link alias">diagonalization</a></td><td>4 wrapper machine · 6 contradiction, 3 per case</td><td><a href="../0-toolkit/02-proof-templates#12-undecidability-by-diagonalization" class="internal internal-link alias" data-slug="0-toolkit/02-proof-templates">diagonalization</a></td><td>Theorem 6, <a href="../1-models-of-computation/07-undecidability#75-self-haters-gonna-self-hate" class="internal internal-link alias" data-slug="1-models-of-computation/07-undecidability">§7.5</a></td></tr><tr><td><a href="#reduction" class="internal internal-link alias">reduction</a></td><td>4 the reduction · 3 “if” · 3 “only if”</td><td><a href="../0-toolkit/02-proof-templates#13-undecidability-by-reduction" class="internal internal-link alias" data-slug="0-toolkit/02-proof-templates">reduction</a></td><td><a href="../problems/undecidability-by-reduction-and-by-rice" class="internal internal-link alias" data-slug="problems/undecidability-by-reduction-and-by-rice">AtLeastTwo</a> (a)</td></tr><tr><td><a href="#rices-theorem" class="internal internal-link alias">Rice’s theorem</a></td><td>4 a machine whose language has the property · 4 one whose language does not · 2 details, including the right variant</td><td><a href="../0-toolkit/02-proof-templates#14-undecidability-by-rices-theorem" class="internal internal-link alias" data-slug="0-toolkit/02-proof-templates">Rice</a></td><td><a href="../problems/undecidability-by-reduction-and-by-rice" class="internal internal-link alias" data-slug="problems/undecidability-by-reduction-and-by-rice">AtLeastTwo</a> (b)</td></tr></tbody></table></div>
+<p><strong>On every problem</strong> (<a href="#10-general-rules" class="internal internal-link alias">§10</a>): “clearly”, “trivial” and “obviously” draw scrutiny; ambiguity is read unfavorably; an NFA where a DFA was asked earns half credit; <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6633em;vertical-align:-0.0817em;"></span><span class="mord amsrm">∅</span></span></span></span> or <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6887em;"></span><span class="mord"><span class="mord">Σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6887em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∗</span></span></span></span></span></span></span></span></span></span></span> as a regular expression or grammar earns nothing; and any result from lecture, the lecture notes, labs or homework solutions may be used without proof.</p>
+<h2 id="2-exams-and-cheat-sheets">2. Exams and cheat sheets<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#2-exams-and-cheat-sheets" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>exam</th><th>when</th><th>covers</th><th>cheat sheet</th></tr></thead><tbody><tr><td>Midterm 1, “Models of computation”</td><td>Mon Sep 28, 2026 (done)</td><td>induction on strings and languages, regular languages and regular expressions, DFAs, NFAs, fooling sets, regular language transformations, context-free languages and grammars (Chapters 1–5); no Turing machines</td><td>one sheet</td></tr><tr><td>Midterm 2, “Algorithms”</td><td>Mon Nov 9, 2026, 7–9 pm</td><td>the <a href="../2-algorithms/" class="internal internal-link alias" data-slug="2-algorithms/index">algorithms</a> half of the course</td><td>one sheet</td></tr><tr><td>Final exam, “Everything”</td><td>Fri Dec 11, 2026, 8–11 am</td><td>everything, including Chapters 6–9, which are tested only here</td><td>two sheets</td></tr></tbody></table></div>
+<p>A cheat sheet is a double-sided letter-size sheet, and it must be <strong>handwritten</strong>. The formats of Midterm 2 and of the final exam are not described here; check the course website.</p>
+<h2 id="3-the-midterm-1-format">3. The Midterm 1 format<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#3-the-midterm-1-format" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Midterm 1’s practice exams have <strong>5 problems in 120 minutes</strong>, one of each type below. Students may use <strong>any result from lecture, the lecture notes, labs or homework solutions without proof</strong> — cite it by name: “by Lemma 3.6”, “by the product construction”.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>problem type</th><th>what to hand in</th><th>template</th><th>rubric</th><th>worked problem</th></tr></thead><tbody><tr><td>true/false, 10 parts</td><td>each answer with a one-sentence justification</td><td>—</td><td>—</td><td>sample items close every chapter page: <a href="../1-models-of-computation/01-strings#summary" class="internal internal-link alias" data-slug="1-models-of-computation/01-strings">Ch 1</a>, <a href="../1-models-of-computation/02-regular-languages#summary" class="internal internal-link alias" data-slug="1-models-of-computation/02-regular-languages">2</a>, <a href="../1-models-of-computation/03-finite-state-machines#summary" class="internal internal-link alias" data-slug="1-models-of-computation/03-finite-state-machines">3</a>, <a href="../1-models-of-computation/04-nondeterministic-automata#summary" class="internal internal-link alias" data-slug="1-models-of-computation/04-nondeterministic-automata">4</a>, <a href="../1-models-of-computation/05-context-free-languages#summary" class="internal internal-link alias" data-slug="1-models-of-computation/05-context-free-languages">5</a></td></tr><tr><td>regular language transformations, two parts</td><td>for each, an automaton built from an arbitrary DFA for <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span></span></span></span></td><td><a href="../0-toolkit/02-proof-templates#9-language-transformation" class="internal internal-link alias" data-slug="0-toolkit/02-proof-templates">transformation</a></td><td><a href="#8-language-transformations" class="internal internal-link alias">§8</a></td><td><a href="../problems/two-language-transformations" class="internal internal-link alias" data-slug="problems/two-language-transformations">insert and delete a 1</a></td></tr><tr><td>induction on a recursively defined string function</td><td>a complete induction proof</td><td><a href="../0-toolkit/02-proof-templates#1-induction-on-strings" class="internal internal-link alias" data-slug="0-toolkit/02-proof-templates">string induction</a></td><td><a href="#4-induction" class="internal internal-link alias">§4</a></td><td><a href="../problems/induction-on-a-recursive-string-function" class="internal internal-link alias" data-slug="problems/induction-on-a-recursive-string-function">sorting a string</a></td></tr><tr><td>non-regularity plus a grammar for the same language</td><td>a fooling-set proof and a context-free grammar</td><td><a href="../0-toolkit/02-proof-templates#7-fooling-set-proof" class="internal internal-link alias" data-slug="0-toolkit/02-proof-templates">fooling set</a>, <a href="../0-toolkit/02-proof-templates#2-writing-up-a-regular-expression-or-a-grammar" class="internal internal-link alias" data-slug="0-toolkit/02-proof-templates">write-up</a></td><td><a href="#7-fooling-sets" class="internal internal-link alias">§7</a>, <a href="#5-regular-expressions-and-grammars" class="internal internal-link alias">§5</a></td><td><a href="../problems/fooling-set-and-grammar-for-one-language" class="internal internal-link alias" data-slug="problems/fooling-set-and-grammar-for-one-language">fooling set and grammar</a></td></tr><tr><td>a DFA plus a regular expression for the same language</td><td>both, with mnemonic state names; no proof needed</td><td><a href="../0-toolkit/02-proof-templates#5-describing-a-dfa" class="internal internal-link alias" data-slug="0-toolkit/02-proof-templates">describing a DFA</a>, <a href="../0-toolkit/02-proof-templates#2-writing-up-a-regular-expression-or-a-grammar" class="internal internal-link alias" data-slug="0-toolkit/02-proof-templates">write-up</a></td><td><a href="#6-dfas-and-nfas" class="internal internal-link alias">§6</a>, <a href="#5-regular-expressions-and-grammars" class="internal internal-link alias">§5</a></td><td><a href="../problems/regular-expression-and-dfa-for-one-language" class="internal internal-link alias" data-slug="problems/regular-expression-and-dfa-for-one-language">01 exactly twice</a></td></tr></tbody></table></div>
+<h2 id="4-induction">4. Induction<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#4-induction" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>points</th><th>for</th></tr></thead><tbody><tr><td>1</td><td>starting from an <strong>arbitrary</strong> object: “let <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.0269em;">w</span></span></span></span> be an arbitrary string”</td></tr><tr><td>2</td><td>an <strong>explicit, strong</strong> induction hypothesis — weak induction is discouraged</td></tr><tr><td>2</td><td><strong>exhaustive</strong> cases: together they cover every object</td></tr><tr><td>1</td><td>the <strong>base cases</strong></td></tr><tr><td>2</td><td><strong>correct use</strong> of the induction hypothesis</td></tr><tr><td>2</td><td>the other details</td></tr></tbody></table></div>
+<p>The wording (“an arbitrary object”) fits every induction in the course — over strings, regular expressions, numbers or derivations. A proof that a grammar generates a language is two of them.</p>
+<blockquote class="callout trap" data-callout="trap">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>What loses points </p></div>
+                  
+                </div>
+<div class="callout-content">
+<ul>
+<li>A hypothesis that is never written down, or a weak one (“assume the claim for <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span>; prove it for <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">a</span><span class="mord mathnormal">x</span></span></span></span>”). State it for <strong>every</strong> smaller object.</li>
+<li>Applying the hypothesis to something that is not smaller than <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.0269em;">w</span></span></span></span> — or not saying why it is smaller.</li>
+<li>Cases that miss strings: a definition with a case <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.0269em;">w</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">ab</span><span class="mord mathnormal">x</span></span></span></span> needs base cases for <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">ε</span></span></span></span> <strong>and</strong> for every single symbol.</li>
+<li>Inducting on the wrong argument: concatenation takes its left argument apart, so the right one never gets smaller.</li>
+<li>A step justified by “clearly” instead of by a definition, the hypothesis or a lemma.</li>
+</ul>
+</div>
+</blockquote>
+<p><strong>Templates:</strong> <a href="../0-toolkit/02-proof-templates#1-induction-on-strings" class="internal internal-link alias" data-slug="0-toolkit/02-proof-templates">string induction</a>, <a href="../0-toolkit/02-proof-templates#3-induction-on-regular-expressions" class="internal internal-link alias" data-slug="0-toolkit/02-proof-templates">structural induction</a>, <a href="../0-toolkit/02-proof-templates#10-proving-what-a-grammar-generates" class="internal internal-link alias" data-slug="0-toolkit/02-proof-templates">what a grammar generates</a> · <strong>worked:</strong> <a href="../problems/induction-on-a-recursive-string-function" class="internal internal-link alias" data-slug="problems/induction-on-a-recursive-string-function">sorting a string</a>, <a href="../problems/proving-what-a-grammar-generates" class="internal internal-link alias" data-slug="problems/proving-what-a-grammar-generates">a grammar proof</a> · <strong>traps in context:</strong> <a href="../1-models-of-computation/01-strings#14-more-than-one-path-up-the-mountain" class="internal internal-link alias" data-slug="1-models-of-computation/01-strings">§1.4</a>, <a href="../concepts/induction-on-strings" class="internal internal-link alias" data-slug="concepts/induction-on-strings">induction on strings</a></p>
+<h2 id="5-regular-expressions-and-grammars">5. Regular expressions and grammars<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#5-regular-expressions-and-grammars" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>points</th><th>for</th></tr></thead><tbody><tr><td>2</td><td>syntax</td></tr><tr><td>8</td><td>correctness (on exams)</td></tr></tbody></table></div>
+<p>Exam deductions are twice the homework ones:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>mistake</th><th>homework</th><th>exam</th></tr></thead><tbody><tr><td>one mistake — often a missing or extra <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">ε</span></span></span></span></td><td>−1</td><td>−2</td></tr><tr><td>a few wrong strings</td><td>−2</td><td>−4</td></tr><tr><td>infinitely many wrong strings</td><td>no correctness credit</td><td>no correctness credit: −8</td></tr><tr><td>the answer <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6633em;vertical-align:-0.0817em;"></span><span class="mord amsrm">∅</span></span></span></span> or <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6887em;"></span><span class="mord"><span class="mord">Σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6887em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∗</span></span></span></span></span></span></span></span></span></span></span></td><td>no credit</td><td>no credit</td></tr></tbody></table></div>
+<p>Homework answers must also explain each piece in English, and for a grammar, <strong>every nonterminal</strong> needs a self-contained description of its language. <strong>Ambiguity is not penalized</strong>: an ambiguous grammar that generates the right language earns full credit.</p>
+<blockquote class="callout trap" data-callout="trap">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>What loses points </p></div>
+                  
+                </div>
+<div class="callout-content">
+<ul>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">ε</span></span></span></span>, forgotten or let in by accident. Test it first.</li>
+<li>Precedence: <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6887em;"></span><span class="mord mathtt">1</span><span class="mord"><span class="mord mathtt">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6887em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∗</span></span></span></span></span></span></span></span></span></span></span> is not <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathtt">10</span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6887em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∗</span></span></span></span></span></span></span></span></span></span></span>, and a misplaced star usually changes infinitely many strings.</li>
+<li>Syntax that regular expressions do not have: <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5556em;"></span><span class="mord">∩</span></span></span></span>, complement, <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6644em;"></span><span class="mord"><span class="mord mathtt">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span></span></span>, a “plus” that means “one or more”.</li>
+<li>A union with a forgotten case, like a grammar for “not of the form <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6644em;"></span><span class="mord"><span class="mord mathtt">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathtt">1</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span></span></span>” that misses every string containing <code>10</code> (<a href="../1-models-of-computation/05-context-free-languages#designing-a-grammar" class="internal internal-link alias" data-slug="1-models-of-computation/05-context-free-languages">§5.4</a>, Example 2).</li>
+<li>A nonterminal described by its role (“the middle part”) instead of by its language.</li>
+</ul>
+</div>
+</blockquote>
+<p><strong>Template:</strong> <a href="../0-toolkit/02-proof-templates#2-writing-up-a-regular-expression-or-a-grammar" class="internal internal-link alias" data-slug="0-toolkit/02-proof-templates">write-up</a> · <strong>worked:</strong> <a href="../problems/regular-expression-and-dfa-for-one-language" class="internal internal-link alias" data-slug="problems/regular-expression-and-dfa-for-one-language">01 exactly twice</a> (b), <a href="../problems/fooling-set-and-grammar-for-one-language" class="internal internal-link alias" data-slug="problems/fooling-set-and-grammar-for-one-language">fooling set and grammar</a> (b), <a href="../problems/state-elimination-by-hand" class="internal internal-link alias" data-slug="problems/state-elimination-by-hand">state elimination by hand</a> · <strong>traps in context:</strong> <a href="../1-models-of-computation/02-regular-languages#designing-a-regular-expression" class="internal internal-link alias" data-slug="1-models-of-computation/02-regular-languages">§2.3</a>, <a href="../1-models-of-computation/05-context-free-languages#designing-a-grammar" class="internal internal-link alias" data-slug="1-models-of-computation/05-context-free-languages">§5.4</a></p>
+<h2 id="6-dfas-and-nfas">6. DFAs and NFAs<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#6-dfas-and-nfas" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>points</th><th>for</th></tr></thead><tbody><tr><td>2</td><td>an <strong>unambiguous, complete description</strong>: a start arrow and double circles; say so if you leave out a trash (dump) state; a description in text gives the whole transition function; an NFA states its <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">ε</span></span></span></span>-transitions; a product construction describes each factor and the accepting states</td></tr><tr><td>6</td><td>correctness (on exams)</td></tr><tr><td>2</td><td><strong>mnemonic</strong> state names</td></tr></tbody></table></div>
+<p><strong>An NFA where a DFA was asked earns half credit.</strong> The rubric has no line for minimality; a clear machine with a few extra states is better than a minimal one you cannot explain (<a href="../1-models-of-computation/03-finite-state-machines#35-designing-dfas-dfas-are-algorithms" class="internal internal-link alias" data-slug="1-models-of-computation/03-finite-state-machines">§3.5</a>).</p>
+<blockquote class="callout trap" data-callout="trap">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>What loses points </p></div>
+                  
+                </div>
+<div class="callout-content">
+<ul>
+<li>Missing transitions and no sentence about a dump state: the machine is incomplete — or an NFA, which earns half credit.</li>
+<li>States named <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">…</span></span></span></span> with no meaning attached.</li>
+<li>“Run both machines in parallel” with no description of the factors, the pairs and the accepting pairs.</li>
+<li>Factors of a product that are not complete DFAs over the same alphabet: the union and the difference then lose strings.</li>
+</ul>
+</div>
+</blockquote>
+<p><strong>Templates:</strong> <a href="../0-toolkit/02-proof-templates#5-describing-a-dfa" class="internal internal-link alias" data-slug="0-toolkit/02-proof-templates">describing a DFA</a>, <a href="../0-toolkit/02-proof-templates#6-writing-up-a-product-construction" class="internal internal-link alias" data-slug="0-toolkit/02-proof-templates">product construction</a> · <strong>worked:</strong> <a href="../problems/regular-expression-and-dfa-for-one-language" class="internal internal-link alias" data-slug="problems/regular-expression-and-dfa-for-one-language">01 exactly twice</a> (a), <a href="../problems/a-product-construction-written-formally" class="internal internal-link alias" data-slug="problems/a-product-construction-written-formally">a product, written formally</a>, <a href="../problems/subset-construction-by-hand" class="internal internal-link alias" data-slug="problems/subset-construction-by-hand">subset construction by hand</a> · <strong>traps in context:</strong> <a href="../1-models-of-computation/03-finite-state-machines#32-formal-definitions" class="internal internal-link alias" data-slug="1-models-of-computation/03-finite-state-machines">§3.2</a>, <a href="../1-models-of-computation/03-finite-state-machines#36-the-product-construction" class="internal internal-link alias" data-slug="1-models-of-computation/03-finite-state-machines">§3.6</a></p>
+<h2 id="7-fooling-sets">7. Fooling sets<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#7-fooling-sets" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>points</th><th>for</th></tr></thead><tbody><tr><td>4</td><td>an explicit <strong>infinite</strong> set that really is a fooling set — a finite set earns nothing</td></tr><tr><td>2</td><td>for arbitrary distinct <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7335em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">F</span></span></span></span>: an explicit suffix <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.044em;">z</span></span></span></span></td></tr><tr><td>2</td><td>showing that one of <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span><span class="mord mathnormal" style="margin-right:0.044em;">z</span></span></span></span> and <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mord mathnormal" style="margin-right:0.044em;">z</span></span></span></span> is in <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span></span></span></span></td></tr><tr><td>2</td><td>showing that the other is not</td></tr></tbody></table></div>
+<blockquote class="callout trap" data-callout="trap">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>What loses points </p></div>
+                  
+                </div>
+<div class="callout-content">
+<ul>
+<li>One example pair instead of arbitrary distinct <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span> and <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span></span></span></span>, written with parameters <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel"><span class="mrel"><span class="mord vbox"><span class="thinbox"><span class="rlap"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="inner"><span class="mord"><span class="mrel"></span></span></span><span class="fix"></span></span></span></span></span><span class="mspace nobreak"></span><span class="mrel">=</span></span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.854em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0572em;">j</span></span></span></span>.</li>
+<li>“Assume <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6986em;vertical-align:-0.0391em;"></span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.854em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0572em;">j</span></span></span></span>” without “without loss of generality” — or when the argument is not symmetric, because <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.044em;">z</span></span></span></span> was built from <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span>.</li>
+<li>Only one half shown, or a half with no reason.</li>
+<li>A set described by what it should do (“all the prefixes we need”) instead of explicitly.</li>
+<li>A suffix that depends on a DFA you are trying to rule out.</li>
+</ul>
+</div>
+</blockquote>
+<p><strong>Template:</strong> <a href="../0-toolkit/02-proof-templates#7-fooling-set-proof" class="internal internal-link alias" data-slug="0-toolkit/02-proof-templates">fooling set</a> · <strong>worked:</strong> <a href="../problems/fooling-set-and-grammar-for-one-language" class="internal internal-link alias" data-slug="problems/fooling-set-and-grammar-for-one-language">fooling set and grammar</a> (a) · <strong>traps in context:</strong> <a href="../1-models-of-computation/03-finite-state-machines#38-proving-a-language-is-not-regular" class="internal internal-link alias" data-slug="1-models-of-computation/03-finite-state-machines">§3.8</a>, <a href="../concepts/fooling-sets" class="internal internal-link alias" data-slug="concepts/fooling-sets">fooling sets</a></p>
+<h2 id="8-language-transformations">8. Language transformations<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#8-language-transformations" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>points</th><th>for</th></tr></thead><tbody><tr><td>2</td><td>a <strong>formal, complete description</strong> of the new machine <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7519em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.109em;">M</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span>, built from an <strong>arbitrary</strong> DFA <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.109em;">M</span></span></span></span> — say whether <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7519em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.109em;">M</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span> is a DFA or an NFA, and give its <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">ε</span></span></span></span>-transitions</td></tr><tr><td>2</td><td>an <strong>English explanation</strong> of the states and of the accepting states</td></tr><tr><td>6</td><td>correctness: 1 for the states, 1 for the start state, 1 for the accepting states, 3 for the transitions</td></tr></tbody></table></div>
+<p>Before handing in, run the construction on the edge cases the rubric names: <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6633em;vertical-align:-0.0817em;"></span><span class="mord amsrm">∅</span></span></span></span>, <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord mathnormal">ε</span><span class="mclose">}</span></span></span></span>, <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6887em;"></span><span class="mord"><span class="mord mathtt">1</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6887em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∗</span></span></span></span></span></span></span></span></span></span></span> and <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6887em;"></span><span class="mord"><span class="mord">Σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6887em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∗</span></span></span></span></span></span></span></span></span></span></span>.</p>
+<blockquote class="callout trap" data-callout="trap">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>What loses points </p></div>
+                  
+                </div>
+<div class="callout-content">
+<ul>
+<li>A construction for one particular DFA or language: the claim is about <strong>every</strong> regular <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span></span></span></span>.</li>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7519em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0379em;">δ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span> left undefined for some state and symbol, or for <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">ε</span></span></span></span>.</li>
+<li>The two kinds mixed up: <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord mathnormal" style="margin-right:0.0269em;">w</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∣</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0269em;">w</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">L</span><span class="mclose">}</span></span></span></span> simulates <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.109em;">M</span></span></span></span> on <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0269em;">w</span><span class="mclose">)</span></span></span></span>; <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0269em;">w</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∣</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathnormal" style="margin-right:0.0269em;">w</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">L</span><span class="mclose">}</span></span></span></span> guesses <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.0269em;">w</span></span></span></span>.</li>
+<li>Complementing an NFA by swapping its accepting states.</li>
+</ul>
+</div>
+</blockquote>
+<p><strong>Template:</strong> <a href="../0-toolkit/02-proof-templates#9-language-transformation" class="internal internal-link alias" data-slug="0-toolkit/02-proof-templates">transformation</a> · <strong>worked:</strong> <a href="../problems/two-language-transformations" class="internal internal-link alias" data-slug="problems/two-language-transformations">insert and delete a 1</a> · <strong>traps in context:</strong> <a href="../1-models-of-computation/04-nondeterministic-automata#49-regular-language-transformations" class="internal internal-link alias" data-slug="1-models-of-computation/04-nondeterministic-automata">§4.9</a>, <a href="../concepts/language-transformations" class="internal internal-link alias" data-slug="concepts/language-transformations">language transformations</a></p>
+<h2 id="9-undecidability">9. Undecidability<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#9-undecidability" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Chapters 6–9 are tested on the final exam only. An undecidability proof is graded with the rubric of its method.</p>
+<h3 id="diagonalization">Diagonalization<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#diagonalization" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>points</th><th>for</th></tr></thead><tbody><tr><td>4</td><td>the wrapper machine, built from the hypothetical decider</td></tr><tr><td>6</td><td>the contradiction: 3 for each of the two cases</td></tr></tbody></table></div>
+<h3 id="reduction">Reduction<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#reduction" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>points</th><th>for</th></tr></thead><tbody><tr><td>4</td><td>the reduction: the new decider and the machine <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7519em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.109em;">M</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span> it writes down</td></tr><tr><td>3</td><td>”if”: a yes-instance (<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.109em;">M</span></span></span></span> accepts <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.0269em;">w</span></span></span></span>) makes the new decider accept</td></tr><tr><td>3</td><td>”only if”: a no-instance (<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.109em;">M</span></span></span></span> rejects <strong>or diverges</strong>) makes it reject</td></tr></tbody></table></div>
+<h3 id="rices-theorem">Rice’s theorem<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#rices-theorem" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>points</th><th>for</th></tr></thead><tbody><tr><td>4</td><td>a machine whose language has the property</td></tr><tr><td>4</td><td>a machine whose language does not</td></tr><tr><td>2</td><td>the details, including the right variant of the theorem</td></tr></tbody></table></div>
+<blockquote class="callout trap" data-callout="trap">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>What loses points </p></div>
+                  
+                </div>
+<div class="callout-content">
+<ul>
+<li><strong>The wrong direction.</strong> Deciding <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span></span></span></span> with the help of a decider for <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord text"><span class="mord textsf">Halt</span></span></span></span></span> proves nothing; the hypothetical decider for <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span></span></span></span> must be the subroutine.</li>
+<li><strong>Running <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7519em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.109em;">M</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span>.</strong> The new decider only writes <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0019em;vertical-align:-0.25em;"></span><span class="mopen">⟨</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.109em;">M</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mclose">⟩</span></span></span></span> down; it must halt on every input.</li>
+<li><strong>“Does not accept” read as “rejects”.</strong> It also means “diverges”, and the “only if” case must cover both.</li>
+<li><strong>Unnamed machines.</strong> Name the hypothetical decider, the decider you build, <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.109em;">M</span></span></span></span> and <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7519em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.109em;">M</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span>, and never write “it”.</li>
+<li><strong>Rice where it does not apply:</strong> a behavior (<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord textsf">ThisIsSparta</span></span></span></span></span>), self-reference (<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord textsf">RevAccept</span></span></span></span></span>), a trivial property — or the wrong variant, such as a property of <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord textsf">Halt</span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.109em;">M</span><span class="mclose">)</span></span></span></span> treated as one of <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord textsf">Accept</span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.109em;">M</span><span class="mclose">)</span></span></span></span>.</li>
+<li><strong>Diagonalizing against the wrong machine.</strong> The contradiction comes from running the machine built from the decider on its own encoding.</li>
+</ul>
+</div>
+</blockquote>
+<p><strong>Templates:</strong> <a href="../0-toolkit/02-proof-templates#12-undecidability-by-diagonalization" class="internal internal-link alias" data-slug="0-toolkit/02-proof-templates">diagonalization</a>, <a href="../0-toolkit/02-proof-templates#13-undecidability-by-reduction" class="internal internal-link alias" data-slug="0-toolkit/02-proof-templates">reduction</a>, <a href="../0-toolkit/02-proof-templates#14-undecidability-by-rices-theorem" class="internal internal-link alias" data-slug="0-toolkit/02-proof-templates">Rice</a> · <strong>worked:</strong> <a href="../problems/undecidability-by-reduction-and-by-rice" class="internal internal-link alias" data-slug="problems/undecidability-by-reduction-and-by-rice">AtLeastTwo</a>; Theorem 6 in <a href="../1-models-of-computation/07-undecidability#75-self-haters-gonna-self-hate" class="internal internal-link alias" data-slug="1-models-of-computation/07-undecidability">§7.5</a> · <strong>traps in context:</strong> <a href="../1-models-of-computation/07-undecidability#79-the-halting-problem-via-reduction" class="internal internal-link alias" data-slug="1-models-of-computation/07-undecidability">§7.9</a>, <a href="../1-models-of-computation/07-undecidability#711-rices-theorem" class="internal internal-link alias" data-slug="1-models-of-computation/07-undecidability">§7.11</a></p>
+<h2 id="10-general-rules">10. General rules<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#10-general-rules" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><strong>“Clearly”, “trivial” and “obviously” draw scrutiny.</strong> A grader reads the step they introduce more closely. Write the reason instead: a definition, the hypothesis, a lemma.</li>
+<li><strong>Ambiguity is read unfavorably.</strong> When an answer can be read two ways, expect the reading that earns less: define every symbol, name every machine, label every edge. (An <em>ambiguous grammar</em> is a different thing, and costs nothing.)</li>
+<li><strong>An NFA where a DFA was asked earns half credit.</strong></li>
+<li><strong><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6633em;vertical-align:-0.0817em;"></span><span class="mord amsrm">∅</span></span></span></span> or <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6887em;"></span><span class="mord"><span class="mord">Σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6887em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∗</span></span></span></span></span></span></span></span></span></span></span> as a regular expression or grammar earns no credit.</strong></li>
+<li><strong>Cite instead of reproving.</strong> Any result from lecture, the lecture notes, labs or homework solutions may be used without proof.</li>
+<li><strong>Cheat sheets are handwritten:</strong> one double-sided letter sheet for a midterm, two for the final.</li>
+</ul>
+<p>Related: <a href="../0-toolkit/02-proof-templates" class="internal internal-link alias" data-slug="0-toolkit/02-proof-templates">proof templates</a> · <a href="../0-toolkit/01-notation-and-conventions" class="internal internal-link alias" data-slug="0-toolkit/01-notation-and-conventions">notation and conventions</a> · <a href="../0-toolkit/03-the-big-picture" class="internal internal-link alias" data-slug="0-toolkit/03-the-big-picture">the big picture</a></p>
+<h3 id="sources-for-this-page">Sources for this page<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#sources-for-this-page" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Exam dates and scope, the cheat-sheet rules, the Midterm 1 format (from its practice exams) and the standard rubrics come from the CS/ECE 374 A (Fall 2026) course website and are paraphrased here; the website is authoritative. The “what loses points” lists collect the traps of the chapter and concept pages linked from each section.</p></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[&quot;chapter&quot;,&quot;concept&quot;,&quot;problem&quot;,&quot;practice&quot;,&quot;demo&quot;,&quot;toolkit&quot;],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[&quot;chapter&quot;,&quot;concept&quot;,&quot;problem&quot;,&quot;practice&quot;,&quot;demo&quot;,&quot;toolkit&quot;],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="desktop-only"><div class="toc"><button type="button" class="toc-header" aria-controls="toc-5" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-0" class="toc-content overflow"><li class="depth-0"><a href="#1-all-rubrics-at-a-glance" data-for="1-all-rubrics-at-a-glance">1. All rubrics at a glance</a></li><li class="depth-0"><a href="#2-exams-and-cheat-sheets" data-for="2-exams-and-cheat-sheets">2. Exams and cheat sheets</a></li><li class="depth-0"><a href="#3-the-midterm-1-format" data-for="3-the-midterm-1-format">3. The Midterm 1 format</a></li><li class="depth-0"><a href="#4-induction" data-for="4-induction">4. Induction</a></li><li class="depth-0"><a href="#5-regular-expressions-and-grammars" data-for="5-regular-expressions-and-grammars">5. Regular expressions and grammars</a></li><li class="depth-0"><a href="#6-dfas-and-nfas" data-for="6-dfas-and-nfas">6. DFAs and NFAs</a></li><li class="depth-0"><a href="#7-fooling-sets" data-for="7-fooling-sets">7. Fooling sets</a></li><li class="depth-0"><a href="#8-language-transformations" data-for="8-language-transformations">8. Language transformations</a></li><li class="depth-0"><a href="#9-undecidability" data-for="9-undecidability">9. Undecidability</a></li><li class="depth-1"><a href="#diagonalization" data-for="diagonalization">Diagonalization</a></li><li class="depth-1"><a href="#reduction" data-for="reduction">Reduction</a></li><li class="depth-1"><a href="#rices-theorem" data-for="rices-theorem">Rice’s theorem</a></li><li class="depth-0"><a href="#10-general-rules" data-for="10-general-rules">10. General rules</a></li><li class="depth-1"><a href="#sources-for-this-page" data-for="sources-for-this-page">Sources for this page</a></li><li class="overflow-end"></li></ul></div></div><div class="backlinks"><h3>Backlinks</h3><ul id="list-0" class="overflow"><li><a href="../0-toolkit/01-notation-and-conventions" class="internal">Notation and conventions</a></li><li><a href="../0-toolkit/02-proof-templates" class="internal">Proof templates</a></li><li><a href="../0-toolkit/04-review-regular-and-context-free" class="internal">Review: regular and context-free languages (Ch 1–5)</a></li><li><a href="../0-toolkit/05-review-turing-machines-and-undecidability" class="internal">Review: Turing machines and undecidability (Ch 6–9)</a></li><li><a href="../0-toolkit/" class="internal">Toolkit</a></li><li><a href="../1-models-of-computation/01-strings" class="internal">Chapter 1 — Strings</a></li><li><a href="../1-models-of-computation/02-regular-languages" class="internal">Chapter 2 — Regular Languages</a></li><li><a href="../1-models-of-computation/03-finite-state-machines" class="internal">Chapter 3 — Finite-State Machines</a></li><li><a href="../1-models-of-computation/04-nondeterministic-automata" class="internal">Chapter 4 — Nondeterministic Automata</a></li><li><a href="../1-models-of-computation/05-context-free-languages" class="internal">Chapter 5 — Context-Free Languages</a></li><li><a href="../1-models-of-computation/06-turing-machines" class="internal">Chapter 6 — Turing Machines</a></li><li><a href="../1-models-of-computation/07-undecidability" class="internal">Chapter 7 — Undecidability</a></li><li><a href="../1-models-of-computation/08-universal-models" class="internal">Chapter 8 — Universal Models</a></li><li><a href="../1-models-of-computation/09-nondeterministic-turing-machines" class="internal">Chapter 9 — Nondeterministic Turing Machines</a></li><li><a href="../2-algorithms/" class="internal">Part 2 · Algorithms</a></li><li><a href="../concepts/dfa" class="internal">DFA (deterministic finite automaton)</a></li><li><a href="../concepts/induction-on-strings" class="internal">Induction on strings</a></li><li><a href="../concepts/rices-theorem" class="internal">Rice's theorem</a></li><li><a href="../" class="internal">CS/ECE 374 · Algorithms &amp; Models of Computation</a></li><li><a href="../practice/01-strings" class="internal">Practice — Chapter 1: Strings</a></li><li><a href="../practice/02-regular-languages" class="internal">Practice — Chapter 2: Regular languages</a></li><li><a href="../practice/03-finite-state-machines" class="internal">Practice — Chapter 3: Finite-state machines</a></li><li><a href="../practice/04-nondeterministic-automata" class="internal">Practice — Chapter 4: Nondeterministic automata</a></li><li><a href="../practice/05-context-free-languages" class="internal">Practice — Chapter 5: Context-free languages</a></li><li><a href="../problems/a-product-construction-written-formally" class="internal">Worked problem — A product construction, written formally</a></li><li><a href="../problems/fooling-set-and-grammar-for-one-language" class="internal">Worked problem — A fooling set and a grammar for one language</a></li><li><a href="../problems/" class="internal">Worked problems</a></li><li><a href="../problems/induction-on-a-recursive-string-function" class="internal">Worked problem — Induction on a recursive string function</a></li><li><a href="../problems/proving-what-a-grammar-generates" class="internal">Worked problem — Proving what a grammar generates</a></li><li><a href="../problems/regular-expression-and-dfa-for-one-language" class="internal">Worked problem — A regular expression and a DFA for one language</a></li><li><a href="../problems/subset-construction-by-hand" class="internal">Worked problem — The subset construction by hand</a></li><li><a href="../problems/two-language-transformations" class="internal">Worked problem — Two language transformations</a></li><li><a href="../problems/undecidability-by-reduction-and-by-rice" class="internal">Worked problem — Undecidability by reduction and by Rice's theorem</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="https://jeffe.cs.illinois.edu/teaching/algorithms/">Textbook: Erickson, Models of Computation</a></li><li><a href="https://courses.grainger.illinois.edu/cs374al1/fa2026/">Course page: CS/ECE 374 A</a></li><li><a href="https://quartz.jzhao.xyz">Built with Quartz</a></li></ul></footer></div></div></body><script src="../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-21c84bec.js" type="application/javascript" data-persist="true"></script><script src="../postscript.js" type="module" data-persist="true"></script></html>
