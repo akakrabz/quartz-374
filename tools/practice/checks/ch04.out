@@ -1,0 +1,122 @@
+== 4.1
+OK   (a) incremental subset construction: at most 2^n DFA states (300 random NFAs with eps)
+OK   (b) one-state NFA with no transitions accepts exactly {eps}
+OK   (b) swapped version accepts nothing, but the complement of {eps} contains 0
+OK   (c) nonempty n-state NFA accepts a string of length <= n-1 (random NFAs with eps)  [1039 nonempty]
+OK   (d) no eps-free NFA with <= 3 states and one accepting state accepts eps and 0 but not 00
+OK   (d) with an eps-transition, s -eps-> f, s -0-> f (one accepting state f != s) accepts exactly {eps, 0}
+OK   (e) 4-state NFA accepts exactly the strings whose third symbol from the end is 1
+OK   (e) its minimal DFA has 8 states
+OK   (e) all 8 strings of length 3 pairwise distinguished by 0^(i-1), i = a position where they differ
+OK   (f) {sort(w) : w in (01)*, |w| <= 14} = {0^n 1^n : n <= 7}
+OK   (f) {0^n1^n} is not regular: x=0^i, y=0^j, z=1^i (i != j <= 9)
+== 4.2
+OK   eps-reach(s) = {a,c,s}  [{a,c,s}]
+OK   eps-reach(a) = {a,c}  [{a,c}]
+OK   eps-reach(b) = {b}  [{b}]
+OK   eps-reach(c) = {c}  [{c}]
+OK   eps-reach(d) = {a,c,d}  [{a,c,d}]
+OK   eps: C0 = {s,a,c} has no accepting state, so eps is rejected
+OK   0110: {s,a,c} -> {a,b,c,d} -> {a,b,c} -> {a,b,c} -> {a,b,c,d}, accepted  [{a,c,s} -> {a,b,c,d} -> {a,b,c} -> {a,b,c} -> {a,b,c,d}]
+OK   0110 steps before closing: delta({s,a,c},0)={b,d}, delta({a,b,c,d},1)={a,b}, delta({a,b,c},1)={a,b}, delta({a,b,c},0)={b,d}
+OK   1010: {s,a,c} -> {b} -> ∅ -> ∅ -> ∅, rejected  [{a,c,s} -> {b} -> ∅ -> ∅ -> ∅]
+OK   accepting path for 0110: s -e-> a -e-> c -0-> d -e-> a -e-> c -1-> b -1-> a -e-> c -0-> d
+OK   the thread through a -0-> b dies: after s,a -0-> b -1-> a -e-> c -1-> b the next 0 has no edge from b
+OK   remark: L(N) = {w : w ends in 0 and the block of 1s at the start of w has even length}
+OK   remark: L(N) = (11)*0 + (11)*0(0+1)*0 exactly
+== 4.3
+OK   5-state NFA accepts exactly the strings whose last symbol appears earlier (|w| <= 9)
+OK   examples: 0120 and 11 in L; 012, 1, eps not in L
+OK   accepting path for 0120: s -0-> p0 -1-> p0 -2-> p0 -0-> f
+OK   brute-force DFA (seen-before set, last symbol) is correct
+OK   no string of length < 2 is accepted (every path to f reads two symbols)
+OK   remark: the smallest DFA has 15 states
+== 4.4
+OK   the DFA M (s, a, d) accepts exactly 0*1
+OK   L(M)* = eps + (0+1)*1 (empty or ends in 1)
+OK   student's NFA accepts 0, but 0 is not in L*
+OK   student's NFA accepts every binary string here (e.g. 0 and 10), |w| <= 12
+OK   10 is not in L*
+OK   fixed NFA on this M: accepts eps, 01, 101; rejects 0, 10
+OK   fixed construction (new accepting start s', s' -e-> s, q -e-> s for q in A) = L* on 304 DFAs (|w| <= 8)
+OK   student's construction is wrong on many of them  [122 wrong]
+OK   student's construction is right whenever no transition enters s  [26 such DFAs]
+== 4.5
+OK   NFA accepts exactly 0*1* + 1*0*
+OK   subset table rows (S, eps-reach, accept?, on 0, on 1) in discovery order  [{s} {a,b,c,d,s} True {a,d} {b,c}; {a,d} {a,b,d} True {a,d} {b}; {b,c} {b,c,d} True {d} {b,c}; {b} {b} True ∅ {b}; {d} {d} True {d} ∅; ∅ ∅ False ∅ ∅]
+OK   6 DFA states, 5 accepting (all but ∅)
+OK   the DFA accepts exactly 0*1* + 1*0*
+OK   state meanings: {s}=eps, {a,d}=0^+, {b,c}=1^+, {b}=0^+1^+, {d}=1^+0^+, ∅=not in L (|w| <= 12)
+OK   signature table (suffixes eps,0,1,01,10) as stated, rows pairwise different  [{'{s}': (1, 1, 1, 1, 1), '{a,d}': (1, 1, 1, 1, 0), '{b,c}': (1, 1, 1, 0, 1), '{b}': (1, 0, 1, 0, 0), '{d}': (1, 1, 0, 0, 0), '∅': (0, 0, 0, 0, 0)}]
+OK   {eps,0,1,01,10,010} reach the six different DFA states
+OK   {eps,0,1,01,10,010} is a fooling set for 0*1* + 1*0*
+OK   run of 0011: {s},{a,d},{a,d},{b},{b}, accepted
+OK   run of 010: {s},{a,d},{b},∅, rejected
+OK   watch out: delta(s, 0) without the eps-reach is ∅
+OK   6 of 2^5 = 32 subsets reachable
+OK   hence minimal: Moore's algorithm also gives 6 states
+== 4.6
+OK   formula on 500 random expressions: states 2(l+u+k), eps-edges e+c+4u+4k, symbol edges = symbol leaves
+OK   (1+01)*0: l=4, e=0, u=1, k=1, c=2  [(4, 0, 4, 1, 1, 2)]
+OK   Thompson's NFA for (1+01)*0 has 12 states, 10 eps-transitions, 4 symbol transitions  [(12, 10, 4)]
+OK   the 14 transitions are exactly as listed (start 0, accepting 11)
+OK   eps-reach(0) = {0,1,2,4,9,10}
+OK   reading 0: delta(eps-reach(0), 0) = {5, 11}; eps-reach = {5, 6, 11}; contains 11 so 0 is accepted
+OK   reading 01: set {1,2,4,7,8,9,10}, no 11, so 01 is rejected
+OK   L((1+01)*0) = strings ending in 0 with no 00
+OK   remark: incremental subset construction on it gives 5 DFA states; minimal DFA has 3  [5, 3]
+== 4.7
+OK   DFA (parity of 0s, parity of 1s) accepts exactly even #0 and even #1
+OK   transitions as tabulated
+OK   after elimination step 1: walks EE -> EE spell exactly L (|w| <= 8)
+OK   after elimination step 2: walks EE -> EE spell exactly L (|w| <= 8)
+OK   after elimination step 3: walks EE -> EE spell exactly L (|w| <= 8)
+OK   final expression (00+11+(01+10)(00+11)*(01+10))* is exactly L(M)
+OK   0110 and 0101 each match X (one term)
+OK   every string matching X* has even length (|w| <= 12)
+OK   answer as derived, (00+11+(01+10)(00+11)*(10+01))*, is exactly L(M)
+OK   0101 and 0110 in L, 011 not
+== transformations
+== 4.8
+OK   rot(0110) = 1100, rot(1) = 1, rot(eps) = eps
+OK   (a) DFA for {w : rot(w) in L} correct on 304 DFAs over 01  [None]
+OK   (b) NFA for {rot(w) : w in L} correct on 304 DFAs over 01  [None]
+OK   (a) DFA for {w : rot(w) in L} correct on 104 DFAs over 012  [None]
+OK   (b) NFA for {rot(w) : w in L} correct on 104 DFAs over 012  [None]
+OK   (a) |Q1| = 1 + |Sigma||Q|
+OK   check: L = 1(0+1)*: {w : rot(w) in L} = 1 + (0+1)1(0+1)*
+OK   check: L = 1(0+1)*: {rot(w) : w in L} = (0+1)*1
+OK   {eps}: A1 = {s1} exactly
+OK   watch out: accepting (a, q) with q in A (no move to f) accepts 0 for L = 1(0+1)*, but 0 is not in RotImg(L)
+OK   {eps}: the only reachable accepting state of M2 is s2
+OK   edge cases: empty -> empty, {eps} -> {eps}, Sigma* -> Sigma* (both parts)
+== 4.9
+OK   off(0110) = 0100, off(1011) = 1010, off(0000) = 0000, off(eps) = eps
+OK   recursive form: off(eps)=eps, off(x0)=off(x)0, off(x1)=x0 for all |x| <= 10
+OK   (a) DFA (p, q) = (M on w, M on off(w)) for {w : off(w) in L}: correct on 304 DFAs  [None]
+OK   (a) alternative guessing NFA (none/some/done) also correct on 304 DFAs  [None]
+OK   (a) invariant delta1*(s1, w) = (delta*(s, w), delta*(s, off(w))) on 44 DFAs, |w| <= 8
+OK   (b) NFA (none/some/done) for {off(w) : w in L}: correct on 304 DFAs  [None]
+OK   edge: L = Sigma*: image = eps + (0+1)*0; preimage = Sigma*
+OK   edge: L = 1*: preimage = {eps}; image = eps + 1*0
+OK   edge: empty -> empty and {eps} -> {eps} (both parts)
+OK   watch out: accepting (q, some) too accepts 11 for L = 1*
+OK   11 is not off(w) for any w (|w| = 2)
+OK   off(w) never ends in 1 (|w| <= 12)
+OK   |Q1| = |Q|^2, |Q2| = 3|Q|
+== 4.10
+OK   back(00101) = 10100, back(0011) = 1100, back(000) = 000, back(110) = 110
+OK   (a) DFA (tau, then (tau, q)) for {w : back(w) in L}: correct on 304 DFAs  [None]
+OK   (a) alternative NFA guessing r = delta*(s, x): correct on 304 DFAs  [None]
+OK   (b) NFA (zeros / body / tail) for {back(w) : w in L}: correct on 304 DFAs  [None]
+OK   edge: Sigma* -> preimage Sigma*, image 0* + 1(0+1)*
+OK   edge: empty -> empty, {eps} -> {eps}, 1* -> 1* (both parts)
+OK   check: L = 10*: preimage = 0*10* (exactly one 1), image = 10*
+OK   check: L = 0*1: preimage = {1}, image = 10*
+OK   every image string starts with 1 or is in 0* (304 DFAs, |w| <= 8)
+OK   back(010) = 100
+OK   watch out: without the zeros branch, L = 0* gives nothing; BackImg(0*) = 0*
+OK   |Q1| (reachable part) <= |Q|^|Q| (1 + |Q|)
+OK   |Q2| = 1 + |Q| + 2|Q|^2
+
+ALL OK

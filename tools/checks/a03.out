@@ -1,0 +1,103 @@
+OK   M(n) = number of n-beat meters = F(n+1), and M(n) = M(n-1) + M(n-2), M(0) = M(1) = 1, n <= 20
+OK   exactly five 4-beat meters: — —, — • •, • — •, • • —, • • • •  [['••••', '—••', '•—•', '••—', '——']]
+OK   RecFibo(n) = F(n) for n <= 22
+OK   RecFibo makes T(n) = 2F(n+1) - 1 calls, n <= 22
+OK   T(0) = T(1) = 1 and T(n) = T(n-1) + T(n-2) + 1
+OK   induction step (2F_n - 1) + (2F_{n-1} - 1) + 1 = 2F_{n+1} - 1
+OK   leaves: F(n) calls RecFibo(1) and F(n-1) calls RecFibo(0); F(n+1) leaves, 2F(n+1)-1 nodes (full binary tree)
+OK   RecFibo(n-k) is called F(k+1) times for 0 <= k < n (1, 1, 2, 3, 5, ...)
+OK   the book's F(k-1) is wrong (e.g. k = 1: one call, but F(0) = 0)
+OK   book's list: 1, 2, 3, 5 calls to RecFibo(n-1..n-4) = F(k+1) for k = 1..4
+OK   T(7) = 41 (Figure 3.1 has 41 nodes), T(6) = 25
+OK   phi = (1+sqrt5)/2 ~ 1.61803 and F(n) = Theta(phi^n): F(n)/phi^n -> 1/sqrt5
+OK   MemFibo(n) = F(n), makes 2n-1 calls (n >= 1), fills F[2], F[3], ..., F[n] in that order (n < 300)
+OK   MemFibo performs n-1 additions (one per entry F[2..n]): O(n)
+OK   IterFibo(n) = F(n) for 0 <= n <= 300
+OK   IterFibo2(n) = F(n) for 0 <= n <= 300 (IterFibo2(0) = 0 via F(-1) = 1)
+OK   rubric-format Fib(i): base Fib(i) = i for i <= 1, recurrence matches F
+OK   [[0,1],[1,1]] (x, y) = (y, x+y)
+OK   M^n (1, 0) = (F(n-1), F(n)) for 0 <= n < 400, with O(log n) matrix products by repeated squaring
+OK   identity F_n = F_m F_{n-m-1} + F_{m+1} F_{n-m} for all integers -30 <= m, n <= 30
+OK   substituting (n, m) -> (2n-1, n-1) gives F_{2n-1} = F_{n-1}^2 + F_n^2
+OK   substituting (n, m) -> (2n, n) gives F_{2n} = F_n (F_{n-1} + F_{n+1}) = F_n (2F_{n-1} + F_n)
+OK   FastRecFibo(n) = (F(n-1), F(n)) with floor(log2 n) + 1 calls, 1 <= n < 2500
+OK   log10(phi) ~ 0.209 ~ 1/5 and log2(phi) ~ 0.694 (book: ~ 2/3)
+OK   F(n) has ~ n log10 phi decimal digits and ~ n log2 phi bits (n = 2000)
+OK   IterFibo: n additions of O(n)-bit numbers = Theta(n^2) bit operations (sum of bit lengths / n^2 -> log2(phi)/2)  [[0.3465, 0.3468, 0.347]]
+OK   T(n) = T(n-1) + T(n-2) + n is Theta(phi^n) (ratio settles)  [3.341641 vs 3.341641]
+OK   T(n) = T(floor(n/2)) + M(n) with M(n) = n log n is O(M(n)) (ratio bounded by 2)  [[1.8, 1.867, 1.9, 1.88, 1.9]]
+OK   Splittable recurrence = FastSplittable = backtracking = brute force; FastSplittable makes n(n+1)/2 IsWord calls (30660 cases)
+OK   backtracking on a^(n-1) b with every string of a's a word: False after exactly 2^n - 1 IsWord calls (n <= 15)
+OK   THEMENTOR: SplitTable[1..10] = T F F T F F F F F T (as in the page's table)  [TFFTFFFFFT]
+OK   THEMENTOR: A[4..9] = MENTOR, A[1..3] = THE; the only segmentation is THE·MENTOR
+OK   shortest-prefix greedy takes THE, MEN and is stuck at TOR  [(False, ['THE', 'MEN'], 'TOR')]
+OK   longest-prefix greedy takes THEM and is stuck at ENTOR  [(False, ['THEM'], 'ENTOR')]
+OK   LIS greedy on [3,4,5,1,2] picks 1, 2 (length 2); the LIS has length 3 (3, 4, 5)
+OK   LISbigger recurrence = FastLIS (book order and reversed inner loop) = LISfirst recurrence = FastLIS2 = brute force (22145 arrays, all arrays of length <= 7 over 1..4)
+OK   FastLIS also works with rows from the bottom up (each row right to left)
+OK   FastLIS with rows from the top reads an unwritten entry (e.g. A = [2, 1, 3])
+OK   LISfirst base case: max of the empty set = 0 gives LISfirst(n) = 1
+OK   example A = [3,1,4,1,5,9,2,6]: LISfirst[0..8] = 5 4 4 3 3 2 1 2 1 (as in the page's table), answer 4  [[5, 4, 4, 3, 3, 2, 1, 2, 1]]
+OK   LISfirst[3] = 1 + max(LISfirst[5], LISfirst[6], LISfirst[8]) = 3; later elements > 4 are 5, 9, 6
+OK   3, 4, 5, 9 is an increasing subsequence of A of length 4
+OK   Edit recurrence = EditDistance (row-major, as written) = breadth-first search; traceback gives an alignment of that cost (1361 pairs)
+OK   if A[i] = B[j] then Edit(i,j) = Edit(i-1,j-1) (the matching shortcut is correct, in all those tables)
+OK   column-major evaluation order works too
+OK   ALGORITHM vs ALTRUISTIC: our table Edit[0..9, 0..10] is the transpose of the book's printed table
+OK   edit distance ALGORITHM / ALTRUISTIC = 6 (table and recurrence)
+OK   exactly three optimal paths = the book's three alignments, each of cost 6  [[('ALGORI_THM', 'ALTRUISTIC'), ('ALGOR_I_THM', 'AL_TRUISTIC'), ('ALGOR_I_THM', 'ALT_RUISTIC')]]
+OK   the three alignments printed on the page are exactly those  [{('ALGORI_THM', 'ALTRUISTIC'), ('ALGOR_I_THM', 'ALT_RUISTIC'), ('ALGOR_I_THM', 'AL_TRUISTIC')}]
+OK   intro alignment A L G O R _ I _ T H M / A L _ T R U I S T I C is a valid alignment of cost 6
+OK   FOOD / MONEY: edit distance 4 (no three edits suffice), alignment F O O _ D / M O N E Y costs 4
+OK   FOOD -> MOOD -> MOND -> MONED -> MONEY: each step is one edit
+OK   (m+1)(n+1) entries: 10 x 11 = 110 for ALGORITHM / ALTRUISTIC
+OK   SS direct recurrence = modified recurrence = FastSubsetSum (as written) = brute force (16072 cases)
+OK   book examples: {8,6,7,5,3,10,9}, T=15 True; {11,6,5,1,7,13,12}, T=15 False
+OK   8+7 = 7+5+3 = 6+9 = 5+10 = 15, all subsets of X
+OK   FastSubsetSum fills (n+1)(T+1) entries
+OK   the page's first inner loop runs to min{X[i] - 1, T}
+OK   the book's bound X[i] - 1 indexes past column T exactly when some X[i] > T + 1 (e.g. X = [5], T = 2)
+OK   OptCost recurrence = OptimalBST (diagonals) = rows = columns (j = 0..n) = brute force over all BSTs; inner loop runs n(n+1)(n+2)/6 times (250 instances, n <= 7)
+OK   Catalan check: number of BSTs on 1..7 keys = 1, 2, 5, 14, 42, 132, 429
+OK   the book's OptimalBST3 with outer loop j = 0 .. n+1 indexes outside OptCost[1..n+1, 0..n]
+OK   InitF: F[i,k] = f[i] + ... + f[k]
+OK   f = [5,2,1,3,4]: OptCost table as on the page  [{1: [0, 5, 9, 12, 21, 31], 2: [None, 0, 2, 4, 10, 18], 3: [None, None, 0, 1, 5, 13], 4: [None, None, None, 0, 3, 10], 5: [None, None, None, None, 0, 4], 6: [None, None, None, None, None, 0]}]
+OK   last entry: F[1,5] = 15, root sums 18, 18, 19, 16, 21; min 16 at r = 4 (unique); OptCost[1,5] = 31
+OK   the optimal tree is unique: root A[4], right child A[5], left child A[1] -> right A[2] -> right A[3]
+OK   its cost 3*1 + (5+4)*2 + 2*3 + 1*4 = 31
+OK   most-frequent-key-at-root greedy: path A[1], A[5], A[4], A[2], A[3], cost 35  [(1, None, (5, (4, (2, None, (3, None, None)), None), None))]
+OK   MIS recurrence = TreeMIS = TreeMIS2 = brute force (1942 rooted trees: all labeled trees on <= 6 vertices + random <= 13)
+OK   TreeMIS work (child + grandchild visits) <= 2n: each vertex counted once by its parent and once by its grandparent
+OK   a leaf gets MIS = max(0, 1) = 1; MISyes(leaf) = 1, MISno(leaf) = 0
+OK   figure tree: 11 vertices, largest independent set 8 = brute force; root values MISyes 6, MISno 8; a: 6 / 5
+OK   fib figure: 25 nodes, in preorder the calls of RecFibo(6)
+OK   fib figure: exactly 2*6 - 1 = 11 nodes in color (MemFibo's calls); the lookups (preorder) are F2, F3, F4  [['6', '5', '4', '3', '2', '1', '0', '1', '2', '3', '4']]
+OK   fib caption numbers: 25 = 2F7 - 1, 13 leaves = F6 + F5 = 8 + 5
+OK   edit figure: all 110 numbers equal Edit[i, j] (rows ALGORITHM, columns ALTRUISTIC)
+OK   edit figure: bold red exactly where A[i] = B[j]
+OK   edit figure: one arrow per move used by the three optimal paths  [15 arrows, 15 moves]
+OK   tree figure: labels MISyes / MISno at every vertex, in drawing order  [['6 / 8', '6 / 5', '1 / 0', '1 / 0', '1 / 3', '1 / 2', '1 / 0', '1 / 0', '1 / 0', '1 / 0', '1 / 0']]
+OK   tree figure: the shaded vertices a, b, c, f, g, h, i, j form an independent set of size 8
+OK   tree caption: root max{6, 8} = 8, exclude root (8 > 6), take a (6 > 5)
+OK   dependency figure, LISbigger: entry (1, 3) reads (i, j+1) and (j, j+1)
+OK   dependency figure, Edit: entry (3, 3) reads (i-1, j), (i, j-1), (i-1, j-1)
+OK   dependency figure, OptCost: entry (2, 4) reads OptCost[i, r-1] and OptCost[r+1, k] for i <= r <= k  [[(2, 1), (2, 2), (2, 3), (3, 4), (4, 4), (5, 4)]]
+OK   MinCoins recurrence (filled t = 0..T) = breadth-first search, 200 random coin systems containing 1, T <= 60
+OK   D = (1,4,5): MinCoins[0..8] = 0 1 2 3 1 1 2 3 2; greedy for 8 is 5+1+1+1 (4 coins), optimum 4+4 (2 coins)
+OK   dynamic-programming page: RecFibo 2F(n+1)-1 calls vs n+1 distinct arguments
+OK   Choose: naive 2C(n,k)-1 calls; memoized exactly the k(n-k) subproblems with 1<=k'<=k, 1<=n'-k'<=n-k, 2k(n-k)+1 calls (n <= 16)
+OK   C(10,5) = 252: 503 naive calls; 25 memoized subproblems, 51 calls
+OK   memoization page: MemFibo 2n-1 calls, RecFibo(n-k) called F(k+1) times (checked above)
+OK   FOOD/MONEY table on the concept page = EditDistance table; distance 4
+OK   diagonal-first read-back gives F O _ O D / M O N E Y (cost 4)
+OK   bold entries = the read-back path (0,0),(1,1),(2,2),(2,3),(3,4),(4,5)
+OK   FOOD/MONEY has exactly three optimal alignments: FO_OD, FOO_D, FOOD_ over MONEY
+OK   f = (2,3,4): greedy builds the path A[3], A[2], A[1], cost 4*1 + 3*2 + 2*3 = 16
+OK   f = (2,3,4): balanced tree rooted at A[2] costs 3*1 + (2+4)*2 = 15 = optimum (brute force)
+OK   f = (2,3,4): F[1,3] = 9; root sums 10, 6, 7 (OptCost[2,3] = 10, [1,1] + [3,3] = 2 + 4, [1,2] = 7); min 6 at r = 2
+OK   row by row from the top reads unfilled entries (every n >= 2)
+OK   VCin/VCout recurrence = brute force = n - MIS on 1200 rooted trees
+OK   figure tree: smallest vertex cover 3 = 11 - 8; {r, d, e} (root, two non-leaf grandchildren) is a cover
+OK   naive grandchildren MIS on an n-vertex path rooted at an end makes F(n+2) - 1 calls (n <= 22)
+
+ALL OK

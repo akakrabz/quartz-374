@@ -1,0 +1,32 @@
+OK   step-by-step runner = automata.TM on 300 random machines x 31 inputs (outcome and step count)  [9300 runs]
+OK   pi computation matches the known hex expansion 3.243F6A8885A308D313198A2E03707344...
+OK   pi = 11.0010010000111111011..._2
+OK   the run 1^6 occupies fraction bits 11-16 (so every string of length <= 6 is in Pi)  [first 111111 at bit 11]
+OK   the first 4000 fraction bits contain a run of ten 1s, but none longer  [10]
+OK   Lemma 1(a): M^R (swap accept/reject) has Accept = Reject(M) and Reject = Accept(M)  [{'accept': 1418, 'reject': 2698, 'crash': 4392, 'timeout': 792}]
+OK   Lemma 1(b): M^A (reject -> looping state) has Accept = Accept(M) and rejects nothing
+OK   Lemma 1(c): M^H (reject -> accept) has Accept = Halt(M) and rejects nothing
+OK   example M accepts exactly the strings starting with 1 and runs forever on the others (|w| <= 9)
+OK   example M' decides the strings ending with 0 (|w| <= 9)
+OK   serial union fails: M never finishes on 00 (it enters its endless loop), although 00 ends with 0
+OK   parallel simulation accepts exactly L(M) ∪ L(M') (|w| <= 9)
+OK   toy acceptors: one accepts 'even number of 1s', the other its complement; each runs forever otherwise
+OK   Lemma 5: the two acceptors in parallel halt on every input with the right answer (|w| <= 10)  [halts within |w| + 1 rounds]
+OK   Lemma 5 on random halting machines: acceptors for Accept(M), Reject(M) in parallel reproduce M  [868 runs]
+OK   figure: the SR row is the flipped diagonal of the table
+OK   figure: the SR row differs from every row M_i in column i
+OK   figure: the table uses all three outcomes on the diagonal
+OK   random tables (2000, up to 12 x 12): the flipped diagonal differs from every row
+OK   Cantor's theorem: for every f: X -> 2^X with |X| <= 4, the 'sad' set Y is not in the image  [66067 functions]
+OK   M_Accept accepts every input, M_Reject rejects every input, M_Diverge runs forever (|w| <= 8)
+OK   a machine that accepts every input after exactly 300 steps accepts SPARTA at step 300
+OK   ... and a 301-step variant accepts SPARTA at step 301 (same language, not in ThisIsSparta)
+OK   both accept every string over {S,P,A,R,T} of length <= 4
+OK   figure: the never-left machine reads cells 0, 1, 2, ... in states start, start, p, p, q, r, q, r  [['start', 'start', 'p', 'p', 'q', 'r', 'q', 'r']]
+OK   figure: the first repeated state on a blank is q (cells 4 and 6)
+OK   figure machine: the decider accepts <M, 011> (|Q| = 6) and long simulation never moves left
+OK   NeverLeft decider agrees with 4000-step simulations on 400 random machines x 15 inputs  [6000 runs, 1540 decided by the |Q|-blanks rule]
+OK   the decider always stops within |w| + |Q| simulated steps  [max excess 0]
+OK   Theorem 20: M' moves left three times in a row iff M accepts (400 random machines x 15 inputs)  [{'accept': 759, 'reject': 1641, 'crash': 3041, 'timeout': 559}]
+
+ALL OK

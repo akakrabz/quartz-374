@@ -1,0 +1,139 @@
+
+# 1. state elimination by hand
+OK   (a) the DFA accepts exactly L, |w| <= 14
+OK   (a) state meanings: delta*(q0, w) = q_i with i = (#0 - #1) mod 3, |w| <= 12
+OK   (a) the DFA is minimal (3 states)
+OK   (a) 0011 visits q0, q1, q2, q1, q0 (accept); 011 ends in q2 (reject)
+OK   (b) expression automaton 0 (with s and t) accepts exactly L
+OK   (b) expression automaton 1 (after eliminating q1) accepts exactly L
+OK   (b) expression automaton 2 (after eliminating q2) accepts exactly L
+OK   (b) expression automaton 3 (after eliminating q0) accepts exactly L
+OK   (b) eliminating q1: every new label is R(p->r) + R(p->q)R(q->q)*R(q->r), as written
+OK   (b) eliminating q2: every new label is R(p->r) + R(p->q)R(q->q)*R(q->r), as written
+OK   (b) eliminating q0: every new label is R(p->r) + R(p->q)R(q->q)*R(q->r), as written
+OK   (b) the library's state elimination in the order q1, q2, q0 prints the same expression  [(01+(1+00)(10)*(0+11))*]
+OK   (b) final expression is exactly equivalent to the DFA
+OK   (b) eliminating q1 creates the loops 01 at q0 and 10 at q2 (the p = r cases)
+OK   (c) epsilon matches and is in L
+OK   (c) 01 is in L and matches
+OK   (c) 10 is in L and matches
+OK   (c) 000 is in L and matches
+OK   (c) 111 is in L and matches
+OK   (c) 0011 is in L and matches
+OK   (c) 0101 is in L and matches
+OK   (c) 0110 is in L and matches
+OK   (c) 1001 is in L and matches
+OK   (c) 1010 is in L and matches
+OK   (c) 1100 is in L and matches
+OK   (c) 0 is not in L and does not match
+OK   (c) 1 is not in L and does not match
+OK   (c) 00 is not in L and does not match
+OK   (c) 001 is not in L and does not match
+OK   (c) 011 is not in L and does not match
+OK   (c) 0001 is not in L and does not match
+OK   (c) 0111 is not in L and does not match
+OK   (c) forgetting the p = r loops gives ((1+00)(0+11))*: a subset of L that misses (01)^k for every k >= 1
+OK   (c) the strings of length 3 in L are exactly 000 and 111
+OK   (c) the strings of length 4 in L are exactly the six with two 0s and two 1s
+OK   (c) pieces: 1 and 00 contribute -1 and +2 (both = -1 mod 3); 0 and 11 contribute +1 and -2 (both = +1 mod 3); 10 and 01 contribute 0
+OK   (c) the block 01+(1+00)(10)*(0+11) matches exactly the walks q0 -> q0 that return to q0 only at the end (|w| <= 12)
+OK   (d) order q0, q1, q2: eliminating q0 gives the labels as written
+OK   (d) order q0, q1, q2: eliminating q1 gives the labels as written
+OK   (d) order q0, q1, q2: eliminating q2 gives the labels as written
+OK   (d) order q0, q1, q2: expression automaton after step 1 accepts exactly L
+OK   (d) order q0, q1, q2: expression automaton after step 2 accepts exactly L
+OK   (d) order q0, q1, q2: expression automaton after step 3 accepts exactly L
+OK   (d) the library prints the same expression for the order q0, q1, q2
+OK   (d) the long expression is exactly equivalent to the short one
+OK   (d) symbol counts: 10 for the order q1, q2, q0 and 28 for q0, q1, q2; characters 23 and 65  [10, 28, 23, 65]
+OK   (d) the order q2, q1, q0 gives the mirror image (10+(0+11)(01)*(1+00))*
+OK   (d) order q1, q2, q0: result exactly equivalent to the DFA (10 symbols)  [(01+(1+00)(10)*(0+11))*]
+OK   (d) order q2, q1, q0: result exactly equivalent to the DFA (10 symbols)  [(10+(0+11)(01)*(1+00))*]
+OK   (d) order q1, q0, q2: result exactly equivalent to the DFA (22 symbols)  [(01)*+(01)*(1+00)(10+(0+11)(01)*(1+00))*(0+11)(01)*]
+OK   (d) order q2, q0, q1: result exactly equivalent to the DFA (22 symbols)  [(10)*+(10)*(0+11)(01+(1+00)(10)*(0+11))*(1+00)(10)*]
+OK   (d) order q0, q1, q2: result exactly equivalent to the DFA (28 symbols)  [ε+0(10)*1+(1+0(10)*(0+11))(01+(1+00)(10)*(0+11))*(0+(1+00)(10)*1)]
+OK   (d) order q0, q2, q1: result exactly equivalent to the DFA (28 symbols)  [ε+1(01)*0+(0+1(01)*(1+00))(10+(0+11)(01)*(1+00))*(1+(0+11)(01)*0)]
+OK   (d) symbol counts by order: q0 last 10, q0 in the middle 22, q0 first 28  [{('q1', 'q2', 'q0'): 10, ('q2', 'q1', 'q0'): 10, ('q1', 'q0', 'q2'): 22, ('q2', 'q0', 'q1'): 22, ('q0', 'q1', 'q2'): 28, ('q0', 'q2', 'q1'): 28}]
+
+# 2. proving what a grammar generates
+OK   L(G) = {0^m 1^2n : m >= n >= 0} on all strings of length <= 14
+OK   the strings of L(G) of length <= 6 are as listed  [['', '0', '00', '000', '011', '0000', '0011', '00000', '00011', '000000', '000011', '001111']]
+OK   0111 and 01111 are not generated (odd number of 1s; too few 0s)
+OK   (a) the derivation built by the proof is valid and yields 0^m 1^2n (m >= n, m + 2n <= 16), in m + 1 steps
+OK   (a) the cases m = 0 / m >= 1, n = 0 / m >= 1, n >= 1 are exhaustive, and m = 0 forces n = 0
+OK   (a) in the third case (m-1, n-1) again satisfies m-1 >= n-1 >= 0, and 0 . 0^(m-1) 1^(2n-2) . 11 = 0^m 1^2n
+OK   (a) derivation of 00011 (m = 3, n = 1): S, 0S11, 00S11, 000S11, 00011  [['S', '0S11', '00S11', '000S11', '00011']]
+OK   (b) x in L implies 0x11 in L and 0x in L (|x| <= 12)
+OK   (b) for x = 0^m 1^2n: 0x11 = 0^(m+1) 1^(2(n+1)) and 0x = 0^(m+1) 1^2n
+OK   (b) every non-empty w in L(G) is 0x with x in L(G), or 0x11 with x in L(G) (|w| <= 12)
+OK   (b trap) 0011 also has the derivation S, 0S, 00S11, 0011 (its first rule is S -> 0S)
+OK   (b) 011 = 0 . eps . 11: the inner string may be empty
+OK   (trap) adding S -> SS breaks the claim: 0110 is generated but is not in L
+OK   (c) 0011 has exactly two parse trees
+OK   (c) 0^m 1^2n has exactly C(m, n) parse trees (m + 2n <= 14)
+OK   (c) S -> 0S | T, T -> 0T11 | eps generates the same language (|w| <= 14)
+OK   (c) ... and every string of the language has exactly one parse tree in it (|w| <= 14)
+
+# 3. CNF conversion
+OK   original: generates exactly the balanced strings (|w| <= 12)
+OK   step 0: generates exactly the balanced strings (|w| <= 12)
+OK   step 1: generates exactly the balanced strings (|w| <= 12)
+OK   step 3: generates exactly the balanced strings (|w| <= 12)
+OK   step 4: generates exactly the balanced strings (|w| <= 12)
+OK   step 5: generates exactly the balanced strings (|w| <= 12)
+OK   step 5, P deleted: generates exactly the balanced strings (|w| <= 12)
+OK   step 6: generates exactly the balanced strings (|w| <= 12)
+OK   original: P generates exactly the strings 0x1 with x balanced (|w| <= 12)
+OK   step 2: the nullable nonterminals are exactly S and S'  [{"S'", 'S'}]
+OK   step 3: the only epsilon-rule left is S' -> eps
+OK   step 3 created the unit rule S -> S (from S -> SS)
+OK   step 4: no unit rule S -> S; the unit rules are S' -> S and S -> P
+OK   step 5: no unit rules left
+OK   step 5: P is unreachable from S'
+OK   step 6: the result is in Chomsky normal form  [(True, None)]
+OK   step 5 is not yet in Chomsky normal form  [(False, "S' -> 0B")]
+OK   step 1 is not yet in Chomsky normal form  [(False, "S' -> S")]
+OK   original is not yet in Chomsky normal form  [(False, 'start symbol on a right side: S -> SS')]
+OK   final grammar: S generates the non-empty balanced strings (|w| <= 12)
+OK   final grammar: B generates the strings x1 with x balanced (|w| <= 12)
+OK   final grammar: 7 nonterminal-free rules count: S' has 3 rules, S 2, B 2, T0 1, T1 1
+OK   every non-empty balanced string is 0x1 (x balanced) or a concatenation of two non-empty balanced strings (|w| <= 14)
+OK   a non-empty balanced string with no shorter non-empty balanced prefix is 0x1 with x balanced (|w| <= 14)
+OK   final grammar: the leftmost derivation of 0011 shown is valid and has 7 = 2*4 - 1 steps
+OK   (trap) forgetting B -> 1 in step 3 leaves only the empty string (|w| <= 12)
+OK   (trap) processing S' before S in step 5 leaves the unit rule S' -> P (not CNF), same language
+OK   (trap) without the new start symbol, S -> eps and S on right sides: not CNF
+
+# 4. a Turing machine for {w#w}
+OK   the table has 20 transitions and 8 non-halting states
+OK   decides {w#w}: on all 88573 inputs over {0,1,#} of length <= 10 it accepts exactly the members and rejects the rest (never crashes, never runs on)  [{'reject': 88542, 'accept': 31}]
+OK   on every input of length n <= 10 it halts within 2n^2 + 3n + 2 steps (the bound in (d))  [{0: 1, 1: 2, 2: 3, 3: 8, 4: 11, 5: 18, 6: 23, 7: 32, 8: 39, 9: 50, 10: 59}]
+OK   exact count: on w#w with |w| = k it takes 2(k+1)^2 steps, for every w with k <= 7
+OK   even lengths: on w#w0 (n = 2k + 2) it rejects after 2(k+1)^2 = n^2/2 steps, for every w with k <= 7
+OK   every round takes exactly 2k + 3 steps (state start is entered at steps 0, 2k+3, 2(2k+3), ...), k <= 7
+OK   on 01#01 it accepts after 18 steps; on ε it rejects at once (no #); on # it accepts after 2 steps
+OK   the trace on 01#01 is as in the table (19 configurations)  [start [0]1#01 | carry0 x[1]#01 | carry0 x1[#]01 | seek0 x1#[0]1 | backR x1[#]x1 | backL x[1]#x1 | backL [x]1#x1 | start x[1]#x1 | carry1 xx[#]x1 | seek1 xx#[x]1 | seek1 xx#x[1] | backR xx#[x]x | backR xx[#]xx | backL x[x]#xx | start xx[#]xx | check xx#[x]x | check xx#x[x] | check xx#xx[□] | accept xx#xx□[□]]
+OK   on 01#00 it rejects in step 11: seek1 reads 0 in cell 4 (no transition)  [('reject', 11) ('seek1', 'xx#x[0]')]
+OK   rejects 0#0# (check reads the second #)
+OK   rejects 0##0 (seek0 reads #)
+OK   rejects 0# (seek0 reads a blank)
+OK   rejects 01 (carry0 reads a blank)
+OK   rejects #0 (check reads 0)
+OK   rejects 0#1 (seek0 reads 1)
+
+# 5. undecidability: the machines on the page
+OK   Y = M_Accept accepts every string over {0,1} of length <= 8, in one step
+OK   N = M_Reject rejects every string over {0,1} of length <= 8, in one step
+OK   Accept(Y) has at least two strings; Accept(N) is empty
+OK   M' built from (M, w) for 5 toy machines and 8 strings w: on every input x (|x| <= 5) M' accepts if M accepts w, rejects if M rejects w, and runs on if M runs on (2520 runs)
+OK   M_slow accepts every input (|x| <= 6), so Accept(M_slow) = Accept(M_Accept)
+OK   on the empty input M_Accept halts after 1 step and M_slow after 400
+OK   so M_Accept is in Quick374 and M_slow is not
+OK   boundary: halting at step 374 counts, at step 375 does not
+OK   M_loop (runs right forever) is not in Quick374
+OK   bounded look-alike: acceptance within 5 steps depends only on the first 5 symbols (400 random machines, 192000 strings)
+OK   dovetailing accepts M_Accept (in round 2)
+OK   dovetailing accepts a machine that diverges on ε but accepts 0 and 1
+OK   dovetailing never accepts M_Reject, M_loop, or a machine accepting only the string 0 (100 rounds)
+
+ALL OK

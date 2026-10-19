@@ -1,0 +1,138 @@
+--- 3.1
+OK   3.1(a) {0^n1^n} xor {0^n1^n} is empty (|w| <= 14)
+OK   3.1(a) {0^n1^n} is not regular: 0^i / 0^j distinguished by 1^i (i != j <= 12)
+OK   3.1(b) L2 = L1 xor (L1 xor L2) for 300 random pairs of languages
+OK   3.1(c) complement of {0^n1^n}: 0^i / 0^j distinguished by 1^i (i != j <= 12)
+OK   3.1(c) L cap complement(L) is empty (|w| <= 14)
+OK   3.1(d) for 0 <= i < j <= 6, z = 0^(5-i): |0^i z| = 5 in L, 0^j z not
+OK   3.1(d) length-counter DFA for |w| = 5: agrees with the predicate on all strings of length <= 14  [first difference None]
+OK   3.1(d) length-counter DFA for |w| = 5: exactly equivalent to the predicate's own DFA  [witness None]
+OK   3.1(d) that DFA has 7 states and is minimal
+OK   3.1(e) 0 = 0^(2^0) is in L
+OK   3.1(e) every 0^m (m <= 80) is a concatenation of strings of L, so L* = 0*
+OK   3.1(f) in 1611 random DFAs (1-5 states) accepting something, the shortest accepted string has length < n
+--- 3.2
+OK   3.2 example '0101' in L is True
+OK   3.2 example '001101' in L is True
+OK   3.2 example '0001' in L is False
+OK   3.2 example '000' in L is False
+OK   3.2 example '' in L is True
+OK   3.2 six-state counter DFA: agrees with the predicate on all strings of length <= 16  [first difference None]
+OK   3.2 six-state counter DFA: exactly equivalent to the predicate's own DFA  [witness None]
+OK   3.2 the counter DFA is minimal (6 states)
+OK   3.2 state meanings: d_k iff all prefixes fine and #0 - #1 = k; dead iff some prefix failed (|w| <= 12)
+OK   3.2 run on 001101: d0 d1 d2 d1 d0 d1 d0
+OK   3.2 run on 0001: d0 d1 d2 dead dead
+OK   3.2(b) {#0 = #1}: 0^i / 0^j distinguished by 1^i (i != j <= 12)
+--- 3.3
+OK   3.3(a) prefixes of 0110: for |x| < |y|, z = rest of 0110 after y; yz = 0110 in L, |xz| < 4 so xz not
+OK   3.3(a) example: z = 10 distinguishes 0 and 01 (010 not in L, 0110 in L)
+OK   3.3 five-state DFA for 'contains 0110': agrees with the predicate on all strings of length <= 16  [first difference None]
+OK   3.3 five-state DFA for 'contains 0110': exactly equivalent to the predicate's own DFA  [witness None]
+OK   3.3 minimal DFA for 'contains 0110' has 5 states
+OK   3.3(b) 0110 and 01101: every extension of both is in L (|z| <= 10), so no suffix distinguishes them
+OK   3.3(b) no 6-string fooling set: the 6 strings of (b) are not a fooling set
+--- 3.4
+OK   3.4(a) x = 00, y = 0, z = 11: 0011 in L and 011 in L
+OK   3.4(a) z = 1^i fails exactly for the pairs with i = 2j (i != j <= 30)  [[(2, 1), (4, 2), (6, 3), (8, 4)]]
+OK   3.4(a) xz = 0^i 1^i is always in L
+OK   3.4(b) fix 1: F = 0(00)*, z = 1^i: xz in L and yz not, for all odd i != j <= 31
+OK   3.4(b) fix 2: F = 0*, z = 1^i unless i = 2j, then z = 1^j (all i != j <= 30)
+OK   3.4 x = 00, y = 0 are still distinguishable (by z = 1: 001 not in L, 01 in L)
+--- 3.5
+OK   3.5 the given DFA vs {#(01,w) even}: agrees with the predicate on all strings of length <= 16  [first difference None]
+OK   3.5 the given DFA vs {#(01,w) even}: exactly equivalent to the predicate's own DFA  [witness None]
+OK   3.5 meanings: delta*(A,w) is the state whose property w has (|w| <= 14)
+OK   3.5 fact: #(01,xa) = #(01,x) + [x ends in 0 and a = 1] (|x| <= 12)
+OK   3.5 the eight cases of the table (representatives of each property)
+OK   3.5 additivity fails at the seam: #(01, 0.1) = 1 > 0 + 0
+OK   3.5 check: 00110 has one 01, run A B B C C D, reject
+OK   3.5 check: 0101 has two 01s, run A B C D A, accept
+--- 3.6
+OK   3.6 M1 (starts with 1): agrees with the predicate on all strings of length <= 14  [first difference None]
+OK   3.6 M1 (starts with 1): exactly equivalent to the predicate's own DFA  [witness None]
+OK   3.6 M2 (even number of 1s): agrees with the predicate on all strings of length <= 14  [first difference None]
+OK   3.6 M2 (even number of 1s): exactly equivalent to the predicate's own DFA  [witness None]
+OK   3.6 product with A = {(good, even)}: agrees with the predicate on all strings of length <= 14  [first difference None]
+OK   3.6 product with A = {(good, even)}: exactly equivalent to the predicate's own DFA  [witness None]
+OK   3.6 product: Q has 6 states, accepting set {(good, even)}
+OK   3.6 reachable: 5 states, (new, odd) is the unreachable one
+OK   3.6 the transition table of the reachable part
+OK   3.6 run on 1001 ends in (good, even), accept
+OK   3.6 run on 0110 ends in (bad, even), reject
+OK   3.6 epsilon ends in (new, even) and is rejected
+OK   3.6(c) union accepting set as listed: agrees with the predicate on all strings of length <= 14  [first difference None]
+OK   3.6(c) union accepting set as listed: exactly equivalent to the predicate's own DFA  [witness None]
+OK   3.6(c) the listed union set equals {(p,q) : p = good or q = even}
+OK   3.6(c) difference accepting set {(good, odd)}: agrees with the predicate on all strings of length <= 14  [first difference None]
+OK   3.6(c) difference accepting set {(good, odd)}: exactly equivalent to the predicate's own DFA  [witness None]
+OK   3.6(d) Moore merges exactly (bad, even) with (bad, odd); 4 states remain  [[["('bad', 'even')", "('bad', 'odd')"], ["('good', 'even')"], ["('good', 'odd')"], ["('new', 'even')"]]]
+OK   3.6(d) for the union the two bad states are distinguishable (epsilon)
+--- 3.7
+OK   3.7 F = 0*1, z = x: xz = (0^i 1)^2 in L, yz = 0^j 1 0^i 1 not in L (all i != j <= 15)
+OK   3.7 check: 0101 in L; 00101 and 000101 not
+OK   3.7 watch out: with F = 0* and z = x, the suffix fails exactly when i + j is even
+OK   3.7 watch out: F = 0* with z = 1 0^i 1 works (all i != j <= 15)
+OK   3.7 a string of L with exactly two 1s and ending in 1 is 0^k 1 0^k 1 (|w| <= 16)
+--- 3.8
+OK   3.8 example '0010110' in L is True
+OK   3.8 example '110101' in L is True
+OK   3.8 example '0110100' in L is False
+OK   3.8 example '' in L is True
+OK   3.8 example '110' in L is True
+OK   3.8 example '1100' in L is False
+OK   3.8(a) five-state DFA: agrees with the predicate on all strings of length <= 16  [first difference None]
+OK   3.8(a) five-state DFA: exactly equivalent to the predicate's own DFA  [witness None]
+OK   3.8(a) the DFA is minimal (5 states)
+OK   3.8(a) state meanings hold for every w with |w| <= 14
+OK   3.8(a) run on 0010110 ends in after0, accept
+OK   3.8(a) run on 0110100: before before before1 after1 after0 after1 after0 dead
+OK   3.8(b) (0+10)*(1+01)*(ε+0) is equivalent to the DFA  [witness None]
+OK   3.8(b) the expression equals the complement of (0+1)*11(0+1)*00(0+1)*  [witness None]
+OK   3.8(b) the expression vs the predicate: agrees with the predicate on all strings of length <= 14  [first difference None]
+OK   3.8(b) the expression vs the predicate: exactly equivalent to the predicate's own DFA  [witness None]
+OK   3.8(b) the parts: (0+10)* = no 11 and not ending in 1 (|w| <= 12)
+OK   3.8(b) the parts: (1+01)*(ε+0) = no 00 (|w| <= 12)
+OK   3.8 watch out: (0+10)*(1+01)* misses 110, 1110, ... (infinitely many: 1^k 0 for every k >= 2)
+OK   3.8 the decomposition of 0010110 (0010 . 11 . 0) and 110101 (eps . 110101 . eps)
+OK   3.8 the expression matches 0010110 and 110101 but not 0110100
+OK   3.8 the DFA is in after1 after reading 011 (of 0110100)
+--- 3.9
+OK   3.9 #(00, 000) = 2 (overlapping occurrences count)
+OK   3.9(a) La cap 0*1* = {0^n1^n} + {0, 1} (|w| <= 16)
+OK   3.9(a) in 0^a 1^b: #00 = max(a-1,0), #11 = max(b-1,0) (a, b <= 12)
+OK   3.9(a) aside: F = 0*, z = 1^i fails for x = eps, y = 0 (both in La)
+OK   3.9(a) aside: F = {0^i : i >= 1}, z = 1^i works (all i != j in 1..14)
+OK   3.9(b) ε+0+1+0(0+1)*0+1(0+1)*1 vs #01 = #10: agrees with the predicate on all strings of length <= 16  [first difference None]
+OK   3.9(b) ε+0+1+0(0+1)*0+1(0+1)*1 vs #01 = #10: exactly equivalent to the predicate's own DFA  [witness None]
+OK   3.9(b) #01 = #10 iff w is empty or starts and ends with the same symbol (|w| <= 16)
+OK   3.9(b) the 01/10 occurrences are exactly the k-1 seams between runs, alternating (|w| <= 14)
+OK   3.9(b) check: 0110 has one 01 and one 10 (in L_b); 011 has one 01 and no 10 (not in L_b)
+OK   3.9(b) runs of 0110 are 0 . 11 . 0
+OK   3.9(c) F = 1^+, z = (01)^(i-1): xz has i-1 of each, yz has j-1 11s and i-1 01s (i != j in 1..14)
+OK   3.9(c) 0^i and 0^j (1 <= i, j <= 6) are not distinguished by any suffix of length <= 10
+OK   3.9(c) the extra 0s change neither count: #01, #11 of 0^i z equal those of 0z (i <= 5, |z| <= 8)
+OK   3.9(c) check: 1101 has one 11 and one 01; 11101 has two 11s and one 01
+--- 3.10
+OK   3.10(a) the reachable states are A, B, C, D, E, G; H is unreachable
+OK   3.10(a) no transition enters H
+OK   3.10(b) initial marks: the 8 pairs between {A,B,C,D} and {E,G}  [['AE', 'AG', 'BE', 'BG', 'CE', 'CG', 'DE', 'DG']]
+OK   3.10(b) pass 1 marks AC, BC, CD  [['AC', 'BC', 'CD']]
+OK   3.10(b) pass 2 marks AB, BD  [['AB', 'BD']]
+OK   3.10(b) pass 3 marks nothing, and it is the last pass
+OK   3.10(b) unmarked at the end: AD and EG
+OK   3.10(b) pass k marks exactly the pairs whose shortest distinguishing string has length k
+OK   3.10(b) AD and EG are indistinguishable
+OK   3.10 check: '1' distinguishes A and C; '01' distinguishes A and B and no single symbol does
+OK   3.10(c) the library's minimization gives the classes {A,D}, {B}, {C}, {E,G}
+OK   3.10(c) the 4-state table is equivalent to M  [witness None]
+OK   3.10(c) M accepts exactly the strings containing 101: agrees with the predicate on all strings of length <= 14  [first difference None]
+OK   3.10(c) M accepts exactly the strings containing 101: exactly equivalent to the predicate's own DFA  [witness None]
+OK   3.10(c) meanings of AD, B, C, EG (|w| <= 14)
+OK   3.10(d) the listed suffixes distinguish all 6 pairs of {eps, 1, 10, 101} (yz in L, xz not)
+OK   3.10(d) {eps, 1, 10, 101} is a fooling set, and 4 = minimal number of states
+OK   3.10 watch out: counting same-pass marks, {B,D} is marked in pass 1 (alphabetical order)
+OK   3.10 watch out: ... but the final partition is the same
+OK   3.10 watch out: without deleting H, H is equivalent to no state (5 classes instead of 4)
+
+ALL OK

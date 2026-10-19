@@ -1,0 +1,64 @@
+OK   1.1(a) unfolding rcat(011, ε) = rcat(11, 0) = rcat(1, 10) = rcat(ε, 110) = 110  [['110', '110', '110', '110', '110', '110', '110', '110']]
+OK   1.1(b) rcat(10, 01) = rcat(0, 101) = rcat(ε, 0101) = 0101 = (10)^R • 01
+OK   1.1(c) the guess: 110 = (011)^R
+OK   1.4(a) rcat(x, y) = x^R • y for all |x| <= 9, |y| <= 6
+OK   1.4(a) ... and over {a,b,c} for |x|, |y| <= 5
+OK   1.4(a) base case: rcat(ε, y) = y = ε•y = ε^R•y (|y| <= 8)
+OK   1.4(a) inductive case: every line rcat(az,y) = rcat(z,ay) = z^R•(a·y) = z^R•(a•y) = (z^R•a)•y = (az)^R•y
+OK   1.4(a) the recursive call changes the second argument (a·y ≠ y), so a fixed-y hypothesis does not apply
+OK   1.4(b) rcat(x, ε) = x^R and |rcat(x, y)| = |x| + |y| (|x| <= 9, |y| <= 6)
+OK   1.4 check: rcat(011, ε) = 110 = (011)^R and rcat(10, 01) = 0101 = 01•01
+OK   1.4 watch out: the special case is not closed under the recursion (rcat(az, ε) calls rcat(z, a), a ≠ ε)
+OK   1.2(a) No: 01 is a substring of 0•1 but of neither 0 nor 1
+OK   1.2(b) Yes: the subsequences of y•z are exactly the u•v with u a subsequence of y and v of z (|y|, |z| <= 5)
+OK   1.2(b) the recursive definition of subsequence agrees with deletion (|z|, |w| <= 8)
+OK   1.2(c) Yes: p prefix of w implies p^R suffix of w^R (|w| <= 10, every prefix)
+OK   1.2(c) the reason: w = p•x gives w^R = x^R•p^R (|p|, |x| <= 6)
+OK   1.2(d) No: 0•00 = 000 = 00•0 but 0 ≠ 00; ε commutes with every y
+OK   1.2(e) Yes: every string of length n has >= n+1 distinct subsequences (|w| <= 12)
+OK   1.2(e) the n+1 prefixes are distinct subsequences; 0^n has exactly n+1 subsequences (n <= 12)
+OK   1.2(f) No: 0101 has exactly 8 distinct substrings: ε, 0, 1, 01, 10, 010, 101, 0101  [['', '0', '1', '01', '10', '101', '010', '0101']]
+OK   1.2(f) 11 = 4·5/2 + 1 is the bound; 01 starts at positions 1 and 3 of 0101
+OK   1.3 the claim (w^R)^c = (w^c)^R holds (|w| <= 12)
+OK   1.3 student's base case: (ε^R)^c = ε^c = ε = ε^R = (ε^c)^R
+OK   1.3 student's u•v case: all five equalities hold and |u|, |v| < |w| (u, v non-empty, length <= 5)
+OK   1.3 the slip: a string of length 1 is neither ε nor u•v with u, v non-empty
+OK   1.3 every string of length >= 2 is u•v with u, v non-empty (|w| <= 10)
+OK   1.3 repair: a^R = (a·ε)^R = ε^R•a = ε•a = a, and (a^R)^c = a^c = (a^c)^R
+OK   1.3 why it matters: the two cases 'prove' #(0,w) = #(1,w) (ε satisfies it, the u•v step is valid) but it fails at w = 0
+OK   1.3 the u•v step uses #(a, uv) = #(a,u) + #(a,v) (|u|, |v| <= 6)
+OK   1.5(a) 0^a1^b: substrings = subsequences = {0^p1^q}, (a+1)(b+1) of each; 0^p1^q = w[a-p+1..a+q] (a, b <= 7)
+OK   1.5(b) every subsequence of w is a substring iff w = 0^i1^j or 1^i0^j (all w with |w| <= 11)
+OK   1.5(b) w is not 0^i1^j iff some 1 comes before some 0; not 1^i0^j iff some 0 comes before some 1 (|w| <= 11)
+OK   1.5(b) 'only if' construction: c = first symbol has >= 2 blocks; with m its longest block, c^(m+1) is a subsequence but not a substring (every w of neither form, |w| <= 11)
+OK   1.5 check: 00 is a subsequence but not a substring of 0110; 0011 has 9 substrings and 9 subsequences
+OK   1.6(a) rot(STAR) = T·rot(SAR) = T·A·rot(SR) = T·A·R·rot(S) = TARS  [['TARS', 'TARS', 'TARS', 'TARS', 'TARS']]
+OK   1.6(b) |rot(w)| = |w| (|w| <= 12 over {0,1}, <= 7 over {a,b,c})
+OK   1.6(b) both cases: rot(w) = w for |w| <= 1; for w = abx, |ax| < |w| and every line of the chain holds
+OK   1.6(b) a·x need not be a suffix of a·b·x: SAR is not a suffix of STAR
+OK   1.6(c) rot(a·x) = x•a (all a, |x| <= 11 over {0,1}; |x| <= 6 over {a,b,c})
+OK   1.6(c) base: rot(a·ε) = a = ε•a
+OK   1.6(c) inductive case: rot(a·b·y) = b·rot(a·y) = b·(y•a) = (b·y)•a (|y| <= 9)
+OK   1.6 check: rot(STAR) = TAR•S, and |x•a| = |x| + 1
+OK   1.7 examples: zig(0000) = 0101, zig(0110) = 0011
+OK   1.7 idea: zig complements exactly the symbols in even positions (|w| <= 12)
+OK   1.7(a) zig(w^c) = zig(w)^c (|w| <= 12)
+OK   1.7(a) base: zig(ε^c) = zig(ε) = ε = ε^c = zig(ε)^c
+OK   1.7(a) inductive case: zig(w^c) = zig(ā·x^c) = ā·zig(x^c)^c = ā·(zig(x)^c)^c = (a·zig(x)^c)^c = zig(ax)^c
+OK   1.7(b) zig(zig(w)) = w (|w| <= 12)
+OK   1.7(b) inductive case: zig(zig(ax)) = zig(a·zig(x)^c) = a·zig(zig(x)^c)^c = a·((zig(zig(x)))^c)^c = a·zig(zig(x)) = a·x
+OK   1.7 (y^c)^c = y (|y| <= 12)
+OK   1.7 check: zig(0110) = 0011, zig(0011) = 0110; zig(10) = 11 = (00)^c = zig(01)^c
+OK   1.8 val is the binary value read least significant bit first (|w| <= 12)
+OK   1.8 example: val(011) = 0 + 2(1 + 2(1 + 2·0)) = 6
+OK   1.8 example: inc(1101) = 0011, i.e. 11 + 1 = 12
+OK   1.8(a) val(inc(w)) = val(w) + 1 (|w| <= 12)
+OK   1.8(a) case ε: val(inc(ε)) = val(1·ε) = 1 + 2 val(ε) = 1 = val(ε) + 1
+OK   1.8(a) case 0x: val(1·x) = 1 + 2 val(x) = (0 + 2 val(x)) + 1 = val(0x) + 1 (|x| <= 11)
+OK   1.8(a) case 1x: val(0·inc(x)) = 2 val(inc(x)) = 2(val(x) + 1) = (1 + 2 val(x)) + 1 = val(1x) + 1 (|x| <= 11)
+OK   1.8(b) |inc(w)| = |w| + 1 if w = 1^n, |w| otherwise (|w| <= 12)
+OK   1.8(b) small fact: 1·x is of the form 1^n iff x is; 1^n = 1·1^(n-1) for n >= 1 (|x| <= 11, n <= 12)
+OK   1.8(b) cases: ε = 1^0 and |inc(ε)| = 1; 0x is never 1^n and |inc(0x)| = |0x|; |inc(1x)| = 1 + |inc(x)|
+OK   1.8 check: inc(111) = 0001 (7 + 1 = 8, length 4); inc(011) = 111 (6 + 1 = 7, length 3)
+
+ALL OK

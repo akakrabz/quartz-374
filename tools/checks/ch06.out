@@ -1,0 +1,47 @@
+OK   table has 20 rows (as printed, with 'read 0,1 / unchanged' rows merged) and 25 transitions  [20 rows, 25 transitions]
+OK   10 working states + accept (+ reject for missing transitions)  [['accept', 'block1', 'block2', 'block3', 'mark0', 'reset', 'rewind', 'seek0', 'seek1', 'start', 'verify']]
+OK   tape alphabet {0, 1, #, x, □}
+OK   our machine decides L: accepts exactly L and halts (never crashes) on all 32767 inputs, |w| <= 14  [[]]
+OK   quadratic running time: at most n^2 + 3n + 2 steps on every input of length n <= 14  [{0: 1, 1: 2, 2: 3, 3: 14, 4: 19, 5: 24, 6: 35, 7: 42, 8: 49, 9: 64, 10: 73, 11: 82, 12: 101, 13: 112, 14: 123}]
+OK   rejections happen at: start/1, block1/□, block2/□, block3/1, seek1/□, seek0/□, verify/0, verify/1  [[('block1', '□'), ('block2', '□'), ('block3', '1'), ('seek0', '□'), ('seek1', '□'), ('start', '1'), ('verify', '0'), ('verify', '1')]]
+OK   trace on 010: the 15 configurations in the table, accept after 14 steps  [start: [0]10 | block1: #[1]0 | block2: #1[0] | block3: #10[□] | rewind: #1[0] | rewind: #[1]0 | rewind: [#]10 | seek1: #[1]0 | seek0: #x[0] | reset: #[x]x | reset: [#]xx | mark0: #[x]x | verify: #x[x] | verify: #xx[□] | accept: #xx□[□]]
+OK   0010: round 2 marks the second 0, then seek1 reads □ and rejects (tape ##xx)  [seek1: ##xx[□]]
+OK   0110: verify reads an unmarked 1 and rejects  [verify: #x[1]x]
+OK   0101: block3 reads 1 and rejects  [block3: #10[1]]
+OK   run on 001100 passes through (reset, #0x1x0, 3) and accepts  [35 steps]
+OK   001100 is accepted after 35 steps  [35]
+OK   on 0^k1^k0^k the machine takes 4k^2 + 9k + 1 steps (k = 1..11)  [{1: 14, 2: 35, 3: 64, 4: 101, 5: 146, 6: 199, 7: 260, 8: 329, 9: 406, 10: 491, 11: 584}]
+OK   fooling set 0* for L: z = 1^i0^i distinguishes 0^i and 0^j (i != j <= 9)
+OK   book's machine accepts 001010 (not in L)
+OK   book's machine rejects the empty string (start has no transition on □)
+OK   book's machine accepts 18 strings outside L of length <= 12  [001010, 000101010, 000101100, 000110010, 000110100, 000010101010, 000010101100, 000010110010, 000010110100, 000010111000, 000011001010, 000011001100, 000011010010, 000011010100, 000011011000, 000011100010, 000011100100, 000011101000]
+OK   book's machine accepts every non-empty string of L of length <= 12
+OK   book's machine halts (never crashes) on every input of length <= 12
+OK   book's machine accepts 001100 and rejects 00100 (the two traces in the text)
+OK   (report only) with the printed +1 the machine rejects 010, which is in L
+OK   stay-put variant (start/□ and verify/□ stay put into accept; mark0 hands x to verify in place) decides L
+OK   converted machine has 2 x 12 = 24 states
+OK   converted machine has no stay-put moves
+OK   stay-put variant vs converted machine: same outcome, tape and head; steps' = steps + #stay moves (|w| <= 12)
+OK   the same holds for 300 random 3-state stay-put machines on all inputs of length <= 6  [None]
+OK   shift machine: M(w) = 0w in |w| + 1 steps for every w, |w| <= 12
+OK   shift trace on 101  [hold0: [1]01 | hold1: 0[0]1 | hold0: 01[1] | hold1: 010[□] | halt: 0101[□]]
+OK   remembering the last 2 symbols shifts by 2: w -> 00w for every w, |w| <= 10
+OK   increment machine: 8 transitions
+OK   increment machine: M(w) = val(w)+1 in binary with |w|+1 bits, for every w, |w| <= 12  [[]]
+OK   examples: 1011 -> 01100, 111 -> 1000, ε -> 1
+OK   increment never moves left of cell 0 (the shifted-in 0 stops the carry)
+OK   |Γ| = 5 needs 3-bit symbol codes, |Q| = 12 needs 4-bit state codes
+OK   start = 1111 and reject = 0000; codes distinct
+OK   accept = 0001 follows the site's convention 0...01 (needed by U; the book fixes no accept code)
+OK   block for δ(seek1, 1) = (seek0, x, +1) is [0110•010|0111•100•1]
+OK   <M> starts with [0000•000][[ and ends with ]]; [[ and ]] occur once
+OK   <δ> has 25 blocks, one per transition of the table
+OK   every block has the same length (4+3+4+3+1 bits and 6 punctuation marks = 21 symbols)
+OK   <010> = [001•010•001]
+OK   encoded configuration (reset, #0x1x0, 3) as printed
+OK   string-level U run on <M, w> agrees with M (outcome and final tape) for every w, |w| <= 9  [[]]
+OK   when M crashes, U neither accepts nor rejects (here: it stops without an answer); otherwise it agrees
+OK   (book typo) the book's printed blocks write start as 001, a code its table gives to no state; with start = 111 from its table they are otherwise identical
+
+ALL OK

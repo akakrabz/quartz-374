@@ -1,0 +1,106 @@
+OK   Fact H1: move i of Hanoi(n) moves disk rho(i), n <= 12
+OK   Fact H2: disk k always moves forward (+1 mod 3) iff n-k is odd, backward iff n-k even, n <= 12
+OK   consecutive Hanoi moves never move the same disk (so Hanoi never undoes its previous move)
+OK   1(a): avoid-peg-(i mod 3) algorithm = recursive Hanoi, move for move, and stops with all disks on peg 2, n <= 12
+OK   1(b) literal rule is ambiguous: after Hanoi move 2 for n = 2 disk 1 has two legal moves  [[(2, 2), (3, 2), (3, 4)]]
+OK   1(b) with 'disk 1 never returns to the peg it just left': unique choice each step, = Hanoi, n <= 12
+OK   1(c): parity/no-undo algorithm has exactly one allowed move per step, = Hanoi, stops when solved, n <= 12
+OK   1(c) invariants along Hanoi: pegs alternate in parity, exactly two odd tops, n <= 12
+OK   1(d) book's test 'n - i even => forward' fails already for n = 1 (moves disk 1 from peg 0 to peg 1)
+OK   1(d) book's test gives the wrong sequence for every n <= 12
+OK   1(d) corrected test 'n - rho(i) odd => forward' = Hanoi, n <= 12
+OK   1(d) loop 'while rho(i) <= n' runs exactly for i = 1 .. 2^n - 1
+OK   rho(42) = 2
+OK   2(b): Off(5) prints 1,3,1,2,1,5,1,2,1,3,1,2,1,4,1,2,1,3,1,2,1 (the book's example)
+OK   2(b,c): Off(n) is legal, reduced, ends at 0^n, first move 1/2 by parity; #moves = M(n) = floor(2^(n+1)/3), n <= 16
+OK   2(c): M(n) = M(n-1) + 2M(n-2) + 1 equals floor(2^(n+1)/3) for n <= 200
+OK   2(c): M(5) = 21
+OK   2(c): M(0..7) = 0, 1, 2, 5, 10, 21, 42, 85
+OK   3: Pisa algorithm is legal, ends on the other vertical needle, uses 2F(n+1) - 1 moves, n <= 14
+OK   3: moving m disks onto the leaning needle takes S(m) = 2F(m+2) - 3 moves, m <= 14
+OK   3: 2F(n+1) - 1 is optimal (BFS), n <= 9  [[1, 3, 5, 9, 15, 25, 41, 67, 109]]
+OK   3: move counts 1, 3, 5, 9, 15, 25 for n = 1..6
+OK   3: for n = 7 the first 7 moves are those drawn in Figure 1.17 (5th move: two disks off the leaning needle)  [[(1, 1, 'A', 'B'), (1, 2, 'A', 'L'), (1, 1, 'B', 'L'), (1, 3, 'A', 'B'), (2, 2, 'L', 'B'), (1, 4, 'A', 'L'), (1, 1, 'B', 'L')]]
+OK   4(a): every move touches peg 0; 0 -> 2 takes (3^n - 1)/2 moves, leaf -> leaf takes 3^n - 1, n <= 10
+OK   4(a): (3^n - 1)/2 is optimal (BFS), n <= 8
+OK   5(a) = end-to-end on a row of 3 pegs (middle = hub): 3^n - 1 is optimal (BFS), n <= 8
+OK   4(a) and 5(a) differ: (3^n-1)/2 != 3^n - 1 for n >= 1; e.g. n = 1: 1 vs 2 moves
+OK   5(b): Shift(n, 1, n) is legal on n+1 pegs in a row and uses (2n^3 + 3n^2 - 2n)/3 moves, n <= 30  [[1, 8, 25, 56, 105, 176]]
+OK   5(b): the per-round count n + (m-1)(2n+1-(m-1)) sums to (2n^3+3n^2-2n)/3
+OK   5(b): n = 2 gives 8 = 3^2 - 1 (same as part (a))
+OK   6: A(n) / claimed bound settles at n = 4^k, k <= 40  [last ratio 1.0250]
+OK   6: B(n) / claimed bound settles at n = 4^k, k <= 40  [last ratio 2.0000]
+OK   6: C(n) / claimed bound settles at n = 4^k, k <= 40  [last ratio 1.1429]
+OK   6: E(n) / claimed bound settles at n = 3^k, k <= 40  [last ratio 1.0250]
+OK   6: F(n) / claimed bound settles at n = 3^k, k <= 40  [last ratio 1.5000]
+OK   6: H(n) / claimed bound settles at n = 2^k, k <= 40  [last ratio 2.0000]
+OK   6: I(n) / claimed bound settles at n = 2^k, k <= 40  [last ratio 1.0250]
+OK   6: D(n) / claimed bound settles at n = 3^k, k <= 60  [last ratio 2.3660]
+OK   6: G(n) / claimed bound settles at n = 2^k, k <= 60  [last ratio 1.5469]
+OK   6: level-sum ratios a/b^c: A 1, B 1/2, C 1/8, D sqrt3, E 1, F 1/3, G 2sqrt2, H 2, I 1
+OK   6: A(n) with floors stays within a constant factor of the claimed bound, 1e3 <= n <= 1e9  [ratio range 0.728..0.836]
+OK   6: B(n) with floors stays within a constant factor of the claimed bound, 1e3 <= n <= 1e9  [ratio range 1.999..2.000]
+OK   6: C(n) with floors stays within a constant factor of the claimed bound, 1e3 <= n <= 1e9  [ratio range 1.143..1.143]
+OK   6: D(n) with floors stays within a constant factor of the claimed bound, 1e3 <= n <= 1e9  [ratio range 1.425..3.163]
+OK   6: E(n) with floors stays within a constant factor of the claimed bound, 1e3 <= n <= 1e9  [ratio range 0.882..1.005]
+OK   6: F(n) with floors stays within a constant factor of the claimed bound, 1e3 <= n <= 1e9  [ratio range 1.500..1.500]
+OK   6: G(n) with floors stays within a constant factor of the claimed bound, 1e3 <= n <= 1e9  [ratio range 0.424..1.520]
+OK   6: H(n) with floors stays within a constant factor of the claimed bound, 1e3 <= n <= 1e9  [ratio range 0.671..1.995]
+OK   6: I(n) with floors stays within a constant factor of the claimed bound, 1e3 <= n <= 1e9  [ratio range 1.352..1.491]
+OK   7(l): rho with (1/15)^rho + (1/10)^rho + 2(1/6)^rho = 1 is 0.6596 (to 4 places), between 1/2 and 1  [rho = 0.659597]
+OK   7(k): level ratio 1/4 + 2/9 + 3/16 = 95/144 < 1
+OK   7(l): level ratio 1/sqrt15 + 1/sqrt10 + 2/sqrt6 = 1.39 > 1, so d = 1/(r-1) = 2.56 works  [r = 1.39092]
+OK   7: J(n) with floors stays within a constant factor of the claimed bound, 1e3 <= n <= 1e12  [ratio range 1.005..1.026]
+OK   7: K(n) with floors stays within a constant factor of the claimed bound, 1e3 <= n <= 1e12  [ratio range 2.937..2.939]
+OK   7: L(n) with floors stays within a constant factor of the claimed bound, 1e3 <= n <= 1e12  [ratio range 3.875..4.198]
+OK   7(j): real-valued J(n)/(n ln n) lies between 1/ln 6 and 1/ln 2 + small, n = 1e3..1e15  [1.378..1.063]
+OK   7(j): n log_6 n <= J(n) <= n (log_2 n + 1) + 6n (real-valued, base J(x) = 1 for x < 1)
+OK   7(k): K(n)/n^2 >= 1 always and <= 144/49 + 0.01 once the leaf terms are negligible (n >= 1e5; 144/49 = 2.9388)  [2.9388..2.9449 (n >= 1e5), max 3.1521 overall]
+OK   7(l): characteristic sum is r = 1.39 at rho = 1/2 and exactly 1/2 at rho = 1, decreasing in between
+OK   7(l): real-valued L(n)/n^rho stays in a narrow band, n = 1e4..1e15  [4.725..5.341]
+OK   7(l) substitution: with d = 1/(r-1) the inequality c n^rho - d sqrt n is preserved by the recurrence
+OK   8(m): M(2^k) = 2^k (1 + k(k+1)/2) with M(1) = 1, k <= 60
+OK   8(n): N(2^k) = 2^k (1 + H_k) with N(1) = 1, k <= 200
+OK   8(n): H_k / ln k -> 1 (so N(n) = Theta(n log log n)); H_200/ln 200 within 15%
+OK   8(p): P(2^(2^k)) = 2^(2^k) (k + 1/2) exactly (k <= 9, via the exact identity P(n)/n = P(sqrt n)/sqrt n + 1)
+OK   8(p): P(n) / (n lg lg n) bounded in [0.5, 1.5] for n = 1e2..1e299  [1.058..1.304]
+OK   8(q): Q(n) / (n lg n) stays in a constant band for n = 1e2..1e299  [0.468..1.423]
+OK   8(q): arguments n_{k+1} = sqrt(2 n_k) satisfy n_k/2 = (n/2)^(1/2^k) and stay above 2
+OK   8(q): each level sum is at least twice the previous one
+OK   8(q): depth L = ceil(lg lg(n/2)) and lg(n/2) <= 2^L < 2 lg(n/2), n = 1e1..1e298
+OK   8(q): level k sum = 2^k n / sqrt(n_k) (n = 1e12)
+OK   9(a): algorithm sorts every stack, n <= 8
+OK   9(a): worst case is exactly 2n - 3 flips for 2 <= n <= 8 (0 for n = 1)  [{1: 0, 2: 1, 3: 3, 4: 5, 5: 7, 6: 9, 7: 11, 8: 13}]
+OK   9(a): the family W_2 = (2,1), W_n = (r1, n, r2, ..., r_{n-1}) with r = reverse(W_{n-1}) needs 2n - 3 flips
+OK   9(a): W_5 = 1 5 3 4 2
+OK   9(b): a flip changes the number of adjacencies (plate counted) by at most 1, all stacks n <= 7
+OK   9(b): bad_stack(n) has no adjacencies for 4 <= n <= 200
+OK   9(b): examples 2 4 1 3 (n=4) and 1 3 5 2 4 (n=5)
+OK   9(b): bad_stack(n) needs at least n flips (BFS), 4 <= n <= 9  [{4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9}]
+OK   9(c): burned-pancake algorithm sorts every stack burned side down, n <= 6
+OK   9(c): worst case is exactly 3n - 2 flips, n <= 6  [{1: 1, 2: 4, 3: 7, 4: 10, 5: 13, 6: 16}]
+OK   9(c): sorted stack with every burned side up needs 3n - 2 flips, n <= 50
+OK   10(a): the permutation for n = 9 is 1 3 5 7 2 4 6 8 9 and for n = 10 is 1 3 5 7 2 4 6 8 9 10
+OK   10(a): on m3_perm(n) every call with >= 3 elements picks the 2nd smallest as pivot, n < 400
+OK   10(a): partition comparisons (n-1)+(n-3)+... = floor(n^2/4)
+OK   10(a): after partition the right part is m3_perm(n-2) + 2 (the induction step), 3 <= n < 300
+OK   11(a): StoogeSort sorts all permutations n <= 8, all 0/1 arrays 9 <= n <= 14, random arrays with repeats
+OK   11(b): floor version leaves [3,4,1,2] unsorted (halves of size 2 never interact)
+OK   11(b): floor version on n = 4 sorts exactly the inputs whose first half is already below the second half
+OK   11(c): instrumented comparison count = C(n) with C(0)=C(1)=0, C(2)=1, C(n)=3C(ceil(2n/3))
+OK   11(d): log_{3/2} 3 = 2.7095  [2.709511]
+OK   11(d): with the ceiling, 0.15 < C(n) / n^log_{3/2}3 < 0.81 for all 2 <= n <= 200000  [0.1529..0.8087]
+OK   11(d): real-valued C(x) (C = 1 on (4/3, 2]) satisfies (x/2)^alpha <= C(x) < 3 (x/2)^alpha
+OK   11(d): without the ceiling, C(2 (3/2)^k) = 3^k exactly (3^k = (n/2)^alpha)
+OK   11(e): swaps = number of inversions of the input <= n(n-1)/2
+OK   12: Cruel sorts all permutations for n = 2, 4, 8 and all 0/1 arrays for n = 16
+OK   12: variant 'noloop' turns [3,4,1,2] into [3, 1, 4, 2] (not sorted)
+OK   12: variant 'swapped' turns [3,4,1,2] into [1, 3, 2, 4] (not sorted)
+OK   12(d): Unusual(n) makes 3^(lg n - 1) = n^lg3 / 3 comparisons
+OK   12(d): instrumented Unusual comparison count matches, n = 2..2048
+OK   12(e): Cruel comparisons C(n) = 2C(n/2) + n^lg3/3 = n^lg3 - n, so Theta(n^lg3)
+OK   12(e): instrumented Cruel comparison count = 3^k - 2^k, n = 2..1024
+OK   13: mergesort-based count = brute-force count (all perms n <= 8, all arrays over {0,1,2} n <= 8, random)
+OK   13: reversed array of size n has n(n-1)/2 inversions, n <= 100
+
+ALL OK
