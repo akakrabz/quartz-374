@@ -47,6 +47,7 @@ content/index.md                       home
 content/0-toolkit/                     notation, proof templates, big picture, two exam reviews, grading, errata
 content/1-models-of-computation/       one page per book chapter (01-strings … 09-nondeterministic-turing-machines)
 content/2-algorithms/                  Part 2: one page per book chapter (01-recursion …) and its solved exercises (01-recursion-exercises …)
+content/3-homework-and-exams/          the course's own problems worked out: Midterm 1 practice tests 1–3, homework write-ups (HW6)
 content/concepts/                      44 glossary pages (32 for Part 1, 12 for Part 2)
 content/problems/                      11 worked exam-style problems
 content/practice/                      7 practice pages (generated hub, easy/medium/hard and topic lists)
@@ -70,7 +71,7 @@ The Explorer orders files by name (numeric prefixes), see `quartz.ts`; titles st
 
 ```bash
 python3 tools/check.py content node_modules/katex/dist/katex.min.js   # links, anchors, KaTeX (strict), frontmatter, callouts, tables
-python3 tools/checks/ch04.py                                          # every claim on the Chapter 4 page (likewise ch01–ch09, concepts_*, problems_*, toolkit_2; Part 2: a01–a03, a01x–a03x)
+python3 tools/checks/ch04.py                                          # every claim on the Chapter 4 page (likewise ch01–ch09, concepts_*, problems_*, toolkit_2; Part 2: a01–a03, a01x–a03x; exams_mt1 for the practice tests)
 python3 tools/practice/checks/ch03.py                                 # every answer in the Chapter 3 practice set
 for f in tools/figs_*.py; do python3 "$f"; done; python3 tools/assemble.py   # regenerate and re-inline all figures
 ```

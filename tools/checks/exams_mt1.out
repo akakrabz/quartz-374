@@ -1,0 +1,179 @@
+---- Practice test 1
+OK   P1(a) 0^n1^n: 0^i and 0^j are distinguished by 1^i (i != j <= 9)
+OK   P1(a) 0^n1^n is infinite
+OK   P1(b) (0+1(01*0)*1)* is a regular expression; its minimal DFA has a few states  [3 states]
+OK   P1(d) m=1: DFA for {0^a1^b : m | a-b} matches the definition up to length 12
+OK   P1(d) m=1: union_r (0^m)* 0^r 1^r (1^m)* equals that language exactly  [None]
+OK   P1(d) m=2: DFA for {0^a1^b : m | a-b} matches the definition up to length 12
+OK   P1(d) m=2: union_r (0^m)* 0^r 1^r (1^m)* equals that language exactly  [None]
+OK   P1(d) m=3: DFA for {0^a1^b : m | a-b} matches the definition up to length 12
+OK   P1(d) m=3: union_r (0^m)* 0^r 1^r (1^m)* equals that language exactly  [None]
+OK   P1(d) m=4: DFA for {0^a1^b : m | a-b} matches the definition up to length 12
+OK   P1(d) m=4: union_r (0^m)* 0^r 1^r (1^m)* equals that language exactly  [None]
+OK   P1(d) m=5: DFA for {0^a1^b : m | a-b} matches the definition up to length 12
+OK   P1(d) m=5: union_r (0^m)* 0^r 1^r (1^m)* equals that language exactly  [None]
+OK   P1(d) m=374: up to length 14 the language is {0^r 1^r : r <= 7}, as the union predicts (p = q = 0)
+OK   P1(g) complement of a DFA has the same number of states and the complementary language
+OK   P1(h) the run-based predicate for {1^i 0^(i+j) 1^j} agrees with the definition up to length 12
+OK   P1(h) no suffix z (|z| <= 10) distinguishes 10 and 1100
+OK   P1(h) 10z in L iff z = 0^j1^j (|z| <= 10)
+OK   P1(h) but 1^*0^* is not trivially a fooling set: some pairs ARE distinguished (1 vs 11 by 0)
+OK   P1(i) adding an unreachable accepting state with self-loops keeps the language
+OK   P1(j) S -> ε | 0A | 1S, A -> 0S | 1A generates exactly the strings with an even number of 0s (<= 12)
+OK   P1(j) A generates exactly the strings with an odd number of 0s (<= 12)
+OK   P2(a) Inserted1st construction equals the definition on 300 random DFAs (1-4 states), |w| <= 8  [None]
+OK   P2(b) Deleted1st construction equals the definition on 300 random DFAs (1-4 states), |u| <= 8  [None]
+OK   P2 Delete1st(100110) = 00110
+OK   P2(a) Inserted1st({ε}) = 0^+ + 1^+  [None]
+OK   P2(b) Deleted1st({ε}) = ∅
+OK   P2 both constructions give ∅ for L = ∅
+OK   P2(a) Inserted1st(1*) = 0^+ + 1^+ 0^+ ... i.e. w != ε with Delete1st(w) in 1*: exact check
+OK   P2(b) Deleted1st(1*) = {ε}
+OK   P2 for L = Σ*: Inserted1st = Σ^+ and Deleted1st = Σ*
+OK   P3(a) #1(squish(w)) <= #1(w) for all |w| <= 12
+OK   P3(b) #1(squish(w)) mod 2 = #1(w) mod 2 for all |w| <= 12
+OK   P3 the three cases of the definition are exhaustive and exclusive (checked on the recursion above)
+OK   P3 the inequality in (a) can be strict (so <= is the right claim)
+OK   P4 sanity: ε, 1, 111, 001, 10001, 1000110001, 0001001 in L; 0, 01, 0011, 10, 000100, 00010011 not
+OK   P4(a) fooling set 0^+ with z = 1^i: 0^i1^i not in L and 0^j1^i in L for all 1 <= i < j <= 9
+OK   P4(a) the suffix works in both directions (i > j too, with z = 1^min)
+OK   P4(a) note: with F = 0^* and i = 0, xz = ε in L and yz = 0^j not in L (roles flip)
+OK   P4(b) the grammar generates exactly L (all strings up to length 12)  [None]
+OK   P4(b) R generates exactly the blocks 0^a1^b with 1 <= b < a (<= 12)
+OK   P4(b) Z generates exactly 0^+ (<= 12)
+OK   P4(b) T generates exactly the strings of L that do not start with 1 (<= 12)
+OK   P5(a) the 3-state DFA (+ dump) accepts exactly the strings without the subsequence 010 (<= 10)
+OK   P5(a) 1*0*1* equals the DFA exactly  [None]
+OK   P5(a) the DFA is minimal with its dump state: 4 states
+OK   P5(a) state meanings: the state after w is the longest prefix of 010 that is a subsequence of w
+OK   P5(b) the 7-state DFA accepts exactly the strings with >= 2 even-length runs of 1s (<= 12)  [None]
+OK   P5(b) the regular expression equals the DFA exactly  [None]
+OK   P5(b) the DFA is minimal: 7 states
+OK   P5(b) state meanings: N/O/E and the subscript k as described (<= 12)
+OK   P5(b) sanity: 110110 and 11011 accepted; 11, 1101, 1111 rejected
+
+--- practice test 2 ---
+OK   P2.1 example: compress0s(00000110001) = 00011001
+OK   P2.1 compress0s halves runs: ceil(k/2) for k = 1..9
+OK   P2.1(a) Decompressed construction correct on 120 random DFAs (2-4 states), |w| <= 8
+OK   P2.1(b) Compressed construction correct on 120 random DFAs (2-4 states), |u| <= 7
+OK   P2.1(b) the NFA has no ε-transitions
+OK   P2.1 edge case L = ∅: Decompressed and Compressed as expected
+OK   P2.1 edge case L = {ε}: Decompressed and Compressed as expected
+OK   P2.1 edge case L = 1*: Decompressed and Compressed as expected
+OK   P2.1 edge case L = Σ*: Decompressed and Compressed as expected
+OK   P2.1 edge case L = 0*: Decompressed and Compressed as expected
+OK   P2.1(a) is a DFA: Decompressed(L) for L = 0* contains 0^k for every k (compress0s(0^k) ∈ 0*)
+OK   P2.2(a) regex (0+1)* 1^1 (0+1)* matches 'contains 1^1', |w| <= 12
+OK   P2.2(b) DFA with 2 states accepts 'contains 1^1', |w| <= 12
+OK   P2.2(a,b) regex and DFA equivalent (exact), k = 1
+OK   P2.2(c) minimal DFA for k = 1 has exactly 2 states
+OK   P2.2(c) F = {1^i : 0 <= i <= 1} is a fooling set with suffix 1^(1-j)
+OK   P2.2(c) the 2 strings of F end in 2 distinct states of the DFA
+OK   P2.2(a) regex (0+1)* 1^2 (0+1)* matches 'contains 1^2', |w| <= 12
+OK   P2.2(b) DFA with 3 states accepts 'contains 1^2', |w| <= 12
+OK   P2.2(a,b) regex and DFA equivalent (exact), k = 2
+OK   P2.2(c) minimal DFA for k = 2 has exactly 3 states
+OK   P2.2(c) F = {1^i : 0 <= i <= 2} is a fooling set with suffix 1^(2-j)
+OK   P2.2(c) the 3 strings of F end in 3 distinct states of the DFA
+OK   P2.2(a) regex (0+1)* 1^3 (0+1)* matches 'contains 1^3', |w| <= 12
+OK   P2.2(b) DFA with 4 states accepts 'contains 1^3', |w| <= 12
+OK   P2.2(a,b) regex and DFA equivalent (exact), k = 3
+OK   P2.2(c) minimal DFA for k = 3 has exactly 4 states
+OK   P2.2(c) F = {1^i : 0 <= i <= 3} is a fooling set with suffix 1^(3-j)
+OK   P2.2(c) the 4 strings of F end in 4 distinct states of the DFA
+OK   P2.2(a) regex (0+1)* 1^4 (0+1)* matches 'contains 1^4', |w| <= 12
+OK   P2.2(b) DFA with 5 states accepts 'contains 1^4', |w| <= 12
+OK   P2.2(a,b) regex and DFA equivalent (exact), k = 4
+OK   P2.2(c) minimal DFA for k = 4 has exactly 5 states
+OK   P2.2(c) F = {1^i : 0 <= i <= 4} is a fooling set with suffix 1^(4-j)
+OK   P2.2(c) the 5 strings of F end in 5 distinct states of the DFA
+OK   P2.2(a) regex (0+1)* 1^5 (0+1)* matches 'contains 1^5', |w| <= 12
+OK   P2.2(b) DFA with 6 states accepts 'contains 1^5', |w| <= 12
+OK   P2.2(a,b) regex and DFA equivalent (exact), k = 5
+OK   P2.2(c) minimal DFA for k = 5 has exactly 6 states
+OK   P2.2(c) F = {1^i : 0 <= i <= 5} is a fooling set with suffix 1^(5-j)
+OK   P2.2(c) the 6 strings of F end in 6 distinct states of the DFA
+OK   P2.2(a) regex (0+1)* 1^6 (0+1)* matches 'contains 1^6', |w| <= 12
+OK   P2.2(b) DFA with 7 states accepts 'contains 1^6', |w| <= 12
+OK   P2.2(a,b) regex and DFA equivalent (exact), k = 6
+OK   P2.2(c) minimal DFA for k = 6 has exactly 7 states
+OK   P2.2(c) F = {1^i : 0 <= i <= 6} is a fooling set with suffix 1^(6-j)
+OK   P2.2(c) the 7 strings of F end in 7 distinct states of the DFA
+OK   P2.2(b) the DFA for k = 374 has 375 states
+OK   P2.2(b) k = 374: accepts 1^374, 0 1^374 0, 1^373 0 1^374; rejects 1^373, 1^373 0 1^373, (01)^400
+OK   P2.2(c) k = 374: the DFA is minimal (375 states after minimization)
+OK   P2.2(c) k = 374: 1^i for 0 <= i <= 374 reach 375 distinct states
+OK   P2.2(c) k = 374: z = 1^(374-j) distinguishes 1^i from 1^j for 20 random pairs i < j
+OK   P2.3 Bond doubles every run of 0s (reference definition), e.g. Bond(0110) = 001100
+OK   P2.3(a) |Bond(w)| >= |w| for all |w| <= 10
+OK   P2.3(a) the inequality is strict exactly when w contains a 0, |w| <= 10
+OK   P2.3(b) Bond(x•y) = Bond(x)•Bond(y) for all |x|, |y| <= 6
+OK   P2.3 Bond(ε) = ε and Bond(0x) = 00·Bond(x), Bond(1x) = 1·Bond(x) (the three cases), |x| <= 8
+OK   P2.4 sanity: 0011, 010, 10, 0110, 0100, 0, ε ∈ L; 100, 001, 0001, 0111, 0101 ∉ L
+OK   P2.4(a) F = 0^+ with suffix z = 1^i: 0^i 1^i ∈ L and 0^j 1^i ∉ L for all 1 <= i != j <= 12
+OK   P2.4(a) why n >= 1: with i = 0 the suffix is ε and 0^j ∈ L, so ε is not distinguished that way
+OK   P2.4(b) grammar generates L on all strings of length <= 12
+OK   P2.4(b) L(E) = {0^n 1^n}
+OK   P2.4(b) L(F) = {1^n 0^n}
+OK   P2.4(b) L(M) = {0^n 1^m 0^n}
+OK   P2.4(b) L(U) = 1*, L(Z) = 0*
+OK   P2.4(b) L(EZ) = {a = b}, L(M) = {a = c}, L(ZF) = {b = c}
+OK   P2.4(b) the grammar is ambiguous: ε comes from EZ, M and ZF; 0 from EZ (E=ε, Z=0) and from ZF (Z=0, F=ε)
+OK   P2.5(b) {0^n : n > 0} is a fooling set for {0^n 1 0^n}: suffix 1 0^i, all 1 <= i != j <= 12
+OK   P2.5(b) the given set {0^n 1 : n > 0} is a fooling set too (suffix 0^i)
+OK   P2.5(c) S -> 010 | 0S0 generates {0^n 1 0^n : n > 0}, |w| <= 13
+OK   P2.5(d) S -> 00S | S11 | 01 generates 0001 but not ε, and 0001 ∉ {0^n 1^n}
+OK   P2.5(d) that grammar generates exactly {0^(2i+1) 1^(2j+1)}, which is not {0^n 1^n}
+OK   P2.5(e) no DFA with <= 3 states and exactly one accepting state accepts {ε, 0}
+OK   P2.5(e) the argument: s accepting and δ(s,0) = s force 00 to be accepted
+OK   P2.5(g) swapped DFA accepts exactly {y^c : y ∈ L}, 60 random DFAs, |w| <= 9
+OK   P2.5(h) {w w^c : w ∈ 0*} = {0^n 1^n : n >= 0}
+OK   P2.5(h) {0^n 1^n} is not regular: 0* is a fooling set with suffix 1^i (i != j <= 12)
+OK   P2.5(i) 01 has even length but is not in (00+11)*
+OK   P2.5(i) (00+11)* is a proper subset of the even-length strings, |w| <= 10
+
+---- Practice test 3
+OK   T3 1(b) {0^m1^n : m+n <= 4} is a finite union, hence a regular expression
+OK   T3 1(c) x=0^i, y=0^j (i<j), z=0^31^i: xz in L, yz not in L, all i<j<=8
+OK   T3 1(c) x=0^i, y=0^j (i<j), z=0^3741^i: xz in L, yz not in L, all i<j<=8
+OK   T3 1(d) ε in L and L closed under concatenation (all pairs with |x|,|y| <= 6)
+OK   T3 1(d) L* = L for |w| <= 10
+OK   T3 1(d) L is not regular: 0^i, 0^j distinguished by 1^i
+OK   T3 1(e) ∅* = {ε}
+OK   T3 1(f) swapping accepting and non-accepting states gives a DFA for the complement (50 random DFAs)
+OK   T3 1(g) L and L' are disjoint, |w| <= 12
+OK   T3 1(g) complement of 0^n1^n is not regular: 0^i, 0^j distinguished by 1^i
+OK   T3 1(h) DFA + 374 unreachable accepting states (self-loops) accepts the same language (20 random DFAs)
+OK   T3 1(i) NFA with one accepting state (ε-moves from the old accepting states) accepts the same language
+OK   T3 1(j) strings reaching the same DFA state are indistinguishable by every suffix (pigeonhole: |F| <= k)
+OK   T3 1(j) example: the 3-state 'number of 1s mod 3' DFA, every set of 4 strings has two in the same state
+OK   T3 2(a) recursive parity(w) = number of 1s mod 2, |w| <= 12
+OK   T3 2(a) examples: parity(ε)=0, parity(1)=1, parity(0110)=0, parity(10101)=1
+OK   T3 2(b) product DFA accepts exactly OddParity(L), 100 random DFAs with 1-4 states, |w| <= 9
+OK   T3 2(c) the same DFA with accepting states A x {0} accepts EvenParity(L)
+OK   T3 2(c) AddParity(L) = {0}·EvenParity(L) ∪ {1}·OddParity(L), 100 random DFAs, |w| <= 8
+OK   T3 2(b) state meaning: delta'*((s,0), w) = (delta*(s,w), parity(w)) for |w| <= 8
+OK   T3 3 membership sanity: 0, 00, 101, 1001, 10001, 01010 in L; ε, 1, 11, 010, 110, 0100 not
+OK   T3 3(a) F = 1*: x=1^i, y=1^j, z=01^i: xz in L, yz not in L, all i != j <= 8
+OK   T3 3(a) counting: a string with exactly one 0 is in L iff it is 1^k 0 1^k, |u| <= 13
+OK   T3 3(b) grammar S -> 0S0 | 1S1 | Z, Z -> 0 | 0Z generates exactly L, |u| <= 10
+OK   T3 3(b) Z generates exactly 0^+
+OK   T3 4 example: take2skip2(0100111100011) = 0111001
+OK   T3 4(a) DFA accepts exactly {w : take2skip2(w) in L}, 60 random DFAs with 1-4 states, |w| <= 10
+OK   T3 4(b) ε-NFA accepts exactly {take2skip2(w) : w in L}, 60 random DFAs, |u| <= 7 (|w| <= 14)
+OK   T3 4(a) state meaning: delta'*((s,0), x) = (delta*(s, take2skip2(x)), |x| mod 4), |x| <= 10
+OK   T3 4 edge case L = 1*: Took2Added2(1*) = {w : taken symbols all 1}, Took2Skipped2(1*) = 1*
+OK   T3 5(a) DFA (4 states + dump) accepts exactly 'runs of 1s even, runs of 0s odd', |w| <= 14
+OK   T3 5(a) DFA is minimal as drawn: 5 states including the dump
+OK   T3 5(a) regex (11)*(0(00)*11(11)*)*(ε+0(00)*) is equivalent to the DFA  [None]
+OK   T3 5(a) examples: ε, 0, 11, 011, 0110, 11000 in; 1, 00, 010, 0111 out
+OK   T3 5(a) state meanings hold for every input that has not hit the dump, |w| <= 12
+OK   T3 5(b) DFA (6 states + dump) accepts exactly '0*10* with |w| a multiple of 3', |w| <= 14
+OK   T3 5(b) DFA is minimal as drawn: 7 states including the dump
+OK   T3 5(b) regex (000)*(100+010+001)(000)* is equivalent to the DFA  [None]
+OK   T3 5(b) (a mod 3, b mod 3) in {(0,2),(1,1),(2,0)} iff a+b+1 is a multiple of 3, a,b <= 12
+OK   T3 5(b) state meanings: N_i / Y_i = (#1 so far, |x| mod 3), |x| <= 12
+OK   T3 5 ε test: ε is in (a) and not in (b)
+
+ALL OK

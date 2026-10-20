@@ -10,6 +10,7 @@ Notes for **CS/ECE 374 A — Algorithms and Models of Computation** (University 
 > - **Concepts** are the glossary: one short page per idea (fooling sets, the subset construction, Rice's theorem, …) with the precise statement, how to use it, the traps, and links to every section that develops it.
 > - **Toolkit** pages collect what is spread over the chapters: notation, every proof template on one page, the big picture of language classes, two exam reviews, how exams are graded, and errata in the book.
 > - **Worked problems** are exam-style problems solved in full as model answers; the **practice bank** is where you do the work yourself — 60 problems tagged easy, medium or hard, each with a folded hint and a worked solution. In Part 2, each chapter instead has a page of **solved book exercises**.
+> - **Homework and exams** holds the course's own material worked out: the Midterm 1 practice tests and the homework write-ups.
 >
 > Hover a link for a preview, and use the **graph view** at the top right of any page to see what connects to what.
 
@@ -40,11 +41,14 @@ Midterm 2 (Nov 9) is on algorithms; the final covers both parts. Each chapter ha
 
 Then greedy algorithms, graph algorithms, shortest paths, flows and NP-hardness — *planned*.
 
+### [[3-homework-and-exams/index|Homework and exams]] — worked solutions
+The three Midterm 1 practice tests solved in full in the exam's format — [[3-homework-and-exams/midterm-1-practice-1|test 1]] · [[3-homework-and-exams/midterm-1-practice-2|test 2]] · [[3-homework-and-exams/midterm-1-practice-3|test 3]] — and homework write-ups that explain the method as they solve the problems: [[3-homework-and-exams/hw6-dynamic-programming|HW6, dynamic programming]].
+
 ### [[practice/index|Practice problems]] — Models of Computation, Chapters 1–7
 Sixty problems, from two-minute true-or-false checks to full exam problems, each with a folded hint and a worked solution: by difficulty — [[practice/easy|easy]] · [[practice/medium|medium]] · [[practice/hard|hard]] — or [[practice/topics|by topic]] across chapters. Every chapter page links its own set.
 
 ### Cross-cutting
-[[concepts/index|Concept glossary]] · [[problems/index|Worked problems]] · [[practice/index|Practice problems]]
+[[concepts/index|Concept glossary]] · [[problems/index|Worked problems]] · [[practice/index|Practice problems]] · [[3-homework-and-exams/index|Homework and exams]]
 
 ## Conventions used throughout
 
