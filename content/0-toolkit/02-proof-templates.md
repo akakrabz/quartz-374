@@ -1,14 +1,14 @@
 ---
 title: "Proof templates"
-description: "Every exam boilerplate on one page, in course order — string induction, write-ups for regular expressions, grammars and DFAs, structural induction, DFA correctness, product constructions, fooling sets, closure, language transformations, grammar proofs, Turing machines, diagonalization, reductions, Rice's theorem, dovetailing and Lemma 5 — each with its source section, its rubric line and a worked problem."
-tags: [toolkit, strings, regular, context-free, turing-machines, undecidability, midterm-1]
+description: "Every exam boilerplate on one page, in course order — string induction, write-ups for regular expressions, grammars and DFAs, structural induction, DFA correctness, product constructions, fooling sets, closure, language transformations, grammar proofs, Turing machines, diagonalization, reductions, Rice's theorem, dovetailing and Lemma 5; for algorithms, recursive-algorithm correctness and the write-ups for divide and conquer, backtracking, dynamic programming, greedy correctness and graph reductions — each with its source section, its rubric line and a worked problem."
+tags: [toolkit, strings, regular, context-free, turing-machines, undecidability, algorithms, recursion, backtracking, dynamic-programming, greedy, graphs, midterm-1, midterm-2]
 aliases: ["templates", "proof template", "exam boilerplate"]
 ---
 
 *Toolkit · reference page · each template is copied from the section linked below it; the rubric lines paraphrase the course's standard rubrics ([[0-toolkit/06-how-exams-are-graded|how exams are graded]]).*
 
 > [!recipe] How to use a template on the exam
-> 1. **Recognize the problem type.** The [[#17-which-template-for-which-problem|table at the end]] maps each type to its template, its rubric and a worked problem.
+> 1. **Recognize the problem type.** The [[#23-which-template-for-which-problem|table at the end]] maps each type to its template, its rubric and a worked problem.
 > 2. **Write the boilerplate first**, word for word, with several blank lines in every case.
 > 3. **Fill in the claim and the hypothesis** — or the set $F$, the names of the machines, the states of $M'$ — in full, with variable names that do not clash.
 > 4. **Only then think** about the real work (the inductive step, the suffix $z$, the machine $M'$), and write it into the gaps.
@@ -16,7 +16,9 @@ aliases: ["templates", "proof template", "exam boilerplate"]
 >
 > The frame alone earns points: on the induction rubric, an arbitrary string, an explicit strong hypothesis and cases that cover every string are 5 of the 10 points, before any algebra. Templates marked *assembled here* have no boilerplate on their chapter page; they are built from that section's recipe and worked examples, in its words where possible.
 
-**Chapter 1** [[#1-induction-on-strings|string induction]] · **Chapter 2** [[#2-writing-up-a-regular-expression-or-a-grammar|expression or grammar write-up]], [[#3-induction-on-regular-expressions|structural induction]] · **Chapter 3** [[#4-proving-a-dfa-correct|DFA correctness]], [[#5-describing-a-dfa|describing a DFA]], [[#6-writing-up-a-product-construction|product construction]], [[#7-fooling-set-proof|fooling set]], [[#8-non-regularity-by-closure|closure]] · **Chapter 4** [[#9-language-transformation|language transformation]] · **Chapter 5** [[#10-proving-what-a-grammar-generates|what a grammar generates]] · **Chapter 6** [[#11-describing-a-turing-machine|Turing machine]] · **Chapter 7** [[#12-undecidability-by-diagonalization|diagonalization]], [[#13-undecidability-by-reduction|reduction]], [[#14-undecidability-by-rices-theorem|Rice]], [[#15-acceptable-by-dovetailing|dovetailing]], [[#16-not-acceptable-by-lemma-5|Lemma 5]]
+*Models of Computation* — **Chapter 1** [[#1-induction-on-strings|string induction]] · **Chapter 2** [[#2-writing-up-a-regular-expression-or-a-grammar|expression or grammar write-up]], [[#3-induction-on-regular-expressions|structural induction]] · **Chapter 3** [[#4-proving-a-dfa-correct|DFA correctness]], [[#5-describing-a-dfa|describing a DFA]], [[#6-writing-up-a-product-construction|product construction]], [[#7-fooling-set-proof|fooling set]], [[#8-non-regularity-by-closure|closure]] · **Chapter 4** [[#9-language-transformation|language transformation]] · **Chapter 5** [[#10-proving-what-a-grammar-generates|what a grammar generates]] · **Chapter 6** [[#11-describing-a-turing-machine|Turing machine]] · **Chapter 7** [[#12-undecidability-by-diagonalization|diagonalization]], [[#13-undecidability-by-reduction|reduction]], [[#14-undecidability-by-rices-theorem|Rice]], [[#15-acceptable-by-dovetailing|dovetailing]], [[#16-not-acceptable-by-lemma-5|Lemma 5]]
+
+*Algorithms* — **Chapter 1** [[#17-proving-a-recursive-algorithm-correct|recursive correctness]], [[#18-writing-up-a-divide-and-conquer-algorithm|divide and conquer]] · **Chapter 2** [[#19-writing-up-a-backtracking-algorithm|backtracking]] · **Chapter 3** [[#20-writing-up-a-dynamic-program|dynamic program]] · **Chapter 4** [[#21-proving-a-greedy-algorithm-correct|greedy correctness]] · **Chapter 5** [[#22-solving-a-problem-by-graph-reduction|graph reduction]]
 
 ## 1. Induction on strings
 
@@ -250,7 +252,86 @@ Strings that encode no machine form a decidable set; counting them in $L$ or in 
 
 **Source** [[1-models-of-computation/07-undecidability#73-useful-properties|§7.3]] · **rubric** none of its own · **worked** [[problems/undecidability-by-reduction-and-by-rice|AtLeastTwo]] (d); $\textsf{NeverAccept}$ in [[1-models-of-computation/07-undecidability#710-more-undecidable-languages|§7.10]]
 
-## 17. Which template for which problem
+## 17. Proving a recursive algorithm correct
+
+**Use it for** "prove that this recursive algorithm is correct", for an algorithm you designed or one given in the problem (StoogeSort, a new sorting or selection algorithm). It is induction on the size of the instance, in the same frame as [[#1-induction-on-strings|induction on strings]]: the induction hypothesis is the Recursion Fairy.
+
+> [!template] Template — proving a recursive algorithm correct
+> Write the proof as a strong induction that mirrors the algorithm: \
+> *Let $I$ be an arbitrary instance of size $n$, and assume the algorithm is correct on every instance of size less than $n$.* \
+> **Base cases:** for the instances solved directly, check the direct answer. \
+> **Recursive case:** every recursive call is on a smaller instance, so by the induction hypothesis it returns the correct answer; show that the way the algorithm *combines* those answers is correct. \
+> Nothing else: never trace what the recursive calls do inside.
+
+**Source** [[2-algorithms/01-recursion#12-simplify-and-delegate|Algorithms §1.2]] · **rubric** none of its own · **worked** [[2-algorithms/01-recursion-exercises#exercise-111--stoogesort|StoogeSort]] (a); mergesort in [[2-algorithms/01-recursion#14-mergesort|§1.4]]
+
+## 18. Writing up a divide-and-conquer algorithm
+
+**Use it for** "describe and analyze an efficient algorithm" when the algorithm recurses on pieces of the input that are a constant fraction smaller — sorting, selection, counting inversions, multiplication. The time comes from the recurrence, usually through a [[concepts/recursion-trees|recursion tree]] and its three cases.
+
+> [!template] Template — writing up a divide-and-conquer algorithm (the recursive-algorithm rubric)
+> 1. **What the recursive algorithm computes** — what it *returns*, in terms of its parameters, in a sentence or two. Essential when you solve a more general problem than the one asked (QuickSelect returns the $k$-th smallest element for *any* $k$, not just the median) or need extra assumptions. An explanation of *how* it works does not count here.
+> 2. **Base case(s)** and their answers.
+> 3. **Divide:** the recursive subproblems, exactly (index ranges, parameters).
+> 4. **Conquer:** how the results of the recursive calls give the answer.
+> 5. **Time:** the recurrence, and its closed-form solution (e.g. from a recursion tree).
+
+**Source** [[2-algorithms/01-recursion#16-the-pattern|Algorithms §1.6]] · **rubric** [[0-toolkit/06-how-exams-are-graded#11-recursive-algorithms|recursive algorithm]]: 3 + 1 + 2 + 2 + 2 · **worked** [[2-algorithms/01-recursion-exercises#exercise-113--counting-inversions|counting inversions]]; quickselect and MomSelect in [[2-algorithms/01-recursion#18-linear-time-selection|§1.8]]
+
+## 19. Writing up a backtracking algorithm
+
+**Use it for** a search over a sequence of decisions — which elements to take, where to cut a string, which key goes at the root — when every option has to be tried. It is graded by the same rubric as divide and conquer, and its recursion is the first step of every dynamic program ([[#20-writing-up-a-dynamic-program|§20]]).
+
+> [!template] Template — writing up a backtracking algorithm
+> $\textsf{Name}(\text{parameters})$ returns *[what, in terms of the parameters only — e.g. "True iff some subset of $X[1\,..\,i]$ sums to $T$"]*. We need $\textsf{Name}(\text{initial values})$. \
+> **Base cases:** *[when no decision is left, and what to return]*. \
+> **Recursive case:** *[the options for the next decision, the call made for each]*; *[how the answers combine]*. \
+> **Correctness:** every solution makes *some* choice for the next decision, and the call for that choice handles the rest (induction). \
+> **Time:** $T(n) \le$ *[recurrence]*, so $T(n) = O(\ldots)$.
+
+**Source** [[2-algorithms/02-backtracking#24-the-general-pattern|Algorithms §2.4]] · **rubric** [[0-toolkit/06-how-exams-are-graded#11-recursive-algorithms|recursive algorithm]]: 3 + 1 + 2 + 2 + 2 · **worked** [[2-algorithms/02-backtracking-exercises#exercise-21--counting-and-weighing-subset-sums|counting subset sums]]; subset sum in [[2-algorithms/02-backtracking#23-subset-sum|§2.3]]
+
+## 20. Writing up a dynamic program
+
+**Use it for** any problem whose backtracking recursion solves the same subproblems again and again — optimal subsequences, segmentations, alignments, intervals, subtrees. Find the recursion first ([[#19-writing-up-a-backtracking-algorithm|§19]]), then store its values in an array filled in an order that respects the dependencies.
+
+> [!template] Template — writing up a dynamic program (rubric: 3 + 4 + 3 points)
+> 1. **The function (3 points).** "For [ranges of the parameters], let $\textsf{Name}(i, j)$ denote [what it returns] for [which part of the input: a prefix $A[1\,..\,i]$, a suffix $A[i\,..\,n]$, an interval $A[i\,..\,k]$, a pair of prefixes, a subtree] [and any extra parameter]. We need $\textsf{Name}(\ldots)$." One point is for naming the portion of the input; two (all or nothing) for a description that is explicit, self-contained and usable — explicit parameters, a value that depends only on them, no "current index" or "best so far". A name like $\textsf{OPT}$, $\textsf{memo}$ or a single letter costs a point.
+> 2. **The recurrence (4 points):** base cases (1) and recursive cases (3), each with its condition.
+> 3. **Memoization structure (1 point):** an array, with its index ranges. A hash table earns nothing.
+> 4. **Evaluation order (1 point):** for nested loops, which loop is outer and the direction of every index; a picture needs labeled and directed axes.
+> 5. **Time (1 point):** number of subproblems $\times$ time per subproblem, in the problem's own parameters.
+>
+> Without a usable description of the function, the recurrence and the iterative details earn nothing. Iterative pseudocode is optional, and computing the *value* of an optimal solution is enough unless the problem asks for the solution itself.
+
+**Source** [[2-algorithms/03-dynamic-programming#34-the-pattern-smart-recursion|Algorithms §3.4]] · **rubric** [[0-toolkit/06-how-exams-are-graded#12-dynamic-programming|dynamic programming]]: 3 + 4 + 3 · **worked** [[2-algorithms/03-dynamic-programming-exercises#exercise-31--making-change-in-nadiria|making change]]; edit distance in [[2-algorithms/03-dynamic-programming#37-edit-distance|§3.7]]
+
+## 21. Proving a greedy algorithm correct
+
+**Use it for** "describe a greedy algorithm and prove it correct", and whenever a dynamic program could be sped up by a greedy choice — without the proof, the dynamic-programming rubric takes off $1\tfrac12$ points. Try small counterexamples first: one counterexample settles that the rule is wrong.
+
+> [!template] Template — proving a greedy algorithm correct
+> **Greedy choice.** "Let $g$ be [the precise choice: the class that finishes first; the two least frequent characters; …]." \
+> **Exchange lemma.** "Let $\mathit{OPT}$ be an optimal solution that does not use $g$, and let $o$ be [the element of $\mathit{OPT}$ playing $g$'s role, e.g. the class of $\mathit{OPT}$ that finishes first]. Then $\mathit{OPT} - o + g$ is feasible because [...] and costs no more because [...]. So some optimal solution uses $g$." \
+> **Same problem, smaller.** "Once $g$ is chosen, what remains is an instance of the same problem: [the classes that start after $g$ ends; the alphabet with $x, y$ merged]. An optimal solution that uses $g$ is $g$ plus an optimal solution of that instance, because [...]." \
+> **Induction.** "The greedy algorithm chooses $g$ and then, by the induction hypothesis, solves the smaller instance optimally; so its solution is optimal." \
+> **Running time.** Usually a sort or a priority queue: $O(n\log n)$.
+
+**Source** [[2-algorithms/04-greedy-algorithms#43-the-general-pattern|Algorithms §4.3]] · **rubric** none of its own: a greedy algorithm without a proof earns no credit · **worked** class scheduling, [[2-algorithms/04-greedy-algorithms#42-scheduling-classes|§4.2]]; [[2-algorithms/04-greedy-algorithms-exercises#exercise-44--stabbing-intervals|stabbing intervals]]
+
+## 22. Solving a problem by graph reduction
+
+**Use it for** any problem about moves, states or configurations — puzzles, mazes, games, "can we get from here to there", "fewest steps" — and for questions about a graph that become easy in a modified graph (parity, a counter, a used coupon: put the extra state in the vertices).
+
+> [!template] Template — solving a problem by graph reduction (rubric: 3 + 3 + 2 + 2 points)
+> 1. **The graph (3 points: vertices 1, edges 1, weights or labels 1).** "Let $G = (V,E)$ be the [**directed** / undirected] graph whose vertices are [an explicit set built from the input, e.g. all pairs $(i,j)$ with $1\le i,j\le n$] and whose edges are [an explicit rule, e.g. $(i,j)\to(i',j')$ whenever …], with weights …." Forgetting to say "directed" costs ½. A brute-force construction in linear time needs no separate algorithm.
+> 2. **The problem on the graph (3 points: 1 for the high-level problem, 2 for the details).** "The answer is yes if and only if $t$ is reachable from $s$ in $G$" or "the answer is the length of a shortest path in $G$ from $\ldots$ to any vertex of the form $\ldots$", and why that answers the original question. Naming an algorithm earns nothing here: "breadth-first search" is not a problem.
+> 3. **The algorithm (2 points).** Invoke the right standard algorithm as a black box: whatever-first search for reachability, breadth-first search for fewest edges, a weighted shortest-path algorithm only when there are weights. A slower algorithm than necessary (Dijkstra where breadth-first search works) costs 1; a more specific one than necessary (breadth- or depth-first where whatever-first suffices) costs ½; re-explaining a standard algorithm instead of invoking it costs 1.
+> 4. **The time (2 points)**, in the parameters of the **input**: "$G$ has $O(n^2)$ vertices and $O(n^2)$ edges, so the algorithm runs in $O(n^2)$ time" — not just "$O(V+E)$".
+
+**Source** [[2-algorithms/05-basic-graph-algorithms#57-graph-reductions-flood-fill|Algorithms §5.7]] · **rubric** [[0-toolkit/06-how-exams-are-graded#13-graph-reductions|graph reduction]]: 3 + 3 + 2 + 2 · **worked** flood fill and walks of even length in §5.7; [[2-algorithms/05-basic-graph-algorithms-exercises#exercise-511--number-maze|number maze]]
+
+## 23. Which template for which problem
 
 | problem | template | rubric, out of 10 | worked problem |
 |---|---|---|---|
@@ -273,8 +354,14 @@ Strings that encode no machine form a decidable set; counting them in $L$ or in 
 | undecidable, a property of $\textsf{Accept}(M)$ | [[#14-undecidability-by-rices-theorem\|Rice]] | Rice: 4 + 4 + 2 | [[problems/undecidability-by-reduction-and-by-rice\|AtLeastTwo]] (b) |
 | acceptable | [[#15-acceptable-by-dovetailing\|dovetailing]] | none of its own | [[problems/undecidability-by-reduction-and-by-rice\|AtLeastTwo]] (d) |
 | not acceptable | [[#16-not-acceptable-by-lemma-5\|Lemma 5]] | none of its own | [[problems/undecidability-by-reduction-and-by-rice\|AtLeastTwo]] (d) |
+| prove a recursive algorithm correct | [[#17-proving-a-recursive-algorithm-correct\|induction on the size]] | none of its own | [[2-algorithms/01-recursion-exercises#exercise-111--stoogesort\|StoogeSort]] (a) |
+| an efficient algorithm that recurses on fractions of the input | [[#18-writing-up-a-divide-and-conquer-algorithm\|divide and conquer]] | recursive algorithm: 3 + 1 + 2 + 2 + 2 | [[2-algorithms/01-recursion-exercises#exercise-113--counting-inversions\|counting inversions]] |
+| try every sequence of choices | [[#19-writing-up-a-backtracking-algorithm\|backtracking]] | recursive algorithm: 3 + 1 + 2 + 2 + 2 | [[2-algorithms/02-backtracking-exercises#exercise-21--counting-and-weighing-subset-sums\|counting subset sums]] |
+| a backtracking recursion with repeated subproblems, made polynomial | [[#20-writing-up-a-dynamic-program\|dynamic program]] | dynamic programming: 3 + 4 + 3 | [[2-algorithms/03-dynamic-programming-exercises#exercise-31--making-change-in-nadiria\|making change]] |
+| a greedy rule: prove it or refute it | [[#21-proving-a-greedy-algorithm-correct\|exchange argument]] | none of its own (no proof, no credit) | [[2-algorithms/04-greedy-algorithms-exercises#exercise-44--stabbing-intervals\|stabbing intervals]] |
+| moves, states, puzzles, reachability, fewest steps | [[#22-solving-a-problem-by-graph-reduction\|graph reduction]] | graph reduction: 3 + 3 + 2 + 2 | [[2-algorithms/05-basic-graph-algorithms-exercises#exercise-511--number-maze\|number maze]] |
 
 The point splits are explained, with what loses points, on [[0-toolkit/06-how-exams-are-graded|how exams are graded]]; the symbols are on [[0-toolkit/01-notation-and-conventions|notation and conventions]].
 
 ### Sources for this page
-The templates for string induction, structural induction, DFA correctness, fooling sets, grammar proofs, diagonalization and reduction are copied from the chapter sections linked under them; the product-construction and language-transformation templates from [[concepts/product-construction|product construction]] and [[concepts/language-transformations|language transformations]] (the second follows the method of §4.9). Context words that pointed elsewhere on their page ("as above", "below", "next subsection") were replaced by section numbers; nothing else changed. The templates marked *assembled here* are built from the recipes and worked examples of the sections they cite. Rubric lines paraphrase the CS/ECE 374 A (Fall 2026) standard rubrics.
+The templates for string induction, structural induction, DFA correctness, fooling sets, grammar proofs, diagonalization and reduction are copied from the chapter sections linked under them; the product-construction and language-transformation templates from [[concepts/product-construction|product construction]] and [[concepts/language-transformations|language transformations]] (the second follows the method of §4.9). Context words that pointed elsewhere on their page ("as above", "below", "next subsection") were replaced by section numbers; nothing else changed. The templates marked *assembled here* are built from the recipes and worked examples of the sections they cite. The six *Algorithms* templates (§17–22) are copied unchanged from the boxes in §1.2, §1.6, §2.4, §3.4, §4.3 and §5.7 of the Algorithms chapter pages. Rubric lines paraphrase the CS/ECE 374 A (Fall 2026) standard rubrics.

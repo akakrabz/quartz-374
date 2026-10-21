@@ -1,0 +1,120 @@
+OK   PlaceQueens n=1: prints exactly the 1 solutions, each once, in lexicographic order  [1 printed]
+OK   PlaceQueens n=2: prints exactly the 0 solutions, each once, in lexicographic order  [0 printed]
+OK   PlaceQueens n=3: prints exactly the 0 solutions, each once, in lexicographic order  [0 printed]
+OK   PlaceQueens n=4: prints exactly the 2 solutions, each once, in lexicographic order  [2 printed]
+OK   PlaceQueens n=5: prints exactly the 10 solutions, each once, in lexicographic order  [10 printed]
+OK   PlaceQueens n=6: prints exactly the 4 solutions, each once, in lexicographic order  [4 printed]
+OK   PlaceQueens n=7: prints exactly the 40 solutions, each once, in lexicographic order  [40 printed]
+OK   PlaceQueens n=8: prints exactly the 92 solutions, each once, in lexicographic order  [92 printed]
+OK   PlaceQueens n=9: prints exactly the 352 solutions, each once, in lexicographic order  [352 printed]
+OK   PlaceQueens n=10: 724 solutions, all valid and distinct
+OK   solution counts n=1..10 are 1,0,0,2,10,4,40,92,352,724  [{1: 1, 2: 0, 3: 0, 4: 2, 5: 10, 6: 4, 7: 40, 8: 92, 9: 352, 10: 724}]
+OK   call counts n=1..10 are 2,3,6,17,54,153,552,2057,8394,35539  [{1: 2, 2: 3, 3: 6, 4: 17, 5: 54, 6: 153, 7: 552, 8: 2057, 9: 8394, 10: 35539}]
+OK   Gauss's first solution [5,7,1,4,2,8,6,3] is an 8-queens solution
+OK   ... and PlaceQueens prints it
+OK   4 queens: solutions [2,4,1,3] and [3,1,4,2]
+OK   4 queens: recursion tree has 17 nodes, 1,4,6,4,2 per level  [[1, 4, 6, 4, 2]]
+OK   4 queens: 6 leaves, 2 complete solutions and 4 dead ends  [[(1, 3), (1, 4, 2), (2, 4, 1, 3), (3, 1, 4, 2), (4, 1, 3), (4, 2)]]
+OK   4 queens leaves are (1,3), (1,4,2), (2,4,1,3), (3,1,4,2), (4,1,3), (4,2)
+OK   diagonal test equals |Q[i]-j| = r-i for all 1<=i<r<=9, 1<=j,Q[i]<=9
+OK   level d of the recursion tree has <= n!/(n-d)! nodes; total calls <= e*n!  (n<=10)
+OK   T(m) = m T(m-1) + 1, T(0)=1 stays below e*m! for m<=14
+OK   8 queens: 2057 calls vs 8! = 40320
+OK   subtraction game: state n is Bad iff n is a multiple of 3 (n <= 30)
+OK   game tree from 4 tokens has 12 nodes and 5 leaves
+OK   labels in the figure: 4 G; 3 B; 2 G; 1 G; 0 B (every node with the same pile has the same label)
+OK   from 4 the winning move is take 1 (to 3, Bad); take 2 (to 2) is Good for the opponent
+OK   PlayAnyGame(4) makes 8 calls (visits 3,2,1,0,0,1,0 below the root) and skips the 4-node subtree of 2  [[4, 3, 2, 1, 0, 0, 1, 0]]
+OK   game-tree size N(n) = 1 + N(n-1) + N(n-2), N(0)=1, N(1)=2, equals F(n+3) - 1 and the drawn tree size
+OK   PlayAnyGame(n) makes at most N(n) calls (the size of the game tree), n < 25
+OK   with a draw, PlayAnyGame returns Good from a state whose only continuation is a draw (so the page restricts to no draws)
+OK   N(n) / phi^n settles (Theta(phi^n))  [[1.8943610844999297, 1.8944212301351766, 1.8944263213219368]]
+OK   X={8,6,7,5,3,10,9}, T=15: exactly the four subsets {8,7},{7,5,3},{6,9},{5,10}  [[{8, 7}, {9, 6}, {10, 5}, {3, 5, 7}]]
+OK   X={11,6,5,1,7,13,12}, T=15: no subset
+OK   SubsetSum(X, i, T) = brute force (all arrays over 1..5 up to length 5, all T; 300 random)
+OK   set version SubsetSum(X, T) = brute force (distinct elements)
+OK   T > sum(X): exactly 2^(n+1) - 1 calls (complete binary recursion tree of depth n), n <= 12
+OK   recurrence T(n) = 2T(n-1) + 1, T(0) = 1 has T(n) = 2^(n+1) - 1
+OK   ConstructSubset (base case i = 0) returns a subset summing to T iff one exists
+OK   book's literal 'n = 0' test recurses below i = 1 (e.g. X = [5], T = 3)
+OK   concept: subsets of [3,5,6,8] summing to 14 are exactly {3,5,6} and {6,8}
+OK   concept: ConstructSubset([3,5,6,8], 4, 14) returns {3,5,6} (exclude-first order)
+OK   concept: SubsetSum([3,5,6,8], 4, 14) is True and its first success (with-first order) is {6,8}
+OK   concept: no subset of [3,5,6,8] sums to 12
+OK   FastSubsetSum table: S[i][t] = (some subset of X[i..n] sums to t), 400 random instances
+OK   concept: sums reachable from [3,5,6,8] within 0..14 are 0,3,5,6,8,9,11,13,14  [[0, 3, 5, 6, 8, 9, 11, 13, 14]]
+OK   concept: NoAdj(i, t) = brute force over non-adjacent subsets (all arrays over 1..4 up to length 6)
+OK   concept: X = [4,1,2,7,3]: 10 = 7+3 = 1+2+7 = 4+1+2+3 but no non-adjacent subset sums to 10; 9 = 4+2+3 does
+OK   concept: non-adjacent subset sums of [4,1,2,7,3] are 0..9 and 11  [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11]]
+OK   concept: the subsets of [4,1,2,7,3] summing to 10 are {7,3}, {1,2,7}, {4,1,2,3}, each with two neighbors
+OK   concept: NoAdj makes O(phi^n) calls (at most 3 F(n+3) on an unreachable target, n < 25)
+OK   BOTH EARTH AND SATURN SPIN = BOT HEART HANDS AT URNS PIN = BOTHEARTHANDSATURNSPIN
+OK   BLUE STEM UNIT ROBOT and BLUEST EMU NITRO BOT are both BLUESTEMUNITROBOT (17 letters)
+OK   prefixes of HEARTHANDSATURNSPIN among {HE, HEAR, HEART, HEARTH, ...} are the four next-word choices
+OK   ROTATOR is a palindrome, PALINDROME is not
+OK   Splittable(A[1..n]) = Splittable(1) = brute force, dictionary {a,ab,ba,bab,bb,aab}, all strings <= 10
+OK   with IsWord = palindrome every string is splittable (single letters are palindromes)
+OK   a string of length n >= 1 has 2^(n-1) segmentations (n <= 12)
+OK   a^(n-1)b with words = nonempty runs of a: not splittable, exactly 2^n - 1 IsWord calls (n <= 16)
+OK   C(m) = m + sum_{k<m} C(k), C(1) = 1 gives C(m) = 2^m - 1
+OK   T(n) = sum_{i<n} T(i) + alpha n satisfies T(n) = 2T(n-1) + alpha for n >= 2
+OK   ... and T(n)/2^n settles (Theta(2^n))  [[1.4999999990686774, 1.4999999999708962, 1.499999999998181]]
+OK   with IsWord costing n^3, T(n) = sum T(i) + n^4 is still Theta(2^n)  [[75.49999973901595, 75.49999999951356, 75.49999999999847]]
+OK   MaxScore(1) = max over all segmentations of the summed scores (200 random strings and score tables)
+OK   BENT, ACKACK, SQUARING, SUBSEQUENT are subsequences of SUBSEQUENCEBACKTRACKING
+OK   QUEUE, EQUUS, TALLYHO are not
+OK   MASHER and LAUGHTER are subsequences of MANSLAUGHTER; only LAUGHTER is a substring
+OK   LISbigger(prev, A[1..n]) with prev = -inf = brute force (21845 arrays over 1..4, length <= 7, + 300 random)
+OK   LIS via LISbigger(0, 1) with sentinel = brute force
+OK   LIS via max_i LISfirst(i) and via LISfirst(0) - 1 = brute force
+OK   FastLIS (table, columns right to left) = brute force
+OK   FastLIS2 (array, i from n down to 0) = brute force
+OK   every value LISbigger(i, j) (i < j) and LISfirst(i) matches its English definition (arrays over 1..3, n <= 6)
+OK   book's example has 23 elements (digits of pi)
+OK   LIS of the book's example has length 6 (brute force: some 6 indices increase, no 7 do; all four algorithms agree)
+OK   1,4,5,6,8,9 is an increasing subsequence of it (positions 3,5,8,12,13 ...)
+OK   take-1 picture: chosen 1,4,5,6 from A[1..10] is increasing and ends with A[8] = 6
+OK   take-1 picture: A[11] = 5 <= 6 must be skipped; LISbigger(8, 11) = LISbigger(8, 12) = 2
+OK   ... so the partial solution 1,4,5,6 extends to an LIS of length 4 + 2 = 6
+OK   LISfirst(1..23) on the example = 6 6 5 6 4 1 5 3 3 4 3 2 1 2 1 3 4 3 1 2 1 2 1  [[6, 6, 5, 6, 4, 1, 5, 3, 3, 4, 3, 2, 1, 2, 1, 3, 4, 3, 1, 2, 1, 2, 1]]
+OK   LISfirst(0) - 1 = 6 with the sentinel
+OK   take-2 picture: after A[8] = 6 the candidates are 8,9,7,9,8 at positions 12,13,14,15,19  [[(12, 8), (13, 9), (14, 7), (15, 9), (19, 8)]]
+OK   LISfirst(8) = 3 (6 then two more, e.g. 6,8,9)
+OK   LISfirst(8) = 1 + LISfirst(12): candidates 12,14 give 2, candidates 13,15,19 give 1
+OK   the maximum 6 of LISfirst is attained at i = 1, 2, 4
+OK   increasing input of length n: LISbigger(0, 1) makes exactly 2^(n+1) - 1 calls (n <= 13)
+OK   increasing input: LISfirst(0) makes 2^n calls; the loop over LISfirst(1..n) makes 2^n - 1 (n <= 13)
+OK   on 200 random arrays the call counts never exceed those bounds
+OK   concept: LISfirst(1..8) for 5 2 8 6 3 6 9 7 = 3 4 2 2 3 2 1 1
+OK   concept: LIS = 4 (e.g. 2,3,6,9 and 2,3,6,7); 2,3,6,6,9 is not increasing
+OK   concept: FastLIS2 array LISfirst[0..8] = 5 3 4 2 2 3 2 1 1  [[5, 3, 4, 2, 2, 3, 2, 1, 1]]
+OK   concept: FastLIS table LISbigger[0, 1] = 4 and LISbigger[1, 2] = 2 (after 5: 8,9 or 6,9 or 6,7)
+OK   Cost(T, f) definition (*) = recursive decomposition, every tree, n <= 7
+OK   OptCost(i, k) = min over all BSTs on keys i..k (brute force), n <= 7
+OK   number of BSTs enumerated for n = 0..8 is 1,1,2,5,14,42,132,429,1430
+OK   example: total frequency 23
+OK   example: OptCost(1, 7) = 49
+OK   example: the optimal tree is unique: C(A(-,B), F(D(-,E), G))
+OK   example: the perfectly balanced tree (root D) costs 56
+OK   example: optimal cost by depths 6*1 + (4+5)*2 + (2+3+2)*3 + 1*4 = 49
+OK   example: balanced cost by depths 3*1 + (2+5)*2 + (4+6+1+2)*3 = 56
+OK   example: optimal tree has 4 levels, balanced has 3
+OK   example: OptCost(1,r-1) + OptCost(r+1,7) for r = 1..7 is 39 38 26 31 35 31 43  [[39, 38, 26, 31, 35, 31, 43]]
+OK   example: the minimum is at r = 3 (key C): 23 + 26 = 49
+OK   example: with root D the best is 23 + 31 = 54
+OK   example: OptCost(1,2) = 8 (root A) and OptCost(4,7) = 18 (root F)
+OK   example: (left, right) pairs = (0,39) (4,34) (8,18) (20,11) (26,9) (29,2) (43,0)  [[(0, 39), (4, 34), (8, 18), (20, 11), (26, 9), (29, 2), (43, 0)]]
+OK   frequencies 2^(n-1), ..., 2, 1: the unique optimal tree is a path of depth n (root = smallest key), n <= 8
+OK   halving frequencies: each f[i] exceeds the sum of all later ones (n <= 30)
+OK   OptCost(1, n) makes exactly 3^n calls (n <= 10), for any frequencies
+OK   T(n) = sum_k (T(k-1) + T(n-k)) + alpha n satisfies T(n) = 3T(n-1) + alpha for n >= 2
+OK   ... and T(n)/3^n settles (Theta(3^n))  [[1.1666666665232681, 1.1666666666660765, 1.1666666666666594]]
+OK   N(n) = sum_{r=1}^{n} N(r-1) N(n-r), N(0) = 1: 1,1,2,5,14,42,132,429
+OK   book's printed upper limit r = n-1 would give N(1) = 0 (so the sum must run to n)
+OK   N(n) = binom(2n, n)/(n+1)
+OK   N(n) n^{3/2} / 4^n -> 1/sqrt(pi) = 0.564...: N(n) = Theta(4^n / n^{3/2})  [[0.5579057327649151, 0.5610319160153655, 0.5626028280046371]]
+OK   N(n) sqrt(n) / 4^n -> 0, so the book's Theta(4^n / sqrt n) is not right  [[0.005579057327649151, 0.0028051595800768275, 0.0014100321503875616]]
+OK   3^n > N(n) for 1 <= n <= 16, 3^n < N(n) for every n >= 17 (checked to 399), and 3^n / N(n) -> 0
+OK   n = 7: 3^7 = 2187 calls vs 429 trees
+
+ALL OK

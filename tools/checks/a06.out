@@ -1,0 +1,111 @@
+== random graphs: DFS, intervals, classification, Lemma 6.1 ==
+OK   DFS(v) from scratch marks exactly reach(v) (1200 random graphs, every start vertex)
+OK   DFSAll calls DFS once per vertex and examines every edge once: O(V + E)
+OK   the clock assigns pre and post the values 1, ..., 2V, each once
+OK   active intervals are disjoint or nested
+OK   [u.pre, u.post] contains [v.pre, v.post] iff u is an ancestor of v
+OK   Lemma 6.1: (a) ancestor <=> (b) u.pre <= v.pre < v.post <= u.post <=> (c) u active just after DFS(v) is called <=> (d) path of new vertices from u to v just before DFS(u) is called
+OK   the active vertices always form a directed path of tree edges ending at the current vertex
+OK   no edge u->v has u.post < v.pre (the fourth ordering is impossible)
+OK   classification by intervals = classification by the state of v when DFS(u) begins
+OK   state of w when v->w is examined: new -> tree, active -> back, finished -> forward or cross
+OK   number of tree edges = V - number of DFS trees
+OK   u.post < v.post for an edge u->v iff it is a back edge, and then v reaches u
+OK   wrapper with an added source s: same pre/post (shifted by 1), DFS trees = children of s
+OK   a loop u->u is classified as a back edge (300 graphs with loops)
+OK   path 0->1->2->3->4: DFSAll finds 1 tree in order 0..4 and 5 trees in order 4..0
+
+== cycles and dags ==
+OK   IsAcyclic (Figure 6.7) = no cycle by brute force (random vertex and edge orders, loops included)
+OK   G has a cycle iff the DFS finds a back edge (any DFS)
+OK   loop-free G has a cycle iff some edge u->v has u.post < v.post
+OK   with loops allowed: G has a cycle iff some edge u->v has u.post <= v.post
+OK   every nonempty dag has a source and a sink
+OK   loop-free G is a dag iff every strong component is a single vertex
+
+== topological sort ==
+OK   for a dag, u.post > v.post for every edge u->v, so reverse postorder is a topological order (random orders)
+OK   TopologicalSort (Figure 6.9, recursive call on w) writes S[V], ..., S[1] = reverse postorder, a topological order
+OK   TopologicalSort fails gracefully (finds an active vertex) exactly on graphs with cycles
+OK   as printed, TopSortDFS(v, clock) recurses on v forever as soon as it meets an edge to a new vertex (e.g. the one-edge dag a->b, a first)
+OK   PostProcess and PostProcessDag call Process in postorder = reverse topological order
+OK   topological orders of rev(G) = reversals of topological orders of G (150 small dags, all orders)
+OK   every reverse topological order of a dag is a postorder (wrapper visits the vertices in that order)
+
+== memoization is depth-first search; longest paths in dags ==
+OK   memoized Edit(i, j) finalizes subproblems in exactly the postorder of a DFS of its dependency graph (200 random string pairs)
+OK   the edit-distance dependency graph is a dag; row-major order is a reverse topological order
+OK   edit distance = shortest path from (m, n) to (0, 0) in the dependency dag (weights 1, 1, [A[i] != B[j]])
+OK   memoized LongestPath(s, t) = maximum over all s-to-t paths (brute force; 1500 dags, weights -5..9)
+OK   dynamic-programming LongestPath (postorder of DFSAll) = brute force; every w.LLP read is already computed
+OK   LLP(v) = -infinity exactly for the vertices that cannot reach t
+OK   as printed (return inside the if), LongestPath returns nothing on its second call on c in the diamond s->a->c, s->b->c, c->t; corrected it returns 3
+
+== strong components ==
+OK   strong component of v = reach(v) ∩ reach^-1(v), reach^-1 by searching rev(G)
+OK   scc(G) is a dag (1200 random graphs)
+OK   rev(scc(G)) = scc(rev(G))
+OK   u reaches v in G iff S(u) reaches S(v) in scc(G)
+OK   Lemma 6.2: each strong component has exactly one vertex without a parent in it — its earliest-starting vertex, an ancestor of all of it
+OK   tree paths from the root of a component to its vertices stay inside the component
+OK   Lemma 6.3: the last vertex of any postordering of G lies in a source component
+OK   the last vertex of a postordering of rev(G) lies in a sink component of G
+OK   edge of G from component C to C': in the DFS of rev(G), some vertex of C' finishes after all of C
+OK   KosarajuSharir (Figure 6.16) labels every vertex with a vertex of its own strong component, equal labels iff same component
+OK   Kosaraju-Sharir: each LabelOneDFS call from phase 2 labels exactly one strong component
+OK   Kosaraju-Sharir finds the components sinks first (a reverse topological order of scc(G))
+OK   FindLow (Figure 6.18) computes low(v) as defined (min start time over tree paths + one non-tree edge)
+OK   Lemma 6.4: v is the root of a sink component iff low(v) = v.pre and low(w) < w.pre for every proper descendant w
+OK   Tarjan (Figure 6.19) labels every vertex with the earliest-starting vertex of its component
+OK   Tarjan emits the components in reverse topological order of scc(G); the first one is a sink
+OK   Tarjan's first component need not be a source component (so 'source' on book p. 242 should be 'sink')
+OK   when v.low = v.pre, popping down to v pops exactly v's component, v deepest
+OK   the almost-algorithm of Figure 6.15 (sink vertex by magic) labels the strong components
+OK   a->b, b->a, a->c from a with b first: postorder b c a; b's component {a, b} is not a sink (edge a->c)
+OK   Kosaraju-Sharir with a breadth-first second phase gives the same components
+OK   symmetric Kosaraju-Sharir (phase 1 on G, phase 2 on rev(G)) gives the same components
+OK   vertices ordered by a topological order of scc(G): every backward edge joins two vertices of one component
+OK   G strongly connected iff one search of G and one of rev(G) from the same vertex reach everything
+
+== the chapter page: the book's 16-vertex graph ==
+OK   book graph: 16 vertices, 24 edges; alphabetical DFSAll has preorder abfgchdlokpeinjm, postorder dkoplhcgfbamjnie (the book's Figure 6.4)
+OK   book graph edge classes: tree 14, forward {fl, gk}, back {ga, dc, kh, kl, mi}, cross {ef, jk, no}
+OK   page example lists exactly these forward, back and cross edges
+OK   page: f->l has [9, 16] inside [3, 20]; e->f has f.post = 20 < 23 = e.pre
+OK   back edges of the book graph = edges with u.post < v.post (figure caption)
+OK   figure a06-dfs-forest shows the 16 pre/post labels of the traversal
+OK   figure a06-intervals: every bar spans [v.pre, v.post]
+OK   Lemma 6.2 roots in the first figure's traversal, by starting time: a, c, p, e, i
+OK   book dag: acyclic, 23 edges, sources e, f, j and sinks b, c, p (page: 'sources $e, f, j$ and the sinks $b, c, p$')
+OK   book dag: postorder b a c d h p l k o n i e g f m j, topological order j m f g e i n o k l p h d c a b (Figure 6.8), as on the page
+
+== the chapter page: other examples ==
+OK   page: DFSAll on the path 0->...->4 gives 1 or 5 trees (checked above); claim on page
+OK   trap dag a->b, b->c, a->c: acyclic, and a->c is a forward edge reaching the finished vertex c
+OK   trap dag a->b, a->c, b->d, c->d, d->e, f->c: preorder a b d e c f puts c before f (f->c); reversed puts e before d (d->e); reverse postorder is topological
+OK   weighted dag: DFS(s) postorder t d c b x a s, topological order s a x b c d t (page, figure caption)
+OK   weighted dag: LLP = t 0, d 4, c 6, b 7, x -inf, a 11, s 13 (dynamic program = memoized = brute force)
+OK   weighted dag example text: every max on the page evaluates as printed
+OK   weighted dag: shortest path s->a->c->t of length 10; longest path s a b c d t unique of length 13
+OK   weighted dag: heaviest-edge greedy from s gives s b d t of length 11; the longest path is unique
+OK   figure a06-longest-path: LLP boxes read 13, 11, −∞, 7, 6, 4, 0 under s a x b c d t
+OK   book graph: components abfg, cdhklo, e, ijmn, p; scc(G) edges e->abfg, e->ijmn, abfg->cdhklo, ijmn->cdhklo, cdhklo->p (Figure 6.13; figure a06-scc)
+OK   Kosaraju-Sharir on the book graph: phase 1 finishes b e f g a m i n j l o k h d c p; pops p c d h k o l j n i m a g f e b (Figure 6.17), as on the page
+OK   Kosaraju-Sharir on the book graph: roots p, c, j, a, e label {p}, {c,d,h,k,l,o}, {i,j,m,n}, {a,b,f,g}, {e}
+OK   Tarjan table on the page: vertices in preorder, pre = the figure's starting times, low = TarjanDFS's values
+OK   Tarjan on the book graph: roots a, c, p, e, i; popped {p}, {c,...,o}, {a,b,f,g}, {i,j,m,n}, {e}
+OK   without the root test (plain FindLow), low(e) = 3 (cross edge e->f; f.pre = 3) and e is not recognized
+OK   FindLow with the book's nested loops (p. 243) breaks Lemma 6.4: on a, b->c, c->b the sink component {b, c} gets no root (low < pre for both); with consecutive loops b is its root; page notes the nesting
+OK   page states the diamond for the printed LongestPath and the a->b, b->a, a->c trap
+OK   page summary/abstract numbers: clock values 1..2V; 14 = 16 - 2 tree edges
+
+== concept pages ==
+OK   depth-first-search example: times a 1/8, b 2/7, c 3/6, d 4/5, e 9/10; preorder abcde, postorder dcbae
+OK   depth-first-search example: tree ab, bc, cd; forward ad; back ca (cycle abca, c.post 6 < 8 a.post); cross eb, ed
+OK   topological-sort example: times a 1/10, b 2/7, d 3/6, e 4/5, c 8/9, f 11/12; postorder e d b c a f; order f a c b d e; preorder a b d e c f; reversed f c e d b a
+OK   dynamic-programming-on-dags LIS example: 10 vertices, 36 edges, LLP(0) = 5, LIS = 4 = brute force; 2,3,6,9 is increasing
+OK   LIS = longest path from 0 to n+1 minus 1 (400 random arrays, brute force)
+OK   strongly-connected-components example: components abc, def, gh; scc edges abc->def, gh->def
+OK   strongly-connected-components example: phase 1 finishes b c a e h g f d; searches start at d, g, a and label def, gh, abc
+
+ALL OK

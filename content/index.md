@@ -1,22 +1,23 @@
 ---
 title: "CS/ECE 374 · Algorithms & Models of Computation"
-description: "Review and reference notes for CS/ECE 374 A (Fall 2026, Illinois): Jeff Erickson's Models of Computation chapter by chapter, a concept glossary, proof templates, exam reviews, worked exam-style problems and a practice bank with folded hints and solutions — every automaton, grammar and Turing machine machine-checked. The Algorithms half is planned."
+description: "Review and reference notes for CS/ECE 374 A (Fall 2026, Illinois): Jeff Erickson's Models of Computation chapter by chapter, a concept glossary, proof templates, exam reviews, worked exam-style problems and a practice bank with folded hints and solutions — every automaton, grammar and Turing machine machine-checked. The Algorithms half covers Erickson's Algorithms (recursion, backtracking, dynamic programming, greedy algorithms, graph search and depth-first search so far) with solved book exercises."
 ---
 
-Notes for **CS/ECE 374 A — Algorithms and Models of Computation** (University of Illinois, Fall 2026), written for *review*: the week before an exam, or when a homework problem needs the exact definition. They follow Jeff Erickson's textbook *Models of Computation* section by section, with the book's theorem numbers. They are **not a replacement for the book** — [read it](https://jeffe.cs.illinois.edu/teaching/algorithms/#models); come here to look things up, to review, and to practice.
+Notes for **CS/ECE 374 A — Algorithms and Models of Computation** (University of Illinois, Fall 2026), written for *review*: the week before an exam, or when a homework problem needs the exact definition. They follow Jeff Erickson's two textbooks section by section — *Models of Computation* for Part 1 and *Algorithms* for Part 2 — with the books' theorem numbers. They are **not a replacement for the books** — [read them](https://jeffe.cs.illinois.edu/teaching/algorithms/); come here to look things up, to review, and to practice.
 
 > [!tip] How this site is organized
 > - **Chapters** (the spine, in book order) — one page per chapter with the book's section numbers: definitions, numbered results, the exam templates, worked examples, traps, and an "On the exams" box. Each links its chapter PDF.
 > - **Concepts** are the glossary: one short page per idea (fooling sets, the subset construction, Rice's theorem, …) with the precise statement, how to use it, the traps, and links to every section that develops it.
 > - **Toolkit** pages collect what is spread over the chapters: notation, every proof template on one page, the big picture of language classes, two exam reviews, how exams are graded, and errata in the book.
-> - **Worked problems** are exam-style problems solved in full as model answers; the **practice bank** is where you do the work yourself — 60 problems tagged easy, medium or hard, each with a folded hint and a worked solution.
+> - **Worked problems** are exam-style problems solved in full as model answers; the **practice bank** is where you do the work yourself — 60 problems tagged easy, medium or hard, each with a folded hint and a worked solution. In Part 2, each chapter instead has a page of **solved book exercises**.
+> - **Homework and exams** holds the course's own material worked out: the Midterm 1 practice tests and the homework write-ups.
 >
 > Hover a link for a preview, and use the **graph view** at the top right of any page to see what connects to what.
 
 ## Course map
 
 ### [[0-toolkit/index|Toolkit]] — reference pages
-[[0-toolkit/01-notation-and-conventions|Notation and conventions]] · **[[0-toolkit/02-proof-templates|Proof templates]]** · [[0-toolkit/03-the-big-picture|The big picture]] · **[[0-toolkit/04-review-regular-and-context-free|Review: Ch 1–5]]** · **[[0-toolkit/05-review-turing-machines-and-undecidability|Review: Ch 6–9]]** · [[0-toolkit/06-how-exams-are-graded|How exams are graded]] · [[0-toolkit/07-errata-in-the-book|Errata in the book]]
+[[0-toolkit/01-notation-and-conventions|Notation and conventions]] · **[[0-toolkit/02-proof-templates|Proof templates]]** · [[0-toolkit/03-the-big-picture|The big picture]] · **[[0-toolkit/04-review-regular-and-context-free|Review: Ch 1–5]]** · **[[0-toolkit/05-review-turing-machines-and-undecidability|Review: Ch 6–9]]** · [[0-toolkit/06-how-exams-are-graded|How exams are graded]] · [[0-toolkit/07-errata-in-the-book|Errata in the books]]
 
 ### [[1-models-of-computation/index|Part 1 · Models of Computation]] — Chapters 1–9 <span class="cs-chip done">complete</span>
 Midterm 1 (Sep 28) covered Chapters 1–5; the final covers all nine.
@@ -31,14 +32,26 @@ Midterm 1 (Sep 28) covered Chapters 1–5; the final covers all nine.
 8. [[1-models-of-computation/08-universal-models|Universal models]] — two stacks, counters, FRACTRAN, Post's correspondence problem, tiles, combinators
 9. [[1-models-of-computation/09-nondeterministic-turing-machines|Nondeterministic Turing machines]] — computation trees, dovetailing, P and NP, Cook–Levin
 
-### [[2-algorithms/index|Part 2 · Algorithms]] <span class="cs-chip">planned</span>
-Recursion, dynamic programming, graph algorithms and NP-hardness, following Erickson's *Algorithms* — for Midterm 2 (Nov 9) and the final (Dec 11).
+### [[2-algorithms/index|Part 2 · Algorithms]] — Chapters 1–6 so far <span class="cs-chip">in progress</span>
+Midterm 2 (Nov 9) is on algorithms; the final covers both parts. Each chapter has a page of solved book exercises.
 
-### [[practice/index|Practice problems]] — Chapters 1–7
+1. [[2-algorithms/01-recursion|Recursion]] — Hanoi, mergesort, quicksort, recursion trees, median-of-medians, Karatsuba · [[2-algorithms/01-recursion-exercises|exercises]]
+2. [[2-algorithms/02-backtracking|Backtracking]] — n queens, game trees, subset sum, text segmentation, LIS, optimal BSTs · [[2-algorithms/02-backtracking-exercises|exercises]]
+3. [[2-algorithms/03-dynamic-programming|Dynamic programming]] — memoization, the write-up format, LIS, edit distance, subset sum, optimal BSTs, trees · [[2-algorithms/03-dynamic-programming-exercises|exercises]]
+4. [[2-algorithms/04-greedy-algorithms|Greedy algorithms]] — exchange arguments, class scheduling, Huffman codes, stable matching · [[2-algorithms/04-greedy-algorithms-exercises|exercises]]
+5. [[2-algorithms/05-basic-graph-algorithms|Basic graph algorithms]] — representations, whatever-first search, BFS and DFS as variants, graph reductions · [[2-algorithms/05-basic-graph-algorithms-exercises|exercises]]
+6. [[2-algorithms/06-depth-first-search|Depth-first search]] — pre/postorder, edge classification, topological sort, DP on dags, strong components · [[2-algorithms/06-depth-first-search-exercises|exercises]]
+
+Then minimum spanning trees, shortest paths, flows and NP-hardness — *planned*. Solving recurrences: [[concepts/recursion-trees|recursion trees]] and the [[concepts/master-theorem|master theorem]].
+
+### [[3-homework-and-exams/index|Homework and exams]] — worked solutions
+The three Midterm 1 practice tests solved in full in the exam's format — [[3-homework-and-exams/midterm-1-practice-1|test 1]] · [[3-homework-and-exams/midterm-1-practice-2|test 2]] · [[3-homework-and-exams/midterm-1-practice-3|test 3]] — and homework write-ups that explain the method as they solve the problems: [[3-homework-and-exams/hw6-dynamic-programming|HW6, dynamic programming]].
+
+### [[practice/index|Practice problems]] — Models of Computation, Chapters 1–7
 Sixty problems, from two-minute true-or-false checks to full exam problems, each with a folded hint and a worked solution: by difficulty — [[practice/easy|easy]] · [[practice/medium|medium]] · [[practice/hard|hard]] — or [[practice/topics|by topic]] across chapters. Every chapter page links its own set.
 
 ### Cross-cutting
-[[concepts/index|Concept glossary]] · [[problems/index|Worked problems]] · [[practice/index|Practice problems]]
+[[concepts/index|Concept glossary]] · [[problems/index|Worked problems]] · [[practice/index|Practice problems]] · [[3-homework-and-exams/index|Homework and exams]]
 
 ## Conventions used throughout
 
@@ -87,6 +100,6 @@ The [[practice/index|practice pages]] add their own five: the problem statement 
 
 ## How the examples were checked
 
-Every concrete example on the site — each regular expression, DFA, NFA, grammar, Turing machine, run trace, state count and fooling-set suffix — is checked by a script against a brute-force definition of its language (all strings up to length 10–14, and exactly by automaton equivalence wherever the language is regular); constructions such as language transformations are tested on hundreds of random DFAs. Each chapter page, concept page and worked problem was then reviewed independently against the book. The scripts are in the repository's `tools/` folder, and the slips found in the book along the way are on [[0-toolkit/07-errata-in-the-book|errata in the book]].
+Every concrete example on the site — each regular expression, DFA, NFA, grammar, Turing machine, run trace, state count and fooling-set suffix — is checked by a script against a brute-force definition of its language (all strings up to length 10–14, and exactly by automaton equivalence wherever the language is regular); constructions such as language transformations are tested on hundreds of random DFAs. In Part 2, every algorithm and recurrence is implemented exactly as the page states it and compared with brute force on all small inputs, and every running-time claim is checked numerically. Each chapter page, concept page and worked problem was then reviewed independently against the book. The scripts are in the repository's `tools/` folder, and the slips found in the book along the way are on [[0-toolkit/07-errata-in-the-book|errata in the book]].
 
-*Status: Part 1 (Models of Computation) is complete — 9 chapter pages, 32 concept pages, 7 toolkit pages, 11 worked problems and 60 practice problems. Part 2 (Algorithms) is planned. Source: Jeff Erickson, [Models of Computation](https://jeffe.cs.illinois.edu/teaching/algorithms/models/all-models.pdf) (December 2018), licensed CC BY-NC-SA 4.0 — summarized here in our own words, never copied.*
+*Status: Part 1 (Models of Computation) is complete — 9 chapter pages, 32 concept pages, 7 toolkit pages, 11 worked problems and 60 practice problems. Part 2 (Algorithms) has Chapters 1–3, 12 concept pages and 29 solved book exercises; the later chapters are planned. Sources: Jeff Erickson, [Models of Computation](https://jeffe.cs.illinois.edu/teaching/algorithms/models/all-models.pdf) (December 2018), licensed CC BY-NC-SA 4.0, and [Algorithms](https://jeffe.cs.illinois.edu/teaching/algorithms/book/Algorithms-JeffE.pdf) (1st edition, 2019), licensed CC BY 4.0 — summarized here in our own words.*

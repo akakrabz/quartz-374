@@ -1,0 +1,75 @@
+OK   simple undirected graphs on V vertices have at most V(V-1)/2 edges; directed without loops V(V-1); with loops V^2 (V <= 9)
+OK   handshake: sum of degrees = 2E (undirected); sum of out-degrees = sum of in-degrees = E (directed), 400 random graphs
+OK   all graphs on <= 5 vertices: tree = connected + acyclic = connected with V-1 edges; a spanning tree exists iff connected
+OK   example graph G: V = 8, E = 8, two components, degrees a2 b3 c3 d3 e2 f1 g1 h1
+OK   figure a05-representations: 2E = 16 list records and 16 ones in the 64-entry matrix; caption says so
+OK   adjacency array of G on the page: offsets 1 3 6 9 12 14 15 16, records b c a c d a b d b c e d f e h g  [[1, 3, 6, 9, 12, 14, 15, 16] bcacdabdbcedfehg]
+OK   adjacency array: binary search in u's sorted interval answers 'is uv an edge?' for all 64 pairs
+OK   book's example graph (Fig. 5.11 matrix): symmetric, 13 vertices, 19 edges, 2 components
+OK   book's adjacency array (Fig. 5.10) offsets 1 3 7 11 13 18 22 27 28 29 32 34 37 and its 38 records
+OK   page states the book's example has 13 vertices, 19 edges and two components
+OK   undirected adjacency matrix symmetric with zero diagonal; scanning both lists in parallel decides uv in <= 1 + min{deg u, deg v} steps (300 random graphs)
+OK   Lemma 5.1: WFS marks exactly the vertices reachable from s (= transitive closure), stack/queue/random bag, all undirected graphs <= 5 vertices, all digraphs <= 4, 3000 random (74970 runs)
+OK   Lemma 5.1: parent edges form a tree rooted at s spanning the marked vertices, every parent edge an edge of G (directed: parent -> child)
+OK   analysis: the for loop (†) runs once per marked vertex
+OK   analysis: line (⋆⋆) runs sum of deg over marked vertices = 2 E(component) <= 2E times (undirected), <= E (directed)
+OK   analysis: each vertex w != s enters the bag exactly deg(w) times if reachable (undirected), #marked in-neighbors <= indeg(w) times (directed); s once more
+OK   analysis: line (⋆) runs as often as pairs are put in: <= 2E + 1 (undirected), <= E + 1 (directed)
+OK   adjacency-matrix WFS reads exactly V matrix entries per marked vertex: O(V^2 + ET)
+OK   without the test 'if v is unmarked' the loop never ends once s has an edge (stack and queue)
+OK   trace, stack from a: takes (∅,a), (a,c), (c,d), (d,e), (e,f), (f,e), (e,d), (d,c), (d,b), (b,d), (b,c), (b,a), (c,b), (c,a), (a,b); marks a c d e f b
+OK   trace, stack: 15 = 2·7 + 1 pairs taken; b entered the bag 3 = deg(b) times, as (a,b), (c,b), (d,b); parent(b) = d; g, h untouched
+OK   trace, stack: depth-first tree a-c, c-d, d-e, e-f, d-b
+OK   trace, queue from a: marks a b c d e f; parents b,c <- a, d <- b, e <- d, f <- e; distances 1 1 2 3 4
+OK   page shows the stack trace and the trees as computed
+OK   IterativeDFS that pushes each neighbor list in reverse marks the vertices in RecursiveDFS's order and builds the same tree (1500 random graphs)
+OK   IterativeDFS (bare vertices) = WhateverFirstSearch with a stack, same marking order
+OK   BFS: the parent path of every marked v has dist(s, v) edges (Floyd-Warshall), 2000 random graphs
+OK   BFS marks vertices in nondecreasing order of distance from s
+OK   EagerWFS (mark when put in) with a queue = breadth-first search: same order, same tree
+OK   triangle abc from a: every depth-first tree gives a a single child (ab, bc or ac, cb), every EagerWFS tree (stack or queue, any neighbor order) makes a the parent of b and c
+OK   best-first with priority w(uv) ('Prim') = minimum spanning tree weight (Kruskal) of s's component, 1200 random weighted graphs
+OK   best-first MST weight = brute force over all spanning trees (components <= 7 vertices, <= 12 edges)
+OK   distinct weights: the same tree from every start vertex and every neighbor order (= Kruskal's)
+OK   the priority queue never holds more than 2E + 1 pairs
+OK   undirected: both pairs (b,c) and (c,b) of one edge can be in the priority queue at once (triangle, weights ab 1, ac 2, bc 9)
+OK   best-first 'Dijkstra' (priority dist(u) + w(u->v)) = Bellman-Ford distances, and each parent path has that length; positive weights, directed and undirected, 1500 graphs
+OK   best-first widest path (priority min{width(u), w(u->v)}, largest first) = brute force over all simple paths
+OK   (the 'Dijkstra' variant is also right with zero-weight edges)
+OK   directed counterexample on the page: best-first picks s->a, s->b (weight 5); the arborescence s->b, b->a weighs 4
+OK   random digraphs: best-first by edge weight is often heavier than the best arborescence  [34 of 300]
+OK   CountComponents = number of union-find classes (1500 random graphs)
+OK   CountAndLabel: comp(u) = comp(v) iff u, v in the same union-find class
+OK   WFSAll puts exactly 2E + C pairs into the bag in all (C = number of components)
+OK   book's LabelOne as printed (no 'put v into the bag') labels nothing and CountAndLabel returns V
+OK   example graph G: CountAndLabel returns 2, labels a-f with 1 and g, h with 2; 2E + C = 18 bag insertions
+OK   directed a->b, c->b: from a, WFS marks only a, b (c is not reachable though the drawing is connected)
+OK   4-disk Tower of Hanoi configuration graph: 81 vertices, 120 edges; BFS from all-on-one-peg reaches all-on-another at depth 15 = 2^4 - 1
+OK   3-disk Hanoi graph: 27 vertices, 39 edges, three corners of degree 2 and 24 vertices of degree 3; 3·2 + 24·3 = 78 = 2·39; corner to corner 7 = 2^3 - 1
+OK   Hanoi graph has 3(3^k - 1)/2 edges for k = 1..5
+OK   Fibonacci dependency graph: n + 1 vertices, 2(n - 1) edges, a dag (n = 1..29)
+OK   edit-distance dependency graph: (m+1)(n+1) vertices, 3mn edges into the non-base subproblems, a dag; the row-major evaluation order is a topological order of it (Ch 5 edge direction)
+OK   DFA M: L(M) is empty iff no accepting state is reachable from s in G_M (brute force over strings of length < |Q|; G_M has <= |Q||Σ| edges), 600 random DFAs
+OK   flood fill by WFS in G (recolor every marked vertex afterwards, as written up; or when marking, as in the book) = brute-force region, 1500 random maps up to 9 x 9, 1-3 colors
+OK   implicit version (pixel map as adjacency list, color as the mark) gives the same picture
+OK   implicit version puts at most 4k + 1 pixels into the bag for a region of k pixels
+OK   n x n map: n^2 vertices and at most 2n(n - 1) < 2n^2 edges (equality for a one-color map)
+OK   color as the mark fails when the new color equals the old one: the loop never ends
+OK   flood-fill figure: 8 x 8 map, 57 edges in G, region of the circled pixel (2,1) has 9 pixels; (4,1) touches it only diagonally and keeps its color
+OK   grid figure: 7 x 7 grid has 84 edges; each search takes 169 = 2E + 1 pairs
+OK   grid figure: depth-first tree is a Hamiltonian path (depth 48), breadth-first depth 6, random-bag depth 8; all three are spanning trees
+OK   even walks: (t,0) reachable from (s,0) in H iff G has an s-t walk with an even number of edges (all graphs <= 5 vertices, all s, t; brute force over walk lengths <= 2V)
+OK   H has 2V vertices and 2E edges
+OK   parity figure: s-t-u-v-t is a walk of length 4, the colored path is a path in H, H has 8 edges; without the triangle edge vt the graph is bipartite and (t,0) is unreachable
+OK   K_n: n(n - 1) + 1 pairs go through the bag for n marks; the depth-first tree is a path (depth n - 1), the breadth-first tree a star (n = 2..8, random orders)
+OK   K_5 numbers on the concept page: 21 pairs, 10 edges, 5 marks
+OK   knights, 8 x 8: BFS from (1,1) reaches (8,8) at depth 6; no walk of <= 5 moves gets there
+OK   knights, 3 x 3: the center square (2,2) has no knight move, so it is unreachable from a corner
+OK   knight graph on n x n has at most 4n^2 edges (each square <= 8 neighbors), n = 1..12; 168 for n = 8
+OK   page states the bag bounds 2E + 1 and E + 1, and O(V + ET), O(V^2 + ET)
+OK   page states best-first O(V + E log E)
+OK   Hanoi numbers on the pages: 81 configurations, 120 edges, 15 moves; 27, 39 on the graphs concept page
+OK   page's edit-distance dependency graph: (m+1)(n+1) vertices and 3mn edges
+OK   knight numbers on the concept page: 6 moves on 8 x 8, center of 3 x 3 unreachable, 4n^2 edges
+
+ALL OK

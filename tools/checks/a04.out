@@ -1,0 +1,102 @@
+== 4.1 tape sorting
+OK   E[cost] double sum = (1/n) sum (n-i+1) L[pi(i)] on 500 random orders
+OK   Lemma 4.1: sorted order optimal, and every optimal order sorted (all L in {1..4}^n, n<=5)
+OK   adjacent swap changes expected cost by (L[b]-L[a])/n
+OK   weighted adjacent swap changes total cost by L[b]F[a] - L[a]F[b]
+OK   Lemma 4.2: every ratio-sorted order is optimal (vs all permutations, 1500 random inputs incl. ratio ties)
+OK   uniform example: sorted b,a,c,d reads 1,3,6,10, expected 20/4 = 5
+OK   uniform example: reverse d,c,a,b reads 4,7,9,10, expected 30/4 = 7.5
+OK   weighted example table L and F rows match
+OK   weighted example L/F row rounded  [['0.67', '0.5', '3', '1']]
+OK   weighted example: ratio order b,a,d,c costs 49 = min over 24 orders
+OK   weighted example: by length b,a,c,d costs 57; by decreasing frequency d,a,b,c costs 58
+OK   weighted example: the page states 49 (ratio order b,a,d,c), 57 (by length) and 58 (by frequency)
+== 4.2 scheduling classes
+OK   GreedySchedule returns a conflict-free schedule of maximum size (5375 inputs, ties included)
+OK   the book's take-class-1-or-not recursion = brute-force maximum
+OK   Lemma 4.3: swapping f for the first-finishing class of any maximum schedule keeps it conflict-free
+OK   figure: classes listed in order of finish time with distinct endpoints
+OK   figure: GreedySchedule picks a, c, f, i; maximum is 4
+OK   figure: a, d, h, i is another maximum schedule
+OK   figure caption names a, c, f, i and a, d, h, i
+OK   earliest start: [0,10],[1,2],[3,4] gives 1, optimum 2  [({1}, 2)]
+OK   shortest duration: [0,4],[3,6],[5,9] gives 1, optimum 2  [({1}, 2)]
+OK   fewest conflicts: 11 classes, every tie-break gives 3, optimum 4  [({3}, 4)]
+OK   fewest conflicts: the page lists exactly these 11 classes
+OK   trap table rows on the page: earliest start and shortest duration counterexamples
+OK   fewest conflicts: [28,42] is the only class with 2 conflicts (the minimum)  [[3, 4, 4, 3, 2, 4, 4, 4, 4, 4, 4]]
+OK   fewest conflicts: the three gap classes on each side overlap pairwise and [0,10]..[60,70] are disjoint
+OK   weighted: earliest finish earns 1 credit, optimum 5
+OK   endpoints: [1,3],[3,5],[5,7] allow 2 strictly, 3 if touching allowed
+OK   concept example: greedy takes [2,3],[5,7],[8,10]; max over all 64 subsets is 3
+== 4.4 Huffman codes
+OK   Huffman cost = minimum over all prefix codes (Kraft-feasible lengths), 166 inputs, n<=6
+OK   Huffman cost = minimum over all full code trees with labeled leaves
+OK   every tie-breaking gives the same Huffman cost = sum of merged frequencies
+OK   cost = sum of internal-node weights; every full tree has two sibling leaves at max depth (500 trees)
+OK   Lemma 4.5 swap formula: exchanging u and v changes cost by (depth v - depth u)(f[u] - f[v])
+OK   Lemma 4.5: some optimal tree has the two least frequent as siblings of max depth (300 inputs)
+OK   Theorem 4.6: cost(U) = cost(U') + f[1] + f[2] when 1, 2 are siblings
+OK   BuildHuffman (loop from n+1): optimal tree, 2n-1 Inserts, 2n-2 ExtractMins, root 2n-1 (500 inputs)
+OK   book's loop 'for i <- n to 2n-1' runs one ExtractMin on an empty queue (n = 2..11)
+OK   book's loop: its first iteration makes leaf n an internal node (L[n] != 0)
+OK   HuffmanEncode / HuffmanDecode round-trip; encoded length = sum of depths (300 messages)
+OK   Sallows: page sentence quoted exactly, its letters = the scriptio continua string
+OK   Sallows: 170 letters, frequency table = actual letter counts (the sentence is self-describing)
+OK   Sallows: Huffman cost 649
+OK   Sallows: depth table gives 649 bits and satisfies Kraft with equality (full tree)
+OK   Sallows: fixed-length code 5 bits x 170 = 850
+OK   book tree: codewords prefix-free, lengths = page depth table
+OK   book tree: A = 101000, S = 111 (as on the page)
+OK   book tree: THISSE encodes as 100 0110 1011 111 111 110
+OK   book tree: the book's longer prefix THISSENTENCECONT matches
+OK   book tree: 19 internal nodes summing to 649, root 170
+OK   book tree is a Huffman tree (some tie-breaking builds it)
+OK   Sallows merges: Z(1) with a 2 -> 3; then the other two 2s; then the four 3s pair up
+OK   Sallows: different tie-breakings give different codeword lengths, all costing 649  [3 depth vectors]
+OK   Morse: E is a prefix of I, S, H
+OK   Fano-Shannon on 10,4,4,4,3: splits {10,4}/{4,4,3}, then {4}/{4,3}; cost 57
+OK   Huffman on 10,4,4,4,3: merges 7, 8, 15, 25; cost 55 = 7+8+15+25
+OK   ABRACADABRA: A5 B2 R2 C1 D1; both trees cost 23 = 2+4+6+11 = optimum; fixed 33
+OK   ABRACADABRA: tree 1 (B+R, CD+BR, A+6) and tree 2 (B+CD, R+4, A+6) are Huffman trees with those lengths
+OK   concept huffman page states 23 and 33 bits
+== 4.5 stable matching
+OK   Gale-Shapley, all 46656 profiles with n = 3: stable, = best(A) for all A, = worst(alpha) for all alpha, same in every order, offers <= n^2 and = sum of ranks of best(A)
+OK   Gale-Shapley, 400 random profiles with n in {1,2,4,5}: same properties
+OK   Lemma 4.7: every rejection (immediate or dropping) is by a doctor infeasible for that hospital
+OK   identical preference lists: H_k gets d_k after exactly n(n+1)/2 offers in every run (n <= 8)
+OK   4x4 table on the page = the book's lists  [{'q': 'ABCD', 'r': 'ADCB', 's': 'BACD', 't': 'DBCA'} {'A': 'tsrq', 'B': 'rtqs', 'C': 'trsq', 'D': 'srqt'}]
+OK   book run: the ten steps as on the page, ending with {As, Bt, Cq, Dr}  [['A>t', 'B>r', 'C>t drops A', 'D>s', 'A>s drops D', 'D>r drops B', 'B>t drops C', 'C>r rejected', 'C>s rejected', 'C>q']]
+OK   book run: from step 5 on exactly one hospital is free (no more choices)  [[4, 3, 2, 2, 1, 1, 1, 1, 1, 1]]
+OK   book run: the matching is stable
+OK   book example: {As, Bt, Cq, Dr} is the ONLY stable matching  [[{'A': 's', 'B': 't', 'C': 'q', 'D': 'r'}]]
+OK   book error: {Ar, Bs, Cq, Dt} is unstable, its only unstable pair is (q, B)
+OK   book example: no doctor and no hospital gets its first choice; C gets its last
+OK   book example: 10 offers = 2+2+4+2; doctors offering gives the same matching after 9 offers
+OK   figure: steps 1..10 each appear twice (once per panel)  [[1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10]]
+OK   figure caption: every doctor ends with the best offer she received
+OK   bad ideas input 1 as printed
+OK   {Aq, Br, Cs} is unstable with unstable pair (r, A)
+OK   Knuth's cycle: Ar, Cr, Cq, Aq are unstable in turn and lead back to {Aq, Br, Cs}  [['AqBrCs', 'ArBqCs', 'AsBqCr', 'AsBrCq', 'AqBrCs']]
+OK   rounds protocol on input 1: {Ar, Bs, Cq} after one round, stable
+OK   bad ideas input 2 as printed
+OK   rounds protocol on input 2: q takes B over A, s takes C, round 2 A gets r; {Ar, Bq, Cs} unstable via (s, A)
+OK   rounds protocol matches >= 1 new pair per round, so ends with a matching (all n=3, 500 random)
+OK   n = 3, all profiles: a doctor can sometimes gain by lying; a single hospital never can
+OK   two colluding hospitals can make one of them better off and neither worse off (found, n = 4)
+OK   concept example: hospitals offering give {Aq, Br, Cs} after 3 offers (hospitals 1st, doctors last)
+OK   concept example: doctors offering give {As, Bq, Cr}; exactly 3 stable matchings, third {Ar, Bs, Cq} = everyone's 2nd choice
+== concept: knapsack example
+OK   knapsack: ratio greedy 0/1 gets 9, optimum 10 (b + c)
+OK   knapsack: fractional greedy a + 4/5 b = 13 = LP optimum
+OK   fractional knapsack: greedy by value/weight = LP optimum on 500 random instances
+== page text
+OK   BuildHuffman on the page starts its loop at n + 1
+OK   GreedySchedule test is strict (S[i] > F[X[count]])
+OK   Lemma 4.2 swap formula on the page
+OK   Huffman trap numbers 57 and 55 on the page
+OK   page: 649 and 850 bits
+OK   page: n(n+1)/2 offers and 2+2+4+2 = 10
+OK   no 'clearly/obviously/trivially' in the page body  [[]]
+
+ALL OK

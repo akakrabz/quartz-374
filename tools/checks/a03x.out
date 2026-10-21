@@ -1,0 +1,108 @@
+== Exercise 3.1: making change in Nadiria
+OK   3.1(c) DP equals BFS optimum for all k <= 3000
+OK   3.1(a) the book's example: greedy pays 122 as 91 + 28 + 1 + 1 + 1
+OK   3.1(a) greedy for 416 is 365+28+13+7+1+1+1 (7 bills)
+OK   3.1(a) 91+91+91+91+52 = 416 with 5 bills, and 5 is optimal
+OK   3.1(a) 416 is the smallest amount where greedy is not optimal  [first few: [416, 455, 507, 546]]
+OK   3.1(a) 455 = 5*91 (5 bills) while greedy uses 365+52+28+7+1+1+1 (7)
+OK   3.1(b) recursive algorithm equals the DP for k <= 40
+OK   3.1(b) call-count recurrence matches the instrumented recursion at k = 30  [T(30) = 97993]
+OK   3.1(b) growth rate r (root of sum r^-d = 1) is 1.449...  [r = 1.448755]
+OK   3.1(b) T(k)/r^k settles (so T(k) = Theta(r^k))  [T(k)/r^k -> 1.44991]
+OK   3.1(b) T(k) >= 2^floor(k/4) for all k <= 3000
+== Exercise 3.2: text segmentation variants
+OK   3.2(a) NumSplits equals brute-force count (400 random dictionaries/strings)
+OK   3.2(a) exactly n(n+1)/2 calls to IsWord
+OK   3.2(b) SameSplit equals brute force, at most n(n+1) calls
+OK   3.2(c) NumSameSplits equals brute force
+OK   3.2(a) ARTISTOIL -> 2 (ARTIST·OIL, ART·IS·TOIL) with a small English dictionary
+OK   3.2(b) BOTHEARTHANDSATURNSPIN / PINSTARTRAPSANDRAGSLAP -> True
+OK   3.2(b) the book's common partition
+== Exercise 3.3: maximum subarray sum and product
+OK   3.3(a) MaxSubarraySum vs brute force (all arrays n <= 5 over 7 values incl. fractions, + random)  [22608 inputs]
+OK   3.3(b) MaxSubarrayProduct vs brute force (same inputs)  [22608 inputs]
+OK   3.3 example: sum 19, product 504
+OK   3.3(a) example: MaxSuffixSum(1..7) = 0, 12, 5, 5, 19, 12, 17
+OK   3.3 example [-374]: sum 0, product 1
+OK   3.3(b) trap: [-2, 3, -4] -> 24, but keeping only the maximum gives 3
+OK   3.3(b) trap: [3, 1/4, 3] -> 3, not the product 9/4 of the whole zero-free stretch
+== Exercise 3.4: maximum-subarray variants
+OK   3.4(a) circular maximum vs brute force over all circular windows  [21608 inputs]
+OK   3.4(b) at least X vs brute force (all n <= 5, all 0 <= X <= n, + random)  [128320 inputs]
+OK   3.4(c) at most X (block prefix/suffix minima) vs brute force  [150065 inputs]
+OK   3.4(d) largest sum <= X vs brute force  [28806 inputs]
+OK   3.4(e) two pointers (non-negative entries) vs brute force  [35436 inputs]
+== Exercise 3.5: optimal subsequences
+OK   3.5(a) LCS vs brute force (all pairs over {a,b} of length <= 4)  [961 inputs]
+OK   3.5(a) LCS vs brute force (random over {a,b,c}, length <= 8)  [500 inputs]
+OK   3.5(b) SCS vs brute force (all pairs over {a,b} of length <= 4)  [961 inputs]
+OK   3.5(b) SCS vs brute force (pairs over {a,b,c} of length <= 3)  [1600 inputs]
+OK   3.5(c) bitonic vs brute force (all arrays n <= 6 over 0..3, + random)  [5861 inputs]
+OK   3.5(d) oscillating vs brute force  [5861 inputs]
+OK   3.5(e) [1, 1] -> 3 (for instance 1, 0, 1); [3, 1, 2, 4] -> value of the DP equals BFS
+OK   3.5(e) shortest oscillating supersequence vs breadth-first search  [1665 inputs]
+OK   3.5(f) convex (pair DP) vs brute force  [5761 inputs]
+OK   3.5(g) weakly increasing (pair DP) vs brute force  [5761 inputs]
+OK   3.5(h) double-increasing (pair DP) vs brute force  [5761 inputs]
+== Exercise 3.6: shuffles
+OK   3.6(a) Shuffle vs brute force (all A, B over {a,b} of length <= 3, all C)  [7225 inputs]
+OK   3.6(b) SmoothShuffle vs brute force (same inputs)  [7225 inputs]
+OK   3.6(b) SmoothShuffle vs brute force (unary strings up to 8 + 8)  [81 inputs]
+OK   3.6(a) Shuffle vs brute force (random, length <= 5 + 5)  [400 inputs]
+OK   3.6(b) SmoothShuffle vs brute force (random, length <= 5 + 5)  [400 inputs]
+OK   3.6(a) trap: acab is a shuffle of ab and ac, but A-first greedy says no
+OK   3.6 BANANAANANAS is a shuffle of BANANA and ANANAS
+OK   3.6 PRODGYRNAMAMMIINCG and DYPRONGARMAMMICING are shuffles of DYNAMIC and PROGRAMMING
+OK   3.6(b) PRDOYGNARAMMMIICNG is a smooth shuffle
+OK   3.6(b) DYPRNOGRAAMMMICING is a shuffle but not smooth
+OK   3.6(b) the book's picture of 19 X's uses 8 + 11 symbols (the book prints the first string with 7)
+OK   3.6(b) X^19 is a smooth shuffle of X^8 and X^11; X^18 of X^7 and X^11; none for X^4 and X^12
+OK   3.6(b) unary rule: X^a, X^b smooth iff max(a,b) <= 2(min(a,b)+1)
+== Exercise 3.7: subsequences of Y
+OK   3.7(a) greedy IsSubsequence vs brute force (k <= n <= 7 over {a,b})  [7595 inputs]
+OK   3.7(b) Cut vs brute force (k <= 3, n <= 7 over {a,b})  [3755 inputs]
+OK   3.7(b) Cut vs brute force (random over {a,b,c}, n <= 9)  [300 inputs]
+OK   3.7(d) MinCost vs brute force (all k <= 3, n <= 7, random costs incl. negative)
+OK   3.7(e) NumOcc vs brute force (k <= 4, n <= 7)  [7595 inputs]
+OK   3.7(a) PPAP is a subsequence of PENPINEAPPLEAPPLEPEN
+OK   3.7(b) removing 2 symbols kills PPAP (and 1 does not)
+OK   3.7(b) the A's of PENPINEAPPLEAPPLEPEN are at positions 8 and 13; deleting them kills PPAP
+OK   3.7(e) PPAP occurs 23 times
+OK   3.7(e) all-equal strings give C(n,k) for all k <= n <= 12
+OK   3.7(f) every NumOcc(i, j) <= C(n-j+1, k-i+1) <= 2^n (so entries have O(n) bits)
+OK   3.7(f) C(n, n/2) has at least n - log2(n+1) bits (so Theta(n)-bit numbers do occur), n <= 400
+OK   3.7(f) log2 C(n,k) <= k log2(e n / k) for 1 <= k <= n <= 200
+== Exercise 3.8: longest substring that appears forward and backward
+OK   3.8 Mirror recurrence vs brute force (all strings over {a,b} of length <= 12, + random over {a,b,c} up to 20)  [8691 inputs]
+OK   3.8 ALGORITHM -> 0
+OK   3.8 RECURSION -> 1
+OK   3.8 REDIVIDE -> 3
+OK   3.8 DYNAMICPROGRAMMINGMANYTIMES -> 4
+OK   3.8 REDIVIDE: EDI = T[2..4] and its reversal IDE = T[6..8] do not overlap
+OK   3.8 REDIVIDE: Mirror(2, 8) = 3
+OK   3.8 YNAM and MANY: DYNAMICPROGRAMMINGMANYTIMES[2..5] = YNAM, [19..22] = MANY
+== Exercise 3.9: palindromes
+OK   3.9(a) LPS vs brute force (all strings over {a,b,c} of length <= 7)  [3279 inputs]
+OK   3.9(b) SPS vs brute force (all strings over {a,b,c} of length <= 5)  [363 inputs]
+OK   3.9(c) MinPal vs brute force (all strings over {a,b,c} of length <= 8)  [9840 inputs]
+OK   3.9(d) MaxMinLen vs brute force  [9840 inputs]
+OK   3.9(e) NumPal vs brute force  [9840 inputs]
+OK   3.9(a) MAHDYNAMICPROGRAMZLETMESHOWYOUTHEM -> 11
+OK   3.9(a) MHYMRORMYHM is a palindromic subsequence of it
+OK   3.9(b) TWENTYONE -> 13 (TWENTOYOTNEWT)
+OK   3.9(c) BUBBASEESABANANA -> 3
+OK   3.9(d) PALINDROME -> 1, BUBBASEESABANANA -> 3, a^n -> n
+OK   3.9(e) PALINDROME -> 1, a^n -> 2^(n-1)
+OK   3.9(e) BUBBASEESABANANA -> 97 by the DP and by listing all 2^15 cut sets (the book says 70 = 5 shown + 65 others)  [DP 97, brute force 97]
+OK   3.9(e) BUBBASEESABANANA has exactly 11 palindromic substrings of length >= 2  [BUB, BB, BASEESAB, ASEESA, SEES, EE, ABA, ANA, ANANA, NAN, ANA]
+OK   3.9(c) the five decompositions shown are palindromic decompositions of BUBBASEESABANANA
+== Exercise 3.10: increasing back-and-forth subsequences
+OK   3.10 BackForth recurrence vs brute force (all arrays n <= 6 over 1..4, + random n <= 10)  [5861 inputs]
+OK   3.10 book's example array: answer 7 under the stated rule
+OK   3.10 positions 14,15,12,19,5,4,11 (values 1,2,3,4,5,7,8) form a valid sequence
+OK   3.10 the book's sequence moves right from odd squares and left from even ones (opposite of the rule)
+OK   3.10 the book's sequence has A[18] = 9, not 3 (so it is not increasing either)
+OK   3.10 swapped rule: 20,1,16,7,10,5,6,4,3,13 is valid with values 0..9
+OK   3.10 with the directions swapped the answer would be 10, not 9
+
+ALL OK

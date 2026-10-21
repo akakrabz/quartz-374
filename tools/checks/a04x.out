@@ -1,0 +1,98 @@
+== Exercise 4.1: nine greedy rules for class scheduling
+OK   4.1 earliest finish (the book's GreedySchedule) is optimal on every run, every input  [7946 inputs]
+OK   4.1 rule (c) is optimal on every run, every input  [7946 inputs]
+OK   4.1 rule (h) is optimal on every run, every input  [7946 inputs]
+OK   4.1 rule (i) is optimal on every run, every input  [7946 inputs]
+OK   4.1 rule (a) fails on some small input (brute-force search)
+OK   4.1 rule (b) fails on some small input (brute-force search)
+OK   4.1 rule (d) fails on some small input (brute-force search)
+OK   4.1 rule (f) fails on some small input (brute-force search)
+OK   4.1 rule (g) fails on some small input (brute-force search)
+OK   4.1 rule (e) is optimal on every run of every small test input (its counterexample must be bigger)
+OK   4.1 (a) page counterexample: every run is suboptimal  [optimum 2, runs give [1]]
+OK   4.1 (b) page counterexample: every run is suboptimal  [optimum 2, runs give [1]]
+OK   4.1 (d) page counterexample: every run is suboptimal  [optimum 2, runs give [1]]
+OK   4.1 (e) page counterexample: every run is suboptimal  [optimum 4, runs give [3]]
+OK   4.1 (f) page counterexample: every run is suboptimal  [optimum 2, runs give [1]]
+OK   4.1 (g) page counterexample: every run is suboptimal  [optimum 3, runs give [2]]
+OK   4.1 (a)/(b) [0,5] is the unique class ending last and the unique class starting first; optimum {[1,2],[3,4]}
+OK   4.1 (d) [3,6] is the unique shortest class and conflicts with both others
+OK   4.1 (e) conflict counts: [9,13] has 2 (the unique minimum), [0,4] and [18,22] have 3, all others 4  [{(0, 4): 3, (2, 7): 4, (3, 7): 4, (3, 8): 4, (6, 10): 4, (9, 13): 2, (12, 16): 4, (14, 19): 4, (15, 19): 4, (15, 20): 4, (18, 22): 3}]
+OK   4.1 (e) [9,13] overlaps exactly [6,10] and [12,16]
+OK   4.1 (e) the two leftover groups are each pairwise conflicting; each of [2,7],[3,7],[3,8] overlaps [0,4] and [6,10]
+OK   4.1 (e) optimum 4 = {[0,4],[6,10],[12,16],[18,22]}; greedy gets 3
+OK   4.1 (f) [0,6] is the unique longest class; optimum 2 = {[0,6],[7,9]}; every run keeps 1 class
+OK   4.1 (g) conflict counts: [6,14] has 4 (unique max), the ends [0,3],[17,20] have 2, the rest 3  [{(0, 3): 2, (1, 8): 3, (2, 7): 3, (6, 14): 4, (12, 19): 3, (13, 18): 3, (17, 20): 2}]
+OK   4.1 (g) optimum 3 = {[0,3],[6,14],[17,20]}; every run ends with 2 classes
+OK   4.1 (g) bridge [6,14] overlaps exactly [2,7],[1,8],[12,19],[13,18]; triangles pairwise overlap, none across
+OK   4.1 (g) after [6,14] is discarded, every remaining class has exactly 2 conflicts
+OK   4.1 (i) without containments, a class that ends last starts strictly after all others
+== Exercise 4.2: weighted class scheduling
+OK   4.2 [0,3] (2 credits) + [1,2] (1 credit): rule EF earns 1 on every run, optimum 2
+OK   4.2 [0,3] (2 credits) + [1,2] (1 credit): rule c earns 1 on every run, optimum 2
+OK   4.2 [0,3] (2 credits) + [1,2] (1 credit): rule h earns 1 on every run, optimum 2
+OK   4.2 [0,3] (2 credits) + [1,2] (1 credit): rule i earns 1 on every run, optimum 2
+OK   4.2(b) with 1 credit per class the credit of a schedule is its size (so 4.1's counterexamples carry over)
+OK   4.2(c) MaxCredit DP equals brute force (all class sets over 0..5 up to 4 classes, random up to 9)  [14820 weighted inputs]
+== Exercise 4.3: smallest cover
+OK   4.3 SmallestCover returns a cover of minimum size (all lists over 0..4 up to 5 intervals, random up to 9)  [8943 inputs]
+OK   4.3 book figure: 16 intervals whose union is a single interval
+OK   4.3 book figure: the shaded 7 intervals form a cover
+OK   4.3 book figure: SmallestCover finds 6, and 6 is the minimum  [[(117, 605), (361, 1185), (961, 1335), (1242, 1692), (1411, 2085), (1955, 2142)]]
+OK   4.3 book figure: the greedy cover is the page's list of six
+OK   4.3 book figure: minimum stays 6 when every endpoint moves by up to 3 pixels
+== Exercise 4.4: stabbing points
+OK   4.4 StabIntervals stabs everything with the minimum number of points, = max # disjoint intervals  [3440 inputs]
+OK   4.4 book figure: the four drawn points stab all 16 intervals
+OK   4.4 book figure: greedy uses 4 points (right ends 529, 1073, 1692, 2049), and 4 is the minimum  [[529, 1073, 1692, 2049]]
+== Exercise 4.5: interval coloring
+OK   4.5 Depth = minimum number of colors (brute force), and SweepColor is proper with exactly Depth colors  [7943 inputs]
+OK   4.5 book figure: its coloring with five colors is proper
+OK   4.5 book figure: the first greedy stabbing point (529) lies in exactly five intervals
+OK   4.5 book figure: depth 5 (all five intervals of the left group contain x = 492), so five colors is the minimum
+== Exercise 4.6: deep Huffman trees
+OK   4.6(a) the arrays: (1,1,1,3,4,7,11,18) and (1,1,1,2,3,5,8,13) for n = 8
+OK   4.6(a) Lucas array: EVERY Huffman tree has depth n-1 (n = 1..18)
+OK   4.6(a) Fibonacci array F_1..F_n: every Huffman tree has depth n-1 (n = 1..18)
+OK   4.6(a) (1,1,1,2,3,5,...): SOME Huffman tree has depth n-1 (n = 1..18)
+OK   4.6(a) ... but not every one for n >= 4 (ties)
+OK   4.6(a) exhaustive (n <= 8): smallest possible largest frequency, every tree deep: 1,1,1,3,4,7,11,18 = L_{n-2} for n >= 3  [{1: (1,), 2: (1, 1), 3: (1, 1, 1), 4: (1, 1, 1, 3), 5: (1, 1, 1, 3, 4), 6: (1, 1, 1, 3, 4, 7), 7: (1, 1, 1, 3, 4, 7, 11), 8: (1, 1, 1, 3, 4, 7, 11, 18)}]
+OK   4.6(a) exhaustive (n <= 8): smallest largest frequency if ties may go your way: 1,1,1,2,3,5,8,13 = F_{n-1} for n >= 2
+OK   4.6(a) L_{n-2} < F_n for n >= 5, L_{n-2} = F_n for n = 4 (Fibonacci is not optimal)
+OK   4.6(a) Fibonacci: F_1 + ... + F_k = F_{k+2} - 1; L_m = F_{m-1} + F_{m+1}; n = 5: L_3 = 4 vs F_5 = 5
+OK   4.6(a) (1,1,1,2): Huffman trees of depth 3 and of depth 2 both occur
+OK   4.6(a) n = 6 figure: (1,1,1,3,4,7), internal weights 2, 3, 6, 10, 17, every tree has depth 5
+OK   4.6(b) Fibonacci total N = F_{n+2} - 1
+OK   4.6(a) identity S_k = f_1 + ... + f_k = L_k - 1 for the Lucas array (k >= 2)
+OK   4.6(b) in random Huffman trees every grandparent weighs at least twice its grandchild
+OK   4.6(b) every leaf depth is at most 2 log2 N + 1
+OK   4.6(b) the bound is about right for Fibonacci frequencies: depth n-1 vs 2 log2 N + 1
+== Exercise 4.8: optimal ternary codes
+OK   4.8 ternary algorithm cost = Kraft brute force optimum (random ties), n = 1..7  [790 inputs]
+OK   4.8 n = 4, f = (1,1,1,1): algorithm cost 6 (lengths 1,1,2,2), naive cost 7 (lengths 1,2,2,2)
+OK   4.8 for odd n the naive version coincides with the algorithm (no dummy needed)
+OK   4.8 n = 1: cost 0 (empty codeword); n = 2: both codewords have length 1
+OK   4.8 reduction: optimal code cost = optimal FULL ternary tree cost after adding one 0 when n is even
+== Exercise 4.9: Gale-Shapley in O(n^2) time
+OK   4.9 implementation returns the hospital-optimal stable matching with <= n^2 offers (random, n <= 6)  [840 inputs]
+OK   4.9 book example: the implementation returns {As, Bt, Cq, Dr}  [10 offers]
+OK   4.9 book example: {As, Bt, Cq, Dr} is its ONLY stable matching
+OK   4.9 book p. 174 error: {Ar, Bs, Cq, Dt} is NOT stable -- Dr. Quincy and Bedlam prefer each other
+== Exercise 4.10: Omega(n^2) offers
+OK   4.10 identical preferences: every execution makes exactly n(n+1)/2 offers and pairs i with i (n <= 6)  [[(1, 1, 1), (2, 3, 3), (3, 6, 6), (4, 10, 10), (5, 15, 15), (6, 21, 21)]]
+OK   4.10 identical preferences, n = 5: the only stable matching pairs hospital i with doctor i
+OK   4.10(a) explicit run: A_k offers to alpha_1..alpha_k, nobody is dropped, n(n+1)/2 offers (n <= 30)
+OK   4.10 the stack implementation of 4.9 makes 21 = 6*7/2 offers on it for n = 6
+== page text
+OK   page 4.1 (a) Ends last and (b) starts first: the intervals on the page are exactly the checked counterexample  [[(0, 5), (1, 2), (3, 4)]]
+OK   page 4.1 (d) Shortest duration: the intervals on the page are exactly the checked counterexample  [[(0, 4), (3, 6), (5, 9)]]
+OK   page 4.1 (e) Fewest conflicts: the intervals on the page are exactly the checked counterexample  [[(0, 4), (2, 7), (3, 7), (3, 8), (6, 10), (9, 13), (12, 16), (14, 19), (15, 19), (15, 20), (18, 22)]]
+OK   page 4.1 (f) Discard the longest: the intervals on the page are exactly the checked counterexample  [[(0, 6), (7, 9), (8, 10)]]
+OK   page 4.1 (g) Discard the most conflicted: the intervals on the page are exactly the checked counterexample  [[(0, 3), (1, 8), (2, 7), (6, 14), (12, 19), (13, 18), (17, 20)]]
+OK   page 4.2(a)/(b): the counterexample is [0,3] (2 credits) and [1,2] (1 credit)
+OK   page 4.3/4.4/4.5: book figures need 6 cover intervals, 4 points, 5 colors
+OK   page 4.6(a): answer (1, 1, 1, 3, 4, 7, 11, ...) with largest frequency L_{n-2}
+OK   page 4.8: (1,1,1,1) costs 7 the naive way and 6 with the dummy
+OK   page 4.10: n(n+1)/2 offers in every run
+
+ALL OK

@@ -1,7 +1,7 @@
 ---
 title: "How exams are graded"
-description: "Exam dates, scope and cheat-sheet rules; the Midterm 1 format; and a paraphrase of every standard rubric — induction, regular expressions and grammars, DFAs and NFAs, fooling sets, language transformations, diagonalization, reductions and Rice's theorem — with what loses points, the matching template and a worked problem for each."
-tags: [toolkit, strings, regular, context-free, undecidability, midterm-1]
+description: "Exam dates, scope and cheat-sheet rules; the Midterm 1 format; and a paraphrase of every standard rubric — induction, regular expressions and grammars, DFAs and NFAs, fooling sets, language transformations, diagonalization, reductions, Rice's theorem, recursive algorithms, dynamic programming and graph reductions — with what loses points, the matching template and a worked problem for each."
+tags: [toolkit, strings, regular, context-free, undecidability, algorithms, midterm-1, midterm-2]
 aliases: ["rubrics", "grading rubrics", "exam rubrics", "exam format"]
 ---
 
@@ -24,6 +24,9 @@ Each standard rubric is out of 10 points.
 | [[#diagonalization\|diagonalization]] | 4 wrapper machine · 6 contradiction, 3 per case | [[0-toolkit/02-proof-templates#12-undecidability-by-diagonalization\|diagonalization]] | Theorem 6, [[1-models-of-computation/07-undecidability#75-self-haters-gonna-self-hate\|§7.5]] |
 | [[#reduction\|reduction]] | 4 the reduction · 3 "if" · 3 "only if" | [[0-toolkit/02-proof-templates#13-undecidability-by-reduction\|reduction]] | [[problems/undecidability-by-reduction-and-by-rice\|AtLeastTwo]] (a) |
 | [[#rices-theorem\|Rice's theorem]] | 4 a machine whose language has the property · 4 one whose language does not · 2 details, including the right variant | [[0-toolkit/02-proof-templates#14-undecidability-by-rices-theorem\|Rice]] | [[problems/undecidability-by-reduction-and-by-rice\|AtLeastTwo]] (b) |
+| [[#11-recursive-algorithms\|recursive algorithm]] (divide and conquer, backtracking) | 3 English description of the problem the algorithm solves · 1 base cases · 2 the recursive subproblems · 2 using their results · 2 time: 1 recurrence + 1 solution | [[0-toolkit/02-proof-templates#18-writing-up-a-divide-and-conquer-algorithm\|divide and conquer]], [[0-toolkit/02-proof-templates#19-writing-up-a-backtracking-algorithm\|backtracking]] | [[2-algorithms/01-recursion#14-mergesort\|mergesort]], [[2-algorithms/02-backtracking#23-subset-sum\|subset sum]] |
+| [[#12-dynamic-programming\|dynamic programming]] | 3 English description of the recursive function · 4 recurrence: 1 base cases + 3 recursive cases · 3 iterative details: 1 memoization structure, 1 evaluation order, 1 time | [[0-toolkit/02-proof-templates#20-writing-up-a-dynamic-program\|dynamic program]] | [[2-algorithms/03-dynamic-programming#37-edit-distance\|edit distance]] |
+| [[#13-graph-reductions\|graph reduction]] | 3 the graph: 1 vertices, 1 edges (−½ without "directed"), 1 weights · 3 the problem on the graph: 1 high-level problem, 2 details · 2 the right algorithm as a black box · 2 time in the input's parameters | [[0-toolkit/02-proof-templates#22-solving-a-problem-by-graph-reduction\|graph reduction]] | [[2-algorithms/05-basic-graph-algorithms#57-graph-reductions-flood-fill\|flood fill]] |
 
 **On every problem** ([[#10-general-rules|§10]]): "clearly", "trivial" and "obviously" draw scrutiny; ambiguity is read unfavorably; an NFA where a DFA was asked earns half credit; $\varnothing$ or $\Sigma^*$ as a regular expression or grammar earns nothing; and any result from lecture, the lecture notes, labs or homework solutions may be used without proof.
 
@@ -198,7 +201,62 @@ Chapters 6–9 are tested on the final exam only. An undecidability proof is gra
 - **Cite instead of reproving.** Any result from lecture, the lecture notes, labs or homework solutions may be used without proof.
 - **Cheat sheets are handwritten:** one double-sided letter sheet for a midterm, two for the final.
 
+## 11. Recursive algorithms
+
+One rubric covers **divide and conquer and backtracking** alike.
+
+| points | for |
+|---|---|
+| 3 | a clear English description of **the problem the recursive algorithm solves** — needed whenever the algorithm solves a more general problem than the one asked, or relies on assumptions the problem did not state; an explanation of *how* the algorithm works does not count |
+| 1 | the base case(s) |
+| 2 | identifying or computing the recursive subproblems ("divide") |
+| 2 | using the results of the recursive calls correctly ("conquer") |
+| 2 | time analysis: 1 for the recurrence, 1 for its closed-form solution |
+
+> [!trap] What loses points
+> - **Describing the steps instead of the problem.** "Split the array in half and recurse" is the algorithm; the 3 points want "$\textsf{Count}(A[i..j])$ returns the number of inversions in $A[i..j]$".
+> - **Solving a generalization silently.** If the recursion needs an extra parameter (a lower bound, a target sum, a flag), describe the generalized problem — that *is* the description.
+> - **A recurrence without its solution**, or a solution without the recurrence: each is worth one point.
+
+**Templates:** [[0-toolkit/02-proof-templates#18-writing-up-a-divide-and-conquer-algorithm|divide and conquer]], [[0-toolkit/02-proof-templates#19-writing-up-a-backtracking-algorithm|backtracking]] · **patterns:** [[concepts/divide-and-conquer|divide and conquer]], [[concepts/backtracking|backtracking]], [[concepts/recursion-trees|solving recurrences with recursion trees]] · **in context:** [[2-algorithms/01-recursion#16-the-pattern|§1.6]], [[2-algorithms/02-backtracking#24-the-general-pattern|§2.4]]
+
+## 12. Dynamic programming
+
+| points | for |
+|---|---|
+| 3 | a clear English description of **the recursive function**: +1 for saying which part of the input a subproblem looks at (a prefix, a suffix plus one value, an interval, a pair of prefixes, a subtree); +2, all or nothing, for a description that is explicit, self-contained and usable — named parameters, a value that depends only on them, no "current index" or "best so far", consistent with a correct recurrence. −1 for naming it a single letter, OPT or memo |
+| 4 | the recurrence: 1 for the base cases (−½ per minor bug), 3 for the recursive cases (−1 per minor bug); −1½ for a greedy shortcut used without proof |
+| 3 | iterative details: 1 for the memoization structure (an array — **hash tables earn nothing**), 1 for the evaluation order (say which loop is outer; label and direct the axes of a drawn table), 1 for the running time |
+
+**Without a usable description, the recurrence and the iterative details earn nothing** — even perfect iterative pseudocode is worth 0 without it. Computing only the *value* of an optimal structure (not the structure itself) earns full credit unless the problem asks for the structure; iterative pseudocode is optional.
+
+> [!trap] What loses points
+> - **Describing the algorithm instead of the function** ("we fill the table left to right…").
+> - **A description that depends on state**: "the best score so far", "the last element we took" — make it a parameter.
+> - **An undescriptive name**: $\textsf{OPT}$, $\textsf{memo}$, $f$.
+> - **A memo structure that is a hash table**, or an evaluation order that reads entries before they are filled.
+> - **A bound in the wrong variables** — $O(n^2)$ for an $m \times n$ table.
+
+**Template:** [[0-toolkit/02-proof-templates#20-writing-up-a-dynamic-program|dynamic program]] · **pattern:** [[concepts/dynamic-programming|dynamic programming]] · **in context:** [[2-algorithms/03-dynamic-programming#34-the-pattern-smart-recursion|§3.4]], [[2-algorithms/03-dynamic-programming#37-edit-distance|§3.7]]
+
+## 13. Graph reductions
+
+| points | for |
+|---|---|
+| 3 | **the graph**: 1 for the vertices, 1 for the edges (−½ for not saying "directed" when it is), 1 for weights, costs or labels if any — all as explicit functions of the input. A brute-force linear-time construction needs no separate algorithm; if the target time needs a cleverer construction, that algorithm is graded out of 5 by its own rubric and everything else is halved |
+| 3 | **the problem on the graph**, stated explicitly: 1 for the high-level problem ("reachability", "shortest path"), 2 for the details — in which graph, from which vertex to which, and how the answer gives the original answer. Naming an algorithm is not a problem: "breadth-first search" earns nothing here |
+| 2 | **the algorithm**, invoked as a black box: −1 for a slower algorithm than necessary (Dijkstra where breadth-first search works), −½ for a more specific one than necessary (breadth- or depth-first where whatever-first suffices), −1 for re-explaining a standard algorithm instead of calling it |
+| 2 | **the running time in the input's parameters**, not just the $V$ and $E$ of the graph you built |
+
+> [!trap] What loses points
+> - **Modifying the algorithm instead of the input graph.** A clearly correct modified search gets full credit; anything less gets partial credit "only sparingly". Put the state in the vertices and call the search unchanged.
+> - **"Try all paths with depth-first search and keep the best."** Every whatever-first search finds exactly one path to each reachable vertex, and a graph can have exponentially many simple paths.
+> - **Vertices described vaguely** ("a vertex for each configuration") instead of as explicit tuples built from the input.
+> - **$O(V+E)$ with no translation** into the input's size.
+
+**Template:** [[0-toolkit/02-proof-templates#22-solving-a-problem-by-graph-reduction|graph reduction]] · **pattern:** [[concepts/graph-reductions|graph reductions]] · **in context:** [[2-algorithms/05-basic-graph-algorithms#57-graph-reductions-flood-fill|§5.7]], [[2-algorithms/05-basic-graph-algorithms-exercises|Chapter 5 exercises]] (5.11–5.19 are all in this format)
+
 Related: [[0-toolkit/02-proof-templates|proof templates]] · [[0-toolkit/01-notation-and-conventions|notation and conventions]] · [[0-toolkit/03-the-big-picture|the big picture]]
 
 ### Sources for this page
-Exam dates and scope, the cheat-sheet rules, the Midterm 1 format (from its practice exams) and the standard rubrics come from the CS/ECE 374 A (Fall 2026) course website and are paraphrased here; the website is authoritative. The "what loses points" lists collect the traps of the chapter and concept pages linked from each section.
+Exam dates and scope, the cheat-sheet rules, the Midterm 1 format (from its practice exams) and the standard rubrics (including the recursive-algorithm, dynamic-programming and graph-reduction rubrics of §11–13) come from the CS/ECE 374 A (Fall 2026) course website and are paraphrased here; the website is authoritative. The "what loses points" lists collect the traps of the chapter and concept pages linked from each section.

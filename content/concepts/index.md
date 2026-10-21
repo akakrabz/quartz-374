@@ -6,6 +6,8 @@ tags: [concept]
 
 The chapters tell the story in the book's order; **concept pages** are the glossary you consult out of order. Each one is short and self-contained: the precise definition or statement, why it works, a recipe or template for using it on an exam, the classic mistakes, one example (checked by a script), and links back to the chapter sections that develop it and the practice problems that exercise it. Open the graph view (top right of any page) to see how they connect.
 
+## Part 1 · Models of Computation
+
 ### Strings and languages
 [[concepts/strings]] · [[concepts/induction-on-strings]] · [[concepts/languages]] · [[concepts/counting-arguments]]
 
@@ -29,5 +31,25 @@ The chapters tell the story in the book's order; **concept pages** are the gloss
 
 ### Complexity
 [[concepts/cook-levin-theorem]]
+
+## Part 2 · Algorithms
+
+### Recursion and divide and conquer
+[[concepts/recursion]] · [[concepts/divide-and-conquer]] · [[concepts/recursion-trees]] · [[concepts/master-theorem]] · [[concepts/linear-time-selection]]
+
+### Backtracking
+[[concepts/backtracking]] · [[concepts/subset-sum]] · [[concepts/longest-increasing-subsequence]]
+
+### Dynamic programming
+[[concepts/dynamic-programming]] · [[concepts/memoization]] · [[concepts/edit-distance]] · [[concepts/optimal-binary-search-trees]] · [[concepts/dynamic-programming-on-trees]]
+
+### Greedy algorithms
+[[concepts/greedy-algorithms]] · [[concepts/interval-scheduling]] · [[concepts/huffman-codes]] · [[concepts/stable-matching]]
+
+### Graphs and graph search
+[[concepts/graphs]] · [[concepts/whatever-first-search]] · [[concepts/graph-reductions]]
+
+### Depth-first search
+[[concepts/depth-first-search]] · [[concepts/topological-sort]] · [[concepts/dynamic-programming-on-dags]] · [[concepts/strongly-connected-components]]
 
 The four classes of languages and the closure properties of each are drawn together on [[0-toolkit/03-the-big-picture|the big picture]]; the exam boilerplate for each kind of proof is collected on [[0-toolkit/02-proof-templates|proof templates]].

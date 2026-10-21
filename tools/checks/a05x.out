@@ -1,0 +1,109 @@
+== Exercise 5.1: seven definitions of a tree
+OK   5.1 the seven definitions agree on every graph with 1..6 vertices  [33867 graphs, 1442 trees]
+OK   5.1 Lemma A: an edge uv is on a cycle iff u, v stay connected in G - uv
+OK   5.1 Lemma B: E >= V - c, with equality iff acyclic
+OK   5.1 tree counts 1, 1, 3, 16, 125, 1296 (Cayley n^(n-2))
+== Exercise 5.2: two vertices of degree 1
+OK   5.2 every connected acyclic graph with n >= 2 has >= 2 vertices of degree 1  [3241 trees]
+OK   5.2 both ends of every longest path have degree 1
+== Exercise 5.3: bipartite graphs
+OK   5.3(a) every tree is bipartite
+OK   5.3(b) bipartite <=> every cycle is even  [2599 graphs]
+OK   5.3(c) WFS depth parity + edge test == brute force (stack, queue, random bag)
+== Exercise 5.4: pecking orders (tournaments)
+OK   5.4(a,b) the insertion rule always yields a procession  [1899 small + 150 large tournaments]
+OK   5.4(c) a tournament with a directed cycle has a 3-cycle
+OK   5.4(c) no 3-cycle (n >= 3) => exactly one procession
+OK   5.4(c) ... and each pigeon's position is 1 + the number of pigeons it pecks
+== Exercise 5.5: Euler tours
+OK   5.5(a,b) connected graph: Euler tour exists (brute force) <=> all degrees even  [1099 graphs]
+OK   5.5(c) Walk/Hierholzer returns a valid tour exactly when one exists
+OK   5.5(c) parity: loops resume only at even moments; an edge taken at an even moment makes the caller's vertex the first entry appended inside the call  [1414 random Eulerian graphs]
+OK   5.5(c) parity: the condition matters — on the triangle, Walk(b) called from Walk(a) appends s first
+== Exercise 5.6: hypercubes
+OK   5.6(a) reflected Gray code is a Hamiltonian cycle of Q_d, d = 2..12
+OK   5.6(b) Q_d has an Euler tour iff d is even (d = 0..8; brute force for d <= 3)
+== Exercise 5.7: strongly connected orientations
+OK   5.7 strong orientation exists (all 2^E tried) <=> connected and every edge on a cycle  [1378 graphs]
+OK   5.7 (*) RecursiveDFS: every edge joins an ancestor and a descendant
+OK   5.7 the DFS orientation is strongly connected exactly when some orientation is
+== Exercise 5.8: a tree that is both depth-first and breadth-first
+OK   5.8 whatever-first search with a stack builds exactly RecursiveDFS's trees (all adjacency orders)  [401 graphs, every root]
+OK   5.8 breadth-first tree depth = BFS distance (book's claim)
+OK   5.8 a spanning tree that is both depth-first and breadth-first equals G  [501 such trees]
+== Exercise 5.9: EagerWFS
+OK   5.9(a) EagerWFS marks exactly the reachable vertices; parent edges form a spanning tree  [2000 graphs]
+OK   5.9(b) EagerWFS with a queue == BFS: same marking order, same parents
+OK   5.9(c) triangle: every EagerWFS tree (any bag, any order) is the star at s
+OK   5.9(c) triangle: every RecursiveDFS tree is a path, never the star  [[[[0, 1], [1, 2]], [[0, 2], [1, 2]]]]
+OK   5.9(c) triangle: with other start vertices RecursiveDFS can build the star at s (so both must start at s)
+OK   5.9(c) K4, any start, any order, any bag: EagerWFS trees are the stars at the start, RecursiveDFS trees are Hamiltonian paths; none in common  [4 eager, 12 dfs trees]
+== Exercise 5.10: three-color search
+OK   5.10(a) no black vertex is ever adjacent to a white one  [1500 random runs]
+OK   5.10(b) at the end: reachable = black, others white, parent edges = spanning tree
+OK   5.10(b) at most 2V steps
+OK   5.10(c) ThreeColorStackSearch runs == RecursiveDFS runs over all adjacency orders (order + parents)  [301 graphs]
+OK   5.10(c) the stack always holds the gray vertices, each once, along a parent path
+OK   5.10(d) K4: every BFS tree is the star; no ThreeColorQueue run (either push order) builds it
+== Exercise 5.11: number maze
+OK   5.11 Figure 5.14: BFS distance from (1,1) to (5,5) is 8  [8]
+OK   5.11 Figure 5.14: the goal's label does not matter
+     one shortest solution: [(1, 1), (1, 4), (5, 4), (5, 2), (5, 3), (2, 3), (2, 2), (2, 5), (5, 5)]
+OK   5.11 Figure 5.14: BFS finds the book's drawn solution R3 D4 L2 R1 U3 L1 R3 D3
+OK   5.11 figure: the BFS distance grid (3 unreachable squares)
+OK   5.11 BFS in the page's graph == exhaustive move search  [1500 random mazes, 137 unsolvable]
+== Exercise 5.12: snakes and ladders
+OK   5.12 Figure 5.15 as read: 5 snakes down, 6 ladders up, distinct endpoints in different rows
+OK   5.12 Figure 5.15, k = 1: BFS == exhaustive move search  [None]
+OK   5.12 Figure 5.15, k = 2: BFS == exhaustive move search  [10]
+OK   5.12 Figure 5.15, k = 3: BFS == exhaustive move search  [7]
+OK   5.12 Figure 5.15, k = 4: BFS == exhaustive move search  [5]
+OK   5.12 Figure 5.15, k = 5: BFS == exhaustive move search  [5]
+OK   5.12 Figure 5.15, k = 6: BFS == exhaustive move search  [5]
+OK   5.12 Figure 5.15, k = 7: BFS == exhaustive move search  [4]
+OK   5.12 Figure 5.15, k = 8: BFS == exhaustive move search  [3]
+     Figure 5.15 minimum moves for k = 1..12: {1: None, 2: 10, 3: 7, 4: 5, 5: 5, 6: 5, 7: 4, 8: 3, 9: 3, 10: 3, 11: 3, 12: 3}
+OK   5.12 Figure 5.15, k = 6: 5 moves, e.g. 1 ->(3) 42 -> 44 ->(50) 93 -> 94 -> 100
+OK   5.12 Figure 5.15, k = 1: square 100 is unreachable; the forced route cycles through 93, 94, 95 (-> 71), ..., 79 (-> 40), ..., 50 (-> 93) and never lands beyond 95
+     k = 6, one shortest route (squares where the token rests): [1, 42, 44, 93, 94, 100]
+OK   5.12 the empty 10x10 board needs ceil(99/6) = 17 moves with k = 6  [17]
+OK   5.12 BFS in the page's graph == exhaustive move search  [1500 random boards]
+== Exercise 5.13: Vidrach Itky Leda
+OK   5.13 Figure 5.16: BFS distance from (red TL, blue BR) to (red BR, blue TL) is 5  [5]
+OK   5.13 Figure 5.16: the book's five moves are edges of the page's graph
+OK   5.13 the graph has n^2(n^2-1) vertices and at most 8 out-edges each
+OK   5.13 BFS in the page's graph == exhaustive move search  [400 random puzzles, 150 unsolvable]
+== Exercise 5.14: walks whose length is divisible by 3
+OK   5.14 example: (t,0) reachable from (s,0)
+OK   5.14 example: s w y x s w t is a walk of length 6
+OK   5.14 example: and 6 is the shortest such length
+OK   5.14 WFS in V x {0,1,2} == brute force over all walks of length < 3V  [1500 random digraphs, 914 yes]
+== Exercise 5.15: no three consecutive edges of the same color
+OK   5.15 example: shortest legal walk from s to t has 7 edges  [7]
+OK   5.15 example: the book's walk s a b d c a b t is legal (RRBRBRR)
+OK   5.15 example: brute force agrees
+OK   5.15 the page's graph has 4V + 1 vertices and at most 4E edges
+OK   5.15 BFS in the page's graph == brute force over all walks of length <= 4V  [1500 random, 1203 solvable]
+== Exercise 5.16: French flag walks
+OK   5.16 WFS from (v,0) == brute force over all French flag walks of length < 3V; E' = E  [1500 random]
+== Exercise 5.17: teleports with cost divisible by 5
+OK   5.17(a) BFS from (s,0) to (t,0) == exhaustive search over walks with exact costs  [600 random]
+OK   5.17(b) min over (t,0,0),(t,0,1) [coupon optional] and (t,0,1) [coupon used] == exhaustive search
+OK   5.17 graph sizes: 5n vertices/10m edges, 10n vertices/30m edges
+== Exercise 5.18: Three Seashells
+OK   5.18 Figure 5.17 as drawn: NOT solvable (WFS on triples)
+OK   5.18 Figure 5.17 as drawn: brute force over move sequences agrees (no solution)
+OK   5.18 Figure 5.17 as drawn: x and y have the same single neighbor q
+OK   5.18 Figure 5.17: the book's first two turns are legal ((a,b,c) -> (p,q,b) -> (q,y,a), tokens blue, green, red)
+OK   5.18 with x hung from p instead: solvable, minimum 4 turns  [4]
+OK   5.18 ... and the book's two turns extend to the 4-turn solution (q,y,a) -> (r,q,p) -> (z,y,x)
+OK   5.18 ... brute force agrees on 4 turns
+OK   5.18 WFS on ordered triples == brute force over move sequences; at most (2E)^3 edges  [400 random, 363 solvable]
+== Exercise 5.19: moving coins together
+OK   5.19 lemma: walk of length exactly t from u to x <=> t >= shortest walk of t's parity (V >= 2)
+OK   5.19(a) two coins: parity formula == brute force over coin configurations  [500 random connected graphs]
+OK   5.19(b) three coins: parity formula == brute force
+OK   5.19 four coins: parity formula == brute force (sanity check of the general rule)
+OK   5.19(c) 42 coins: reachable from all (u_j, 0) <=> non-bipartite or all starts on one side
+
+ALL OK
