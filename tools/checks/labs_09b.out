@@ -1,0 +1,36 @@
+== Problem 1: consistent overall ranking
+OK   P1: every input with 4 players and at most 2 games: ranking iff one exists, and it is consistent  [601 inputs, 0 failures]
+OK   P1: random inputs (3-7 players, 0-7 games) agree with brute force over all n! rankings  [1500 inputs, 551 with a ranking, 949 without, 0 failures]
+OK   P1: the graph has n vertices and exactly 2m edges
+OK   P1 example: games ABC, BDE, FAD give a ranking (DFS in alphabetical order)  [FABDEC]
+OK   P1 example: the page's ranking F A B D E C
+OK   P1 example: adding game E F C creates the cycle F A B D E F and no ranking exists
+== Problems 2-4: Judy's tour
+OK   all graphs with n <= 4 galaxies, all D in {1,2,3}: Problems 2, 3 (k=0,1,2), 4 (k=0,1,2) and the land-at-home variants agree with exhaustive search  [1807 instances]
+OK   random connected graphs, n = 5..9, D with ties / distinct reals / BFS hops: Problems 2, 3 (k=0,1,2), 4 (k=0,1,2) and the land-at-home variants agree with exhaustive search  [900 instances]
+OK   tests are not degenerate: P4 often < n, paid teleports often help, multiplicity often exceeds distinct  [{'P4 < n': 182, 'P4: k2 > k1': 185, 'P4: k1 > k0': 270, 'P3 > P4': 270}]
+OK   BFS hop distances: |D[u]-D[v]| <= 1 on every edge and the Problem 2 answer is always 2
+OK   BFS hop distances: the Problem 3 answer is at most 6 (and 6 occurs)
+OK   P2/P3 sizes: H' has n+1 vertices and <= m + deg(s) edges; the layered dag (k+1)n+1 vertices and <= (2k+1)m + (k+1)deg(s) edges; LLP looks at each edge once
+OK   P3: the layered graph is a dag (no edge into an active vertex in any DFS)
+OK   P4 sizes: reachable tuples <= (n+1)^3 n^2, edges <= that + 3 n^2 (n+1)^2 m, start edges <= m^2  [n=5,m=6: 35 tuples, 48 edges  n=6,m=8: 1998 tuples, 3339 edges  n=7,m=9: 1173 tuples, 1680 edges  n=8,m=11: 1431 tuples, 2142 edges  n=9,m=12: 2470 tuples, 3770 edges  n=10,m=14: 3042 tuples, 4173 edges  n=11,m=15: 5837 tuples, 9164 edges]
+OK   P4: with ties in D, every random tie-break of the ranks gives the exhaustive answer  [591 runs, 0 failures]
+OK   P4 time: climb edges summed over all (n+1)^3 n^2 tuples are at most 3 n^2 (n+1)^2 m
+== the page's example instance
+OK   example: answers P2 = 4, P3 = 9 (k=1) and 14 (k=2), P4 = 7 (k=1) and 8 (k=2)  [{'P2': 4, 'P3k1': 9, 'P3k2': 14, 'P4k1': 7, 'P4k2': 8}]
+OK   example: brute force agrees
+OK   example tours are valid: scghs (k=0), scghadfghs (k=1), scghadfghadfghs and scghehadfghs (k=2)
+OK   example tour lengths: 4, 9 teleports / 7 galaxies, 14 teleports, 8 galaxies
+OK   example: every tour with <= 2 paid teleports visits at most two of a, b, e; the best tours miss exactly one galaxy, and it is one of a, b, e  [best tours: scbcghadfghs scghadfghehs scghehadfghs]
+OK   example: galaxies a, b, e can only be entered by a paid teleport (all their neighbors are farther)
+OK   example: the away dag has the 10 edges s->c s->h c->g b->c g->h f->g d->f e->h a->d a->h
+OK   example: in the away dag, s reaches exactly s, c, g, h (a, b, d, e, f are unreachable)
+OK   example sweep trace for chains scgh / eh / adfgh matches the page's table, total 3 + 5 = 8  [[(0, 's', 'c', 1), (2, 'a', 'd', 1), (0, 'c', 'g', 1), (2, 'd', 'f', 1), (1, 'e', 'h', 1), (2, 'f', 'g', 0), (0, 'g', 'h', 0), (2, 'g', 'h', 0), (0, 'h', 'finish', 0), (1, 'h', 'finish', 0), (2, 'h', 'finish', 0)]]
+OK   example: every row of the trace is an edge of the token dag with that weight
+== traps
+OK   trap: moving the highest token instead of the lowest gives wrong answers on most instances  [264 of 300 instances]
+OK   trap: Problem 3's answer capped at n is not Problem 4's answer  [154 of 300 instances]
+OK   example: Problem 3's dag counts h twice in its best tour (14 > 9 galaxies)
+OK   what we do not know: in about one instance in seven, every best tour has a moment with 3 chains in progress and both paid teleports pending (5 galaxies to remember)  [46 of 300 instances]
+
+ALL OK

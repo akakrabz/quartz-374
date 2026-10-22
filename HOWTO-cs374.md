@@ -47,7 +47,7 @@ content/index.md                       home
 content/0-toolkit/                     notation, proof templates, big picture, two exam reviews, grading, errata
 content/1-models-of-computation/       one page per book chapter (01-strings … 09-nondeterministic-turing-machines)
 content/2-algorithms/                  Part 2: one page per book chapter (01-recursion …) and its solved exercises (01-recursion-exercises …)
-content/3-homework-and-exams/          the course's own problems worked out: Midterm 1 practice tests 1–3, homework write-ups (HW6)
+content/3-homework-and-exams/          the course's own problems worked out: Midterm 1 practice tests 1–3, labs 6a–9b (`tools/SPEC-labs.md`, checks `labs_06`–`labs_09b`), homework write-ups (HW6)
 content/concepts/                      56 glossary pages (32 for Part 1, 24 for Part 2)
 content/problems/                      11 worked exam-style problems
 content/practice/                      7 practice pages (generated hub, easy/medium/hard and topic lists)
