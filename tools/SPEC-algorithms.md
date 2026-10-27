@@ -28,6 +28,9 @@ content/2-algorithms/06-depth-first-search.md
 content/2-algorithms/04-greedy-algorithms-exercises.md
 content/2-algorithms/05-basic-graph-algorithms-exercises.md
 content/2-algorithms/06-depth-first-search-exercises.md
+content/2-algorithms/07-minimum-spanning-trees.md    (build 4) + 07-minimum-spanning-trees-exercises.md
+content/2-algorithms/08-shortest-paths.md                       + 08-shortest-paths-exercises.md
+content/2-algorithms/09-all-pairs-shortest-paths.md             + 09-all-pairs-shortest-paths-exercises.md
 content/concepts/<slug>.md                         concept pages (see §3)
 tools/figs_a0N.py → tools/figs/a0N-*.html          figures (chapter N; exercises use a0Nx-*)
 tools/checks/a0N.py (+ .out)                       checks for chapter page N and its concept pages
@@ -56,6 +59,13 @@ Ch5: 5.1 Introduction and history | 5.2 Basic definitions | 5.3 Representations 
 Ch6: 6.0 Depth-first search, recursively (the chapter's unnumbered introduction) | 6.1 Preorder and postorder |
      6.2 Detecting cycles | 6.3 Topological sort | 6.4 Memoization and dynamic programming | 6.5 Strong connectivity |
      6.6 Strong components in linear time | Summary
+Ch7: 7.1 Distinct edge weights | 7.2 The only minimum spanning tree algorithm | 7.3 Borůvka's algorithm |
+     7.4 Jarník's (Prim's) algorithm | 7.5 Kruskal's algorithm | Summary
+Ch8: 8.1 Shortest path trees | 8.2 Negative edges | 8.3 The only SSSP algorithm | 8.4 Unweighted graphs: breadth-first search |
+     8.5 Directed acyclic graphs: depth-first search | 8.6 Best-first: Dijkstra's algorithm |
+     8.7 Relax all the edges: Bellman–Ford | Summary
+Ch9: 9.1 Introduction | 9.2 Lots of single sources | 9.3 Reweighting | 9.4 Johnson's algorithm | 9.5 Dynamic programming |
+     9.6 Divide and conquer | 9.7 Funny matrix multiplication | 9.8 Floyd–Warshall | Summary
 ```
 
 Anchors are github-slugger slugs: `#17-recursion-trees`, `#18-linear-time-selection`, `#24-the-general-pattern`,
@@ -75,6 +85,14 @@ Ch 5: `graphs` (definitions, representations, the V/E vocabulary) · `whatever-f
       variants and their running times) · `graph-reductions` (modeling a problem as a graph; the rubric's write-up)
 Ch 6: `depth-first-search` (pre/postorder, edge classification) · `topological-sort` · `dynamic-programming-on-dags` ·
       `strongly-connected-components`
+Ch 7: `minimum-spanning-trees` (safe/useless edges, the generic algorithm; Borůvka, Jarník/Prim and Kruskal compared;
+      aliases for the three names) · `union-find` (disjoint sets, as used by Kruskal)
+Ch 8: `shortest-paths` (SSSP, shortest-path trees, tense edges and relaxation, Ford's generic algorithm, negative cycles) ·
+      `breadth-first-search` (the Ch 8 writer moves the aliases "BFS" and "breadth-first search" here from
+      concepts/whatever-first-search.md, editing only that page's aliases line and adding a link) · `dijkstras-algorithm` ·
+      `bellman-ford`
+Ch 9: `all-pairs-shortest-paths` (the problem, lots of single sources, DP, divide and conquer, funny matrix
+      multiplication) · `johnsons-algorithm` (reweighting) · `floyd-warshall`
 
 Concept pages follow SPEC §12 (definition/key box, why it works, recipe/template, traps, one checked example, "Where it appears"
 with exact anchors, `Related:` last). Tags: `concept` plus `algorithms` and a topic tag. Check aliases are unique site-wide
@@ -91,7 +109,8 @@ chapter: 1
 ---
 ```
 Meta line: `*Algorithms, Chapter 1 · book pp. 21–70 · [chapter PDF](https://jeffe.cs.illinois.edu/teaching/algorithms/book/01-recursion.pdf) · next: [[2-algorithms/02-backtracking|Chapter 2]] · exercises: [[2-algorithms/01-recursion-exercises|solved exercises]]*`
-(Chapter PDFs: `01-recursion.pdf`, `02-backtracking.pdf`, `03-dynprog.pdf`, `04-greedy.pdf`, `05-graphs.pdf`, `06-dfs.pdf`.) Then `> [!abstract] In one breath`, the fixed
+(Chapter PDFs: `01-recursion.pdf`, `02-backtracking.pdf`, `03-dynprog.pdf`, `04-greedy.pdf`, `05-graphs.pdf`, `06-dfs.pdf`,
+`07-mst.pdf`, `08-sssp.pdf`; for Ch 9 link the whole-book PDF `Algorithms-JeffE.pdf` with book pages.) Then `> [!abstract] In one breath`, the fixed
 sections, `## Summary`, `> [!exam] On the exams`, `### Sources for this page` — as in Part 1.
 
 ## 5. Algorithms on the page

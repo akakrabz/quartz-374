@@ -52,4 +52,10 @@ The chapters tell the story in the book's order; **concept pages** are the gloss
 ### Depth-first search
 [[concepts/depth-first-search]] · [[concepts/topological-sort]] · [[concepts/dynamic-programming-on-dags]] · [[concepts/strongly-connected-components]]
 
+### Minimum spanning trees
+[[concepts/minimum-spanning-trees]] · [[concepts/union-find]]
+
+### Shortest paths
+[[concepts/shortest-paths]] · [[concepts/breadth-first-search]] · [[concepts/dijkstras-algorithm]] · [[concepts/bellman-ford]] · [[concepts/all-pairs-shortest-paths]] · [[concepts/johnsons-algorithm]] · [[concepts/floyd-warshall]]
+
 The four classes of languages and the closure properties of each are drawn together on [[0-toolkit/03-the-big-picture|the big picture]]; the exam boilerplate for each kind of proof is collected on [[0-toolkit/02-proof-templates|proof templates]].

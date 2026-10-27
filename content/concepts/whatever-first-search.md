@@ -2,7 +2,7 @@
 title: "Whatever-first search"
 description: "The generic graph traversal: keep candidate edges in a bag, mark each vertex the first time it comes out. It marks exactly the vertices reachable from the start in O(V + ET) time; a stack gives depth-first search, a queue breadth-first search, a priority queue best-first search."
 tags: [concept, algorithms, graphs, midterm-2]
-aliases: ["WhateverFirstSearch", "WFS", "breadth-first search", "BFS", "best-first search", "graph traversal", "reachability"]
+aliases: ["WhateverFirstSearch", "WFS", "best-first search", "graph traversal", "reachability"]
 ---
 
 > [!key] Whatever-first search (Lemma 5.1)
@@ -42,4 +42,4 @@ aliases: ["WhateverFirstSearch", "WFS", "breadth-first search", "BFS", "best-fir
 
 **Where it appears.** [[2-algorithms/05-basic-graph-algorithms#55-whatever-first-search|§5.5]] (the algorithm, Lemma 5.1 and the analysis), [[2-algorithms/05-basic-graph-algorithms#56-important-variants|§5.6]] (stack, queue and priority queue; components; directed graphs), [[2-algorithms/05-basic-graph-algorithms#57-graph-reductions-flood-fill|§5.7]] (as a black box in a reduction); depth-first search in [[2-algorithms/06-depth-first-search|Chapter 6]].
 
-Related: [[concepts/graphs]] · [[concepts/graph-reductions]] · [[concepts/depth-first-search]]
+Related: [[concepts/graphs]] · [[concepts/graph-reductions]] · [[concepts/depth-first-search]] · [[concepts/breadth-first-search]]

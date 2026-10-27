@@ -1,0 +1,95 @@
+OK   random families: 2500 graphs without negative cycles (2159 with negative edges); 553 of 1500 mixed graphs have a negative cycle
+OK   graphs with loops (800): FloydWarshall with dist[v, v] = min{0, w(v->v)} detects exactly the negative cycles (negative loops included) and is otherwise correct
+OK   V runs of Bellman-Ford report a negative cycle iff there is one (1500 mixed graphs)
+OK   Johnson's new vertex: V+1 vertices, E+V edges, no distance between old vertices changes, every price <= 0
+OK   V breadth-first searches = brute-force edge-count distances (unweighted)
+OK   V runs of the dag dynamic program = brute force (600 random dags, negative edges)
+OK   V runs of Dijkstra = brute force (graphs with nonnegative weights)
+OK   V runs of Bellman-Ford = brute force
+OK   JohnsonAPSP (Figure 9.2) = brute force
+OK   JohnsonAPSP fails gracefully exactly when there is a negative cycle
+OK   ShimbelAPSP: dist[u, v, V-1] = brute force
+OK   ShimbelAPSP: dist[u, v, l] = shortest walk with at most l edges (enumerated walks)
+OK   AllPairsBellmanFord = brute force
+OK   AllPairsBellmanFord after iteration l: true dist <= dist[u, v] <= dist(u, v, l)
+OK   FischerMeyerAPSP: dist[u, v, ceil(lg V)] = brute force, and V-1 <= 2^ceil(lg V) < 2V
+OK   FischerMeyerAPSP: dist[u, v, i] = shortest walk with at most 2^i edges
+OK   LeyzorekAPSP = brute force
+OK   min-plus powers: I (x) W^l = dist(., ., l) (W with 0 diagonal)
+OK   repeated squaring: W^(2^ceil(lg V)) = distance matrix
+OK   with infinity on the diagonal, the l-th min-plus power = shortest walk with exactly l edges
+OK   KleeneAPSP: dist[u, v, V] = brute force
+OK   KleeneAPSP: dist[u, v, r] = shortest path with intermediate vertices <= r (brute force)
+OK   FloydWarshall = brute force
+OK   FloydWarshall in place: the matrix after phase r equals KleeneAPSP's dist(., ., r) exactly
+OK   FloydWarshall with the vertices r taken in a random order = brute force
+OK   FloydWarshall with pred[u, v] <- pred[r, v]: following pred gives a shortest path; Null on the diagonal and for unreachable pairs
+OK   Johnson's reduced weights are all nonnegative
+OK   random prices: every simple path u~>v changes by pi(u) - pi(v); dist' = dist + pi(u) - pi(v)
+OK   random prices: every cycle keeps its length
+OK   reduced weight 0 exactly for the edges with pi(u) + w(u->v) = pi(v) (shortest paths from s)
+OK   Johnson's prices: pi(v) = dist(s, v) = min{0, min_u dist(u, v)}
+OK   FloydWarshall: some dist[v, v] < 0 iff the graph has a negative cycle (1500 mixed graphs)
+OK   FloydWarshall: every vertex of a negative cycle ends with dist[v, v] < 0
+OK   FloydWarshall: dist[v, v] < 0 only if v is strongly connected to a negative cycle
+OK   FloydWarshall in place <= KleeneAPSP entrywise, also with negative cycles
+OK   Warshall (or/and) = transitive closure by search
+OK   FloydWarshall with infinity on the diagonal: dist[v, v] = shortest cycle through v
+OK   the min-plus product is associative (300 random triples with infinite entries)
+OK   the min-plus identity (0 diagonal, infinity elsewhere) is an identity
+OK   ShimbelAPSP as printed (v != u) reads an unassigned dist[u, u, l] whenever V >= 3 and E is nonempty
+OK   work counts: FloydWarshall V^3, Leyzorek/FischerMeyer ceil(lg V) V^3, Shimbel (V-1) V (V+E), Johnson's last loop V^2
+OK   LeyzorekAPSP after iteration i: true dist <= dist[u, v] <= dist(u, v, 2^i)
+OK   FischerMeyerAPSP and LeyzorekAPSP: some dist[v, v] < 0 iff the graph has a negative cycle, and every vertex of a negative cycle gets dist[v, v] < 0 (concept page: the repeated-squaring diagonal)
+OK   running example: distance matrix rows (0 −2 2 5), (4 0 4 7), (0 −2 0 3), (−3 −5 −1 0) (brute force)
+OK   running example: simple cycles 1-2-3-4-1 (2), 2-3-2 (5), 3-4-3 (5); no negative cycle
+OK   running example: every shortest path is unique; pred matrix rows (– 1 2 3), (4 – 2 3), (4 1 – 3), (4 1 2 –) = FloydWarshall's predecessors
+OK   running example: 3->4->1->2 has length −2 against the edge 3->2 (1); 4->1->2->3 has length −1 against 4->3 (2)
+OK   figure a09-example: the six drawn edges and their weight labels are the running example's  [[('1', '2', '−2'), ('2', '3', '4'), ('3', '2', '1'), ('3', '4', '3'), ('4', '1', '−3'), ('4', '3', '2')]]
+OK   figure a09-example: the dist and pred matrices drawn are the brute-force distances and predecessors  [({(1, 1): '0', (1, 2): '−2', (1, 3): '2', (1, 4): '5', (2, 1): '4', (2, 2): '0', (2, 3): '4', (2, 4): '7', (3, 1): '0', (3, 2): '−2', (3, 3): '0', (3, 4): '3', (4, 1): '−3', (4, 2): '−5', (4, 3): '−1', (4, 4): '0'}, {(1, 1): '–', (1, 2): '1', (1, 3): '2', (1, 4): '3', (2, 1): '4', (2, 2): '–', (2, 3): '2', (2, 4): '3', (3, 1): '4', (3, 2): '1', (3, 3): '–', (3, 4): '3', (4, 1): '4', (4, 2): '1', (4, 3): '2', (4, 4): '–'})]
+OK   figure a09-example caption: cycle lengths 5, 5, 2 and the two paths that beat a direct edge
+OK   running example, Johnson: prices pi(1..4) = −3, −5, −1, 0; JohnsonAPSP = brute force
+OK   running example, Johnson: reduced weights 1->2 0, 2->3 0, 4->1 0, 3->4 2, 4->3 3, 3->2 5
+OK   running example, Johnson: the shortest-path tree from s is s->4->1->2->3, and pi(2) = −5 along s->4->1->2
+OK   running example, Johnson: dist'(3, .) = (2, 2, 0, 2); dist(3, 2) = 2 + 1 − 5 = −2; dist(3, 1) = 2 + 1 − 3 = 0
+OK   running example, Johnson: the reduced-weight-0 edges are exactly the tree edges 4->1, 1->2, 2->3
+OK   running example, Johnson: cycles keep their length: 2-3-2 = 0 + 5, 3-4-3 = 2 + 3, 1-2-3-4-1 = 0 + 0 + 2 + 0
+OK   page: Johnson example numbers
+OK   Johnson price arithmetic as printed: −3 − 2 + 5 = 0 and −1 + 1 + 5 = 5 are pi(u) + w − pi(v)
+OK   figure a09-reweighting: left panel = G + s with weights w, tree s->4->1->2->3 colored  [[('1', '2', '−2', 'var(--accent)'), ('2', '3', '4', 'var(--accent)'), ('3', '2', '1', 'currentColor'), ('3', '4', '3', 'currentColor'), ('4', '1', '−3', 'var(--accent)'), ('4', '3', '2', 'currentColor'), ('s', '1', '0', 'var(--muted)'), ('s', '2', '0', 'var(--muted)'), ('s', '3', '0', 'var(--muted)'), ('s', '4', '0', 'var(--accent)')]]
+OK   figure a09-reweighting: right panel = reduced weights, the weight-0 edges colored  [[('1', '2', '0', 'var(--accent)'), ('2', '3', '0', 'var(--accent)'), ('3', '2', '5', 'currentColor'), ('3', '4', '2', 'currentColor'), ('4', '1', '0', 'var(--accent)'), ('4', '3', '3', 'currentColor')]]
+OK   figure a09-reweighting: price labels π = −3, −5, −1, 0 next to vertices 1, 2, 3, 4
+OK   figure a09-reweighting caption: prices, tree and cycle sums
+OK   Figure 9.1: path lengths 8 and 7; after adding 2 they are 12 and 13 and the shortest path changes
+OK   running example + 3: the most negative weight is −3; 3->4->1->2 becomes 6 + 0 + 1 = 7 > 4 = edge 3->2, so the shortest path from 3 to 2 changes
+OK   page: the adding-a-constant trap
+OK   running example: W^2 != W^3 = W^4 = distances; Shimbel's level 2 = W^2, level 3 = distances
+OK   figure a09-minplus: matrices W, W^2, W^4 and the highlighted improvements  [({(3, 1), (2, 4), (1, 3), (4, 2)}, {(3, 2), (2, 1), (1, 4), (4, 3)})]
+OK   figure a09-minplus caption
+OK   V - 1 <= 2^ceil(lg V) < 2V for V = 2 .. 100000
+OK   FischerMeyerAPSP's table has V^2 (ceil(lg V) + 1) entries, O(V^2 log V)
+OK   Strassen: lg 7 = 2.807355 to six decimals
+OK   ShimbelAPSP as printed on the running example reads dist[u, u, 1] (never assigned) at l = 2
+OK   running example: FloydWarshall's matrix after phase r = KleeneAPSP's dist(., ., r), r = 1..4
+OK   figure a09-fw-phases: the five matrices, the improved entries and the shaded row/column r  [[]]
+OK   figure a09-fw-phases caption: phase r finds exactly the listed shortest paths, each through r
+OK   figure a09-fw-phases caption text
+OK   phase r never changes row r or column r (800 random graphs without negative cycles)
+OK   wrong loop order (u, v, r), one pass: dist[2, 1] stays ∞ although 2->3->4->1 has length 4; when (2, 1) is computed, dist[2, 4] and dist[3, 1] are still ∞
+OK   page: the wrong-loop-order trap
+OK   running example with infinity on the diagonal: all four diagonal entries 2 (the cycle 1->2->3->4->1)
+OK   page: shortest-cycle tip
+OK   figure a09-fw-structure: three pieces labeled ≤ r − 1 and the 0 at (r, r)
+OK   concept all-pairs-shortest-paths example: rows (0, 2, 1), (∞, 0, −1), (∞, 3, 0); pred(a, c) = b; the only cycle has length 2; W^2 = distances while W has 4 at (a, c)
+OK   concept all-pairs-shortest-paths example text
+OK   concept all-pairs-shortest-paths trap: the diagonal of Floyd-Warshall and of repeated squaring detects negative cycles (checked as sq_detect, fw_detect)
+OK   concept johnsons-algorithm example: prices 0, −2, −1; reduced weights 0, 0, 4, 1; cycles 1 = 0 + 0 + 1 and 5 = 4 + 1; dist'(a, c) = 0, dist(a, c) = −1; dist'(c, b) = 1, dist(c, b) = 0
+OK   concept johnsons-algorithm example text
+OK   concept floyd-warshall example: start (0,3,4),(∞,0,−1),(2,∞,0); phase 1 finds 3->1->2 (5); phase 2 sets (1,3) = 2; phase 3 finds 2->3->1 (1); final (0,3,2),(1,0,−1),(2,5,0)
+OK   concept floyd-warshall example: cycles 1-2-3-1 (4) and 1-3-1 (6); with w(3->1) = −3 the first has length −1; diagonal −1, −1, −2; (3, 1) = −4; with infinity on the diagonal the original graph gets 4, 4, 4
+OK   concept floyd-warshall example text
+OK   page: section headings and anchors used by other pages
+OK   page: meta line (book pages, whole-book PDF, prev, exercises)
+OK   page: every figure marker has its figure inlined
+
+ALL OK

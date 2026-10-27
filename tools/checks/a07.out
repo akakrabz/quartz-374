@@ -1,0 +1,79 @@
+== ShorterEdge is the lexicographic key
+OK   ShorterEdge(i, j, k, l) returns the edge with the smaller key (w, min, max); keys of different edges differ (300 graphs with ties)
+== distinct weights: every algorithm = the unique brute-force MST
+OK   Lemma 7.1: distinct weights give exactly one minimum spanning tree (500 random graphs, n <= 7)
+OK   Borůvka, Kruskal (labels and forest), JarníkBestFirst, Jarník with a binary heap and with an array, from every start vertex, all return the brute-force MST
+OK   Borůvka: at most floor(V/2^i) components after i phases, so at most floor(log2 V) phases
+OK   Borůvka worst case for V = 2..8 (random graphs, all weightings of the path) is exactly floor(log2 V) phases
+OK   page states the bound floor(log2 V) and the book's ceil
+OK   Borůvka: every phase at least halves the number of components
+OK   GenericMST with random nonempty sets of safe edges: F stays a forest, useless edges stay useless, ends at the MST
+OK   JarníkBestFirst: exactly E Inserts and E ExtractMins, every edge inserted exactly once; vertex version: V-1 Inserts and ExtractMins, at most one DecreaseKey per edge, at most E - deg(s) in all
+OK   Jarník with an unsorted array scans at most V^2 entries in its ExtractMins
+== ties broken by the key
+OK   with ties (weights in 1..3), some graphs have several minimum spanning trees
+OK   with ties broken by the key, all algorithms (every start vertex) return the same tree
+OK   that tree has minimum weight for the original weights
+OK   perturbation: w + eps*rank (eps = 1/(VE+1), exact fractions) has distinct tree weights, orders the edges like the key, and its unique MST is the algorithms' tree
+OK   Lemma 7.1's converse fails: a tree with all weights equal has exactly one (minimum) spanning tree
+OK   all weights 1 (K4): all 16 spanning trees are minimum, weight V - 1 = 3
+== Lemmas 7.2 and 7.3
+OK   cut property: for random S (3000 sets), the lightest edge with exactly one endpoint in S is in the MST
+OK   Lemma 7.2 for arbitrary forests: every safe edge is in the MST, whether or not F is inside the MST
+OK   Lemma 7.3 for forests inside the MST: no useless edge is in the MST
+OK   without the invariant, a useless edge can be an MST edge (found on random forests)
+OK   every bridge is in every spanning tree (200 random graphs)
+== shifting and negating weights; disconnected graphs
+OK   adding c to every weight adds (V-1)c to every spanning tree and leaves the MST unchanged
+OK   the MST of -w is the maximum spanning tree
+OK   disconnected: Kruskal and Borůvka-that-stops-when-stuck return the minimum spanning forest
+OK   disconnected: the book's Borůvka loop (while count > 1) never ends
+OK   disconnected: Jarník spans exactly the start vertex's component
+OK   page states the disconnected-graph behavior
+OK   disconnected: the vertex version extracts one priority-infinity vertex (edge Null) per further component and its other edges are the minimum spanning forest
+== Borůvka details
+OK   the eight-vertex path with weights 1, 5, 2, 7, 3, 6, 4 needs exactly 3 = log2 8 phases, 8 -> 4 -> 2 -> 1
+OK   triangle of weight-1 edges: picks xy, yz, zx add a cycle; with keys, x and y pick xy, z picks xz: a tree
+OK   triangle: the safe edges found by AddAllSafeEdges with keys are xy (for x, y) and xz (for z)
+== the book's example graph
+OK   example: 7 vertices, 12 distinct weights; MST {ac, bd, cd, cf, de, eg} of weight 2+3+4+5+12+16 = 42
+OK   example: unique MST
+OK   partial forest F = {bd, cd, cf, eg}: components {a}, {b,c,d,f}, {e,g}; ac safe for {a} and {b,c,d,f}, de for {e,g}; useless bc, df; undecided ab, be, dg, fg; F inside the MST
+OK   F = {ab, bc}: ac is useless but an MST edge
+OK   cut exchange: T is a spanning tree of weight 61; the edges leaving S = {a,b,c,d} are de 12, dg 14, cf 16, be 18, df 30; path d-b-a-c-f-g-e crosses at cf; T - cf + de weighs 57 = 61 - 16 + 12
+OK   cut exchange: two more exchanges (cd for ab, cf for fg) give spanning trees of weight 52 and 42 = the MST
+OK   the MST path from f to g is f c d e g of weight 16+3+12+4 = 35; the edge fg weighs 26
+OK   Borůvka on the example: 2 phases = floor(log2 7), the most for 7 vertices (7 -> 3 -> 1 at worst); phase 1 picks ac, bd, cd, bd, eg, cf, eg for a..g (5 distinct edges); then 2 components, both pick de
+OK   after phase 1, ab, bc and df are useless
+OK   JarníkBestFirst from g: extraction order eg, de, bd, cd, ac, ab, bc, dg, cf, be, fg, df; tree edges in the order eg, de, bd, cd, ac, cf; 12 Inserts, 12 ExtractMins
+OK   the vertex-version priority table from s = g matches JarníkInit/JarníkLoop (values, extractions, bold = decreased in that step)  [7 rows]
+OK   vertex version on the example: 6 Inserts, 6 ExtractMins, 7 DecreaseKeys
+OK   the Kruskal table (Find values, actions, relabeled vertices, sets after) matches the labeling union-find
+OK   Kruskal on the example: 7 MakeSets, 24 Finds, 6 Unions; 7 relabelings, at most 2 per vertex (g twice) = floor(log2 7); MST order bd, cd, eg, ac, de, cf
+OK   Kruskal (300 random graphs): exactly V MakeSets, 2E Finds, V-1 Unions; no vertex relabeled more than floor(log2 V) times
+OK   always relabeling the growing set costs 1 + 2 + ... + (V-1) = V(V-1)/2 relabelings (V = 20)
+OK   comparison: Borůvka adds {ac, bd, cd, cf, eg} then de; Jarník from g eg, de, bd, cd, ac, cf; Kruskal bd, cd, eg, ac, de, cf
+== concept pages
+OK   MST concept example: square pqrs with diagonal pr; MST {pq, rs, pr} of weight 6; Kruskal adds pq, rs, pr and skips qr, ps; Jarník from s adds rs, pr, pq; Borůvka phase 1 pq (p, q), rs (r, s), phase 2 pr for both
+OK   union-find example: 12 relabelings (4 per round); element 8 labeled 8, 7, 5, 1 (3 = log2 8 relabelings, the maximum); the forest ends as one tree of rank 3
+OK   forest union-find: every root of rank r has at least 2^r elements, so heights stay <= log2 n
+OK   aliases on the MST page include the five names
+== figures
+OK   figure a07-example is inlined after its marker
+OK   figure a07-cut-exchange is inlined after its marker
+OK   figure a07-boruvka is inlined after its marker
+OK   figure a07-jarnik is inlined after its marker
+OK   figure a07-kruskal is inlined after its marker
+OK   figure a07-example: left panel = MST thick, the rest plain; right panel = F, safe ac and de, useless bc df, undecided ab be dg fg; arrows from a and c along ac and from e along de
+OK   figure a07-cut-exchange: left T with e = de dashed and e' = cf marked; right T' = T - cf + de, cf removed; captions 61, 57, 16 - 12 = 4
+OK   figure a07-boruvka: phase 1 safe edges with an arrow from every vertex along its pick; phase 2 F + safe de (arrows from d and e) + useless ab bc df; final MST with all other edges useless
+OK   figure a07-jarnik: each panel shows T, T's safe edge (arrow out of T) and exactly the useless edges; after step 6 df and fg are useless too
+OK   figure a07-kruskal: each panel = F before the union, the added edge, the edges skipped so far; the partition text after each union (label first, bold) matches the labeling union-find
+OK   figure captions: Borůvka 5 distinct safe edges, two phases; Jarník order; Kruskal skipped edges
+== numbers and statements in the text
+OK   floor(log2 7) = 2 as printed (twice: Borůvka phases, Kruskal relabelings); no ceil(log2 7) = 3 left
+OK   the array row is attributed to the book's Exercise 7.7
+OK   log E < 2 log V because E < V^2 for simple graphs
+OK   page has the fixed headings 7.1-7.5 and Summary
+
+ALL OK

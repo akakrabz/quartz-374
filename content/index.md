@@ -1,6 +1,6 @@
 ---
 title: "CS/ECE 374 · Algorithms & Models of Computation"
-description: "Review and reference notes for CS/ECE 374 A (Fall 2026, Illinois): Jeff Erickson's Models of Computation chapter by chapter, a concept glossary, proof templates, exam reviews, worked exam-style problems and a practice bank with folded hints and solutions — every automaton, grammar and Turing machine machine-checked. The Algorithms half covers Erickson's Algorithms (recursion, backtracking, dynamic programming, greedy algorithms, graph search and depth-first search so far) with solved book exercises."
+description: "Review and reference notes for CS/ECE 374 A (Fall 2026, Illinois): Jeff Erickson's Models of Computation chapter by chapter, a concept glossary, proof templates, exam reviews, worked exam-style problems and a practice bank with folded hints and solutions — every automaton, grammar and Turing machine machine-checked. The Algorithms half covers Erickson's Algorithms (recursion, backtracking, dynamic programming, greedy algorithms, graph search, depth-first search, minimum spanning trees and shortest paths so far) with solved book exercises."
 ---
 
 Notes for **CS/ECE 374 A — Algorithms and Models of Computation** (University of Illinois, Fall 2026), written for *review*: the week before an exam, or when a homework problem needs the exact definition. They follow Jeff Erickson's two textbooks section by section — *Models of Computation* for Part 1 and *Algorithms* for Part 2 — with the books' theorem numbers. They are **not a replacement for the books** — [read them](https://jeffe.cs.illinois.edu/teaching/algorithms/); come here to look things up, to review, and to practice.
@@ -32,7 +32,7 @@ Midterm 1 (Sep 28) covered Chapters 1–5; the final covers all nine.
 8. [[1-models-of-computation/08-universal-models|Universal models]] — two stacks, counters, FRACTRAN, Post's correspondence problem, tiles, combinators
 9. [[1-models-of-computation/09-nondeterministic-turing-machines|Nondeterministic Turing machines]] — computation trees, dovetailing, P and NP, Cook–Levin
 
-### [[2-algorithms/index|Part 2 · Algorithms]] — Chapters 1–6 so far <span class="cs-chip">in progress</span>
+### [[2-algorithms/index|Part 2 · Algorithms]] — Chapters 1–9 so far <span class="cs-chip">in progress</span>
 Midterm 2 (Nov 9) is on algorithms; the final covers both parts. Each chapter has a page of solved book exercises.
 
 1. [[2-algorithms/01-recursion|Recursion]] — Hanoi, mergesort, quicksort, recursion trees, median-of-medians, Karatsuba · [[2-algorithms/01-recursion-exercises|exercises]]
@@ -41,8 +41,11 @@ Midterm 2 (Nov 9) is on algorithms; the final covers both parts. Each chapter ha
 4. [[2-algorithms/04-greedy-algorithms|Greedy algorithms]] — exchange arguments, class scheduling, Huffman codes, stable matching · [[2-algorithms/04-greedy-algorithms-exercises|exercises]]
 5. [[2-algorithms/05-basic-graph-algorithms|Basic graph algorithms]] — representations, whatever-first search, BFS and DFS as variants, graph reductions · [[2-algorithms/05-basic-graph-algorithms-exercises|exercises]]
 6. [[2-algorithms/06-depth-first-search|Depth-first search]] — pre/postorder, edge classification, topological sort, DP on dags, strong components · [[2-algorithms/06-depth-first-search-exercises|exercises]]
+7. [[2-algorithms/07-minimum-spanning-trees|Minimum spanning trees]] — safe edges, Borůvka, Jarník (Prim), Kruskal, union-find · [[2-algorithms/07-minimum-spanning-trees-exercises|exercises]]
+8. [[2-algorithms/08-shortest-paths|Shortest paths]] — relaxation, BFS, dags, Dijkstra, Bellman–Ford, which algorithm when · [[2-algorithms/08-shortest-paths-exercises|exercises]]
+9. [[2-algorithms/09-all-pairs-shortest-paths|All-pairs shortest paths]] — Johnson, min-plus products, Floyd–Warshall · [[2-algorithms/09-all-pairs-shortest-paths-exercises|exercises]]
 
-Then minimum spanning trees, shortest paths, flows and NP-hardness — *planned*. Solving recurrences: [[concepts/recursion-trees|recursion trees]] and the [[concepts/master-theorem|master theorem]].
+Then flows and NP-hardness — *planned*. Solving recurrences: [[concepts/recursion-trees|recursion trees]] and the [[concepts/master-theorem|master theorem]].
 
 ### [[3-homework-and-exams/index|Homework and exams]] — worked solutions
 The three Midterm 1 practice tests solved in full in the exam's format — [[3-homework-and-exams/midterm-1-practice-1|test 1]] · [[3-homework-and-exams/midterm-1-practice-2|test 2]] · [[3-homework-and-exams/midterm-1-practice-3|test 3]] — the labs from 6a on, each problem explained — [[3-homework-and-exams/lab-06a|6a]] · [[3-homework-and-exams/lab-06b|6b]] · [[3-homework-and-exams/lab-07a|7a]] · [[3-homework-and-exams/lab-07b|7b]] · [[3-homework-and-exams/lab-08a|8a]] · [[3-homework-and-exams/lab-08b|8b]] · [[3-homework-and-exams/lab-09a|9a]] · [[3-homework-and-exams/lab-09b|9b]] — and homework write-ups that explain the method as they solve the problems: [[3-homework-and-exams/hw6-dynamic-programming|HW6, dynamic programming]].
