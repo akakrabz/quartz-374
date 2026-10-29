@@ -20,7 +20,7 @@ Before working them, read [[0-toolkit/06-how-exams-are-graded|how exams are grad
 
 ## Labs
 
-Each page states every problem (including the "harder problems to think about later"), with a folded hint and a folded solution that explains the idea before the details. Labs 6–8 are explained from the official solutions — every error found in them is fixed and noted on the page; labs 9a and 9b had no posted solutions, so those solutions are ours, each checked against brute force and reviewed independently.
+Each page states every problem (including the "harder problems to think about later"), with a folded hint and a folded solution that explains the idea before the details. Labs 6–8 are explained from the official solutions — every error found in them is fixed and noted on the page; labs 9a–10b had no posted solutions, so those solutions are ours, each checked against brute force and reviewed independently.
 
 | lab | date | topic | page |
 |---|---|---|---|
@@ -32,6 +32,8 @@ Each page states every problem (including the "harder problems to think about la
 | 8b | Oct 16 | dynamic programming: fewest 1s in an arithmetic expression; parenthesizing $+$ and $-$ | [[3-homework-and-exams/lab-08b\|Lab 8b]] |
 | 9a | Oct 21 | graph reductions: a number maze and five variants | [[3-homework-and-exams/lab-09a\|Lab 9a]] |
 | 9b | Oct 23 | graph reductions to dags: a consistent ranking, Judy's tour of the galaxies | [[3-homework-and-exams/lab-09b\|Lab 9b]] |
+| 10a | Oct 28 | shortest paths: one negative edge, where to meet, looped trees | [[3-homework-and-exams/lab-10a\|Lab 10a]] |
+| 10b | Oct 30 | all-pairs shortest paths: repairing a distance array after one wrong weight; arbitrage | [[3-homework-and-exams/lab-10b\|Lab 10b]] |
 
 ## Homework write-ups
 

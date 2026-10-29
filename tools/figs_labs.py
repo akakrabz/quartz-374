@@ -815,3 +815,437 @@ def _l9b_figures():
 
 _l9b_figures()
 # ======================================================================================================== end of Lab 9b
+
+# ======================================================================================================= Lab 10a
+# Figures for content/3-homework-and-exams/lab-10a.md (one negative edge; where to meet; looped trees).  Every number
+# drawn is recomputed below (Dijkstra, Bellman-Ford, the D/L recurrences); tools/checks/labs_10a.py checks the same
+# numbers independently.  Self-contained: own imports, names prefixed _l10a.
+def _l10a_figures():
+    import heapq as _hq
+    import math as _m
+    import os as _os
+    import sys as _sys
+    _sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
+    from figlib import SVG as _S, Automaton as _A, SERIF_IT as _SERIF, MONO as _MONO
+
+    out_dir = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "figs")
+    _os.makedirs(out_dir, exist_ok=True)
+    INF = _m.inf
+
+    def save(name, html):
+        with open(_os.path.join(out_dir, name + ".html"), "w", encoding="utf-8") as f:
+            f.write(html + "\n")
+        print("wrote", name)
+
+    def dij(V, E, s):
+        d = {v: INF for v in V}
+        d[s] = 0
+        pq = [(0, s)]
+        while pq:
+            k, x = _hq.heappop(pq)
+            if k != d[x]:
+                continue
+            for (a, b), w in E.items():
+                if a == x and k + w < d[b]:
+                    d[b] = k + w
+                    _hq.heappush(pq, (d[b], b))
+        return d
+
+    def bf(V, E, s):
+        d = {v: INF for v in V}
+        d[s] = 0
+        for _ in range(len(V)):
+            for (a, b), w in E.items():
+                if d[a] + w < d[b]:
+                    d[b] = d[a] + w
+        return d
+
+    def num(x):
+        return "∞" if x == INF else str(x).replace("-", "−")
+
+    def overlay(A, S, caption, alt):
+        svg = A.svg(alt).replace("</svg>", "".join(S.items) + "</svg>")
+        out = f'<figure class="cs-fig">{svg}<figcaption>{caption}</figcaption></figure>'
+        assert "\n\n" not in out
+        return out.replace("\n", " ")
+
+    def tag(S, x, y, s, color, anchor="middle", size=13, weight="600"):
+        S.text(x, y, s, size=size, color=color, halo=True, anchor=anchor, weight=weight)
+
+    # ---------------------------------------------------------------- 1. Problem 1: the example with one negative edge
+    V = ["s", "a", "b", "t", "u", "v"]
+    E = {("s", "a"): 1, ("s", "u"): 7, ("a", "b"): 2, ("a", "t"): 6, ("b", "t"): 3, ("u", "v"): -5, ("v", "b"): 0,
+         ("t", "a"): 2}
+    NEG = ("u", "v")
+    Gp = {e: w for e, w in E.items() if e != NEG}
+    ds, dv, true = dij(V, Gp, "s"), dij(V, Gp, "v"), bf(V, E, "s")
+    assert ds == dict(s=0, a=1, b=3, t=6, u=7, v=INF) and dv == dict(s=INF, a=5, b=0, t=3, u=INF, v=0)
+    assert min(ds["t"], ds["u"] + E[NEG] + dv["t"]) == 5 == true["t"]
+    PATH = {("s", "u"), ("u", "v"), ("v", "b"), ("b", "t")}
+    P = {"s": (60, 132), "a": (210, 62), "t": (450, 62), "u": (210, 202), "v": (370, 202), "b": (370, 132)}
+    A = _A(560, 290, r=16, font_size=14)
+    for x, (px, py) in P.items():
+        A.state(x, px, py)
+    SIDE = {("s", "a"): 1, ("s", "u"): -1, ("a", "b"): -1, ("a", "t"): -1, ("b", "t"): 1, ("u", "v"): -1,
+            ("v", "b"): -1, ("t", "a"): 1}
+    for (a, b), w in E.items():
+        on = (a, b) in PATH
+        bend = -26 if (a, b) == ("t", "a") else 0
+        A.edge(a, b, num(w), bend=bend, color="var(--hi)" if on else "currentColor", width=2.6 if on else 1.4,
+               label_side=SIDE[(a, b)], mono=False, label_dist=12)
+    S = _S(560, 290)
+    OFF = {"s": (0, -30), "a": (-30, -30), "t": (30, -30), "u": (0, 30), "v": (0, 30), "b": (44, 12)}
+    OFF2 = {"s": (0, 28), "a": (-46, 12), "t": (44, 12), "u": (-46, 12), "v": (46, 0), "b": (46, 4)}
+    for x in V:
+        (px, py) = P[x]
+        dx, dy = OFF[x]
+        S.text(px + dx - 6, py + dy, num(ds[x]), size=13.5, color="var(--accent)", halo=True, anchor="end",
+               weight="600")
+        S.text(px + dx, py + dy, "·", size=15, color="var(--muted)", halo=True, weight="700")
+        S.text(px + dx + 6, py + dy, num(dv[x]), size=13.5, color="var(--accent2)", halo=True, anchor="start",
+               weight="600")
+    S.text(30, 260, "tags: distance from s · distance from v, both in G − (u→v)", size=12.5, anchor="start",
+           color="var(--muted)")
+    S.text(30, 278, "δ(s, t) = min{ 6, 7 + (−5) + 3 } = 5, along s → u → v → b → t", size=12.5, anchor="start",
+           color="var(--hi)")
+    save("lab-10a-one-negative", overlay(A, S,
+        "<strong>Problem 1: one negative edge, two runs of Dijkstra.</strong> The only negative edge is <i>u</i>→<i>v</i> "
+        "(weight −5); there is no negative cycle, and the graph is not a dag (<i>a</i>→<i>t</i>→<i>a</i>). Each vertex "
+        "is tagged with its distance from <i>s</i> (blue) and from <i>v</i> (green) in <i>G</i> − (<i>u</i>→<i>v</i>), "
+        "where Dijkstra's algorithm is safe. The best path avoiding <i>u</i>→<i>v</i> costs 6 (<i>s a b t</i>); the "
+        "best path through it costs 7 + (−5) + 3 = 5 (red), so δ(<i>s</i>, <i>t</i>) = 5. Dijkstra on <i>G</i> itself "
+        "extracts <i>t</i> once with 6 before it reaches <i>u</i>, so stopping there would be wrong.",
+        alt="six-vertex directed graph with one negative edge u to v, distance tags from s and from v, and the "
+            "shortest path s u v b t highlighted"))
+
+    # ---------------------------------------------------------------- 2. Problem 2: the best city off the shortest path
+    V2 = ["p", "a", "q", "c"]
+    E2 = {("p", "a"): 1, ("a", "q"): 9, ("p", "c"): 6, ("q", "c"): 6}
+    U2 = dict(E2)
+    for (x, y), w in E2.items():
+        U2[(y, x)] = w
+    dp, dq = dij(V2, U2, "p"), dij(V2, U2, "q")
+    T = {x: max(dp[x], dq[x]) for x in V2}
+    assert T == dict(p=10, a=9, q=10, c=6) and dp["q"] == 10 and dp["c"] + dq["c"] == 12
+    P2 = {"p": (50, 70), "a": (170, 70), "q": (490, 70), "c": (290, 176)}
+    S2 = _S(540, 216)
+    R = 16
+
+    def uedge(x, y, w, color="currentColor", width=1.5, lx=0, ly=0):
+        (x1, y1), (x2, y2) = P2[x], P2[y]
+        L = _m.hypot(x2 - x1, y2 - y1)
+        ux, uy = (x2 - x1) / L, (y2 - y1) / L
+        S2.line(x1 + ux * R, y1 + uy * R, x2 - ux * R, y2 - uy * R, color=color, width=width)
+        S2.text((x1 + x2) / 2 + lx, (y1 + y2) / 2 + ly, str(w), size=14, halo=True, color=color)
+    uedge("p", "a", 1, color="var(--accent)", width=2.4, ly=14)
+    uedge("a", "q", 9, color="var(--accent)", width=2.4, ly=14)
+    uedge("p", "c", 6, lx=-12, ly=10)
+    uedge("q", "c", 6, lx=12, ly=10)
+    for x, (px, py) in P2.items():
+        best = x == "c"
+        S2.circle(px, py, R, stroke="var(--hi)" if best else "currentColor", width=2.2 if best else 1.6)
+        S2.text(px, py + 1, x, size=15, font=_SERIF, italic=True, color="var(--hi)" if best else "currentColor")
+    LAB = {"p": (50, 36), "a": (170, 36), "q": (490, 36), "c": (290, 204)}
+    for x, (lx, ly) in LAB.items():
+        S2.text(lx, ly, f"{dp[x]}, {dq[x]} → {T[x]}", size=13, halo=True,
+                color="var(--hi)" if x == "c" else "var(--muted)", weight="600" if x == "c" else None)
+    save("lab-10a-meeting", S2.figure(
+        "<strong>Problem 2: the best city need not lie on a shortest path between you.</strong> Under each city: "
+        "your driving time, your friend's, and the meeting time there, their maximum. The shortest route between "
+        "<i>p</i> and <i>q</i> is <i>p a q</i> (blue, length 10), and the best city on it is <i>a</i>, with meeting "
+        "time 9; but <i>c</i>, off that route, gives 6. Two runs of Dijkstra and a scan over all cities find it.",
+        alt="four cities p, a, q, c with road lengths; c gives the earliest meeting although it is not on the "
+            "shortest p-q path"))
+
+    # ---------------------------------------------------------------- 3. Problem 3: the split-root dag of the handout's tree
+    TREE = [("r", "a", 5), ("r", "b", 8), ("a", "c", 17), ("a", "d", 0), ("c", "e", 23), ("b", "f", 1),
+            ("f", "g", 9), ("f", "h", 14)]
+    LOOP = {"e": 4, "d": 16, "g": 7, "h": 42}
+    kids = {}
+    W = {}
+    for x, y, w in TREE:
+        kids.setdefault(x, []).append(y)
+        W[(x, y)] = w
+    D = {"r": 0}
+    for x, y, w in TREE:
+        D[y] = D[x] + w
+    L = {}
+    for x in ["e", "d", "g", "h", "c", "f", "a", "b", "r"]:
+        L[x] = LOOP[x] if x in LOOP else min(W[(x, c)] + L[c] for c in kids[x])
+    GE = dict(W)
+    for l, w in LOOP.items():
+        GE[(l, "r")] = w
+    assert bf(list(D), GE, "b")["d"] == 22 == L["b"] + D["d"] and L["b"] == 17 and D["d"] == 5
+    U = "b"
+    VV = "d"
+    PIECE1 = {("b", "f"), ("f", "g"), ("g", "r_in")}          # b ~> r_in: L(b)
+    PIECE2 = {("r_out", "a"), ("a", "d")}                     # r_out ~> d: D(d)
+    Y = [44, 104, 164, 224, 300]
+    P3 = {"r_out": (310, Y[0]), "a": (200, Y[1]), "b": (420, Y[1]), "c": (140, Y[2]), "d": (250, Y[2]),
+          "f": (460, Y[2]), "e": (110, Y[3]), "g": (410, Y[3]), "h": (510, Y[3]), "r_in": (310, Y[4])}
+    A3 = _A(640, 360, r=15, font_size=14)
+    for x, (px, py) in P3.items():
+        if x in ("r_out", "r_in"):
+            A3.state(x, px, py, label="", shape="rounded", w=58)
+        else:
+            A3.state(x, px, py, hi=(x in (U, VV)))
+    for x, y, w in TREE:
+        a2 = "r_out" if x == "r" else x
+        col = "var(--accent)" if (a2, y) in PIECE1 else ("var(--accent2)" if (a2, y) in PIECE2 else "currentColor")
+        wid = 2.6 if col != "currentColor" else 1.3
+        side = -1 if P3[y][0] < P3[a2][0] else 1
+        A3.edge(a2, y, str(w), color=col, width=wid, label_side=side, mono=False, label_dist=11,
+                label_color=col if col != "currentColor" else None)
+    for l, w in LOOP.items():
+        on = (l, "r_in") in PIECE1
+        col = "var(--accent)" if on else "var(--muted)"
+        A3.edge(l, "r_in", str(w), color=col, width=2.6 if on else 1.3, dash=None if on else "5 4",
+                label_side=1 if P3[l][0] < 310 else -1, mono=False, label_dist=13,
+                label_pos={"e": 0.5, "d": 0.45, "g": 0.5, "h": 0.3}[l], label_color=col)
+    S3 = _S(640, 360)
+    S3.text(300, Y[0] + 1, "r", size=15, font=_SERIF, italic=True)
+    S3.text(306, Y[0] + 6, "out", size=10.5, anchor="start")
+    S3.text(303, Y[4] + 1, "r", size=15, font=_SERIF, italic=True)
+    S3.text(309, Y[4] + 6, "in", size=10.5, anchor="start")
+    S3.text(420 + 24, Y[1] - 14, "u", size=14, font=_SERIF, italic=True, color="var(--hi)", anchor="start")
+    S3.text(250 + 24, Y[2] - 12, "v", size=14, font=_SERIF, italic=True, color="var(--hi)", anchor="start")
+    S3.text(560, 120, "b ⇝ r", size=13, color="var(--accent)", anchor="start")
+    S3.text(560, 138, "1 + 9 + 7", size=13, color="var(--accent)", anchor="start")
+    S3.text(560, 156, "= L(b) = 17", size=13, color="var(--accent)", anchor="start", weight="600")
+    S3.text(36, 70, "r ⇝ d", size=13, color="var(--accent2)", anchor="start")
+    S3.text(36, 88, "5 + 0", size=13, color="var(--accent2)", anchor="start")
+    S3.text(36, 106, "= D(d) = 5", size=13, color="var(--accent2)", anchor="start", weight="600")
+    S3.text(310, 344, "δ(b, d) = 17 + 5 = 22", size=13.5, color="var(--hi)", weight="600")
+    save("lab-10a-split-root", overlay(A3, S3,
+        "<strong>Problem 3: the handout's looped tree with its root split in two.</strong> Every tree edge leaves "
+        "<i>r</i><sub>out</sub> or a lower node, and every loop edge (dashed) now enters a new sink <i>r</i><sub>in</sub> "
+        "at the bottom, so the graph is a dag and DagSSSP runs in linear time. A walk in the looped tree passes "
+        "through <i>r</i> at most once when it is shortest, so it is either a path in this dag or a path to "
+        "<i>r</i><sub>in</sub> followed by a path from <i>r</i><sub>out</sub>. For <i>u</i> = <i>b</i> and "
+        "<i>v</i> = <i>d</i>, not below <i>b</i>: down from <i>b</i> to the leaf <i>g</i> and its loop edge "
+        "(blue, the cheapest of the two ways out, 17 against 1 + 14 + 42 = 57), then down from the root to <i>d</i> "
+        "(green, 5).",
+        alt="the looped tree of the handout drawn as a dag: the root split into r-out at the top and r-in at the "
+            "bottom, with the path from b down to g and its loop edge, and the path from the root to d"))
+
+
+_l10a_figures()
+# ======================================================================================================= end of Lab 10a
+
+# ======================================================================================================== Lab 10b
+# Lab 10b (one wrong edge weight; arbitrage): four figures for content/3-homework-and-exams/lab-10b.md.  The numbers
+# drawn (the trap example's distances, the reduction example, the currency rates and their -ln weights) are recomputed
+# here; tools/checks/labs_10b.py checks the same numbers independently.  Self-contained: l10b_ names only.
+
+
+def _l10b_figures():
+    import math as _m
+    import os as _os
+    from figlib import SVG as _S, SERIF_IT as _SERIF
+
+    out_dir = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "figs")
+    _os.makedirs(out_dir, exist_ok=True)
+    R = 17
+
+    def it(s):
+        return f"<tspan font-style='italic'>{s}</tspan>"
+
+    def save(name, html):
+        with open(_os.path.join(out_dir, name + ".html"), "w", encoding="utf-8") as f:
+            f.write(html + "\n")
+        print("wrote", name)
+
+    def node(S, x, y, name, fill=None):
+        S.circle(x, y, R, stroke="currentColor", fill="var(--paper)", width=1.6)
+        if fill:
+            S.circle(x, y, R, stroke="currentColor", fill=fill, width=1.6, fill_opacity=0.16)
+        S.text(x, y + 1, name, size=16, font=_SERIF, italic=True)
+
+    def arc(S, p, q, bend, color="currentColor", width=1.6, dash=None, arrow=True, r1=R, r2=R):
+        """Quadratic curve from p to q, control point offset `bend` to the left of p->q; trimmed at the circles.
+        Returns the curve's midpoint."""
+        (x1, y1), (x2, y2) = p, q
+        dx, dy = x2 - x1, y2 - y1
+        L = _m.hypot(dx, dy)
+        nx, ny = dy / L, -dx / L                     # left of travel on screen
+        cx, cy = (x1 + x2) / 2 + nx * bend, (y1 + y2) / 2 + ny * bend
+        a1 = _m.atan2(cy - y1, cx - x1)
+        a2 = _m.atan2(cy - y2, cx - x2)
+        sx, sy = x1 + _m.cos(a1) * r1, y1 + _m.sin(a1) * r1
+        off = r2 + (2.5 if arrow else 0)
+        ex, ey = x2 + _m.cos(a2) * off, y2 + _m.sin(a2) * off
+        S.path(f"M{sx:.1f},{sy:.1f} Q{cx:.1f},{cy:.1f} {ex:.1f},{ey:.1f}", color=color, width=width, arrow=arrow,
+               dash=dash)
+        return 0.25 * sx + 0.5 * cx + 0.25 * ex, 0.25 * sy + 0.5 * cy + 0.25 * ey
+
+    # ------------------------------------------------------------------ (a) the repair rule
+    S = _S(640, 226, font_size=14)
+    P = {"x": (140, 162), "u": (260, 64), "v": (400, 64), "y": (520, 162)}
+    arc(S, P["x"], P["y"], -70, color="var(--muted)", width=1.4, dash="5 4")
+    S.text(330, 210, "old shortest path:  dist[" + it("x") + ", " + it("y") + "]", size=13, color="var(--muted)",
+           raw=True, halo=True)
+    arc(S, P["x"], P["u"], 26, dash="5 4", width=1.6)
+    S.text(152, 94, "dist[" + it("x") + ", " + it("u") + "]", size=13.5, anchor="end", raw=True, halo=True)
+    S.text(152, 112, "column " + it("u") + ": unchanged", size=12, anchor="end", color="var(--muted)", raw=True)
+    S.path(f"M{P['u'][0] + R},{P['u'][1]} L{P['v'][0] - R - 2.5},{P['v'][1]}", color="var(--accent)", width=2.6,
+           arrow=True)
+    S.text(330, 30, it("w") + "′(" + it("u") + "→" + it("v") + ") — now lighter", size=13.5, color="var(--accent)",
+           raw=True, halo=True)
+    arc(S, P["v"], P["y"], 26, dash="5 4", width=1.6)
+    S.text(508, 94, "dist[" + it("v") + ", " + it("y") + "]", size=13.5, anchor="start", raw=True, halo=True)
+    S.text(508, 112, "row " + it("v") + ": unchanged", size=12, anchor="start", color="var(--muted)", raw=True)
+    for k, (x, y) in P.items():
+        node(S, x, y, k, fill="var(--accent)" if k in "uv" else None)
+    html = S.figure(
+        "<strong>Repairing after a weight decrease.</strong> A new shortest path from <i>x</i> to <i>y</i> either "
+        "avoids <i>u</i>→<i>v</i> — then it is no shorter than the old one, dist[<i>x</i>, <i>y</i>] (gray) — or uses "
+        "it exactly once, after a shortest path to <i>u</i> and before a shortest path from <i>v</i>. Those two "
+        "pieces never use <i>u</i>→<i>v</i> (a simple path that ends at <i>u</i> or starts at <i>v</i> cannot), so "
+        "the old entries dist[<i>x</i>, <i>u</i>] and dist[<i>v</i>, <i>y</i>] are still exact: the new distance is "
+        "the smaller of dist[<i>x</i>, <i>y</i>] and dist[<i>x</i>, <i>u</i>] + <i>w</i>′(<i>u</i>→<i>v</i>) + "
+        "dist[<i>v</i>, <i>y</i>].",
+        alt="vertices x, u, v, y: the old path from x to y, and the path through the lightened edge u to v")
+    save("lab-10b-repair", html)
+
+    # ------------------------------------------------------------------ (c) the zero-cycle trap
+    T = {(0, 1): 1, (0, 2): 0, (2, 0): 0, (1, 3): 0, (3, 1): 0}         # u=0, v=1, a=2, b=3
+    Tp = dict(T)
+    Tp[(0, 1)] = 5
+    INF = float("inf")
+
+    def fw(n, W):
+        D = [[0 if i == j else INF for j in range(n)] for i in range(n)]
+        for (a, b), c in W.items():
+            D[a][b] = min(D[a][b], c)
+        for r in range(n):
+            for i in range(n):
+                for j in range(n):
+                    D[i][j] = min(D[i][j], D[i][r] + D[r][j])
+        return D
+
+    old, new = fw(4, T)[0], fw(4, Tp)[0]
+    assert old == [0, 1, 0, 1] and new == [0, 5, 0, 5]
+    tight = {e for e, c in Tp.items() if old[e[0]] + c == old[e[1]]}
+    assert tight == {(0, 2), (2, 0), (1, 3), (3, 1)}
+    S = _S(600, 178, font_size=14)
+    X = {2: 200, 0: 310, 1: 440, 3: 550}
+    names = {0: "u", 1: "v", 2: "a", 3: "b"}
+    Y0 = 92
+    for (p_, q_) in [(2, 0), (0, 2), (1, 3), (3, 1)]:
+        mx, my = arc(S, (X[p_], Y0), (X[q_], Y0), 22, color="var(--accent)", width=2.2)
+        S.text(mx, my + (-9 if X[p_] < X[q_] else 10), "0", size=13, halo=True)
+    S.path(f"M{X[0] + R},{Y0} L{X[1] - R - 2.5},{Y0}", color="currentColor", width=1.6, arrow=True, dash="6 4")
+    S.text((X[0] + X[1]) / 2, Y0 - 12, it("w") + " = 1,  " + it("w") + "′ = 5", size=13, raw=True, halo=True)
+    S.text(16, 26, "old dist[" + it("u") + ", ·]", size=13, anchor="start", raw=True)
+    S.text(16, 158, "true dist′(" + it("u") + ", ·)", size=13, anchor="start", raw=True)
+    for k in X:
+        node(S, X[k], Y0, names[k])
+        S.text(X[k], 26, str(old[k]), size=14, weight=600)
+        S.text(X[k], 158, str(new[k]), size=14, weight=600,
+               color="var(--hi)" if new[k] != old[k] else "currentColor")
+    html = S.figure(
+        "<strong>Why tight edges must be reachable from the source.</strong> The weight of <i>u</i>→<i>v</i> was 1 "
+        "and is really 5; the old row of <i>u</i> says 0, 1, 0, 1. With <i>w</i>′ no edge is tense, and every vertex "
+        "has a tight incoming edge (blue: old label of the tail + weight = old label of the head) — <i>v</i> and "
+        "<i>b</i> prop each other up around their cycle of length 0. But <i>u</i>→<i>v</i> is not tight "
+        "(0 + 5 ≠ 1), so a search from <i>u</i> along tight edges never reaches <i>v</i> or <i>b</i>: their labels "
+        "are too low (red). The out-neighbor shortcut is fooled as well: <i>w</i>(<i>u</i>→<i>a</i>) + "
+        "dist[<i>a</i>, <i>v</i>] = 0 + 1 = dist[<i>u</i>, <i>v</i>], but that path to <i>v</i> runs through "
+        "<i>u</i>→<i>v</i> itself.",
+        alt="four vertices a, u, v, b; zero-weight cycles between a and u and between v and b; the edge u to v "
+            "raised from 1 to 5")
+    save("lab-10b-zero-cycle", html)
+
+    # ------------------------------------------------------------------ (d) the reduction
+    H = {("p", "q"): 2, ("q", "r"): 1, ("r", "q"): 3}
+    M = 1 + sum(H.values())
+    assert M == 7
+    S = _S(580, 286, font_size=14)
+    Q = {"u": (110, 176), "v": (470, 176), "p": (290, 112), "q": (290, 180), "r": (290, 248)}
+    S.rect(238, 80, 104, 198, rx=14, stroke="var(--muted)", width=1.3, dash="3 3")
+    S.text(330, 96, "H", size=15, font=_SERIF, italic=True, color="var(--muted)", anchor="end")
+    for h in "pqr":
+        mx, my = arc(S, Q[h], Q["u"], 0.001, color="var(--muted)", width=1.3)
+        mx, my = arc(S, Q["v"], Q[h], 0.001, color="var(--muted)", width=1.3)
+    S.text(176, 140, "0", size=13, color="var(--muted)", halo=True)
+    S.text(404, 140, "0", size=13, color="var(--muted)", halo=True)
+    # H's own edges
+    S.path(f"M{Q['p'][0]},{Q['p'][1] + R} L{Q['q'][0]},{Q['q'][1] - R - 2.5}", arrow=True)
+    S.text(Q["p"][0] + 12, (Q["p"][1] + Q["q"][1]) / 2, "2", size=13, anchor="start", halo=True)
+    m1 = arc(S, Q["q"], Q["r"], 16)
+    m2 = arc(S, Q["r"], Q["q"], 16)
+    S.text(m1[0] + 10, m1[1], "1", size=13, anchor="start", halo=True)
+    S.text(m2[0] - 10, m2[1], "3", size=13, anchor="end", halo=True)
+    # the special edge, over the top
+    mx, my = arc(S, Q["u"], Q["v"], 230, color="var(--accent)", width=2.6)
+    S.text(mx, my - 14, it("w") + "(" + it("u") + "→" + it("v") + ") = 0,   " + it("w") + "′(" + it("u") + "→"
+           + it("v") + ") = " + it("M") + " = 7", size=13.5, color="var(--accent)", raw=True, halo=True)
+    for k, (x, y) in Q.items():
+        node(S, x, y, k, fill="var(--accent)" if k in "uv" else None)
+    S.text(Q["u"][0], Q["u"][1] + 34, "every vertex → " + it("u"), size=12, color="var(--muted)", raw=True)
+    S.text(Q["v"][0], Q["v"][1] + 34, it("v") + " → every vertex", size=12, color="var(--muted)", raw=True)
+    html = S.figure(
+        "<strong>Repairing after an increase is as hard as computing all distances.</strong> Take any graph "
+        "<i>H</i> with nonnegative weights (here <i>p</i>→<i>q</i>, <i>q</i>→<i>r</i>, <i>r</i>→<i>q</i>), add "
+        "<i>u</i> with a 0-weight edge from every vertex of <i>H</i>, <i>v</i> with a 0-weight edge to every vertex "
+        "of <i>H</i>, and the edge <i>u</i>→<i>v</i>. With <i>w</i>(<i>u</i>→<i>v</i>) = 0 every distance is 0, so "
+        "the old array is all zeros whatever <i>H</i> is. With <i>w</i>′(<i>u</i>→<i>v</i>) = <i>M</i>, 1 more than "
+        "the total weight of <i>H</i>, the corrected distance between vertices of <i>H</i> is "
+        "min{dist<sub><i>H</i></sub>, <i>M</i>}: here 2, 3, 1, 3 from <i>p</i> to <i>q</i>, <i>p</i> to <i>r</i>, "
+        "<i>q</i> to <i>r</i>, <i>r</i> to <i>q</i>, and <i>M</i> = 7, meaning “unreachable in <i>H</i>”, from "
+        "<i>q</i> or <i>r</i> to <i>p</i>.",
+        alt="a graph H in a box, a vertex u that every vertex of H points to, a vertex v that points to every "
+            "vertex of H, and the edge from u to v over the top")
+    save("lab-10b-reduction", html)
+
+    # ------------------------------------------------------------------ Problem 2: the currency graph
+    from fractions import Fraction as _F
+    rates = {("$", "¥"): _F(120), ("¥", "€"): _F(1, 100), ("€", "$"): _F(6, 5),
+             ("¥", "$"): _F(1, 125), ("€", "¥"): _F(100), ("$", "€"): _F(4, 5)}
+    assert rates[("$", "¥")] * rates[("¥", "€")] * rates[("€", "$")] == _F(36, 25)
+
+    def lab(r):
+        s = f"{float(r):g}"
+        return s
+
+    def wlab(r):
+        return f"{-_m.log(float(r)):.2f}".replace("-", "−")
+
+    S = _S(560, 352, font_size=14)
+    C = {"$": (100, 250), "¥": (280, 62), "€": (460, 250)}
+    cycle = [("$", "¥"), ("¥", "€"), ("€", "$")]
+    for (a, b), r in rates.items():
+        on = (a, b) in cycle
+        mx, my = arc(S, C[a], C[b], 34 if on else 26, color="var(--accent)" if on else "var(--muted)",
+                     width=2.6 if on else 1.4)
+        # label: outside for the cycle, inside for the reverse edges
+        cx, cy = 280, 190
+        dx, dy = mx - cx, my - cy
+        L = _m.hypot(dx, dy)
+        push = 30 if on else -26
+        lx, ly = mx + dx / L * push, my + dy / L * push
+        S.text(lx, ly - 8, lab(r), size=14, weight=600 if on else None,
+               color="var(--accent)" if on else "var(--muted)", halo=True)
+        S.text(lx, ly + 9, "(" + wlab(r) + ")", size=12.5, color="var(--accent)" if on else "var(--muted)",
+               halo=True)
+    for k, (x, y) in C.items():
+        S.circle(x, y, 21, stroke="currentColor", fill="var(--paper)", width=1.6)
+        S.text(x, y + 1, k.replace("$", "&#36;"), size=17, raw=True)     # no literal $ in the page (math)
+    S.text(280, 336, "&#36; → ¥ → € → &#36;:   120 · 0.01 · 1.2 = 1.44,    −4.79 + 4.61 − 0.18 = −0.36 &lt; 0",
+           size=13.5, color="var(--accent)", raw=True)
+    html = S.figure(
+        "<strong>The currency graph.</strong> One vertex per currency and an edge <i>i</i>→<i>j</i> for every rate; "
+        "each edge shows the rate <i>R</i>[<i>i</i>, <i>j</i>] and, in parentheses, its weight "
+        "−ln <i>R</i>[<i>i</i>, <i>j</i>]. A sequence of trades multiplies the money by the product of the rates, "
+        "which is <i>e</i> to the minus length of the walk: more money is a shorter walk, and the handout’s "
+        "arbitrage cycle (blue, product 1.44) is a cycle of negative length. Every other cycle has product at most 1: "
+        "0.96 for &#36;⇄¥ and &#36;⇄€, exactly 1 for ¥⇄€ (length 0, not arbitrage), 0.64 for &#36; → € → ¥ → "
+        "&#36;. "
+        "The rates other than the handout’s three are made up; they need not be reciprocal.",
+        alt="three currencies, dollar, yen and euro, with six exchange-rate edges; the cycle dollar to yen to euro "
+            "to dollar highlighted")
+    save("lab-10b-arbitrage", html)
+
+
+_l10b_figures()
+# ======================================================================================================== end of Lab 10b

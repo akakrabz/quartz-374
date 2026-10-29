@@ -32,7 +32,7 @@ aliases: ["Dijkstra", "Dijkstra's algorithm", "NonnegativeDijkstra"]
 > - **Unweighted graph or dag:** breadth-first search or DagSSSP is faster; Dijkstra costs a point.
 > - **Prim is not Dijkstra:** the key is $\mathit{dist}(u) + w(u\to v)$, not $w(u\to v)$.
 > - **The time is $O(E\log V)$**, not $O(V\log V)$: every edge may cause a DecreaseKey.
-> - **One target:** the search may stop when $t$ is extracted; its distance is final then.
+> - **One target:** with non-negative weights the search may stop when $t$ is extracted; its distance is final then. With a negative edge it may not: $t$ can leave the queue before its distance is final ([[3-homework-and-exams/lab-10a|Lab 10a]], Problem 1).
 
 **Example.** Undirected (both directions), with $sa = 4$, $sb = 1$, $ba = 2$, $at = 1$, $bt = 5$. Dijkstra from $s$ extracts $s$ (0), $b$ (1), $a$ (3, lowered from 4), $t$ (4, lowered from 6), so $\delta(t) = 4$ along $s\,b\,a\,t$ — three edges, where breadth-first search would choose a two-edge path, $s\,a\,t$ of length 5 or $s\,b\,t$ of length 6.
 
