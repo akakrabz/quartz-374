@@ -1,7 +1,7 @@
 ---
 title: "Huffman codes"
 description: "Optimal prefix-free binary codes: code trees, the cost Σ f·depth, Huffman's rule of merging the two least frequent characters, why it is optimal, and its O(n log n) implementation with a priority queue."
-tags: [concept, algorithms, greedy, midterm-2]
+tags: [concept, algorithms, greedy]
 aliases: ["Huffman code", "Huffman's algorithm", "prefix-free code", "prefix code", "code tree", "BuildHuffman"]
 ---
 

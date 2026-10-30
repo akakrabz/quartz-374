@@ -1,14 +1,14 @@
 ---
 title: "Proof templates"
-description: "Every exam boilerplate on one page, in course order — string induction, write-ups for regular expressions, grammars and DFAs, structural induction, DFA correctness, product constructions, fooling sets, closure, language transformations, grammar proofs, Turing machines, diagonalization, reductions, Rice's theorem, dovetailing and Lemma 5; for algorithms, recursive-algorithm correctness and the write-ups for divide and conquer, backtracking, dynamic programming, greedy correctness and graph reductions — each with its source section, its rubric line and a worked problem."
-tags: [toolkit, strings, regular, context-free, turing-machines, undecidability, algorithms, recursion, backtracking, dynamic-programming, greedy, graphs, midterm-1, midterm-2]
+description: "Every exam boilerplate on one page, in course order — string induction, write-ups for regular expressions, grammars and DFAs, structural induction, DFA correctness, product constructions, fooling sets, closure, language transformations, grammar proofs, Turing machines, diagonalization, reductions, Rice's theorem, dovetailing and Lemma 5; for algorithms, recursive-algorithm correctness and the write-ups for divide and conquer, backtracking, dynamic programming, greedy correctness, graph reductions and NP-hardness reductions — each with its source section, its rubric line and a worked problem."
+tags: [toolkit, strings, regular, context-free, turing-machines, undecidability, algorithms, recursion, backtracking, dynamic-programming, greedy, graphs, complexity, midterm-1, midterm-2]
 aliases: ["templates", "proof template", "exam boilerplate"]
 ---
 
 *Toolkit · reference page · each template is copied from the section linked below it; the rubric lines paraphrase the course's standard rubrics ([[0-toolkit/06-how-exams-are-graded|how exams are graded]]).*
 
 > [!recipe] How to use a template on the exam
-> 1. **Recognize the problem type.** The [[#23-which-template-for-which-problem|table at the end]] maps each type to its template, its rubric and a worked problem.
+> 1. **Recognize the problem type.** The [[#24-which-template-for-which-problem|table at the end]] maps each type to its template, its rubric and a worked problem.
 > 2. **Write the boilerplate first**, word for word, with several blank lines in every case.
 > 3. **Fill in the claim and the hypothesis** — or the set $F$, the names of the machines, the states of $M'$ — in full, with variable names that do not clash.
 > 4. **Only then think** about the real work (the inductive step, the suffix $z$, the machine $M'$), and write it into the gaps.
@@ -331,7 +331,23 @@ Strings that encode no machine form a decidable set; counting them in $L$ or in 
 
 **Source** [[2-algorithms/05-basic-graph-algorithms#57-graph-reductions-flood-fill|Algorithms §5.7]] · **rubric** [[0-toolkit/06-how-exams-are-graded#13-graph-reductions|graph reduction]]: 3 + 3 + 2 + 2 · **worked** flood fill and walks of even length in §5.7; [[2-algorithms/05-basic-graph-algorithms-exercises#exercise-511--number-maze|number maze]]
 
-## 23. Which template for which problem
+## 23. Proving a problem NP-hard
+
+**Use it for** "prove that $Y$ is NP-hard" (final exam): any decision problem for which you are to show that a polynomial-time algorithm is unlikely. Reduce a known NP-hard problem $X$ **to** $Y$ — never the other way.
+
+> [!template] Template — proving that $Y$ is NP-hard (rubric: 1 + 2 + 2 + 2 + 2 + 1)
+> We prove that $Y$ is NP-hard by a polynomial-time reduction from $X$, which is NP-hard [cite: lecture or book]. \
+> **Reduction.** Given an arbitrary instance $x$ of $X$ [name its parts: a formula $\Phi$ with $n$ variables and $k$ clauses; a graph $G = (V,E)$ and an integer $k$], we build the instance $y$ of $Y$ as follows: [every vertex, edge, number or clause of $y$, as an explicit function of $x$ — one gadget per part of $x$]. \
+> $y$ has [size, e.g. $3k$ vertices and $O(k^2)$ edges], so the reduction runs in **polynomial time**, [e.g. $O(k^2)$]. \
+> **⇒ ("only if").** Suppose $x$ is a YES instance, with certificate [a satisfying assignment …]. Then [build a certificate for $y$ …], so $y$ is a YES instance. \
+> **⇐ ("if").** Suppose the instance $y$ built above is a YES instance, with certificate [an independent set $S$ of size $k$ …]. Then [use the structure of $y$ to build a certificate for $x$ …], so $x$ is a YES instance. \
+> So $x$ is a YES instance of $X$ if and only if $y$ is a YES instance of $Y$: a polynomial-time algorithm for $Y$ would solve $X$ in polynomial time. Hence $Y$ is NP-hard. $\blacksquare$
+>
+> For **NP-completeness**, add: $Y\in\textsf{NP}$, because [the certificate] can be checked in polynomial time [how].
+
+**Source** [[2-algorithms/12-np-hardness#128-the-general-pattern|Algorithms §12.8]] · **rubric** [[0-toolkit/06-how-exams-are-graded#14-np-hardness|NP-hardness]]: 1 + 2 + 2 + 2 + 2 + 1 · **worked** [[2-algorithms/12-np-hardness#127-maximum-independent-set-from-3sat|3SAT → independent set]], [[2-algorithms/12-np-hardness#1212-subset-sum-from-vertex-cover|vertex cover → subset sum]]; [[2-algorithms/12-np-hardness-exercises|Chapter 12 exercises]]
+
+## 24. Which template for which problem
 
 | problem | template | rubric, out of 10 | worked problem |
 |---|---|---|---|
@@ -360,8 +376,9 @@ Strings that encode no machine form a decidable set; counting them in $L$ or in 
 | a backtracking recursion with repeated subproblems, made polynomial | [[#20-writing-up-a-dynamic-program\|dynamic program]] | dynamic programming: 3 + 4 + 3 | [[2-algorithms/03-dynamic-programming-exercises#exercise-31--making-change-in-nadiria\|making change]] |
 | a greedy rule: prove it or refute it | [[#21-proving-a-greedy-algorithm-correct\|exchange argument]] | none of its own (no proof, no credit) | [[2-algorithms/04-greedy-algorithms-exercises#exercise-44--stabbing-intervals\|stabbing intervals]] |
 | moves, states, puzzles, reachability, fewest steps | [[#22-solving-a-problem-by-graph-reduction\|graph reduction]] | graph reduction: 3 + 3 + 2 + 2 | [[2-algorithms/05-basic-graph-algorithms-exercises#exercise-511--number-maze\|number maze]] |
+| $Y$ is NP-hard (final exam) | [[#23-proving-a-problem-np-hard\|NP-hardness reduction]] | NP-hardness: 1 + 2 + 2 + 2 + 2 + 1 | [[2-algorithms/12-np-hardness#127-maximum-independent-set-from-3sat\|3SAT → independent set]] |
 
 The point splits are explained, with what loses points, on [[0-toolkit/06-how-exams-are-graded|how exams are graded]]; the symbols are on [[0-toolkit/01-notation-and-conventions|notation and conventions]].
 
 ### Sources for this page
-The templates for string induction, structural induction, DFA correctness, fooling sets, grammar proofs, diagonalization and reduction are copied from the chapter sections linked under them; the product-construction and language-transformation templates from [[concepts/product-construction|product construction]] and [[concepts/language-transformations|language transformations]] (the second follows the method of §4.9). Context words that pointed elsewhere on their page ("as above", "below", "next subsection") were replaced by section numbers; nothing else changed. The templates marked *assembled here* are built from the recipes and worked examples of the sections they cite. The six *Algorithms* templates (§17–22) are copied unchanged from the boxes in §1.2, §1.6, §2.4, §3.4, §4.3 and §5.7 of the Algorithms chapter pages. Rubric lines paraphrase the CS/ECE 374 A (Fall 2026) standard rubrics.
+The templates for string induction, structural induction, DFA correctness, fooling sets, grammar proofs, diagonalization and reduction are copied from the chapter sections linked under them; the product-construction and language-transformation templates from [[concepts/product-construction|product construction]] and [[concepts/language-transformations|language transformations]] (the second follows the method of §4.9). Context words that pointed elsewhere on their page ("as above", "below", "next subsection") were replaced by section numbers; nothing else changed. The templates marked *assembled here* are built from the recipes and worked examples of the sections they cite. The seven *Algorithms* templates (§17–23) are copied unchanged from the boxes in §1.2, §1.6, §2.4, §3.4, §4.3, §5.7 and §12.8 of the Algorithms chapter pages. Rubric lines paraphrase the CS/ECE 374 A (Fall 2026) standard rubrics.

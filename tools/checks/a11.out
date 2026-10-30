@@ -1,0 +1,99 @@
+OK   max-flow routine: value = brute-force minimum cut, flow feasible, residual cut is minimum (400 networks)
+OK   11.1 directed: max flow = max number of edge-disjoint paths (exhaustive), and the walks give that many edge-disjoint simple paths (500 graphs)
+OK   11.1: |f*| <= V - 1 in simple graphs
+OK   11.1 Menger, edge version: minimum separating edge set = maximum flow (200 graphs, exhaustive)
+OK   11.1 undirected: two directed unit edges per edge; after canceling two-way flow the value is unchanged and the walks give max-many edge-disjoint undirected paths (800 graphs, BFS and randomized DFS augmentation, exhaustive)  [two-way flow canceled 30 times]
+OK   11.2 vertex splitting: max flow in the split graph maps back to a feasible flow with vertex capacities of the same value, equal to the LP optimum in G (300 graphs)
+OK   11.2 vertex splitting, converse: a flow in G with vertex capacities (LP optimum) maps to a feasible flow in the split graph
+OK   11.2 vertex-disjoint paths: flow in the unit split graph = max number of internally vertex-disjoint paths (500 graphs, exhaustive); contracted paths are valid
+OK   11.2 trap: with infinite edge capacities an edge s->t has no finite cut (unbounded flow)
+OK   figure a11-split: bowtie has 2 edge-disjoint and 1 vertex-disjoint path; m's split edge is a minimum cut  [2 1]
+OK   11.2 trap: s, t split too: with terminals s_out, t_in their split capacity (1 or INF) does not change the flow; with s_in, t_out capacity 1 caps it at 1 and INF is needed (300 graphs)  [78 graphs where capacity 1 at s_in/t_out loses flow]
+OK   11.3: max flow in s->L->R->t = maximum matching (exhaustive), read-off edges form a matching (600 graphs)
+OK   11.3: |f*| <= min(|L|, |R|)
+OK   11.3: AlternatingPathMatching gains one edge per iteration and ends with a maximum matching
+OK   11.3 Berge: a matching is maximum iff it has no alternating path (all matchings of 150 graphs)  [1117 matchings]
+OK   figure a11-matching: {ax, cy} is maximal but not maximum; b x a y c z is alternating; M xor P = {bx, ay, cz}
+OK   11.4 tuple selection: max flow = maximum number of tuples (exhaustive over multisets), and the decomposition gives a valid selection (300 instances)  [40 optimal selections repeat a tuple]
+OK   11.4 multiplicity: one possible tuple with all capacities 2 -> flow 2, but only 1 distinct tuple
+OK   11.4 exam scheduling: max flow = most classes schedulable (all schedules enumerated), and the decomposition is a valid schedule (150 instances)
+OK   11.5: minimum disjoint-path cover of a dag (exhaustive) = V - maximum matching in G', and the matching gives such a cover (400 dags)
+OK   11.5: an edge set is a disjoint-path cover (with V - |F| paths) iff its flat/sharp copy is a matching
+OK   11.5 trap: 2-cycle u->v->u has a matching of size 2 but needs 1 path (V - 2 = 0 is wrong)
+OK   figure a11-path-cover: min cover 2 = 6 - 4 with paths a c e, b d f; the unique longest path a c d f leaves b, e and gives 3 paths  [[[0, 2, 4], [1, 3, 5]]]
+OK   11.5 faculty hiring: path-cover answer = fewest professors with the condition on consecutive classes (all partitions, 250 instances)
+OK   11.5 faculty hiring: with walking times obeying the triangle inequality it also equals the all-pairs version
+OK   11.5 faculty hiring: positive class lengths make the compatibility graph a dag
+OK   11.5 precision: without the triangle inequality the all-pairs reading can need more professors (1 vs 2)
+OK   11.6: team n may be assumed to win all its games (same answer with all its outcomes enumerated, 500 leagues)
+OK   11.6 theorem: team n can finish first iff the max flow saturates every game edge (all outcomes enumerated)  [244 eliminated]
+OK   11.6 certificate: eliminated iff some set Q has wins + mutual games > |Q|(W[n] + R[n])
+OK   11.6 certificate: the team vertices on the source side of the residual minimum cut form such a Q
+OK   Detroit table: games-left matrix is symmetric
+OK   Detroit: 49 + 27 = 76; capacities 1, 5, 7, 13 (sum 26); 3+8+7+2+7 = 27 games among rivals; max flow 26
+OK   Detroit: 20 of its 27 remaining games are outside the division (3 + 4 inside)
+OK   Detroit is eliminated: no outcome of the rivals' games keeps all of them at <= 76 wins  [6912]
+OK   Detroit certificate: Q = all four rivals (278 + 27 = 305 > 304) is the only one, and the residual cut finds it
+OK   footnote example: capacities 1 + 1 + 9 = 11 >= 7 games, yet eliminated (Q = {A, B}: 21 > 18; a rival reaches 11)
+OK   11.7: P - min cut = best profit over all valid sets, and the residual source side is a best valid set (400 instances, cycles allowed)
+OK   11.7: a cut is finite iff its source side is valid, and then its capacity is P - profit
+OK   book example: P = 15, min cut 13 (2 + 3 + 5 + 3), best set {4, 6, 2, -2, -3, -5} with profit 2, unique; next best 0  [[(2, frozenset({'B', 'p2', 'C', 'A', 'p6', 'p4'})), (0, frozenset()), (-1, frozenset({'B', 'A', 'p4'}))]]
+OK   11.7 trap: reversed infinite edges select a project without its prerequisite and forbid a prerequisite without its dependents
+OK   flow-reductions example: max flow 6 = 2*3 with limits 2, 2, 2 (assignment valid); 5 < 6 when C's limit is 1
+OK   bipartite-matching example: greedy gives {1A, 2C} (maximal); 3 C 2 A 1 B switches to {1B, 2A, 3C}; maximum 3; residual source side {s, 3, 4, C}, cut s->1, s->2, C->t  [[("('R', 'C')", 't'), ('s', "('L', '1')"), ('s', "('L', '2')")]]
+OK   page: fixed ## headings in order  [['11.1 Edge-disjoint paths', '11.2 Vertex capacities and vertex-disjoint paths', '11.3 Bipartite matching', '11.4 Tuple selection', '11.5 Disjoint-path covers', '11.6 Baseball elimination', '11.7 Project selection', 'All the reductions at a glance', 'Summary']]
+OK   page: frontmatter title, tags, chapter
+OK   page: meta line
+OK   page states: $76-75 = 1$
+OK   page states: $76-71 = 5$
+OK   page states: $76-69 = 7$
+OK   page states: $76-63 = 13$
+OK   page states: in total 26
+OK   page states: $3+8+7+2+7 = 27$
+OK   page states: $W[n]+R[n] = 49 + 27 = 76$
+OK   page states: include 20 against teams outside
+OK   page states: $75+71+69+63 = 278$
+OK   page states: make 305 wins
+OK   page states: $4\cdot 76 = 304$
+OK   page states: $1 + 1 + 9 = 11\ge 7$
+OK   page states: $8 + 8 + 5 = 21 > 2\cdot 9 = 18$
+OK   page states: at least 11 wins
+OK   page states: $P = 4+6+2+3 = 15$
+OK   page states: capacity 13
+OK   page states: $2+3+5$
+OK   page states: $15 - 13 = 2$
+OK   page states: every other valid set earns at most 0
+OK   page states: $V = n + r + t + p + 2 = O(N)$
+OK   page states: $E = O(nr + rt + tp) = O(N^2)$
+OK   page states: **$O(N^3)$**
+OK   page states: $O(VE) = O(n^4)$
+OK   page states: $O(VE) = O(n^3)$
+OK   page states: $\lvert f^*\rvert\le V-1$
+OK   page states: $\lvert f^*\rvert\le\min(\lvert L\rvert,\lvert R\rvert)\le V/2$
+OK   page states: $O(\sqrt{V}\,E)$
+OK   page states: 3 paths instead of 2
+OK   page states: | New York Yankees | 75–59 | 28 | | 3 | 8 | 7 | 3 |
+OK   page states: | Baltimore Orioles | 71–63 | 28 | 3 | | 2 | 7 | 4 |
+OK   page states: | Boston Red Sox | 69–66 | 27 | 8 | 2 | | 0 | 0 |
+OK   page states: | Toronto Blue Jays | 63–72 | 27 | 7 | 7 | 0 | | 0 |
+OK   page states: | Detroit Tigers | 49–86 | 27 | 3 | 4 | 0 | 0 | |
+OK   page states: let you take a project without its prerequisites but force you to take every project that needs a selected one
+OK   page states: With $s_{\text{in}}$ and $t_{\text{out}}$ instead, those split edges need capacity $\infty$
+OK   Detroit table won–lost matches the data
+OK   figure a11-split is inlined after its marker
+OK   figure a11-matching is inlined after its marker
+OK   figure a11-path-cover is inlined after its marker
+OK   figure a11-baseball is inlined after its marker
+OK   figure a11-projects is inlined after its marker
+OK   figure labels: split
+OK   figure labels: matching
+OK   figure labels: path cover
+OK   figure labels: baseball
+OK   figure labels: projects
+OK   concept flow-reductions: tags and Related last
+OK   concept bipartite-matching: tags and Related last
+OK   flow-reductions states the example numbers
+OK   bipartite-matching states the example
+OK   aliases are unique site-wide  [[]]
+
+ALL OK

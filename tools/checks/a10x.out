@@ -1,0 +1,57 @@
+== helpers
+OK   Ford-Fulkerson (random augmenting paths) == brute-force min cut == networkx  [300 random networks]
+== Exercise 10.0: is f a maximum flow?
+OK   10.0 feasibility + conservation + no residual s-t path  <=>  f feasible with |f| = min cut (brute force)  [1500 networks with parallel/opposite edges; 738 maximum, 762 not]
+OK   10.0 the tests include feasible flows of negative value  [50]
+== Exercise 10.1: f' - f is a flow in G_f
+OK   10.1 g = (positive part of f'-f forward, negative part backward) is feasible in G_f, conserved, |g| = |f'|-|f|  [566 pairs of random feasible flows on reduced networks]
+OK   10.1 remark: the maximum flow value of G_f is |f*| - |f|  [800 random feasible flows]
+== Exercise 10.2: an edge never crosses two minimum cuts in opposite directions
+OK   10.2 positive capacities: no edge u->v has min cuts with u in S, v in T and with v in S', u in T'  [1500 networks; 1962 edges cross some min cut forward]
+OK   10.2 counterexample with c(u->v) = 0: all four placements of u, v give minimum cuts
+OK   10.2/10.3 any max flow saturates every S->T edge and avoids every T->S edge of every min cut  [800 networks]
+== Exercise 10.3: minimum cuts are closed under intersection and union
+OK   10.3 S n S' and S u S' are minimum cuts whenever S and S' are  [1500 networks, 801 with several min cuts]
+OK   10.3 remark: cut capacity is submodular, ||S n S'|| + ||S u S'|| <= ||S|| + ||S'||  [300 networks, all pairs]
+== Exercise 10.4: simplifying opposing pairs (false as printed)
+OK   10.4 example: max flow 1 in G, 0 in G'
+OK   10.4 example: min cuts of G are {s} and {s,u,v} (capacity 1); of G' only {s,u} (capacity 0)
+OK   10.4 example: cut capacities in G / G': {s} 1/1, {s,u} 7/0, {s,v} 12/5, {s,u,v} 1/1  [{(0,): (1, 1), (0, 1): (7, 0), (0, 2): (12, 5), (0, 1, 2): (1, 1)}]
+OK   10.4(a) fails: the zero flow is a maximum flow in G' but not in G
+OK   10.4 ||S,T|| in G' = ||S,T|| in G - m if the cut separates u and v, unchanged otherwise  [1500 networks, every cut]
+OK   10.4 the max flow values of G and G' differ on some random networks  [429 of 1500]
+OK   10.4(c) a max flow of G (pushed m around u->v->u if needed) is feasible in G, maximum, and not a flow of G'
+== Exercise 10.5: unique maximum flows and unique minimum cuts
+OK   10.5(a) SCC/bidirected-tree test == enumeration of all integral maximum flows  [700 reduced networks, 653 unique, 47 not]
+OK   10.5(a) SCC/bidirected-tree test == LP (min and max of every f(e) over all maximum flows)  [500 reduced networks up to 7 vertices, 379 unique, 121 not]
+OK   10.5(b) unique min cut <=> every vertex is reachable from s or reaches t in G_f (== enumeration)  [1500 networks, 843 unique, 657 not]
+OK   10.5(b) R_s and V - R^t are min cuts, and every min cut S has R_s <= S <= V - R^t
+OK   10.5(c) s->a->t, capacities 1, 1: one maximum flow, two minimum cuts {s} and {s,a}
+OK   10.5(d) s->a 1, a->b 2, b->t 2, a->t 2: unique min cut {s} (capacities 1, 4, 3, 4), two integral max flows  [{(0,): 1, (0, 1): 4, (0, 2): 3, (0, 1, 2): 4}]
+OK   10.5(a) trap: s->a (1), a->t (2) has a unique maximum flow, yet G_f has the 2-cycle a->t->a
+OK   10.5 the algorithms agree on the two examples
+== Exercise 10.6: acyclic maximum flows
+OK   10.6(a) MakeAcyclic returns a feasible acyclic flow with the same value  [2000 flows, 583 of them cyclic]
+OK   10.6(a) MakeAcyclic only decreases flow values
+OK   10.6(a) total cancelled-cycle length <= sum_e f(e); loop steps <= 3(V+E) + 2 sum_e f(e)
+OK   10.6(a) Ford-Fulkerson's output has sum_e f(e) <= (V-1)|f*|
+OK   10.6 trap: the sum of the simple paths s->a->b->t and s->b->a->t is a cyclic flow (a->b->a)
+OK   10.6(b) 'H is a dag' == LP over all simple cycles (no maximum flow is positive on a cycle)  [400 reduced networks, 334 always acyclic, 66 not]
+OK   10.6(b) H = the edges that are positive in some maximum flow (LP: max f(e) > 0)
+== Exercise 10.7: unit capacities and distance d
+OK   10.7(a) unit capacities: |f*| <= E/d  [1839 networks with parallel edges or simple]
+OK   10.7(b) simple unit-capacity graphs: |f*| <= V^2/d^2 (constant 1)
+OK   10.7 level cuts: edges leave S_i only from L_i to L_{i+1}, disjoint for different i, <= |L_i||L_i+1|; min_i (|L_i|+|L_i+1|) <= 2V/d
+OK   10.7(a) is tight: k edge-disjoint s-t paths of length d have E = kd and max flow k
+== Exercise 10.8: delete k edges to minimize the maximum flow
+OK   10.8 deleting k edges of a minimum cut leaves max(lambda - k, 0) == optimum over all k-subsets  [2562 (network, k) pairs, unit capacities with parallel edges]
+== Exercise 10.9: E - V + 1 cycles, E - V + 2 paths and cycles
+OK   10.9 deleting an edge that lies on a cycle lowers E - V + c by 1; deleting a bridge leaves it unchanged  [1000 random multigraphs, every edge]
+OK   10.9(a) |f| = 0, G connected: greedy decomposition uses <= mu(support) <= E - V + 1 cycles  [856 circulations]
+OK   10.9(b) |f| > 0, G connected: <= mu(support + t->s) <= E - V + 2 paths and cycles  [1221 flows]
+OK   10.9(a) needs G connected: two disjoint directed triangles, E - V + 1 = 1, but the all-ones circulation needs 2 cycles
+OK   10.9 needs f >= 0: -1 on every edge of a directed triangle is a nonzero (s,t)-flow of value 0 with no edge of positive flow (so no cycle may be used)
+OK   10.9(c) chain of k triangles: E - V + 1 = k, its only directed cycles are the k triangles (edge-disjoint), so the all-ones circulation needs k cycles  [k = 1..5]
+OK   10.9(c) k paths s->a_i->t: E - V + 2 = k, no cycles, exactly k s-t paths, each needed  [k = 1..5]
+
+ALL OK

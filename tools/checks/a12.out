@@ -1,0 +1,85 @@
+OK   DPLL helper agrees with brute force on 1500 random CNF formulas
+OK   12.6 gate rule for and: the CNF holds exactly when the gate equation holds
+OK   12.6 gate rule for or: the CNF holds exactly when the gate equation holds
+OK   12.6 gate rule for not: the CNF holds exactly when the gate equation holds
+OK   12.6 padding: a OR b and z are each equivalent to their padded clauses, for every value of the new variables
+OK   12.5/12.6 on 400 random circuits (≤ 4 inputs, ≤ 5 gates, fan-in 1-3): K' ≡ K, Phi satisfiable iff K is, Phi3 is 3CNF, at most 5 clauses per binary gate, 4 per NOT gate, +4, satisfiable iff K is, and certificates transform both ways  [{'sat': 365, 'unsat': 35}]
+OK   book circuit: exactly 4 of the 32 inputs turn the light on: x5 = 0 and (x2,x3,x4) = (1,1,0) or (x1,x2,x4) = (1,0,1)  [[(0, 1, 1, 0, 0), (1, 0, 0, 1, 0), (1, 0, 1, 1, 0), (1, 1, 1, 0, 0)]]
+OK   book circuit on x = 01100: y1..y7, z = 0,1,1,1,0,1,1,1
+OK   book 3CNF (p. 390): 46 clauses, 34 variables (5 inputs, 9 wires, 20 padding), all with 3 literals
+OK   our Tseitin implementation reproduces the book's printed 3CNF clause for clause (up to padding names)
+OK   K' of the book's circuit: 9 gates (6 binary, 3 NOT), so 6*5 + 3*4 + 4 = 46 clauses
+OK   book 3CNF with the inputs fixed is satisfiable exactly for the 4 satisfying inputs of the circuit
+OK   NAND example: Phi2 has 3 + 2 + 1 = 6 clauses, Phi3 has 1 + 2*2 + 2*2 + 4 = 13 clauses
+OK   NAND example: the page's 13 clauses equal our construction (padding variables p1..p6)
+OK   NAND example: 3 of 4 inputs satisfy the circuit; Phi3 has 3 * 2^6 = 192 satisfying assignments of 2^10  [192]
+OK   12.7 3Sat -> MaxIndSet on 600 random 3CNF formulas: 3k vertices, alpha(G) ≤ k, alpha(G) = k iff satisfiable, certificates both ways  [{True: 537, False: 63}]
+OK   book formula (Figure 12.8): 12 vertices, 12 triangle edges + 8 negation edges, alpha = 4
+OK   Figure 12.8's independent set {a, ~d, c, a} is independent; it sets a = c = True, d = False (b free)
+OK   book formula is satisfied by a = c = True, b = d = False and by a = b = d = True, c = False
+OK   book formula has exactly 8 satisfying assignments of 16  [8]
+OK   12.9 on the Figure 12.8 graph: smallest vertex cover 12 - 4 = 8, largest clique of the complement 4
+OK   12.9: S independent in G iff S is a clique in the complement iff V - S is a vertex cover; alpha(G) = omega(complement) and tau(G) = n - alpha(G) — all 1099 labeled graphs on ≤ 5 vertices + 200 random
+OK   3-coloring helper agrees with brute force on 300 random graphs
+OK   12.10 half-gadget ('majority gate'): equal input colors force that color at the output (2 colorings); different input colors allow each output color (3 colorings); 5 with fixed inputs, 24 in all
+OK   12.10 Figure 12.14: the 24 half-gadget colorings fall into 4 classes up to permuting the colors (the book draws 5: its two equal-input drawings differ only by swapping the other two colors)
+OK   12.10 clause gadget: extends to a 3-coloring iff some literal node is colored True (all 8 cases); 5 new vertices, 10 edges
+OK   12.10 3Sat -> 3Color on 250 random 3CNF formulas: 3 + 2n + 5k vertices, 3 + 3n + 10k edges, 3-colorable iff satisfiable, certificates both ways  [{True: 217, False: 33}]
+OK   book formula (Figure 12.15): 31 vertices, 55 edges; the coloring for a = c = True, b = d = False extends
+OK   figure: the clause gadget for (a ∨ b ∨ ~c) with a = c = True, b = False has a 3-coloring
+OK   Hamiltonian-cycle helper (existence and count) agrees with brute force on 800 random digraphs
+OK   12.11 VertexCover -> DirectedHamCycle: H has a Hamiltonian cycle iff G has a vertex cover of size ≤ k, on 1274 random (G, k) with 1 ≤ #non-isolated vertices and k ≤ that number; the cycle's chains form a cover of size exactly k
+OK   12.11: outside that range the book's reduction fails (YES instance, no Hamiltonian cycle) — so the page first answers k ≥ #non-isolated vertices directly  [285 cases]
+OK   12.11 edge case: G = the edge uv plus isolated w and x, k = 3: G has a cover of size 1 ≤ 3, but H (3 cover vertices, 2 vertex chains) has no Hamiltonian cycle
+OK   Figure 12.17 graph (edges uv uw ux vx wx), k = 2: H has 4*5 + 2 = 22 vertices and 30 + 6 + 16 = 52 edges  [22 52]
+OK   Figure 12.17: the only vertex cover of size 2 is {u, x}, and H has exactly 2 Hamiltonian cycles (the two ways to assign x1, x2 to the chains of u and x)  [2]
+OK   Figure 12.16: an edge gadget can be covered by paths from 'in' to 'out' vertices in exactly 3 ways: straight through on both sides, or one detour (u,v,in)→(v,u,in)→(v,u,out)→(u,v,out) or its mirror
+OK   12.11 the book's 3Sat -> DirectedHamCycle (text reading, rows (i,0..2k)) gives Hamiltonian cycles for some unsatisfiable formulas (1200 random small CNFs)  [7 wrong answers]
+OK   12.11 the book's construction as drawn in Figures 12.19-12.20 (rows of 2k vertices) fails too  [9 wrong answers]
+OK   12.11 the page's repaired construction (spacers + hubs): Hamiltonian iff satisfiable on all 1200 random CNFs (1-3 variables, 1-4 clauses of 1-3 literals); n(3k+2) + k vertices; the (=>) cycle is Hamiltonian; row directions of any Hamiltonian cycle give a satisfying assignment  [{True: 933, False: 267}]
+OK   counterexample formula: 8 distinct clauses on a, b, c, unsatisfiable; a = True, b = c = False satisfies all but the last
+OK   counterexample (text reading): the cycle of a = True, b = c = False with (1,2k)→[k]→(2,2k) in place of the connector (1,2k)→(2,2k) is a Hamiltonian cycle of H  [59 vertices]
+OK   counterexample (figure reading): the cycle of a = True, b = c = False with (1,2k)→[k]→(2,2k) in place of the connector (1,2k)→(2,2k) is a Hamiltonian cycle of H  [56 vertices]
+OK   repaired construction on the book's formula: 4*(3*4+2) + 4 = 60 vertices; the cycle for a = b = d = True, c = False is Hamiltonian
+OK   figure: (a ∨ b) ∧ (~a ∨ ~b), rows of 7 vertices, 2 hubs, 2 clause vertices = 18 vertices; the cycle for a = True, b = False is Hamiltonian; H has exactly 2 Hamiltonian cycles (the two satisfying assignments)
+OK   12.10 page's extension rule: r = True when l1 or l2 is True; otherwise r = False, s = Other, t = False
+OK   12.11 sizes: VertexCover -> HamCycle has 4E + k vertices and 6E + (2E - V) + 2kV edges (no isolated vertices); 3Sat -> HamCycle (repaired) has n(3k+2) + k vertices and 6kn + 4n + 6k edges
+OK   12.11 sizes: with a repeated literal, (a ∨ a ∨ b) gives fewer than 6kn + 4n + 6k edges (hence 'at most')  [24]
+OK   12.11 the page's version (isolated vertices removed, k ≥ n' answered by a fixed Hamiltonian graph) is correct on 1026 random (G, 0 ≤ k ≤ V), including graphs with isolated vertices and no edges
+OK   12.12 VertexCover -> SubsetSum (X a multiset): subset sums to T iff a vertex cover of size ≤ k exists, on 1791 random (G, 0 ≤ k ≤ V)
+OK   12.12 no carries: for every edge i exactly three numbers of X have digit i equal to 1 (b_i and the two endpoints)
+OK   12.12 X can have repeated values: the edge uv alone gives a_u = a_v = 5 (so X must be a multiset, an array as in Chapter 2)
+OK   12.12 read as a set, X would give wrong answers: edge uv, k = 2 (cover {u, v}) gives the multiset {5, 5, 1} with 5 + 5 = 10 = T, but the set {5, 1} cannot reach 10
+OK   12.12 Caveat: T ≥ 4^E whenever k ≥ 1 (200 random graphs, every 1 ≤ k ≤ V; equality only for E = 0, k = 1)
+OK   12.12 book example: a_u, a_v, a_w, a_x = 1344, 1300, 1105, 1029; b_uv..b_wx = 256, 64, 16, 4, 1; T = 2730
+OK   12.12 base-4 digits: 111000, 110110, 101101, 100011; 010000, 001000, 000100, 000010, 000001; T = 222222
+OK   12.12 cover {v, w}: a_v + a_w + b_uv + b_uw + b_vx + b_wx = 1300 + 1105 + 256 + 64 + 4 + 1 = 2730
+OK   12.12 book example: {v, w} is the only vertex cover of size 2, and exactly one subset of X sums to 2730
+OK   12.12 with k = 1 (T = 1*4^5 + 682 = 1706) no subset works, since the graph has no cover of size 1
+OK   12.12 the target is exponential in the input: T > 4^E, so the O(nT) table has more than n*4^E entries
+OK   np-hardness example: the 5-cycle is not 2-colorable; the coloring 0,1,0,1,2 is a proper 3-coloring
+OK   reductions example: the complement of the 5-cycle 01234 is the 5-cycle 02413; alpha(C5) = 2 = omega(complement); {0, 2} is independent in C5 and a clique in the complement
+OK   satisfiability example: z = x1 ∨ x2 gives 1 + 2 + 2 + 4 = 9 clauses on 7 variables; 48 of the 128 assignments satisfy it, all with z = True and (x1, x2) ≠ (False, False)
+OK   satisfiability example: 2SAT-style (x∨y)∧(~x∨y)∧(x∨~y)∧(~x∨~y) is unsatisfiable; dropping any clause makes it satisfiable
+OK   page: the 16 fixed section headings and Summary, in order  [["12.1 A game you can't win", '12.2 P versus NP', '12.3 NP-hard, NP-easy and NP-complete', '12.4 Formal definitions', '12.5 Reductions and SAT', '12.6 3SAT (from CircuitSat)', '12.7 Maximum independent set (from 3SAT)', '12.8 The general pattern', '12.9 Clique and vertex cover (from independent set)', '12.10 Graph coloring (from 3SAT)', '12.11 Hamiltonian cycle', '12.12 Subset sum (from vertex cover)', '12.13 Other useful NP-hard problems', '12.14 Choosing the right problem', '12.15 A frivolous real-world example', '12.16 On beyond zebra', 'Summary']]
+OK   page: no 'clearly', 'obviously', 'trivially'
+OK   page: the displayed transcription of the book's circuit is exactly its gate list  [[('y1', 'and', ['x1', 'x4']), ('y2', 'not', ['x4']), ('y3', 'and', ['x3', 'y2']), ('y4', 'or', ['y1', 'x2']), ('y5', 'not', ['x2']), ('y6', 'not', ['x5']), ('y7', 'or', ['y3', 'y5']), ('z', 'and', ['y4', 'y7', 'y6'])]]
+OK   page: wire values for x = 01100 and the counts 46 clauses / 34 variables / 6*5 + 3*4 + 4
+OK   page: the 13 displayed clauses of Phi3 for z = NOT(x1 AND x2) equal our construction  [13]
+OK   page: 3Sat -> MaxIndSet / complement example numbers (12 vertices, alpha 4, cover 12 - 4 = 8, clique 4)
+OK   page: 3Color sizes 3 + 2n + 5k, 3 + 3n + 10k; book example 31 vertices and 55 edges
+OK   page: VertexCover -> HamCycle sizes and the Figure 12.17 numbers (22 vertices, 52 edges, two cycles)
+OK   page: repaired 3Sat -> HamCycle sizes n(3k+2) + k and 6kn + 4n + 6k; the book example's 60 vertices
+OK   page: the subset-sum table (9 numbers, digits, values, the ✓ subset summing to T = 2730)  [9 rows]
+OK   page: subset-sum text numbers (1300 + 1105 + 256 + 64 + 4 + 1 = 2730; k = 1 target 1706)
+OK   page: the counterexample is stated with (ā ∨ b ∨ c) last and the splice (1,2k)→[8]→(2,2k)
+OK   page: exam facts (Nov 10–19, HW10 Nov 17, HW11 Dec 1, final Dec 11, not Midterm 2, labs 12a–13b, rubric 1/2/2/2/2/1, at most 5, at most 1)
+OK   page: all seven figures are placed and inlined
+OK   figure circuit: caption says 4 of 32 inputs; input digits 0 1 1 0 0 drawn
+OK   figure coloring: the drawn colors of p, q, r, s, t form a proper coloring with a True, b and c̄ False  [['F', 'T', 'O', 'F', 'O']]
+OK   figure indset / tseitin / ham captions: 12 + 8 edges; 13-clause, 2^6; rows of 7, exactly two cycles
+OK   concept pages: Related is the last line; examples present (5-cycle coloring 0,1,0,1,2; complement 0 2 4 1 3; 9 clauses / 7 variables / 48 of 128)
+OK   cook-levin-theorem and subset-sum link §12.3/§12.5 and §12.12, and np-hardness in Related
+OK   aliases are unique site-wide (case-insensitive)  [[]]
+
+ALL OK

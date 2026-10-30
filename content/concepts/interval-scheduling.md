@@ -1,7 +1,7 @@
 ---
 title: "Interval scheduling"
 description: "Choosing the largest set of pairwise non-overlapping intervals (the book's class scheduling problem): take the interval that finishes first and recurse — O(n log n), proved by an exchange argument — and the natural rules that fail."
-tags: [concept, algorithms, greedy, midterm-2]
+tags: [concept, algorithms, greedy]
 aliases: ["class scheduling", "activity selection", "GreedySchedule", "earliest finish time first"]
 ---
 

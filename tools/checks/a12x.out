@@ -1,0 +1,61 @@
+OK   helper: subset-DP Hamiltonian cycle/path == permutation search on all graphs with <= 5 vertices
+OK   helper: subset-DP directed Hamiltonian cycle == permutation search (all digraphs <= 3 vertices, 300 random)
+OK   helper: DPLL == truth-table satisfiability on 400 random CNF formulas
+OK   helper: backtracking k-coloring == brute force on all graphs <= 5 vertices, k = 1, 2, 3
+OK   12.1(a) CanReach DP == brute force over all 2^n subsets (1500 random sets of distinct integers in [-15,15])
+OK   12.1(a) table has (n+1)(2M+1) entries, each O(1): O(nM) time
+OK   12.1(b) n = 10 numbers of n bits: input 100 bits, but M = 5165 >= 2^(n-1)*n
+OK   12.1(b) n = 20 numbers of n bits: input 400 bits, but M = 10485950 >= 2^(n-1)*n
+OK   12.1(b) n = 40 numbers of n bits: input 1600 bits, but M = 21990232556300 >= 2^(n-1)*n
+OK   12.2(a) largest clique of the intersection graph == BoxDepth (600 random sets of <= 9 closed rectangles)
+OK   12.2(b) the O(n^3) candidate-corner algorithm == brute force over all grid points
+OK   12.3(a) 'some term has no complementary pair' == truth table (1500 random DNF formulas)
+OK   12.3(b) the book's CNF and DNF example formulas are equivalent
+OK   12.3(b) distributing 1 disjoint 3-literal clauses gives 3^1 = 3 terms
+OK   12.3(b) distributing 2 disjoint 3-literal clauses gives 3^2 = 9 terms
+OK   12.3(b) distributing 3 disjoint 3-literal clauses gives 3^3 = 27 terms
+OK   12.3(b) distributing 10 disjoint 3-literal clauses gives 3^10 = 59049 terms
+OK   12.3(b) k = 1: every implicant covers at most one of the 3^1 minimal models (so any DNF has >= 3 terms)
+OK   12.3(b) k = 2: every implicant covers at most one of the 3^2 minimal models (so any DNF has >= 9 terms)
+OK   12.3(b) k = 3: every implicant covers at most one of the 3^3 minimal models (so any DNF has >= 27 terms)
+OK   12.4(a) components of the literal graph == brute force (2500 random 3CNF formulas)
+OK   12.4(b) (x + xbar + y) is satisfiable but not all-or-nothing satisfiable
+OK   12.6(a) sort and pair a_i with a_(2n+1-i) == brute force over all pairings (3000 sets of <= 8 numbers)  [2151 YES instances]
+OK   12.6(b) search-and-alternate 2-coloring == brute force (all graphs <= 5 vertices, 800 random on 6)
+OK   12.6(c) strong components of the implication graph decide 2SAT == truth table (3000 random 2CNF)
+OK   12.6(c) the assignment 'x true iff comp(x) after comp(xbar)' satisfies every satisfiable instance
+OK   12.7(b) same construction with k = 4, 5 colors (clique of k-3): 3-colorable <=> k-colorable, all small graphs
+OK   12.7(b) 12Color: G + K9 joined to every vertex is 12-colorable <=> G is 3-colorable; n+9 vertices, m+36+9n edges  [all 1099 graphs on <= 5 vertices]
+OK   12.7(c) padding to K = 4, 5 literals: padded formula satisfiable <=> 3CNF satisfiable (2500 random formulas)
+OK   12.7(c) every padded clause has exactly K literals on K distinct variables
+OK   12.7(c) K = 12 (9 padding variables): satisfiable <=> satisfiable, 12 distinct variables per clause, 512 clauses per 3-variable clause  [60 random formulas (59 satisfiable), 32 with 3 distinct vars per clause]
+OK   12.8(a) both orientations of every edge (fixed NO instance if n < 3): directed HC <=> undirected HC  [all graphs <= 5 vertices + 600 random on 6; 491 YES]
+OK   12.8(a) without the special case, the one-edge graph K2 (no Hamiltonian cycle) would map to a directed 2-cycle
+OK   12.8(b) in/mid/out split: undirected HC <=> directed HC; 3n vertices, 2n + m edges  [1069 digraphs (all on <= 3 vertices, 500 random each on 4, 5); 187 YES]
+OK   12.10(a) add a vertex adjacent to everything (fixed YES instance if n = 1): HC <=> HP  [all graphs <= 5 vertices, 400 random each on 6, 7]
+OK   12.10(b) copy v to v', pendants s-v and t-v' (fixed NO instance if n < 3): HP <=> HC, for every choice of v  [all graphs <= 5 vertices, 400 random each on 6, 7]
+OK   12.10(b) without the special case, K2 would map to a graph with Hamiltonian path s v u v' t
+OK   12.10(a) without the n = 1 case, the one-vertex graph (Hamiltonian path) would map to K2 (no Hamiltonian cycle)
+OK   12.16(a) G + c isolated vertices (c = 1, 2, 3): path missing exactly / at most c vertices <=> Hamiltonian path  [all graphs <= 5 vertices]
+OK   12.16(b) D-2 pendant leaves at every vertex (D = 2, 3, 4): spanning tree of max degree <= D <=> Hamiltonian path  [all graphs <= 5 vertices]
+OK   12.16(b) with D = 23: 21 pendants per vertex, 22n vertices
+OK   12.16(c) apex z adjacent to all + L-1 pendants on z (L = 2, 3, 4): spanning tree with <= L leaves <=> HP  [all graphs <= 5 vertices]
+OK   12.16(d) G + c disjoint edges (c = 0..3): largest set with <= c inside edges == alpha(G) + 2c  [all graphs <= 5 vertices (<= 4 for c = 3)]
+OK   12.16(e) a d-clique joined to each vertex (d = 1, 2, 3): largest set with <= d neighbors inside == dn + alpha(G)  [all graphs <= 5 / 4 / 3 vertices]
+OK   12.16(f) G + c disjoint K4 (c = 1, 2): 3-coloring with <= c monochromatic edges <=> G 3-colorable  [136 graphs]
+OK   12.16(f) K4 alone: every 3-coloring has >= 1 monochromatic edge, and some has exactly 1
+OK   12.22(a) Euler-trail test (connected + 0 or 2 odd labels) == exhaustive search (2500 random bags of <= 7)  [1903 YES]
+OK   12.22(b) one domino [u|v] per edge (fixed NO instance if n < 3): 'every label twice' <=> Hamiltonian cycle  [all graphs <= 5 vertices; 229 YES]
+OK   12.22(b) the n <= 2 case only shortens the proof: without it, every graph with n <= 2 (at most one domino) already maps to a NO instance, e.g. K2 gives {[1|2]}, which shows 1 and 2 once
+OK   12.26 G (isolated vertices deleted) + w_uv per edge: vertex cover <= k <=> dominating set <= k, for every k  [1399 graphs; n0 + m vertices, 3m edges]
+OK   12.26 trap: keeping isolated vertices breaks the reduction (some graph and k), keeping them and raising k by their number works (all graphs <= 5 vertices, every k)  [361 broken pairs]
+OK   12.34 grid with red/blue stones per positive/negative literal: solvable <=> satisfiable  [1500 random 3CNF formulas (1477 satisfiable), every subset of stones tried]
+OK   12.38 complement of (G + triangle): three nonempty cliques <=> G 3-colorable  [all graphs <= 5 vertices; 1032 YES]
+OK   12.38 without the triangle, the one-vertex graph would map to a NO instance
+OK   12.38 without the triangle the plain complement fails exactly on the graphs with < 3 vertices
+OK   figure 12.8(b): the directed example has a Hamiltonian cycle and so does its 9-vertex image
+OK   figure 12.10(b): G has a Hamiltonian cycle, G' (8 vertices) a Hamiltonian path
+OK   figure 12.26: smallest vertex cover 2, smallest dominating set of G' 2, G' has 4 + 4 vertices
+OK   figure 12.34: the assignment satisfies the formula and leaves a stone in every row, one color per column
+
+ALL OK

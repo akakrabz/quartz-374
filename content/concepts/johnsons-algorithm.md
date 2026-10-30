@@ -1,7 +1,7 @@
 ---
 title: "Johnson's algorithm"
 description: "All-pairs shortest paths with negative edges in O(VE log V) time: reweight the edges by vertex prices — distances from a new vertex — so that every weight is nonnegative without changing any shortest path, then run Dijkstra from every vertex."
-tags: [concept, algorithms, graphs, midterm-2]
+tags: [concept, algorithms, graphs]
 aliases: ["reweighting", "Johnson's reweighting", "JohnsonAPSP", "vertex prices", "reduced weights"]
 ---
 

@@ -89,7 +89,7 @@ OK   concept floyd-warshall example: start (0,3,4),(∞,0,−1),(2,∞,0); phase
 OK   concept floyd-warshall example: cycles 1-2-3-1 (4) and 1-3-1 (6); with w(3->1) = −3 the first has length −1; diagonal −1, −1, −2; (3, 1) = −4; with infinity on the diagonal the original graph gets 4, 4, 4
 OK   concept floyd-warshall example text
 OK   page: section headings and anchors used by other pages
-OK   page: meta line (book pages, whole-book PDF, prev, exercises)
+OK   page: meta line (book pages, chapter PDF, prev, next, exercises)
 OK   page: every figure marker has its figure inlined
 
 ALL OK

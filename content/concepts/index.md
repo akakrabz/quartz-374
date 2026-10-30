@@ -58,4 +58,10 @@ The chapters tell the story in the book's order; **concept pages** are the gloss
 ### Shortest paths
 [[concepts/shortest-paths]] · [[concepts/breadth-first-search]] · [[concepts/dijkstras-algorithm]] · [[concepts/bellman-ford]] · [[concepts/all-pairs-shortest-paths]] · [[concepts/johnsons-algorithm]] · [[concepts/floyd-warshall]]
 
+### Maximum flows and their applications
+[[concepts/maximum-flow]] · [[concepts/ford-fulkerson]] · [[concepts/flow-reductions]] · [[concepts/bipartite-matching]]
+
+### NP-hardness
+[[concepts/np-hardness]] · [[concepts/polynomial-time-reductions]] · [[concepts/satisfiability]] · [[concepts/independent-set]] · [[concepts/graph-coloring]] · [[concepts/hamiltonian-cycle]] · [[concepts/subset-sum]] · and from Part 1, [[concepts/cook-levin-theorem]]
+
 The four classes of languages and the closure properties of each are drawn together on [[0-toolkit/03-the-big-picture|the big picture]]; the exam boilerplate for each kind of proof is collected on [[0-toolkit/02-proof-templates|proof templates]].

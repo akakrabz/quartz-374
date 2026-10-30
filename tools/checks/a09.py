@@ -1205,9 +1205,10 @@ on("page: section headings and anchors used by other pages", True, page,
    "## 9.1 Introduction", "## 9.2 Lots of single sources", "## 9.3 Reweighting", "## 9.4 Johnson's algorithm",
    "## 9.5 Dynamic programming", "## 9.6 Divide and conquer", "## 9.7 Funny matrix multiplication",
    "## 9.8 Floyd–Warshall", "## Summary")
-on("page: meta line (book pages, whole-book PDF, prev, exercises)", True, page,
-   "*Algorithms, Chapter 9 · book pp. 309–326 · [whole-book PDF](https://jeffe.cs.illinois.edu/teaching/algorithms/"
-   "book/Algorithms-JeffE.pdf) · prev: [[2-algorithms/08-shortest-paths|Chapter 8]] · exercises: "
+on("page: meta line (book pages, chapter PDF, prev, next, exercises)", True, page,
+   "*Algorithms, Chapter 9 · book pp. 309–326 · [chapter PDF](https://jeffe.cs.illinois.edu/teaching/algorithms/"
+   "book/09-apsp.pdf) · prev: [[2-algorithms/08-shortest-paths|Chapter 8]] · next: "
+   "[[2-algorithms/10-maximum-flows-and-minimum-cuts|Chapter 10]] · exercises: "
    "[[2-algorithms/09-all-pairs-shortest-paths-exercises|solved exercises]]*")
 check("page: every figure marker has its figure inlined",
       all(f"<!-- fig:a09-{k} -->\n" + FIG[k].strip() in page for k in FIG))

@@ -31,6 +31,9 @@ content/2-algorithms/06-depth-first-search-exercises.md
 content/2-algorithms/07-minimum-spanning-trees.md    (build 4) + 07-minimum-spanning-trees-exercises.md
 content/2-algorithms/08-shortest-paths.md                       + 08-shortest-paths-exercises.md
 content/2-algorithms/09-all-pairs-shortest-paths.md             + 09-all-pairs-shortest-paths-exercises.md
+content/2-algorithms/10-maximum-flows-and-minimum-cuts.md (build 5) + 10-maximum-flows-and-minimum-cuts-exercises.md
+content/2-algorithms/11-applications-of-flows-and-cuts.md           + 11-applications-of-flows-and-cuts-exercises.md
+content/2-algorithms/12-np-hardness.md                              + 12-np-hardness-exercises.md
 content/concepts/<slug>.md                         concept pages (see §3)
 tools/figs_a0N.py → tools/figs/a0N-*.html          figures (chapter N; exercises use a0Nx-*)
 tools/checks/a0N.py (+ .out)                       checks for chapter page N and its concept pages
@@ -66,7 +69,23 @@ Ch8: 8.1 Shortest path trees | 8.2 Negative edges | 8.3 The only SSSP algorithm 
      8.7 Relax all the edges: Bellman–Ford | Summary
 Ch9: 9.1 Introduction | 9.2 Lots of single sources | 9.3 Reweighting | 9.4 Johnson's algorithm | 9.5 Dynamic programming |
      9.6 Divide and conquer | 9.7 Funny matrix multiplication | 9.8 Floyd–Warshall | Summary
+Ch10: 10.1 Flows | 10.2 Cuts | 10.3 The maxflow-mincut theorem | 10.4 Ford and Fulkerson's augmenting-path algorithm |
+     10.5 Combining and decomposing flows | 10.6 Edmonds and Karp's algorithms | 10.7 Further progress | Summary
+Ch11: 11.1 Edge-disjoint paths | 11.2 Vertex capacities and vertex-disjoint paths | 11.3 Bipartite matching |
+     11.4 Tuple selection | 11.5 Disjoint-path covers | 11.6 Baseball elimination | 11.7 Project selection | Summary
+Ch12: 12.1 A game you can't win | 12.2 P versus NP | 12.3 NP-hard, NP-easy and NP-complete | 12.4 Formal definitions |
+     12.5 Reductions and SAT | 12.6 3SAT (from CircuitSat) | 12.7 Maximum independent set (from 3SAT) |
+     12.8 The general pattern | 12.9 Clique and vertex cover (from independent set) | 12.10 Graph coloring (from 3SAT) |
+     12.11 Hamiltonian cycle | 12.12 Subset sum (from vertex cover) | 12.13 Other useful NP-hard problems |
+     12.14 Choosing the right problem | 12.15 A frivolous real-world example | 12.16 On beyond zebra | Summary
 ```
+Build-5 anchors (github-slugger: lowercase, punctuation dropped, spaces → hyphens, Unicode kept): `#103-the-maxflow-mincut-theorem`,
+`#104-ford-and-fulkersons-augmenting-path-algorithm`, `#106-edmonds-and-karps-algorithms`, `#113-bipartite-matching`,
+`#121-a-game-you-cant-win`, `#123-np-hard-np-easy-and-np-complete`, `#126-3sat-from-circuitsat`,
+`#127-maximum-independent-set-from-3sat`, `#128-the-general-pattern`, `#129-clique-and-vertex-cover-from-independent-set`,
+`#1210-graph-coloring-from-3sat`, `#1211-hamiltonian-cycle`, `#1212-subset-sum-from-vertex-cover`,
+`#1213-other-useful-np-hard-problems`, `#1214-choosing-the-right-problem`. `tools/check.py` validates every anchor.
+The ♥ sections (12.4, 12.16) are kept, briefly, with "(♥ in the book)" in the first sentence, not in the heading.
 
 Anchors are github-slugger slugs: `#17-recursion-trees`, `#18-linear-time-selection`, `#24-the-general-pattern`,
 `#27-longest-increasing-subsequence-take-2`, `#31-matravrtta-fibonacci-numbers`, `#34-the-pattern-smart-recursion`,
@@ -94,6 +113,20 @@ Ch 8: `shortest-paths` (SSSP, shortest-path trees, tense edges and relaxation, F
 Ch 9: `all-pairs-shortest-paths` (the problem, lots of single sources, DP, divide and conquer, funny matrix
       multiplication) · `johnsons-algorithm` (reweighting) · `floyd-warshall`
 
+Ch 10: `maximum-flow` (flows, cuts, residual graphs, the maxflow-mincut theorem, integrality; aliases such as "maxflow",
+      "minimum cut", "maxflow-mincut theorem") · `ford-fulkerson` (augmenting paths, running times, Edmonds–Karp's two
+      rules; aliases "Ford–Fulkerson", "augmenting path", "Edmonds–Karp")
+Ch 11: `flow-reductions` (modeling a problem as a flow network: edge- and vertex-disjoint paths, vertex capacities,
+      the two-direction proof, integrality) · `bipartite-matching`
+Ch 12: `np-hardness` (P, NP, co-NP, NP-hard, NP-easy, NP-complete, P versus NP; aliases "NP-hard", "NP-complete",
+      "P versus NP") · `polynomial-time-reductions` (Karp reductions, the direction rule, the write-up and its rubric;
+      aliases "Karp reduction", "many-one reduction", "NP-hardness proof") · `satisfiability` (SAT, CircuitSat, 3SAT,
+      CNF, the CircuitSat → SAT/3SAT reductions; aliases "SAT", "3SAT", "CircuitSat") · `independent-set` (with clique
+      and vertex cover: the 3SAT reduction and the complement relations; aliases "IndependentSet", "maximum independent
+      set", "clique", "vertex cover") · `graph-coloring` (3Color from 3SAT) · `hamiltonian-cycle` (the book's reduction).
+      Already on the site and to be linked, not rewritten: `cook-levin-theorem` (Part 1 §9.6) and `subset-sum` (Ch 2–3;
+      the Ch 12 writer adds §12.12 to its "Where it appears" line and nothing else).
+
 Concept pages follow SPEC §12 (definition/key box, why it works, recipe/template, traps, one checked example, "Where it appears"
 with exact anchors, `Related:` last). Tags: `concept` plus `algorithms` and a topic tag. Check aliases are unique site-wide
 (`grep -rh "^aliases" content`).
@@ -110,7 +143,7 @@ chapter: 1
 ```
 Meta line: `*Algorithms, Chapter 1 · book pp. 21–70 · [chapter PDF](https://jeffe.cs.illinois.edu/teaching/algorithms/book/01-recursion.pdf) · next: [[2-algorithms/02-backtracking|Chapter 2]] · exercises: [[2-algorithms/01-recursion-exercises|solved exercises]]*`
 (Chapter PDFs: `01-recursion.pdf`, `02-backtracking.pdf`, `03-dynprog.pdf`, `04-greedy.pdf`, `05-graphs.pdf`, `06-dfs.pdf`,
-`07-mst.pdf`, `08-sssp.pdf`; for Ch 9 link the whole-book PDF `Algorithms-JeffE.pdf` with book pages.) Then `> [!abstract] In one breath`, the fixed
+`07-mst.pdf`, `08-sssp.pdf`, `09-apsp.pdf`, `10-maxflow.pdf`, `11-maxflowapps.pdf`, `12-nphard.pdf`.) Then `> [!abstract] In one breath`, the fixed
 sections, `## Summary`, `> [!exam] On the exams`, `### Sources for this page` — as in Part 1.
 
 ## 5. Algorithms on the page
@@ -137,6 +170,19 @@ sections, `## Summary`, `> [!exam] On the exams`, `### Sources for this page` �
   (3) the standard algorithm invoked as a black box (whatever-first search when reachability is all that is needed);
   (4) time in the INPUT's parameters. Notation: $G = (V, E)$, $n = \lvert V\rvert$ (the book writes $V$ for both — use $V$
   and $E$ in running times like the book: $O(V + E)$), directed edges $u\to v$, undirected edges $uv$.
+- **Flow reductions** (Ch 10–11) are written like graph reductions, plus Erickson's two-direction proof: (1) the flow
+  network — vertices, directed edges, capacities, source and sink — as explicit functions of the input; (2) the claim
+  "the input has a solution of size $k$ if and only if the network has an $(s,t)$-flow of value $k$", proved in both
+  directions (solution → flow; integral flow → solution, by the integrality theorem); (3) the maximum-flow algorithm
+  as a black box (Ford–Fulkerson in $O(E\lvert f^*\rvert)$ when the flow value is small, otherwise Orlin's $O(VE)$ as
+  the book allows); (4) time in the input's parameters. Flows are **not taught in CS 374** (the book's own page says the
+  course covers everything except flows) and appear on no exam: say so once in the "On the exams" box, without a rubric.
+- **NP-hardness proofs** (Ch 12) are written in the course NP-hardness rubric's format (algo-facts.md): name the known
+  NP-hard problem $X$; the reduction as an algorithm that takes an **arbitrary instance of $X$** and builds an instance
+  of $Y$ in polynomial time (gadgets described exactly, sizes counted); the "⇒" proof (a YES instance of $X$ gives a YES
+  instance of $Y$) and the "⇐" proof (if the built instance of $Y$ is YES, the instance of $X$ was YES); the words
+  "polynomial time". The direction rule is the top trap: reduce **from** the known hard problem **to** the new one.
+  Every reduction on a page is checked by brute force on all (or many random) small instances: YES ↦ YES and NO ↦ NO.
 - Recursion trees: show the level sums and say which of the three cases applies (decreasing geometric → root dominates,
   equal → levels × level sum, increasing → leaves dominate).
 

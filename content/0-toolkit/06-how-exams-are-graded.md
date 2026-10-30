@@ -1,6 +1,6 @@
 ---
 title: "How exams are graded"
-description: "Exam dates, scope and cheat-sheet rules; the Midterm 1 format; and a paraphrase of every standard rubric — induction, regular expressions and grammars, DFAs and NFAs, fooling sets, language transformations, diagonalization, reductions, Rice's theorem, recursive algorithms, dynamic programming and graph reductions — with what loses points, the matching template and a worked problem for each."
+description: "Exam dates, scope, policies and cheat-sheet rules; the Midterm 1 and Midterm 2 formats; and a paraphrase of every standard rubric — induction, regular expressions and grammars, DFAs and NFAs, fooling sets, language transformations, diagonalization, reductions, Rice's theorem, recursive algorithms, dynamic programming, graph reductions and NP-hardness — with what loses points, the matching template and a worked problem for each."
 tags: [toolkit, strings, regular, context-free, undecidability, algorithms, midterm-1, midterm-2]
 aliases: ["rubrics", "grading rubrics", "exam rubrics", "exam format"]
 ---
@@ -27,6 +27,7 @@ Each standard rubric is out of 10 points.
 | [[#11-recursive-algorithms\|recursive algorithm]] (divide and conquer, backtracking) | 3 English description of the problem the algorithm solves · 1 base cases · 2 the recursive subproblems · 2 using their results · 2 time: 1 recurrence + 1 solution | [[0-toolkit/02-proof-templates#18-writing-up-a-divide-and-conquer-algorithm\|divide and conquer]], [[0-toolkit/02-proof-templates#19-writing-up-a-backtracking-algorithm\|backtracking]] | [[2-algorithms/01-recursion#14-mergesort\|mergesort]], [[2-algorithms/02-backtracking#23-subset-sum\|subset sum]] |
 | [[#12-dynamic-programming\|dynamic programming]] | 3 English description of the recursive function · 4 recurrence: 1 base cases + 3 recursive cases · 3 iterative details: 1 memoization structure, 1 evaluation order, 1 time | [[0-toolkit/02-proof-templates#20-writing-up-a-dynamic-program\|dynamic program]] | [[2-algorithms/03-dynamic-programming#37-edit-distance\|edit distance]] |
 | [[#13-graph-reductions\|graph reduction]] | 3 the graph: 1 vertices, 1 edges (−½ without "directed"), 1 weights · 3 the problem on the graph: 1 high-level problem, 2 details · 2 the right algorithm as a black box · 2 time in the input's parameters | [[0-toolkit/02-proof-templates#22-solving-a-problem-by-graph-reduction\|graph reduction]] | [[2-algorithms/05-basic-graph-algorithms#57-graph-reductions-flood-fill\|flood fill]] |
+| [[#14-np-hardness\|NP-hardness]] (final exam) | 1 a reasonable NP-hard problem $X$ to reduce from · 2 a structurally sound reduction: an arbitrary instance of $X$ in, an instance of $Y$ out, polynomial time · 2 correct (YES ↦ YES, NO ↦ NO) · 2 "only if": YES for $X$ gives YES for $Y$ · 2 "if": YES for the built $Y$ gives YES for $X$ · 1 "polynomial time" | [[2-algorithms/12-np-hardness#128-the-general-pattern\|the general pattern]] | [[2-algorithms/12-np-hardness#127-maximum-independent-set-from-3sat\|3SAT → independent set]] |
 
 **On every problem** ([[#10-general-rules|§10]]): "clearly", "trivial" and "obviously" draw scrutiny; ambiguity is read unfavorably; an NFA where a DFA was asked earns half credit; $\varnothing$ or $\Sigma^*$ as a regular expression or grammar earns nothing; and any result from lecture, the lecture notes, labs or homework solutions may be used without proof.
 
@@ -35,10 +36,14 @@ Each standard rubric is out of 10 points.
 | exam | when | covers | cheat sheet |
 |---|---|---|---|
 | Midterm 1, "Models of computation" | Mon Sep 28, 2026 (done) | induction on strings and languages, regular languages and regular expressions, DFAs, NFAs, fooling sets, regular language transformations, context-free languages and grammars (Chapters 1–5); no Turing machines | one sheet |
-| Midterm 2, "Algorithms" | Mon Nov 9, 2026, 7–9 pm | the [[2-algorithms/index\|algorithms]] half of the course | one sheet |
-| Final exam, "Everything" | Fri Dec 11, 2026, 8–11 am | everything, including Chapters 6–9, which are tested only here | two sheets |
+| Midterm 2, "Algorithms" | Mon Nov 9, 2026, 7–9 pm (conflict exam Tue Nov 10) | Homeworks 5–9 plus the *interface* of the algorithms introduced on Nov 3 (Bellman–Ford, Floyd–Warshall): recursion, divide and conquer, backtracking, dynamic programming (including tree-shaped and on dags), graphs, whatever-first search (traversal, connectivity, reachability), depth-first search, topological sort, shortest paths — [[2-algorithms/index\|Algorithms]] Chapters 1–3, 5, 6, 8 and Floyd–Warshall from 9; not greedy algorithms, MSTs, flows or NP-hardness | one sheet |
+| Final exam, "Everything" | Fri Dec 11, 2026, 8–11 am | everything, including Models Chapters 6–9 and NP-hardness (Algorithms Chapter 12), which are tested only here | two sheets |
 
-A cheat sheet is a double-sided letter-size sheet, and it must be **handwritten**. The formats of Midterm 2 and of the final exam are not described here; check the course website.
+A cheat sheet is a double-sided letter-size sheet (two single-sided sheets also count as one), and it must be **handwritten** by you, on paper.
+
+**Exam policies** (course website): closed everything except the cheat sheet; each problem takes about 20 minutes and is "much closer in difficulty to lab problems than homework"; every algorithm needs a running time; a faster correct algorithm is worth more than a slower correct one, and a slower correct one more than a faster incorrect one; a greedy algorithm needs a formal proof of correctness or earns nothing; other proofs are needed only when a problem says ***prove*** or ***justify***; write English specifications (above all for dynamic programs), never code.
+
+**Midterm 2's format**, from the Fall 2025 practice exams and exam: **5 problems in 120 minutes** — short answers (solve three recurrences; give the memoization structure, evaluation order and running time for a given recurrence; draw a small graph with stated properties or mark a search tree on a given one), then dynamic programming (often with a part (a): *show that the obvious greedy strategy fails*), divide and conquer, and graph reductions. Problem types, recipes, drills and a study plan: [[0-toolkit/08-review-algorithms|the Midterm 2 review]]. The final's format is not described here; check the course website.
 
 ## 3. The Midterm 1 format
 
@@ -256,7 +261,30 @@ One rubric covers **divide and conquer and backtracking** alike.
 
 **Template:** [[0-toolkit/02-proof-templates#22-solving-a-problem-by-graph-reduction|graph reduction]] · **pattern:** [[concepts/graph-reductions|graph reductions]] · **in context:** [[2-algorithms/05-basic-graph-algorithms#57-graph-reductions-flood-fill|§5.7]], [[2-algorithms/05-basic-graph-algorithms-exercises|Chapter 5 exercises]] (5.11–5.19 are all in this format)
 
+## 14. NP-hardness
+
+Lectured from November 10 and tested on the final, not on Midterm 2. To prove a problem $Y$ NP-hard, reduce a known NP-hard problem $X$ **to** $Y$.
+
+| points | for |
+|---|---|
+| 1 | **a reasonable NP-hard problem $X$** to reduce from — any NP-hard problem listed in the lecture notes (not $Y$ itself); one where a short, direct reduction is likely. If the problem names $X$, this point moves elsewhere |
+| 2 | **a structurally sound reduction**: an algorithm that takes an **arbitrary instance of $X$ and nothing else**, builds an instance of $Y$, and runs in polynomial time. If this is wrong, nothing else earns credit |
+| 2 | **a correct reduction**: it builds a YES instance of $Y$ exactly when it is given a YES instance of $X$ |
+| 2 | **the "only if" proof**: every YES instance of $X$ becomes a YES instance of $Y$ |
+| 2 | **the "if" proof**: if the instance of $Y$ the reduction built is a YES instance, the instance of $X$ was one |
+| 1 | **the words "polynomial time"** — only if the reduction is correct |
+
+A structurally sound but incorrect reduction with half of the proof right is worth at most 5. **A reduction in the wrong direction is worth at most 1.** Black-box reductions from optimization problems, as in Erickson's Chapter 12, are graded by the natural analogs. To prove NP-*completeness*: +1 for membership in NP (describe the certificate), and 1½ instead of 2 for each of the two proofs.
+
+> [!trap] What loses points
+> - **The wrong direction**: an algorithm for $Y$ built from one for the known problem proves nothing about $Y$.
+> - **A reduction that only works for special instances of $X$**, or that looks at the answer (it may not know whether the instance is YES).
+> - **Only one direction proved** — the "if" proof (a YES instance of $Y$ comes from a YES instance of $X$) is the one usually forgotten.
+> - **No size count**: say how big the built instance is and why it is built in polynomial time.
+
+**Template and examples:** [[2-algorithms/12-np-hardness#128-the-general-pattern|the general pattern]] · [[concepts/polynomial-time-reductions|polynomial-time reductions]] · [[concepts/np-hardness|NP-hardness]] · the same direction rule for undecidability: [[#reduction|§9]]
+
 Related: [[0-toolkit/02-proof-templates|proof templates]] · [[0-toolkit/01-notation-and-conventions|notation and conventions]] · [[0-toolkit/03-the-big-picture|the big picture]]
 
 ### Sources for this page
-Exam dates and scope, the cheat-sheet rules, the Midterm 1 format (from its practice exams) and the standard rubrics (including the recursive-algorithm, dynamic-programming and graph-reduction rubrics of §11–13) come from the CS/ECE 374 A (Fall 2026) course website and are paraphrased here; the website is authoritative. The "what loses points" lists collect the traps of the chapter and concept pages linked from each section.
+Exam dates and scope, the cheat-sheet rules, the Midterm 1 format (from its practice exams), the Midterm 2 format (from the public Fall 2025 practice exams and exam) and the standard rubrics (including the recursive-algorithm, dynamic-programming, graph-reduction and NP-hardness rubrics of §11–14), the exam policies come from the CS/ECE 374 A (Fall 2026) course website and are paraphrased here; the website is authoritative. The "what loses points" lists collect the traps of the chapter and concept pages linked from each section.

@@ -44,11 +44,11 @@ Opening `public/index.html` from disk (file://) does not work — search, graph 
 
 ```
 content/index.md                       home
-content/0-toolkit/                     notation, proof templates, big picture, two exam reviews, grading, errata
+content/0-toolkit/                     notation, proof templates, big picture, three exam reviews (Ch 1–5, Ch 6–9, Midterm 2 algorithms), grading, errata
 content/1-models-of-computation/       one page per book chapter (01-strings … 09-nondeterministic-turing-machines)
-content/2-algorithms/                  Part 2: one page per book chapter (01-recursion …) and its solved exercises (01-recursion-exercises …)
-content/3-homework-and-exams/          the course's own problems worked out: Midterm 1 practice tests 1–3, labs 6a–10b (`tools/SPEC-labs.md`, checks `labs_06`–`labs_10b`), homework write-ups (HW6)
-content/concepts/                      65 glossary pages (32 for Part 1, 33 for Part 2)
+content/2-algorithms/                  Part 2: one page per book chapter (01-recursion … 12-np-hardness) and its solved exercises (01-recursion-exercises …)
+content/3-homework-and-exams/          the course's own problems worked out: Midterm 1 practice tests 1–3, labs 6a–10b (`tools/SPEC-labs.md`, checks `labs_06`–`labs_10b`), homework write-ups (HW6, HW7)
+content/concepts/                      75 glossary pages (32 for Part 1, 43 for Part 2)
 content/problems/                      11 worked exam-style problems
 content/practice/                      7 practice pages (generated hub, easy/medium/hard and topic lists)
 tools/                                 specs, checkers, figure generators, automata library (see §5)
@@ -80,7 +80,7 @@ for f in tools/figs_*.py; do python3 "$f"; done; python3 tools/assemble.py   # r
 
 `tools/REVIEW-SPEC.md` is the independent-review procedure; the reviewers' logs are in `tools/review/`.
 
-## 6. What's here (build 4, 2026-10-25 — Part 1 complete, Part 2 Chapters 1–9, labs 6a–9b)
+## 6. What's here (build 5, 2026-10-30 — Part 1 and Part 2 complete, labs 6a–10b, HW6–7, Midterm 2 review)
 
 - **Part 1 · Models of Computation:** all nine chapters of Erickson's book, one page each (49 figures across the site).
 - **32 concept pages**, **7 toolkit pages** (notation, proof templates, the big picture, review of Ch 1–5, review of Ch 6–9, how exams are graded, errata in the book), **11 worked problems**, and **60 practice problems** for Chapters 1–7 (24 easy, 20 medium, 16 hard), each with a folded hint and a worked solution.
@@ -89,6 +89,7 @@ for f in tools/figs_*.py; do python3 "$f"; done; python3 tools/assemble.py   # r
 - **Part 2 · Algorithms (build 2):** Chapters 1–3 of Erickson's *Algorithms* (recursion, backtracking, dynamic programming), one page each, plus a page of solved book exercises per chapter (13, 6 and 10 exercises; ♥ problems and anything equivalent to open homework skipped), 12 concept pages, 12 figures, and the recursive-algorithm and dynamic-programming rubrics and templates on the toolkit pages. Six check scripts (`a01`–`a03`, `a01x`–`a03x`), 611 checks, all passing; `tools/check.py` passes on all 95 pages (2,068 links and anchors, 19,314 KaTeX expressions). Each chapter and its exercises were reviewed independently (`tools/review/R7`–`R9`); the book slips found are on the errata page. Chapters 4–12 are listed as planned on the unit page.
 - **Part 2, build 3:** Chapters 4–6 (greedy algorithms, basic graph algorithms, depth-first search) with solved exercises (9, 19 and 14), 11 more concept pages and a master-theorem page, the graph-reduction rubric (grading page §13) and the greedy and graph-reduction templates (proof templates §21–22), and the errata for Chapters 4–6. Checks `a04`–`a06`, `a04x`–`a06x` and `master_theorem` add about 600 checks; all 29 check scripts pass (about 2,450 checks), and `tools/check.py` passes on all 118 pages. Reviews: `tools/review/R10`–`R12`.
 - **Part 2, build 4:** Chapters 7–9 (minimum spanning trees, shortest paths, all-pairs shortest paths) with solved exercises (10, 16 and 10), 9 more concept pages, figures on every page, errata for Chapters 7–9; checks `a07`–`a09`, `a07x`–`a09x`; reviews `tools/review/R15`–`R17`. Also the lab pages 6a–9b (`content/3-homework-and-exams/lab-*.md`, reviews R13–R14).
+- **Part 2, build 5:** Chapters 10–12 (maximum flows and minimum cuts, applications of flows and cuts, NP-hardness) with solved exercises (10, 10 and 13), 10 more concept pages, figures, errata for Chapters 10–12 (including a 3SAT → Hamiltonian-cycle reduction that is wrong as printed, repaired on the page); checks `a10`–`a12`, `a10x`–`a12x`, `a12c`; reviews `tools/review/R20`–`R23`. The **Midterm 2 review** (`0-toolkit/08-review-algorithms.md`, checks `review_mt2`, review R19), the official Midterm 2 scope on the grading page and in every chapter's exam box, the NP-hardness rubric (grading §14) and template (proof templates §23), and the HW7 write-up (check `hw7`). Flows are marked as not part of CS 374 this semester; NP-hardness as final-only.
 
 ## 7. The practice bank: adding or changing problems
 

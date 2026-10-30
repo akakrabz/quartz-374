@@ -1,7 +1,7 @@
 ---
 title: "Errata in the books"
-description: "Slips in Erickson's two textbooks found while writing this site — in Models of Computation a wrong move in a printed Turing machine, a too-weak CNF rule and an off-by-one in the Cook–Levin tableau; in Algorithms wrong summation limits, a wrong growth rate, array ranges and loop bounds that do not fit their tables, a broken non-recursive Hanoi rule, wrong counts in exercise examples, a Huffman loop off by one, an unstable “stable” matching, graph-search pseudocode that recurses forever or labels nothing, an off-by-one negative-cycle test and an all-pairs table entry that is read but never written — each with the correction and the section here that has it right."
-tags: [toolkit, regular, context-free, turing-machines, undecidability, complexity, algorithms]
+description: "Slips in Erickson's two textbooks found while writing this site — in Models of Computation a wrong move in a printed Turing machine, a too-weak CNF rule and an off-by-one in the Cook–Levin tableau; in Algorithms wrong summation limits, a wrong growth rate, array ranges and loop bounds that do not fit their tables, a broken non-recursive Hanoi rule, wrong counts in exercise examples, a Huffman loop off by one, an unstable “stable” matching, graph-search pseudocode that recurses forever or labels nothing, an off-by-one negative-cycle test an all-pairs table entry that is read but never written, a sign slip in the definition of net flow, a false exercise about opposing edges, and a 3SAT → Hamiltonian-cycle reduction that is wrong as printed — each with the correction and the section here that has it right."
+tags: [toolkit, regular, context-free, turing-machines, undecidability, complexity, algorithms, flows]
 aliases: ["errata", "book errata", "typos in the book"]
 ---
 
@@ -166,6 +166,48 @@ The book is careful, and every item below is small. They are listed because each
 | p. 315, the Fischer–Meyer recurrence | base case "if $i = 1$" | "if $\ell = 1$" | — [[2-algorithms/09-all-pairs-shortest-paths#96-divide-and-conquer\|§9.6]] |
 | p. 316 | dropping the third index reduces the space "from $O(V^3)$ to $O(V^2)$" | the 3-D table has $V^2(\lceil\lg V\rceil + 1) = O(V^2\log V)$ entries; $O(V^3)$ is true but loose | — [[2-algorithms/09-all-pairs-shortest-paths#96-divide-and-conquer\|§9.6]] |
 | Ex. 9.11, p. 324 (recursive Floyd–Warshall) | initialization "if $i = j$ … ; if $i\to j\in E$ … else $\infty$"; base case $D[i,k] + D[j,k]$; the order of the eight recursive calls | "else if" (the printed "else" overwrites the diagonal with $\infty$); $D[i,k] + D[k,j]$; all four calls with the first half of $k$ first, then the second half in reverse block order — each of the three defects alone gives wrong distances | the exercise is skipped on this site; its page explains the fix — [[2-algorithms/09-all-pairs-shortest-paths-exercises\|Ch 9 exercises]] |
+
+## Algorithms, Chapter 10 · Maximum flows and minimum cuts
+
+| where | as printed | should be | why it matters |
+|---|---|---|---|
+| p. 329, net flow $\partial f(v)$ | the formula subtracts outflow from inflow, but the text calls it the net flow *out* of $v$ and concludes $\lvert f\rvert = \partial f(s)$; "or every vertex" | outflow minus inflow (as the proof of Lemma 10.1 uses); "for every vertex" | with the printed formula the value of $f$ comes out negative — [[2-algorithms/10-maximum-flows-and-minimum-cuts#101-flows\|§10.1]] |
+| p. 336, Zwick's non-terminating example | after $4n+1$ augmentations the residual capacities are $\varphi^{2n-2}, 0, \varphi^{2n-1}$; the flow value tends to $4+\sqrt5$ | $\varphi^{2n}, 0, \varphi^{2n+1}$; the limit is $1 + 2\varphi/(1-\varphi) = 2+\sqrt5$ (the book sums $\sum_{i\ge1}\varphi^i$ as $1/(1-\varphi)$) | the conclusion — the value stays below the maximum, 7 — still holds — [[2-algorithms/10-maximum-flows-and-minimum-cuts#104-ford-and-fulkersons-augmenting-path-algorithm\|§10.4]] |
+| p. 337, flow decomposition | every non-negative flow is a combination of path and cycle flows | every non-negative flow with $\lvert f\rvert \ge 0$: one unit on $t\to s$ is a non-negative flow of value $-1$ | the proof covers only $\lvert f\rvert = 0$ and $\lvert f\rvert > 0$ — [[2-algorithms/10-maximum-flows-and-minimum-cuts#105-combining-and-decomposing-flows\|§10.5]] |
+| p. 337, path flows | value $-1$ on edges a path uses backward | right for augmenting paths in the residual graph; wrong in a network with antiparallel edges (with $s\to t$ and $t\to s$, the path $s\to t$ gets value 2) | — [[2-algorithms/10-maximum-flows-and-minimum-cuts#105-combining-and-decomposing-flows\|§10.5]] |
+| p. 338 | $v_j\to v_{j-1}\to\cdots\to v_k$ | $v_{j+1}$ | — [[2-algorithms/10-maximum-flows-and-minimum-cuts#105-combining-and-decomposing-flows\|§10.5]] |
+| p. 339, the $O(VE)$ decomposition | walk from $s$ along edges with flow until $t$ or a repeated vertex | the walk can get stuck when flow enters $s$ (the circulation $s\to a\to t\to b\to s$); add an edge $t\to s$ carrying $\lvert f\rvert$ and peel off cycles, as the proof does | Ford–Fulkerson flows never put flow into $s$, so the walk works for them — [[2-algorithms/10-maximum-flows-and-minimum-cuts#105-combining-and-decomposing-flows\|§10.5]] |
+| p. 342, Edmonds–Karp | "at most $EV/2$ iterations"; "the $i$th / $j$th augmenting path" in the proof of Lemma 10.3 | the argument counts residual edges, of which there can be $2E$, so it gives $VE$; the $(i{+}1)$st / $(j{+}1)$st path under Lemma 10.2's numbering | the $O(VE^2)$ bound is unaffected — [[2-algorithms/10-maximum-flows-and-minimum-cuts#106-edmonds-and-karps-algorithms\|§10.6]] |
+| Ex. 10.2, p. 344 | an edge $u\to v$ of a flow network | needs $c(u\to v) > 0$; §10.1 allows capacity 0 | a degenerate counterexample — [[2-algorithms/10-maximum-flows-and-minimum-cuts-exercises#exercise-102--an-edge-never-crosses-minimum-cuts-both-ways\|Ex. 10.2]] |
+| Ex. 10.4(a),(b), p. 345 | subtracting $\min\{c(u\to v), c(v\to u)\}$ from both opposing edges keeps the maximum flows and the minimum cuts | **false**: $s\to u$ 1, $u\to v$ 7, $v\to u$ 10, $v\to t$ 1 has maximum flow 1, the simplified network 0; part (c) is true | to remove an opposing pair, subdivide one edge with a new vertex instead — [[2-algorithms/10-maximum-flows-and-minimum-cuts-exercises#exercise-104--simplifying-opposing-edges-false-as-printed\|Ex. 10.4]] |
+| Ex. 10.9(a),(b), p. 346 | bounds for "an arbitrary $(s,t)$-flow" | need a connected network and a flow $f \ge 0$ with $\lvert f\rvert\ge0$ (two disjoint directed triangles need two cycles, though $E-V+1 = 1$) | — [[2-algorithms/10-maximum-flows-and-minimum-cuts-exercises#exercise-109--tight-bounds-for-flow-decompositions\|Ex. 10.9]] |
+
+## Algorithms, Chapter 11 · Applications of flows and cuts
+
+| where | as printed | should be | why it matters |
+|---|---|---|---|
+| p. 356, bipartite matching | the proof writes $U$ and $W$ for the two sides | $L$ and $R$, as in the construction | — [[2-algorithms/11-applications-of-flows-and-cuts#113-bipartite-matching\|§11.3]] |
+| p. 360, exam scheduling | the edge rule uses $A[\ell,k]$ | $A[k,\ell]$ | the indices name a different pair — [[2-algorithms/11-applications-of-flows-and-cuts#114-tuple-selection\|§11.4]] |
+| p. 361, disjoint-path covers | the proof's "⇐" and "⇒" labels; "project $M'$ back"; the bipartite graph named $G' = (V',E')$ and $H$ | the labels swapped (the "⇐" part proves cover ⇒ matching); $M$; one name | — [[2-algorithms/11-applications-of-flows-and-cuts#115-disjoint-path-covers\|§11.5]] |
+| pp. 364–365, baseball elimination | $R[i] = \sum_j G[i,j]$ | the example's $R[n] = 27$ counts 20 games outside the division too; the formula covers only division games | the reduction needs all remaining games — [[2-algorithms/11-applications-of-flows-and-cuts#116-baseball-elimination\|§11.6]] |
+| p. 365 | "$\binom{n}{2}$ game nodes" for the pairs $1 \le i < j < n$ | $\binom{n-1}{2}$ | — [[2-algorithms/11-applications-of-flows-and-cuts#116-baseball-elimination\|§11.6]] |
+| p. 365 | the converse starts from "a feasible flow" | an **integral** feasible flow (the theorem still holds, by integrality) | a fractional flow does not give a schedule — [[2-algorithms/11-applications-of-flows-and-cuts#116-baseball-elimination\|§11.6]] |
+| p. 366, project selection | a feasible set "includes all its dependents" | all its **prerequisites** | — [[2-algorithms/11-applications-of-flows-and-cuts#117-project-selection\|§11.7]] |
+| p. 367 | "valid input to the maximum cut problem" | **minimum** cut | — [[2-algorithms/11-applications-of-flows-and-cuts#117-project-selection\|§11.7]] |
+| Ex. 11.3, p. 368 | targets "$t_1, t_1, \ldots, t_\tau$" | $t_1, t_2, \ldots, t_\tau$ | — [[2-algorithms/11-applications-of-flows-and-cuts-exercises#exercise-113--multi-terminal-flows\|Ex. 11.3]] |
+
+## Algorithms, Chapter 12 · NP-hardness
+
+| where | as printed | should be | why it matters |
+|---|---|---|---|
+| p. 385, §12.3 | $\textsf{UnSat}$ is NP-hard under Karp reductions "only if P = NP" | an overstatement, not a proven fact: $\textsf{UnSat}$ is Karp-NP-hard if and only if NP = co-NP | — [[2-algorithms/12-np-hardness#123-np-hard-np-easy-and-np-complete\|§12.3]] |
+| p. 394, Fig. 12.10 | the output label "… in $\overline{G}$" | "… in $G$" | — [[2-algorithms/12-np-hardness#129-clique-and-vertex-cover-from-independent-set\|§12.9]] |
+| p. 397, Fig. 12.14 | "all valid 3-colorings up to permutations of the colors": five drawings | four classes (24 colorings / 6); two of the drawings differ only by swapping two colors | — [[2-algorithms/12-np-hardness#1210-graph-coloring-from-3sat\|§12.10]] |
+| p. 398, reduction diagram for VertexCover → DirectedHamCycle | "$O(V+E)$" | $O(V^2)$, as p. 400 says: $H$ has $2kV$ cover edges | — [[2-algorithms/12-np-hardness#from-vertex-cover\|§12.11]] |
+| pp. 398–400, VertexCover → DirectedHamCycle | the construction for every $G$ and $k$ | fails when $k$ exceeds the number of non-isolated vertices (a cover of size $k$ exists, $H$ has too few vertex chains): delete isolated vertices first, and answer YES at once if $k$ is at least the number left | the reduction must handle every instance — [[2-algorithms/12-np-hardness#from-vertex-cover\|§12.11]] |
+| pp. 400–401, 3SAT → DirectedHamCycle | rows of "$2k$ vertices $(i,0),\ldots,(i,2k)$" (that is $2k+1$; the figures draw $2k$), consecutive rows joined end to end | **wrong as printed**: for the eight clauses on $a, b, c$ with $(\bar a\vee b\vee c)$ last — unsatisfiable — the graph is Hamiltonian, because a cycle can leave the end of row $a$ through the last clause vertex into row $b$. The repair: spacer vertices between the clause positions and a hub between consecutive rows | copying the book's construction gives a reduction that is not correct — [[2-algorithms/12-np-hardness#from-3sat\|§12.11]], [[concepts/hamiltonian-cycle\|Hamiltonian cycle]] |
+| p. 402, VertexCover → SubsetSum | "a set $X$" of numbers | a **multiset**: two vertices can get equal numbers (one edge $uv$, $k = 2$) | read as a set, the reduction gives wrong answers — [[2-algorithms/12-np-hardness#1212-subset-sum-from-vertex-cover\|§12.12]] |
+| p. 403 | the "⇐" proof writes $t$ (twice) | $T$ | — [[2-algorithms/12-np-hardness#1212-subset-sum-from-vertex-cover\|§12.12]] |
 
 ## Not errors, but easy to trip over
 

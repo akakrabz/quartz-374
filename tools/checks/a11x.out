@@ -1,0 +1,70 @@
+== maximum flow routine
+OK   Ford-Fulkerson (BFS, DFS, random paths) == brute-force minimum cut, feasible, conserving  [400 random networks x 3 path rules, integer and rational capacities]
+== Exercise 11.1: balanced digraphs
+OK   11.1 balanced digraph: edges leaving S == edges entering S, for every vertex set S  [700 random balanced multigraphs, all subsets]
+OK   11.1 max # edge-disjoint u->v paths (unit-capacity max flow) == min # edges leaving a set with u, not v  [12990 ordered pairs]
+OK   11.1 answer YES: k edge-disjoint u->v paths  =>  k edge-disjoint v->u paths (flow values equal)  [12990 ordered pairs]
+OK   11.1 trap: without balance it fails (single edge u->v: 1 path u->v, 0 paths v->u)
+== Exercise 11.2: a path from u to w through v
+OK   11.2 max flow from v_out to T is at most 2  [32019 (graph, u, v, w) instances]
+OK   11.2 max flow == 2  <=>  some simple u-w path passes through v (all simple paths enumerated)  [32019 instances, 17589 positive]
+OK   11.2 the two flow paths, one reversed and joined at v, form a simple u-w path through v
+OK   11.2 trap graph: the only u-w path through v is u y v x w  [[[0, 4, 1, 3, 2]]]
+OK   11.2 trap graph: after taking u x v first, v cannot reach w without x
+OK   11.2 trap graph: the network has a flow of value 2
+== Exercise 11.3: multi-terminal flows
+OK   11.3(a) MaxMultiFlow value == brute-force min over S (all sources, no target) of c(S, V-S)  [1500 runs: 500 random networks x 3 MaxFlow implementations, integer and rational capacities]
+OK   11.3(a) MaxMultiFlow returns a feasible multi-terminal flow (capacities, conservation at non-terminals)
+OK   11.3(a) invariant: after (i, tau) no target is reachable from s_i, and that reach set never grows
+OK   11.3(a) at the end, no target is reachable from any source in G_f
+OK   11.3(b) super-source/super-target max flow == the same brute-force value
+== Exercise 11.4: Sodor (minimum vertex cut)
+OK   11.4 book's example: the algorithm returns 2  [closes ['X', 'Y']]
+OK   11.4 book's example: the cut found is the two circled stations
+OK   11.4 book's example: brute force over station subsets also gives 2
+OK   11.4 book's example: the max flow is two vertex-disjoint s-t paths  [[['s', 'a', 'X', 'p', 't'], ['s', 'b', 'Y', 'q', 't']]]
+OK   11.4 max flow value == fewest stations whose closing disconnects s from t (all subsets tried)  [934 random graphs with s, t not adjacent]
+OK   11.4 the stations x with x_in reachable and x_out unreachable in the final residual graph form such a set
+OK   11.4 s adjacent to t: no set of closures works (reported as impossible)
+OK   11.4 |f*| <= V - 2 (closing every other station is a cut)
+OK   11.4 trap: capacity-1 split edges for s and t change nothing with source s_out, target t_in; with s_in, t_out they cap the flow at 1  [44 graphs lose flow]
+== Exercise 11.5(a): the escape problem
+OK   11.5 Figure 11.10: max flow == m == 8 (a positive instance)
+OK   11.5 Figure 11.10: the book's eight drawn paths are vertex-disjoint grid paths to the boundary
+OK   11.5 Figure 11.10: the flow decomposes into 8 vertex-disjoint terminal-to-boundary paths
+OK   11.5 a plus of five terminals in a 5 x 5 grid cannot escape (flow 4 < 5)
+OK   11.5 trap: s + the middle terminal + the in-copies of the outer four is a cut of capacity 4 (their split edges)
+OK   11.5 trap: a plus never escapes, every position in grids n = 3..7
+OK   11.5(a) max flow == m  <=>  vertex-disjoint escape paths exist (exhaustive search)  [1200 random instances, n <= 6, 1006 positive]
+OK   11.5 brute force: stopping paths at the first boundary vertex loses nothing (n <= 4)
+OK   11.5(a) |f*| <= 4n - 4 boundary vertices for n >= 2
+== Exercise 11.6: mini-golf (perfect bipartite matching)
+OK   11.6 max flow == n  <=>  some permutation pairs every start with a visible hole  [1500 random bipartite graphs, n <= 7]
+OK   11.6 the edges carrying flow form a matching of size |f*|
+OK   11.6 pipeline on a U-shaped course: visibility edges + max flow == brute force over correspondences  [300 random point sets, 176 positive]
+== Exercise 11.7: cycle covers
+OK   11.7 perfect matching (max flow == V) in the out-copy/in-copy graph  <=>  cycle cover (all permutations)  [2000 random digraphs (some with loops), 358 with a cycle cover]
+OK   11.7 following matched successors splits the vertices into directed cycles of G
+== Exercise 11.8: domino tilings
+OK   11.8 Figure 11.12: 56 squares, 28 of each color, max flow 28 -> True
+OK   11.8 Figure 11.12: exhaustive tiling search agrees
+OK   11.8 Figure 11.12: the book's drawn tiling covers each square once with 28 dominoes
+OK   11.8 matching test (equal colors and max flow == #black) == exhaustive tiling search  [1500 random boards, n <= 6, 463 tileable]
+OK   11.8 trap: two non-adjacent squares of opposite colors (equal counts) cannot be tiled
+OK   11.8 mutilated 8 x 8 board (opposite corners deleted): 30 vs 32 squares of the two colors -> False
+== Exercise 11.9: one token per row and column on white squares
+OK   11.9 Figure 11.13: max flow == 9 -> True
+OK   11.9 Figure 11.13: the book's tokens are on white squares, one per row and column
+OK   11.9 Figure 11.13: exactly 2 placements exist; the book's is one of them  [[[4, 6, 1, 5, 2, 3, 8, 9, 7], [4, 6, 5, 1, 2, 3, 8, 9, 7]]]
+OK   11.9 Figure 11.13: the other placement puts row 3 in column 5 and row 4 in column 1, all else equal
+OK   11.9 max flow == n  <=>  a placement exists (all permutations)  [1500 random grids, n <= 7, 700 positive]
+== Exercise 11.10: nesting boxes
+OK   11.10 some rotation of a fits in b  <=>  sorted sides of a < sorted sides of b, coordinatewise  [20000 random pairs]
+OK   11.10 n - (max matching) == fewest chains in a partition of the boxes (all set partitions)  [600 random sets of <= 8 boxes, sides 11..19]
+OK   11.10 matched pairs give a valid nesting: each box directly inside at most one, holding at most one
+OK   11.10 remark: fewest visible boxes == largest set of pairwise non-nesting boxes (Dilworth)  [300 random sets]
+OK   11.10 page example: fitting pairs are exactly A<C, B<C, D<C, E<B, E<C, E<D  [['A<C', 'B<C', 'D<C', 'E<B', 'E<C', 'E<D']]
+OK   11.10 page example: 3 visible boxes, and A, B, D pairwise do not nest  [matched (inner, outer) pairs [('A', 'C'), ('E', 'B')]]
+OK   11.10 page example: E in B in C, with A and D alone, is a valid 3-chain nesting
+
+ALL OK

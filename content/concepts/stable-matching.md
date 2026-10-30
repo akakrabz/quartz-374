@@ -1,7 +1,7 @@
 ---
 title: "Stable matching"
 description: "Matching n doctors with n hospitals so that no doctor and hospital prefer each other to their partners: the Gale–Shapley algorithm, its O(n^2) bound, why its output is stable, and why it is the best stable matching for the proposing side and the worst for the other."
-tags: [concept, algorithms, greedy, midterm-2]
+tags: [concept, algorithms, greedy]
 aliases: ["stable marriage", "Gale-Shapley algorithm", "Gale–Shapley", "unstable pair", "Boston Pool algorithm", "deferred acceptance"]
 ---
 

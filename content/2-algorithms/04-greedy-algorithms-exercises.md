@@ -1,7 +1,7 @@
 ---
 title: "Chapter 4 exercises — Greedy Algorithms"
 description: "Solutions to Exercises 4.1–4.6 and 4.8–4.10 of Erickson's Algorithms: nine greedy rules for class scheduling (three proved correct, six refuted), weighted scheduling by dynamic programming, smallest interval covers, stabbing points, interval coloring, the deepest Huffman trees and why Fibonacci frequencies are not the smallest, ternary Huffman codes, and implementing and stress-testing Gale–Shapley."
-tags: [exercises, algorithms, greedy, midterm-2]
+tags: [exercises, algorithms, greedy]
 ---
 
 *Solved exercises for [[2-algorithms/04-greedy-algorithms|Chapter 4]] · book pp. 176–179 · statements paraphrased; see the book for the originals*

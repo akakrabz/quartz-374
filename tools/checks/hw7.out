@@ -1,0 +1,21 @@
+OK   1(a) Dec recurrence = O(mn) version = brute force on 2160 random pairs (lengths <= 5, values 1..4)
+OK   1(a) example A=[5,3,4,1,2], B=[3,5,4,2,1]: answer 3 (5,4,2 or 5,4,1)
+     Dec table (rows i = 1..m, cols j = 1..n):
+       [0, 1, 0, 0, 0]
+       [1, 1, 0, 0, 0]
+       [1, 1, 2, 0, 0]
+       [1, 1, 2, 0, 3]
+       [1, 1, 2, 3, 3]
+OK   1(b) Pal recurrence (memoized and nested loops) = brute force on 1960 random pairs (lengths <= 6)
+OK   1(b) example A=ABCBA..: LCPS(BANANA, ANANAS) = 5 (ANANA)
+OK   1(b) example LCPS(ABCBA, ACBCA) = 3
+OK   1(b) the endpoint rule is needed: LCPS(AA, AA) = 2 but A,A not both usable twice
+OK   1(b) LCPS(ABA, ABA) = 3, LCPS(AB, BA) = 1
+OK   2 Sep recurrence = brute force over all subsets on 108 random inputs (n <= 5, distinct coordinates)
+OK   2 example: four rectangles, best separable subset has size 3
+OK   2 a cross (two overlapping rectangles) is not separable: answer 2 for the cross plus one more
+OK   3 Rounds recurrence = brute force over all broadcast schedules on 300 random binary trees (n <= 10)
+OK   3 a tree shaped like the handout figure takes 5 rounds
+OK   3 'larger child first' = min over both orders: max(1+big, 2+small)
+OK   3 a path of 7 nodes takes 6 rounds; a complete binary tree of depth 2 (7 nodes) takes 4
+ALL OK

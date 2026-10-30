@@ -1,6 +1,6 @@
 ---
 title: "Homework and exams"
-description: "The course's own problems worked out: the three Midterm 1 practice tests solved in the exam's format, the labs from 6a on with every problem explained, and homework write-ups that teach the method while solving the problems — every automaton, grammar and recurrence checked by script."
+description: "The course's own problems worked out: the three Midterm 1 practice tests solved in the exam's format, the labs from 6a on with every problem explained, and the HW6 and HW7 write-ups that teach the method while solving the problems — every automaton, grammar and recurrence checked by script."
 tags: [exam, homework, lab]
 ---
 
@@ -40,8 +40,9 @@ Each page states every problem (including the "harder problems to think about la
 | homework | topic | page |
 |---|---|---|
 | 6 | dynamic programming: days off in a sliding window, maximum flatness, palindrome decompositions | [[3-homework-and-exams/hw6-dynamic-programming\|HW6, worked through]] |
+| 7 | more dynamic programming: longest common decreasing and palindromic subsequences, orthogonally separable rectangles, broadcasting in a binary tree | [[3-homework-and-exams/hw7-dynamic-programming\|HW7, worked through]] |
 
-The method behind them is [[2-algorithms/03-dynamic-programming|Chapter 3]] and its [[0-toolkit/02-proof-templates#20-writing-up-a-dynamic-program|write-up template]].
+The method behind them is [[2-algorithms/03-dynamic-programming|Chapter 3]] and its [[0-toolkit/02-proof-templates#20-writing-up-a-dynamic-program|write-up template]]. For Midterm 2 (Mon Nov 9), start from [[0-toolkit/08-review-algorithms|the algorithms review]].
 
 ### Sources for this page
 Problems from the CS/ECE 374 A (Fall 2026) practice tests and homework handouts; the solutions are ours, and every automaton, regular expression, grammar, fooling set and recurrence on these pages is checked against brute force by `tools/checks/exams_mt1.py` and the homework check scripts.
