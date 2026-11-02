@@ -1,0 +1,85 @@
+== Exercise 8.0(a): verifying distance labels
+OK   8.0(a) VerifyDist == ground truth, every labeling in {-2..4, inf} on every 3-vertex digraph  [36864 labelings, 139 correct ones, 0 mismatches]
+OK   8.0(a) VerifyDist == ground truth on random digraphs (true labels and perturbations, negative cycles allowed)  [10500 labelings, 2276 correct, 0 mismatches]
+OK   8.0(a) counterexample s->a (1), a->b (1), b->a (-1) with labels 0,0,1: no tense edge
+OK   8.0(a) ... every vertex other than s has a tight incoming edge
+OK   8.0(a) ... but the true distances are 0,1,2 and VerifyDist rejects the labels
+OK   8.0(a) ... and accepts the true labels 0,1,2
+== Exercise 8.0(b): verifying predecessor pointers
+OK   8.0(b) VerifyPred == ground truth, every pred assignment on random 3- and 4-vertex digraphs  [11610 assignments, 220 shortest-path trees, 0 mismatches]
+== Exercise 8.1: looped trees
+OK   8.1(b) dist(u,v) = D(v)-D(u) if u is an ancestor of v, else L(u)+D(v): == Dijkstra for all pairs  [400 random looped binary trees, 2-14 nodes]
+OK   8.1(a) a looped binary tree with n nodes has E <= (3n-1)/2 edges
+OK   8.1 book's tree: D = r0 a5 b8 c22 d5 e45 f9 g18 h23  [[0, 5, 8, 22, 5, 45, 9, 18, 23]]
+OK   8.1 book's tree: L = a16 b17 c27 d16 e4 f16 g7 h42 (r: 21)  [[21, 16, 17, 27, 16, 4, 16, 7, 42]]
+OK   8.1 book's tree: dist(a,h) = 16 + 23 = 39, dist(c,a) = 27 + 5 = 32, dist(h,g) = 42 + 18 = 60
+OK   8.1 book's tree: dist(a,e) = 17 + 23 = 40 (down the tree)
+== Exercise 8.2: few negative edges
+OK   8.2(a) two Dijkstras: min(d_s(t), d_s(x)+w(x->y)+d_y(t)); -inf iff d_y(x)+w<0, x reached, t reached from y  [1402 random digraphs with one negative edge, 488 with -inf distances]
+OK   8.2(b) k+2 layers of Dijkstra; -inf = reachable from a vertex improved in layer k+1: == ground truth  [2500 random digraphs with 0-4 negative edges, 903 with -inf distances]
+OK   8.2(b) figure: delta_0(t), delta_1(t), delta_2(t) = 2, 1, -2 and dist(s,t) = -2 (ground truth agrees)
+OK   8.2(b) figure: layers 0,1,2 = (s0 a1 b inf c3 t2), (b-2 c0 t1), (t-2); layer 3 all inf
+== Exercise 8.3: vertex weights
+OK   8.3(b) w(s) + Dijkstra in the directed graph with w(u->v) = w(v) == min vertex weight over all s-t paths  [1500 random graphs, 1033 with a path]
+OK   8.3(a) every spanning tree has total vertex weight = sum of all vertex weights
+== Exercise 8.4(a): replacement paths when the shortest path visits every vertex
+OK   8.4(a) bypass-interval sweep == Dijkstra in G minus e, for every edge e  [1200 random instances with a shortest Hamiltonian s-t path (2434 generated), 907 with an inf entry]
+OK   8.4(a) figure: dist(s,t) = 9; deleting the path edges gives 12, 10, 10, 10, 11; any other edge 9  [[12, 10, 10, 10, 11, 9, 9, 9, 9]]
+OK   8.4(a) a backward edge (d->a, weight 1) changes no answer
+== Exercise 8.5: reinserting one edge
+OK   8.5 argmin over missing u->v of d_s(u)+w(u->v)+d_t(v) is a best edge; value == brute force  [1321 random (G, H) pairs, 609 where reinsertion helps]
+== Exercise 8.6: Bellman-Ford that returns a negative cycle, and -inf labels
+OK   8.6(a) Bellman-Ford + pred walk: returns a negative cycle of G reachable from s iff one exists, else a SPT  [2500 random digraphs (shuffled edge orders), 998 cycles returned]
+OK   8.6(b) Bellman-Ford, then -inf for everything reachable from heads of still-tense edges == ground truth
+== Exercise 8.7: FellmanBored
+OK   8.7 dist(v_l) <= w(W) at every moment after FellmanBored has examined W's edges in order  [3000 random runs, negative edges and cycles allowed]
+== Exercise 8.8: detecting negative cycles with Ford's algorithm
+OK   8.8(a) ... a->s first becomes tense after 51 rounds of a->b, b->a, when dist(a) = -102 < -100
+OK   8.8(a) counterexample: the run s->a, then a->b, b->a alternately, then a->s changes pred(s)  [104 relaxations, dist(a) = -102]
+OK   8.8(a) ... every cycle through s is nonnegative (s->a->s weighs 100) ...
+OK   8.8(a) ... but the graph has a negative cycle (a->b->a weighs -2), reachable from s and reaching s
+OK   8.8(a) corrected claim on random runs: if pred(s) changes, s lies on a negative closed walk (dist(s) = -inf)  [565 runs in which pred(s) changed]
+OK   8.8(b) example: s->a->s weighs -1; relaxing s->a, s->b, then b->c, c->b forever is a legal run  [1002 relaxations, each of a tense edge]
+OK   8.8(b) ... pred(s) stays Null although a->s is tense the whole time
+OK   8.8(c) no reachable negative cycle: P u X stays a dag in every run (random and cycle-avoiding choices)  [866 runs to termination]
+OK   8.8(c) reachable negative cycle: P itself (hence P u X) gets a cycle, even when relaxations avoid closing one  [534 runs, latest at relaxation 19]
+OK   8.8(c) every cycle ever seen in P u X has negative weight
+OK   8.8(c) remark: with only an unreachable negative cycle, no edge is ever tense (P u X stays empty)
+OK   8.8(d) counterexample run s->u, u->v, s->v, v->u is legal and then halts  [dist = [0, 1, 0]]
+OK   8.8(d) ... R = all four edges contains the cycle u->v->u (weight 2) ...
+OK   8.8(d) ... although the graph has no negative cycle
+OK   8.8(d) the true half: with a reachable negative cycle, R gets a cycle in every run
+OK   8.8 lemma: in an endless run some label drops below -(sum of |w(e)|)
+== Exercise 8.11: every edge negative
+OK   8.11 reach + strong components + dag relaxation (O(V+E)) == ground truth  [2000 random all-negative digraphs (some with self-loops), 792 with -inf distances]
+== Exercises 8.12 and 8.13: best paths and counting shortest paths (Figure 8.18)
+OK   8.12 Figure 8.18: dist(s, t) = 14
+OK   8.12 Figure 8.18: the four drawn paths are shortest paths with 1, 5, 4 and 8 edges
+OK   8.12 Figure 8.18: the best path is the single edge s->t
+OK   8.13 Figure 8.18: exactly 8 shortest paths from s to t; N(t) = N(s) + N(g) = 1 + 7  [8]
+OK   8.13 Figure 8.18: path counts N = s1 a1 b1 c4 d3 e1 f4 g7 t8  [[1, 1, 1, 4, 3, 1, 4, 7, 8]]
+OK   8.13 Figure 8.18: distances s0 a2 b3 c6 d5 e4 f8 g10 t14  [[0, 2, 3, 6, 5, 4, 8, 10, 14]]
+OK   8.12 Figure 8.18: 13 tight edges; the 4 others are c->s, f->d, t->d, t->e (book A..I: D->A, G->E, I->E, I->F)  [['AB', 'AI', 'BC', 'BD', 'BE', 'CE', 'CF', 'DG', 'ED', 'EH', 'FE', 'GH', 'HI']]
+OK   8.12 Figure 8.18: BFS in the tight dag gives fewest-edge counts s0 a1 b2 c2 d2 e3 f3 g3 t1  [[0, 1, 2, 2, 2, 3, 3, 3, 1]]
+OK   8.12 Dijkstra, tight edges, BFS from s == lexicographically smallest (weight, #edges) over all paths  [1500 random digraphs with weights 1-4 (many ties)]
+OK   8.12 alternative: Dijkstra with integer weights V*w(e)+1 gives V*dist + #edges of a best path
+OK   8.13 Dijkstra, then N(v) = sum of N(u) over tight u->v in extraction order == number of shortest paths
+== Exercise 8.14: meeting in the middle
+OK   8.14 min over t of max(d(p,t), d(q,t)) by two Dijkstras == brute force  [800 random graphs]
+OK   8.14 trap: on p -1- a -1- q every vertex minimizes d(p,t)+d(q,t) = 2, but only a gives meeting time 1
+== Exercise 8.15: espresso stops
+OK   8.15(a) WFS from s in the edges of length <= L == brute force over paths  [1000 random graphs]
+OK   8.15(b) binary search over sorted edge lengths with (a) == min over paths of the longest edge
+OK   8.15(c) Dijkstra with w(u->v) = [v green] on edges <= L == fewest green vertices over all paths
+== Exercise 8.16: shortest walk with a multiple of 3 edges
+OK   8.16 the walk s w y x s w t uses 6 edges of G
+OK   8.16 book's example: 6 (all weights 1)
+OK   8.16 Dijkstra from (s,0) to (t,0) in V x {0,1,2} == exhaustive DP over walk lengths up to 3V+3
+OK   8.16 brute-force bound: walks longer than 3V+3 edges never improve the answer (tested to 12V)
+== Exercise 8.17: no three consecutive edges of one color, weighted
+OK   8.17 book's example (red 1, blue 2): 9
+OK   8.17 the walk s a b =>d c =>a b t is legal (RRBRBRR) and weighs 9
+OK   8.17 the printed walk ends b -> c, but the graph has no edge b -> c (book typo for b -> t)
+OK   8.17 Dijkstra in the (vertex, color, run) graph == exhaustive search over all walks of <= 4V+3 edges  [700 random red/blue digraphs]
+
+ALL OK

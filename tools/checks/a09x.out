@@ -1,0 +1,70 @@
+== Exercise 1: predecessor pointers
+OK   LeyzorekAPSP, its pair version and FloydWarshall compute the true distances (no negative cycles)  [5000 random graphs, weights -2..3, 1470 with a zero cycle]
+OK   1(a) plain pred update in LeyzorekAPSP fails on some graphs, and only on graphs with a zero-length cycle  [154 failures]
+OK   1(a) (length, #edges) pairs compared lexicographically: pointers always trace shortest paths
+OK   1(b) FloydWarshall pred update (plain, and with pairs): pointers always trace shortest paths, zero cycles included
+OK   1(a) counterexample: Leyzorek distances from d are 3, 2, 1 to a, b, c and are correct  [[3, 2, 1, 0]]
+OK   1(a) counterexample: pred[d,a] = b and pred[d,b] = a (a pointer cycle), pred[d,c] = d
+OK   1(a) counterexample trace: (c,a) via b; (d,a) via c gets pred b; (d,b) via a gets pred a; nothing else  [[(2, 0, 1, 2, 1), (3, 0, 2, 3, 1), (3, 1, 0, 2, 0)]]
+OK   1(a) pairs fix the counterexample: (d,b) = (2, 2 edges) with pred c; FloydWarshall gets pred[d,b] = c too
+== Exercise 2: correct distances with negative cycles
+OK   2(a) Johnson + bad components (Bellman-Ford per strong component) + reachability = brute force  [2500 random graphs, weights -3..3, 985 with a negative cycle]
+OK   2(b) LeyzorekAPSP + negative-diagonal marking (in place, and into a copy) = brute force
+OK   2(c) FloydWarshall + negative-diagonal marking (in place, and into a copy) = brute force
+OK   2 lemma: on a negative cycle => negative diagonal => in a strong component with a negative cycle
+== Exercise 3: returning a negative cycle
+OK   3(a) Johnson: Bellman-Ford pointer walk returns a simple negative cycle, else the distances  [2500 random graphs, 1137 with a negative cycle]
+OK   3(b) Leyzorek: negative diagonal, then Bellman-Ford from x returns a simple negative cycle
+OK   3(c) Floyd-Warshall: negative diagonal, then Bellman-Ford from x returns a simple negative cycle
+OK   3(c) Floyd-Warshall without Bellman-Ford: the pre-phase test u~>r~>u returns a simple negative cycle
+== Exercise 4: zero-length cycles
+OK   4(a) a zero cycle exists iff the zero-reduced-weight subgraph Z has a cycle; DFS returns one  [3000 random graphs without negative cycles, 731 with a zero cycle]
+OK   4(b) H = edges of Z inside a strong component of Z: all cycles zero, every zero cycle kept, = union of zero cycles
+OK   4 figure: prices pi = (-2, 0, -3, -4, -2, -2) for a..f  [[-2, 0, -3, -4, -2, -2]]
+OK   4 figure: reduced weights a->b 0, b->c 0, c->a 0, b->d 3, d->e 0, e->d 0, c->f 0, f->e 0, e->b 1  [{(0, 1): 0, (1, 2): 0, (2, 0): 0, (1, 3): 3, (3, 4): 0, (4, 3): 0, (2, 5): 0, (5, 4): 0, (4, 1): 1}]
+OK   4 figure: no negative cycle; zero cycles are exactly a->b->c->a and d->e->d  [[[0, 1, 2], [3, 4]]]
+OK   4 figure: Z = H + {c->f, f->e}; H = {a->b, b->c, c->a, d->e, e->d}; DFS on Z finds a zero cycle  [Z=[(0, 1), (1, 2), (2, 0), (2, 5), (3, 4), (4, 3), (5, 4)] H=[(0, 1), (1, 2), (2, 0), (3, 4), (4, 3)]]
+OK   4 figure: other cycles b->d->e->b and b->c->f->e->b have lengths 4 and 1
+== Exercise 5: distances between k vertex classes
+OK   5 reweight once, then one Dijkstra per class from a super-source with edges z->x of weight -pi(x)  [2500 random graphs and partitions]
+OK   5 trap: weight-0 super-source edges in the reweighted graph give wrong answers  [wrong on 943 of 2500]
+== Exercise 6: arbitrage
+OK   6(a) MaxAmt by Bellman-Ford on products = best product over all simple paths from currency 1  [1500 random markets, 601 with arbitrage]
+OK   6(a) the -ln weights version gives the same amounts (floating point, rel. error 1e-9)
+OK   6(b) Bellman-Ford from an artificial source detects exactly the markets with a cycle of product > 1
+OK   6(c) the extracted cycle is a simple cycle with product > 1
+OK   6 book example: 1 USD -> 120 JPY -> 1.2 EUR -> 1.44 USD, cycle weight -ln 1.44 < 0  [36/25]
+== Exercise 7: Morty
+OK   7 min over (s, p, f) of dist(s,p)+dist(p,f)+dist(f,s) = min over (p, f) of dist(p,f)+dist(f,p)  [1500 random graphs with weights 0..9 and random thresholds]
+OK   7 the start vertex s = p attains the optimum
+== Exercise 8: deleting a vertex
+OK   8(a) G' with w'(u->w) = min(w(u->w), w(u->v)+w(v->w)) keeps all distances among V - {v}  [2500 random graphs without negative cycles, weights -3..5]
+OK   8(b) dist(v,x) = min over v->y of w(v->y)+dist'(y,x), and symmetrically dist(x,v)
+OK   8(c) eliminate-recurse-extend APSP = brute force
+OK   8(c) work recurrence T(V) = T(V-1) + O(V^2): T(V)/V^3 -> 1 (exact count (V-1)(V-2) + 2(V-1)^2 per level)  [0.9950]
+OK   8 figure: deleting v from u1->v (2), u2->v (-1), v->x1 (3), v->x2 (1), u1->x1 (4), x2->u2 (2)  [{(0, 3): 4, (0, 4): 3, (1, 3): 2, (1, 4): 0, (4, 1): 2}]
+== Exercise 9: boolean matrix products
+OK   9(a) 0 for True, 1 for False, then min-plus product = 0 exactly where the boolean product is True
+OK   9(b) ordinary product of 0/1 matrices > 0 exactly where the boolean product is True
+== Exercise 10: transitive closure by matrix multiplication
+OK   10(a) (A or I) squared ceil(lg n) times = reflexive transitive closure  [800 random graphs]
+OK   10(a) one more product A * R* gives the strict closure (paths with >= 1 edge)
+OK   10(b) divide and conquer on a topologically sorted dag: R_XY = R_X A_XY R_Y
+OK   10(c) strong components + (b) on the component dag
+OK   10(d) boolean product read off the closure of the 3n-vertex layered graph
+OK   10(b) the recursion makes exactly 2(n-1) products of size <= n/2 (two per internal node)
+OK   10(b) T(n) = 2T(n/2) + 2(n/2)^w is Theta(n^w) for w = 2.0: T/n^w settles  [[1.0, 1.0, 1.0]]
+OK   10(b) T(n) = 2T(n/2) + 2(n/2)^w is Theta(n^w) for w = 2.3728639: T/n^w settles  [[0.629, 0.629, 0.629]]
+OK   10(b) T(n) = 2T(n/2) + 2(n/2)^w is Theta(n^w) for w = 2.807355: T/n^w settles  [[0.4, 0.4, 0.4]]
+== Exercise 11 (not solved on the page): RecursiveAPSP as printed
+OK   11 as printed the code is wrong on most inputs  [{'tot': 1500, 'printed': 1499, 'init': 1470, 'typo': 945, 'order': 353, 'good': 1500}]
+OK   11 each of the three defects alone breaks it: diagonal overwritten by inf; D[j,k] for D[k,j]; call order
+OK   11 fixed init, D[k,j], and calls (k-half 1: blocks 11,12,21,22; k-half 2: 22,21,12,11) = Floyd-Warshall
+OK   11 printed call order (typos fixed) misses dist(2,1) = 3 on the path 2->4->3->1 of unit edges
+== page text
+OK   page states the checked numbers (9.1(a) trace, 9.2(a), 9.4 example, 9.5 construction, 9.6 example, 9.11 note)
+OK   figure a09x-zero: the price labels are the computed prices pi(a..f) = -2, 0, -3, -4, -2, -2
+OK   figure a09x-pointer-cycle: the grey distance labels from d are 0, 1, 2, 3 for d, c, b, a
+OK   figure a09x-eliminate caption: u1->x1 keeps 4 < 2 + 3; three new edges
+
+ALL OK

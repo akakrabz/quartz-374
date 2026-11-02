@@ -1,0 +1,74 @@
+OK   swap lemma: T - f + g is a spanning tree for every non-tree g and every f on g's tree path  [300 random graphs]
+OK   fundamental cycle: every non-MST edge is the heaviest edge of the cycle it closes with T
+OK   fundamental cut: every MST edge f is the lightest edge across the cut of T - f
+OK   7.1(a) the heaviest edge of every cycle is not in the MST (distinct weights, brute-force MST)  [300 random graphs, 3368 cycles]
+OK   7.1(a) Kruskal view: the heaviest edge of a cycle is useless when Kruskal examines it
+OK   7.1(a) with ties: in a triangle of equal weights every MST contains a heaviest edge of the cycle
+OK   7.1(b) diamond: unique MST = {ux, xv, uy}, weight 7  [[0, 1, 3], 7]
+OK   7.1(b) diamond: cycle u v y has lightest edge uv (3), which is not in the MST
+OK   7.1(b) diamond: uv is the heaviest edge of cycle u x v
+OK   7.1(b) diamond: three cycles in all
+OK   7.1(b) no counterexample with 3 vertices (triangles keep their lightest edge)
+OK   7.1(b) the claim fails often on random graphs  [84/200 random graphs]
+OK   7.2(a) triangle 1,1,2: spanning-tree weights 2,3,3, unique MST {ab, bc}  [[2, 3, 3]]
+OK   7.2(b) triangle violates the cut bullet (S = {b}) but satisfies the cycle bullet
+OK   7.2(b) graph H: unique MST {ac, ax, bx} of weight 6  [[0, 1, 2], 6]
+OK   7.2(b) graph H: cycle abc has two heaviest edges ab, bc (weight 4); H satisfies the cut bullet
+OK   7.2(b) graph H: ab is the unique heaviest edge of cycle a x b, bc of cycle b c a x
+OK   7.2(b) the cut bullet alone implies a unique MST  [4288 weighted graphs]
+OK   7.2(b) the cycle bullet alone implies a unique MST
+OK   7.2(b) 'only if' is false for each bullet: unique MSTs violating the cut / cycle bullet exist  [2129 unique, 1806 violate cut, 708 violate cycle]
+OK   7.2(b) corrected: unique iff every non-tree edge is strictly heavier than its tree path (T from Kruskal)
+OK   7.2(b) corrected: the same holds for every MST T, not just Kruskal's
+OK   7.2(c) Kruskal twice (ties broken against T) decides uniqueness
+OK   7.3(a) useful edges (on no cycle) are exactly the bridges, and all are in the MST  [400 random graphs, 506 bridges]
+OK   7.3(b) no dangerous edge is in the MST
+OK   7.3(b) in fact dangerous edges = edges not in the MST
+OK   7.3(c) reverse-delete: 'endpoints still connected' = 'dangerous in the current graph'
+OK   7.3(c) reverse-delete returns the MST
+OK   7.4(a) Kruskal on negated weights = maximum spanning tree (brute force)  [300 random graphs]
+OK   7.4(b) E minus a maximum spanning forest of the positive edges is a minimum feedback edge set  [400 random graphs, weights -3..6, possibly disconnected, vs all edge subsets]
+OK   7.4(b) with positive weights it is the complement of the maximum spanning forest
+OK   7.5 MST update (all four cases) = brute-force MST of the new graph  [dec-in 1074, dec-out-keep 495, dec-out-swap 787, inc-in-keep 1204, inc-in-swap 1074, inc-out 775]
+OK   7.5 every case occurs
+OK   7.6(a) Heavy[s, v] from one search of T per vertex = heaviest edge on the tree path
+OK   7.6(a) claim: EVERY second smallest spanning tree differs from T in exactly one edge
+OK   7.6(a) best single swap T - f + g = a second smallest spanning tree (all spanning trees enumerated)  [400 random graphs, 15678 spanning trees]
+OK   Figure 7.1: MST weights {2,3,4,5,12,16}, total 42
+OK   7.6(a) Figure 7.1 table: non-tree edge -> heaviest path edge, difference  [{8: (5, 3), 10: (3, 7), 18: (12, 6), 30: (16, 14), 14: (12, 2), 26: (16, 10)}]
+OK   7.6(a) Figure 7.1: second smallest spanning tree swaps 12 for 14, weight 44 (brute force agrees, unique)  [308 spanning trees]
+OK   7.7 array-based Jarnik = brute-force MST  [300 random graphs]
+OK   7.7 its work is exactly 2V(V-1) steps, whatever E is
+OK   7.8(a) marked edges are MST edges and form a forest  [400 random graphs]
+OK   7.8(a) a pass at least halves the number of vertices
+OK   7.8(a) radix-sort contraction = lightest edge between every pair of components, no loops or parallels
+OK   7.8 repeated contraction passes compute the MST
+OK   7.8(b) k* = max(0, ceil(log2(V log2 V / E))) is within a factor 2 of the best k, and f(k*) = O(E max(1, log(V log V / E)))  [V = 2^4..2^30, max f(k*)/bound = 3.50]
+OK   7.8(b) k = ceil(log2 log2 V) gives O(E log log V)  [max ratio 3.17]
+OK   7.8(b) after k passes at most V/2^k vertices and at most E edges remain  [200 random graphs]
+OK   7.8(c) on planar grids the contraction algorithm is correct and does sum(V_i + E_i) <= 8V work  [max work/V = 5.31]
+OK   7.8(c) every contracted grid still has E_i <= 3V_i - 6 (stays planar)
+OK   7.9 book figure: bottleneck distance between s and t is 9
+OK   7.9 book figure: maximum spanning tree = {12, 11, 10, 9, 8, 6}
+OK   7.9 book figure: its s-t path is s, C, LR, UR, t with weights 10, 12, 9, 11 (the highlighted path)
+OK   7.9 book figure: the edges of weight >= 9 are exactly that path, so every other s-t path uses an edge of weight <= 8
+OK   7.9(a) a maximum spanning forest contains a widest path between every pair  [9492 pairs in 400 random graphs, ties and disconnected graphs included]
+OK   7.9(b) 'bottleneck <= W' iff t is unreachable from s using only edges heavier than W
+OK   7.9(c)i deleting any edge lighter than B leaves the bottleneck distance B  [26118 deletions]
+OK   7.9(c)ii contracting any edge heavier than B leaves the bottleneck distance B  [20336 contractions]
+OK   7.10 the up-tree variant of Boruvka computes the MST (random and by-size Union)  [300 random graphs]
+OK   7.10 at most floor(log2 V) + 1 calls to FindSafeEdges (components at least halve per iteration)
+OK   7.10 FindSafeEdges: Find invocations <= 2 (number of Finds) + (pointer changes), each vertex changed at most once, so O(V + E)  [max invocations/(V+E) = 3.09]
+OK   7.10 hint: when FindSafeEdges ends, every up-tree has depth <= 1
+OK   7.10 with union by size every vertex has depth <= log2(size of its up-tree)
+OK   7.10 with union by size AddSafeEdges makes <= 4c Finds of cost <= 1 + log2 V (c = roots with a safe edge)
+OK   7.10 counterexample: on a tree with V = 2^(k+1), AddSafeEdges (adversarial Union) makes >= (k+1) 2^k Find invocations, so cost/E grows like (log2 V)/2  [V=1024: 9718 = 9.50E (by size 5.49E); V=2048: 20469 = 10.00E (by size 5.50E); V=4096: 42996 = 10.50E (by size 5.50E); V=8192: 90099 = 11.00E (by size 5.50E)]
+OK   7.10 counterexample: every leaf's Find starts at depth >= k (so makes >= k + 1 calls)
+OK   7.10 numbers on the page: V = 2^13 = 8192, E = 8191: AddSafeEdges makes 90,099 Find invocations (11.0 E); union by size on the same input 5.5 E; each doubling of V adds 0.5 E  [8192, 8191, 90099, 11.000E, by size 5.499E]
+OK   page: 7.1(b) diamond weights 1..5 and MST of weight 7
+OK   page: 7.2 triangle 1,1,2 (trees 2, 3, 3) and H with weights 1, 2, 3, 4, 4 and MST weight 6
+OK   page: 7.6 table for Figure 7.1 and the second smallest weight 44
+OK   page: 7.10 numbers (V = 2^13, 90,099 Find calls, about 11E, +0.5E per doubling, 5.5E by size)
+OK   page: 7.10 cites Tarjan-van Leeuwen for arbitrary linking and hedges the depth claim to the simulated range
+
+ALL OK

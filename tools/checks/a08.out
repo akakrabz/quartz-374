@@ -1,0 +1,109 @@
+== Ford's generic algorithm (8.3): random graphs, random tense-edge choices, brute force
+OK   FordSSSP halts iff no negative cycle is reachable from s (615 halting, 285 non-halting graphs)
+OK   Claim 1: every dist(v) is the length of the walk that produced it, starting at s (checked after every relaxation)
+OK   Claim 2: without negative cycles every such walk is a simple path, and predecessor pointers never form a cycle
+OK   FordSSSP ends with dist = brute-force shortest simple paths
+OK   Claims 3-4: at the end the predecessor pointers form a tree whose paths have length dist(v) = delta(v)
+== Shortest-path trees exist (8.1): the fewest-edges construction of the proof
+OK   choosing, for each v, the predecessor on a fewest-edge shortest path always gives a shortest-path tree (random graphs with negative edges and zero-weight cycles)
+== Negative edges (8.2)
+OK   a shortest walk s->t exists iff s reaches t and no s-t walk touches a negative cycle (min-plus walks with V-1 vs 200 edges, all cycles enumerated)
+OK   Figure 8.3: one cycle a b c d a of weight 2 - 8 + 1 + 4 = -1; the walk to t gets 1 shorter per lap
+OK   Figure 8.4: unique shortest undirected paths s v u and s u v, both of length 0; together they use all three edges (no tree); the subpath s v has length 1 > 0
+OK   footnote 2 (p. 275): with a zero-weight cycle, the non-simple walk s a s a t is as short as the path s a t
+OK   adding a constant changes the answer: s->t 1 vs s a t 0; after +2: s->t 3 beats s a t 4
+OK   a negative cycle reachable from s that cannot reach t: delta(t) = 2 is finite, but Bellman-Ford reports a negative cycle and Ford does not halt
+OK   a negative cycle that s cannot reach is not reported and changes no distance (Bellman-Ford)
+== Shortest-path tree vs minimum spanning tree (8.1 figure)
+OK   fan graph: MST {sa, ab, bc, cd} of weight 14; shortest-path tree = the four spokes, weight 26; distances 5 6 7 8; MST path s a b c d has length 14; the trees share only sa
+OK   figure a08-sp-tree: weight labels twice each, distance tags 0 5 6 7 8, totals 14 and 26 in the text
+OK   distinct positive weights: the lightest edge at s is the unique shortest path to its endpoint, and it is in the MST (so SPT and MST always share it)
+== Relaxation figure
+OK   a08-relax: 3 + 4 = 7 < 9 is tense; after Relax dist(v) = 7; labels 2, 4 (twice); tags 0 7 3 9 | 0 7 3 7
+== Breadth-first search (8.4)
+OK   BFS = brute-force fewest-edge distances (700 random directed and undirected graphs)
+OK   BFSWithToken pushes, pulls and outputs exactly what BFS does
+OK   Lemma 8.1 at the end of every phase: dist(v) = inf or <= i, and v is queued iff dist(v) = i
+OK   each vertex pushed at most once, pulled at most once, each edge tested at most once
+OK   the test 'dist(v) = inf' gives the same distances and predecessors
+OK   BFS predecessor pointers form a tree of shortest paths
+OK   book's Figure 8.6: pulled s ✠ b d ✠ c a g ✠ f e ✠ h (the loop stops with only the token left: no trailing ✠ ✠); dist s0 b1 d1 a2 c2 g2 e3 f3 h4; queues b d | c a g | f e | h
+OK   book's run: d->c is not tense when d is scanned; 18 edges, each tested once; every vertex pushed and pulled once
+OK   figure a08-bfs: pulled sequence, phase queues and BFS-tree edges as computed
+OK   figure a08-bfs caption: no edge skips a layer forward (dist(v) <= dist(u) + 1), some go back two layers
+OK   BFS trap: s->t 10 vs s a t of weights 1, 1: BFS picks the one-edge path, the shortest path has length 2
+== Dags (8.5)
+OK   with negative cycles (delta = -inf allowed, -inf + w = -inf) the dag identity holds at every v != s and fails at s exactly when delta(s) = -inf (the Sources' correction of p. 282)
+OK   DagSSSP (DP form), DagSSSP (Ford form) and PushDagSSSP agree, for random topological orders
+OK   ... and equal brute-force shortest paths in random dags with negative weights
+OK   ... and their predecessor pointers form shortest-path trees
+OK   the identity delta(v) = min over u->v of delta(u) + w holds in random graphs without negative cycles; with a negative cycle through s, delta(s) < 0
+OK   book's dag (Figures 8.9/8.10): delta = 0 3 8 6 13 8 9; the page's min-expressions are the in-edges in order  [$\delta(a) = 0 + 3 = 3$, $\delta(b) = \min\{0 + 8,\ 3 + 6\} = 8$, $\delta(c) = \min\{0 + 7,\ 8 - 2\} = 6$, $\delta(d) = \min\{3 + 12,\ 8 + 5\} = 13$, $\delta(e) = \min\{8 + 0,\ 6 + 10,\ 13 + 1\} = 8$, $\delta(f) = \min\{13 - 3,\ 8 + 1\} = 9$]
+OK   PushDagSSSP sets dist(d) to 15 then 13, dist(f) to 10 then 9; the pull version also passes through 15 and 10
+OK   figure a08-dag: the 12 edge weights and the 7 boxed distances  [['0', '0', '1', '1', '10', '12', '13', '3', '3', '5', '6', '6', '7', '8', '8', '8', '9', '−2', '−3']]
+== Dijkstra (8.6)
+OK   Dijkstra = brute force on 900 random graphs with non-negative (incl. zero) weights; pred is a shortest-path tree
+OK   Lemma 8.3: extracted values non-decreasing
+OK   Lemma 8.4: every vertex extracted at most once
+OK   at most V Insert, V ExtractMin, E DecreaseKey and E relaxations
+OK   with non-negative weights, dist(u) is final when u is extracted (so the search may stop at t)
+OK   invariant: after every scan, the tail of every tense edge is in the priority queue
+OK   NonnegativeDijkstra = Dijkstra with non-negative weights, and never relaxes into an extracted vertex
+OK   book's Dijkstra is correct with negative edges when no negative cycle is reachable, and never halts when one is
+OK   the tense-edge invariant also holds with negative edges
+OK   NonnegativeDijkstra is wrong on 8 of 327 random graphs with negative edges (no negative cycles)
+OK   the converse of the invariant fails: after extracting s, b is in the queue but b->a (5 + 1 > 1) is not tense
+OK   Dijkstra example: the trace (extractions, Insert/DecreaseKey, queue contents) matches the page's table
+OK   Dijkstra example: final distances s0 a2 b5 c6 d8 t9, tree a<-s b<-s c<-b d<-b t<-d; 6 Insert, 6 ExtractMin, 4 DecreaseKey; keys of c 9 -> 8 -> 6
+OK   figure a08-dijkstra: the 10 weights and the 6 distances
+OK   counterexample: NonnegativeDijkstra ends with dist(a) = 1, dist(t) = 4 and a->t still tense; the skipping variant with dist(a) = 2, dist(t) = 4; the book's Dijkstra re-inserts a and gets dist(t) = 3 = delta(t)
+OK   figure a08-dijkstra-negative: weights twice, tags 0 3 1 4 | 0 3 1 3
+OK   book's Figure 8.15 graph: Dijkstra extracts d six times with dist 5 4 3 2 1 0, and relaxes e->d, f->e, f->d twice each (all other edges at most once); no ExtractMin ever has a tie
+OK   Shier-Witzgall graphs: V = 2k+1, Dijkstra makes exactly 3(2^k - 1) relaxations (k = 1..12), the shortest-path tree is the zig-zag through the apexes, and 3(2^k-1)/2^(V/2) -> 3/sqrt(2): Theta(2^(V/2))
+OK   undirected graphs with non-negative weights: Dijkstra on the doubled graph = brute-force undirected paths
+== Bellman-Ford (8.7)
+OK   BellmanFord returns 'Negative cycle!' iff a negative cycle is reachable from s (cycles enumerated)
+OK   with a new source joined to every vertex by 0-weight edges it detects every negative cycle
+OK   otherwise both forms end with brute-force distances and a shortest-path tree
+OK   Lemma 8.6: after i rounds dist(v) <= dist_{<=i}(v) (all walks with <= i edges enumerated)
+OK   the while-form makes at most V-1 rounds of relaxations without negative cycles, and never halts with one
+OK   BellmanFordDP computes dist_{<=i}(v) exactly (brute-force walks), row by row
+OK   with the edge loop outside the vertex loop (BellmanFordDP2) still exactly
+OK   reading row i (BellmanFordDP3): dist[i, v] <= dist_{<=i}(v)
+OK   without reachable negative cycles the last row of every version and BellmanFordFinal are the distances
+OK   the dist_{<=i} table for the book's graph (rows 0..6) is the page's table; it settles at i = 5  [> | 0 | 0 | $\infty$ | $\infty$ | $\infty$ | $\infty$ | $\infty$ | $\infty$ |
+> | 1 | 0 | 3 | 10 | 4 | $\infty$ | $\infty$ | $\infty$ |
+> | 2 | 0 | 3 | 9 | 4 | 3 | $\infty$ | 5 |
+> | 3 | 0 | 3 | 9 | 4 | 2 | 6 | 4 |
+> | 4 | 0 | 3 | 9 | 4 | 1 | 5 | 4 |
+> | 5 | 0 | 3 | 9 | 4 | 0 | 5 | 4 |
+> | 6 | 0 | 3 | 9 | 4 | 0 | 5 | 4 |]
+OK   in-place BellmanFord, edges in the listed order: every distance after one round; with e->d moved before f->d and f->e: all but dist(d) = 1 after one round, all after two; no negative cycle either way
+OK   figure a08-bellman-ford: 12 weights, 7 distances s0 a3 b9 c4 d0 e5 f4, tree as computed
+== Moore (8.7)
+OK   Moore = brute force when no negative cycle is reachable; predecessor pointers form a shortest-path tree
+OK   Lemma 8.7: after i phases dist(v) <= dist_{<=i}(v); the queue never holds a vertex twice
+OK   in every phase each vertex is pulled at most once, and every edge tense at the start of a phase is examined during it
+OK   without negative cycles Moore halts after at most V-1 token pulls (attained on random graphs: True); with a reachable negative cycle it never halts
+OK   a negative cycle is reachable iff the token is pulled a V-th time (700 random graphs)
+OK   book's criterion is off by one: on the path s -> v1 -> ... -> v_{V-1} (V = 2..8) the queue still holds v_{V-1} right after the (V-1)th token pull, with no negative cycle
+OK   Moore on the book's graph (Figure 8.17): pulls s ✠ a b c ✠ d f ✠ d e ✠ d (no trailing ✠ ✠), the token four times, and ends with the distances of the figure
+== Reductions
+OK   jumps: BFS in H from (s,0), min over (t,c) = fewest moves by direct simulation; at most (k+1)n^2 vertices and 8(k+1)n^2 edges
+OK   coupon: Dijkstra in H, min over (t,0),(t,1) = brute force over all walks (2V-1 edges); H has 2V vertices, 3E edges
+OK   at most k edges: DagSSSP in the layered dag = brute-force walks with <= k edges (negative cycles allowed); (k+1)V vertices, kE edges; with k = V-1 and 0-weight stay edges it reproduces BellmanFordDP row by row
+OK   figure example: cycle a b a has weight -1; best walk to t with <= 3 edges is s a b t of length 4; with 5 edges it is 3
+OK   figure a08-layered: weights of G and the 16 labels of H (inf for unreachable copies)
+OK   the negative-cycle figure and the relaxation figure are inlined after their markers
+== Concept pages
+OK   shortest-paths example: every run of Ford ends with dist a2 b4 t5, pred(t) = b; runs make 3 or 4 relaxations
+OK   breadth-first-search example: 3x3 grid, 12 undirected edges; label i + j - 2; phases pull 1 2 3 2 1; each of 24 directed edges tested once
+OK   BFS from t in rev(G) gives the distances to t; a new vertex joined to several starts gives the multi-source distances plus 1
+OK   dijkstras-algorithm example: extracts s0 b1 a3 t4; a lowered from 4, t from 6; path s b a t; two-edge paths s a t = 5 and s b t = 6
+OK   bellman-ford example: cycle a b c a weighs +1 -> a2 b3 c0, nothing reported; with c->a = 1 it weighs -1, a, b, c fall in every round and 'Negative cycle!' is returned
+== Page text: numbers stated in prose
+OK   8.2/8.6/8.7 statements present: d->c not tense, BellmanFord rounds, extract sequence of the counterexample
+OK   whatever-first-search no longer claims the aliases BFS / breadth-first search, and links the new page
+OK   aliases are unique site-wide  [[]]
+
+ALL OK

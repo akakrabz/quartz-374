@@ -1,0 +1,118 @@
+OK   the handout's array has 23 elements; Problem 5 uses its first 10
+OK   handouts: SUBSEQUENCE, UBSEQU and the empty string are substrings of SUBSEQUENCE
+OK   handouts: SBSQNC, SQUEE, UEQUE, EEE are subsequences but not substrings
+OK   handouts: QUEUE, EQUUS, DIMAGGIO, SSS, FOOBAR are not subsequences
+OK   alternating means: first step down, then up, down, ... (3,1,4 yes; 1,3,2 no)
+OK   convex <=> 2B[i-1] < B[i-2] + B[i] (all triples of small integers)
+
+== Lab 7a, Problem 1: longest decreasing subsequence
+OK   7a P1: LDSsmaller(0,1) with A[0] = +inf equals brute force  [28159 inputs]
+OK   7a P1: LDSfirst(0) - 1 with A[0] = +inf equals brute force  [28159 inputs]
+OK   7a P1: max_i LDSfirst(i) equals brute force  [28159 inputs]
+OK   7a P1: official prefix version LDS(n, n+1) equals brute force  [28159 inputs]
+OK   7a P1: LIS of the negated array equals brute force  [28159 inputs]
+OK   7a P1: LIS of the reversed array equals brute force  [28159 inputs]
+OK   7a P1 time: on a strictly decreasing array LDSsmaller(0,1) makes exactly 2^(n+1) - 1 calls (n <= 12)
+OK   7a P1 time: never more than 2^(n+1) - 1 calls (T(n) <= 2T(n-1) + O(1))  [{0: 1, 1: 3, 2: 7, 3: 15, 4: 31, 5: 63, 6: 127, 7: 255, 10: 372, 9: 417, 12: 985, 8: 172, 11: 521}]
+
+== Lab 7a, Problem 2: longest alternating subsequence
+OK   7a P2: LASabove(0,1) with A[0] = -inf equals brute force  [28159 inputs]
+OK   7a P2: one-parameter version max_i Down(i) equals brute force  [28159 inputs]
+OK   7a P2 time: never more than 2^(n+1) - 1 calls  [{0: 1, 1: 3, 2: 7, 3: 14, 4: 26, 5: 47, 6: 83, 7: 145, 10: 664, 9: 392, 12: 1914, 8: 237, 11: 1009}]
+
+== Lab 7a, Problem 3: longest convex subsequence
+OK   7a P3: max(min(n,2), max_{i<j} LXS(i,j)) with base value 2 equals brute force  [28159 inputs]
+OK   7a P3: sentinel version LXS(-1, 0) - 2 (after shifting) equals brute force  [28159 inputs]
+OK   7a P3: the official recurrence (1 + max, max of nothing = 0) is exactly one too small whenever n >= 2  [28152 inputs]
+OK   7a P3: ... and its sentinel version LCS(-1,0) - 2 is one too small too
+OK   7a P3: on the handout's array the official recurrence gives 5, the corrected one 6
+OK   7a P3 time: on A[k] = 2^k (every subsequence convex) LXS(i, j) makes exactly 2^(n-j) calls
+OK   7a P3 time: LXS(i, j) never makes more than 2^(n-j) calls (6000 arrays, all pairs)
+
+== Lab 7a, Problem 4: longest palindrome subsequence
+OK   7a P4: LPS(1, n) equals brute force  [28159 inputs]
+OK   7a P4: LPS(1, n) with the shortcut (equal ends => 2 + LPS(i+1, j-1)) equals brute force  [28159 inputs]
+OK   7a P4 lemma: LPS(i+1, j) <= 2 + LPS(i+1, j-1) and LPS(i, j-1) <= 2 + LPS(i+1, j-1) (all intervals)
+OK   7a P4 time: all-equal arrays use <= 3^n calls; with the shortcut, distinct arrays use exactly 2^n - 1
+OK   7a P4 time: plain recursion <= 3^n calls, with the shortcut <= 2^n - 1 calls (all test arrays)
+
+== Lab 7a, Problem 5: shortest palindrome supersequence
+OK   7a P5: SPS(1, n) equals brute force over all palindromes  [578 inputs]
+OK   7a P5: SPS(1, n) with the shortcut (equal ends => 2 + SPS(i+1, j-1)) equals brute force  [578 inputs]
+OK   7a P5: SPS(1, n) = 2n - LPS(1, n)  [28159 inputs]
+OK   7a P5: SPS(i, j) = 2(j - i + 1) - LPS(i, j) for every interval (5000 arrays)
+
+== The handout's examples (array 3,1,4,1,5,9,2,6,5,3,5,8,9,7,9,3,2,3,8,4,6,2,7)
+OK   P1 example: exhaustive search over decreasing subsequences gives 5
+OK   P1 example: LDSsmaller(0,1) = LDSfirst(0) - 1 = LIS(-A) = 5
+OK   P1 witness 9,6,5,4,2 is a decreasing subsequence of length 5
+OK   P2 example: exhaustive search over alternating subsequences gives 17
+OK   P2 example: LASabove(0,1) = max_i Down(i) = 17
+OK   P2 witness 3,1,4,1,5,2,6,5,8,7,9,3,8,4,6,2,7 is an alternating subsequence of length 17
+OK   P3 example: exhaustive search over convex subsequences gives 6
+OK   P3 example: corrected LXS gives 6 (both versions)
+OK   P3 witness 3,1,1,2,5,9 is a convex subsequence of length 6 (steps -2, 0, 1, 3, 4)
+OK   P4 example: LPS(1, n) = 9, not the handout's 7 (with and without the shortcut)
+OK   P4 example: exhaustive search over palindromic subsequences gives 9; LCS(A, reverse A) = 9
+OK   P4 handout's witness 4,9,5,3,5,9,4 is a palindromic subsequence, but of length 7 only
+OK   P4 witness 2,6,8,9,7,9,8,6,2 is a palindromic subsequence of length 9
+OK   P4 witness 3,2,3,9,7,9,3,2,3 is a palindromic subsequence of length 9
+OK   P4 witness 2,6,8,9,7,9,8,6,2 sits at positions 7, 8, 12, 13, 14, 15, 19, 21, 22
+OK   P5 example: SPS(1, 10) = 15 for 3,1,4,1,5,9,2,6,5,3 (with and without the shortcut)
+OK   P5 example: no palindrome of length 14 over the array's symbols plus a fresh one contains it (so none of length <= 14: a palindrome can always be lengthened by one at its center)
+OK   P5 witness 3,5,6,2,9,5,1,4,1,5,9,2,6,5,3 is a palindrome of length 15 containing the array
+OK   P5 example: 15 = 2*10 - LPS, with LPS(3,1,4,1,5,9,2,6,5,3) = 5
+
+== Lab 7b, Problem 1: FastLDS (2D table) and FastLDS2 (1D table)
+OK   7b P1: FastLDS (columns right to left, i = 0..j-1) equals brute force  [28159 inputs]
+OK   7b P1: FastLDS with i from j-1 down to 0 (official order) equals brute force  [28159 inputs]
+OK   7b P1: FastLDS2 (LDSfirst, i from n down to 0) equals brute force  [28159 inputs]
+OK   7b P1: both give 5 on the handout's array
+OK   7b P1 time: FastLDS does n(n+1)/2 entry computations: ops/n^2 -> 1/2  [[0.51, 0.505, 0.5025, 0.5012]]
+OK   7b P1 time: FastLDS2 does Theta(n^2) loop steps: ops/n^2 -> 1/2  [[0.5304, 0.5151, 0.5075, 0.5038]]
+
+== Lab 7b, Problem 2: FastLAS (two 2D tables), the official answer formula, GreedyLAS
+OK   7b P2: FastLAS returning LASabove[0, 1] equals brute force  [28159 inputs]
+OK   7b P2: max_j (1 + LASbelow[j, j+1]) equals brute force  [28159 inputs]
+OK   7b P2: the official answer formula returns 2 on A = [1, 2], where the answer is 1
+OK   7b P2: the official formula computes the longest zigzag (either first direction) instead  [wrong on 14077 of 28159 inputs]
+OK   7b P2: ... which exceeds the answer by at most 1
+OK   7b P2 time: n(n+1)/2 pairs of entries: ops/n^2 -> 1/2  [[0.51, 0.505, 0.5025, 0.5012]]
+OK   7b P2: GreedyLAS (with the sentinel -inf) equals brute force  [28159 inputs]
+OK   7b P2: GreedyLAS gives 17 on the handout's array
+OK   7b P2: the official GreedyLAS returns 2 on [5], [5, 5, 5] and [1, 2] (answers 1, 1, 1)
+OK   7b P2: the official GreedyLAS equals the longest zigzag whenever A has two distinct values
+OK   7b P2 lemma: with no equal neighbors, the longest zigzag subsequence = number of turning points, and the turning points themselves form one  [28128 sequences]
+OK   7b P2 step 1: deleting repeated neighbors does not change the answer
+OK   7b P2 step 2: longest alternating subsequence of A = longest zigzag of (-inf, A) minus 1
+OK   7b P2 proof: window maxima/minima give distinct interior turning points for every zigzag  [58322 zigzags]
+OK   7b P2 time: GreedyLAS does at most 2n loop steps (O(n))  [[1.998, 1.999, 2.0, 2.0]]
+
+== Lab 7b, Problem 3: FastLXS
+OK   7b P3: FastLXS (rows bottom to top) equals brute force  [28159 inputs]
+OK   7b P3: FastLXS gives 6 on the handout's array; the official pseudocode (initial value 1) gives 5
+OK   7b P3: the official pseudocode is one too small whenever n >= 2
+OK   7b P3 time: the k-loop runs C(n,3) times in total: ops/n^3 -> 1/6  [[0.1544, 0.1605, 0.1636, 0.1651]]
+
+== Lab 7b, Problems 4 and 5: FastLPS and FastSPS
+OK   7b P4: FastLPS (i from n+1 down to 1, j from i up to n) equals brute force  [28159 inputs]
+OK   7b P5: FastSPS (same order) equals brute force  [578 inputs]
+OK   7b P5: FastSPS = 2n - FastLPS on all test arrays  [28159 inputs]
+OK   7b P4, P5: 9 on the handout's array, 15 on its first ten elements
+OK   7b P4 time: n(n+1)/2 entries with i <= j: ops/n^2 -> 1/2  [[0.51, 0.505, 0.5025, 0.5012]]
+    LPS table for 3,1,4,1,5: {1: [1, 1, 1, 3, 3], 2: [1, 1, 3, 3], 3: [1, 1, 1], 4: [1, 1], 5: [1]}
+    SPS table for 3,1,4,1,5: {1: [1, 3, 5, 5, 7], 2: [1, 3, 3, 5], 3: [1, 3, 5], 4: [1, 3], 5: [1]}
+OK   7b table: LPS(i, j) for A = 3,1,4,1,5 as printed on the page
+OK   7b table: SPS(i, j) for A = 3,1,4,1,5 as printed on the page
+OK   7b table: 1,4,1 is a longest palindrome subsequence (3) and 3,5,1,4,1,5,3 a shortest supersequence (7)
+
+== Figures (tools/figs_labs.py, Lab 7 section) and the handout's witness in the SPS example
+OK   zigzag figure: the example has no equal neighbors and 17 turning points after the sentinel
+OK   zigzag figure: the turning points are 3,1,4,1,9,2,6,3,9,7,9,2,8,4,6,2,7 and form an alternating subsequence
+OK   zigzag figure: the hollow (non-turning) points are positions 5, 9, 11, 12, 16, 18
+OK   zigzag figure: caption lists exactly that sequence and the length 17
+OK   zigzag figure: 17 filled points drawn  [17]
+OK   dependencies figure exists
+OK   SPS example: in the handout's palindrome the array sits at 1,7,...,15; the self-paired elements are 3,1,4,1,3
+
+ALL OK

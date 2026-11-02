@@ -1,0 +1,74 @@
+== independent-set: 3SAT -> IndependentSet (Section 12.7), as stated on the page
+OK   3SAT -> IndependentSet: Phi satisfiable <=> G has an independent set of size k, and none of size k+1 (all 4232 formulas with n <= 2 variables, k <= 2 clauses)  [4226 YES, 6 NO, 0 bad]
+OK   3SAT -> IndependentSet: Phi satisfiable <=> G has an independent set of size k, and none of size k+1 (1500 random formulas, n <= 4, k <= 4)  [1467 YES, 33 NO, 0 bad]
+OK     ... largest independent set of the 24-vertex graph is 7 (every 7 of the 8 clauses are satisfiable)  [7]
+OK     ... sizes: 3k vertices and 3k + (complementary pairs in different clauses) edges
+== independent-set: complements (Section 12.9)
+OK   S independent in G <=> S clique in complement(G) <=> V - S vertex cover of G (all 1100 graphs on <= 5 vertices, every S)
+OK   MaxIndSet(G) = MaxClique(complement G) = n - MinVertexCover(G) (all graphs <= 5 vertices + 300 random on 6..9)
+OK   decision maps (G,k) -> (complement G, k) and (G,k) -> (G, n-k): YES <-> YES for every k (all graphs <= 5 vertices); 'size >= k' = 'size exactly k' for IS, 'size <= k' = 'exactly k' for VC
+== independent-set: tree dynamic program (link to dynamic-programming-on-trees)
+OK   tree MIS dynamic program (MISyes/MISno, post-order) = brute force on 400 random trees with <= 11 vertices
+== independent-set: the example
+OK   example: 9 vertices, 9 triangle edges, 6 conflict edges, 15 edges  [[('a1', 'ā2'), ('a3', 'ā2'), ('b1', 'b̄2'), ('b1', 'b̄3'), ('c1', 'c̄3'), ('c2', 'c̄3')]]
+OK   example: conflict edges a1-ā2, b1-b̄2, b1-b̄3, c1-c̄3, ā2-a3, c2-c̄3  [[('a1', 'ā2'), ('a3', 'ā2'), ('b1', 'b̄2'), ('b1', 'b̄3'), ('c1', 'c̄3'), ('c2', 'c̄3')]]
+OK   example: {a1, c2, b̄3} is independent, gives a = c = True, b = False, which satisfies Phi
+OK   example: Phi has 5 satisfying assignments; the 3 falsifying ones are FFF, TTF, FTT (a,b,c)  [5]
+OK   example: MaxIndSet = 3, MinVertexCover = 6, MaxClique(complement) = 3, complement has 36 - 15 = 21 edges
+OK   example: the vertex cover V - {a1, c2, b̄3} has 6 vertices and covers all 15 edges
+OK   figure a12c-is-triangles: caption names the formula, 15 edges and the independent set
+== graph-coloring: 3SAT -> 3Color (Section 12.10), as stated on the page
+OK   3SAT -> 3Color: Phi satisfiable <=> G 3-colorable; 3 + 2n + 5k vertices, 3 + 3n + 10k distinct edges (all 4232 formulas with n <= 2, k <= 2)  [4226 YES, 6 NO, 0 bad]
+OK   3SAT -> 3Color: Phi satisfiable <=> G 3-colorable; 3 + 2n + 5k vertices, 3 + 3n + 10k distinct edges (800 random formulas, n <= 4, k <= 4)  [788 YES, 12 NO, 0 bad]
+OK   in every 3-coloring (first 40 per graph, 150 formulas): each x_i, not-x_i colored True/False oppositely, and 'x_i colored like T' satisfies Phi
+== graph-coloring: gadgets
+OK   half-gadget ('majority gate'): equal inputs force the output to their color; different inputs allow all 3
+OK   half-gadget has 24 proper 3-colorings = 4 up to permuting the colors (the book's Figure 12.14 draws 5, two of which differ only by swapping False and Other)  [24]
+OK   clause gadget: extends to a 3-coloring for 7 of the 8 True/False colorings of l1, l2, l3; not for all False
+OK   clause-gadget example l1 = l2 = False, l3 = True: exactly 2 extensions; {u, v} = {True, Other}, w = False, y = Other, z = False
+OK   template '=>' completion rule (w True and {u,v} = {y,z} = {False, Other}, z Other if l3 False; else True, Other, False, Other, False) is a proper coloring for all 7 satisfying literal colorings
+OK   all-False case: without edge yz every coloring has w = False and y = z = Other (so edge yz is violated)
+OK   book's 4-clause formula: graph has 31 vertices and 55 edges, is 3-colorable; a = c = True, b = d = False satisfies it
+== graph-coloring: 2Color and kColor
+OK   2Color: alternate colors along a whatever-first search; correct <=> brute force <=> no odd cycle (all 1100 graphs <= 5 vertices + 400 random)
+OK   3Color -> kColor (k = 4, 5): add k - 3 new vertices adjacent to each other and to every old vertex (250 random graphs)
+== hamiltonian-cycle: helpers
+== hamiltonian-cycle: 3SAT -> DirectedHamCycle, as stated on the page (separators and hubs)
+OK   3SAT -> DirectedHamCycle: Phi satisfiable <=> H Hamiltonian; n(3k+2)+k vertices, 6kn+4n+6k edges (749 formulas with n <= 2, k <= 2)  [745 YES, 4 NO, 0 bad]
+OK     ... and H has exactly sum over satisfying assignments of prod_j (#true literals of c_j) Hamiltonian cycles, so no cycle 'cheats' (749 formulas with n <= 2, k <= 2)  [0 mismatches]
+OK   3SAT -> DirectedHamCycle: Phi satisfiable <=> H Hamiltonian; n(3k+2)+k vertices, 6kn+4n+6k edges (500 random formulas, n <= 3, k <= 3)  [494 YES, 6 NO, 0 bad]
+OK     ... and H has exactly sum over satisfying assignments of prod_j (#true literals of c_j) Hamiltonian cycles, so no cycle 'cheats' (500 random formulas, n <= 3, k <= 3)  [0 mismatches]
+OK   3SAT -> DirectedHamCycle: Phi satisfiable <=> H Hamiltonian; n(3k+2)+k vertices, 6kn+4n+6k edges (40 unsatisfiable formulas, n <= 3, k <= 4)  [0 YES, 40 NO, 0 bad]
+OK     ... and H has exactly sum over satisfying assignments of prod_j (#true literals of c_j) Hamiltonian cycles, so no cycle 'cheats' (40 unsatisfiable formulas, n <= 3, k <= 4)  [0 mismatches]
+== hamiltonian-cycle: the book's construction (Section 12.11, 'From 3SAT') is not correct
+OK   counterexample formula (all 8 clauses over a, b, c) is unsatisfiable, and a=T, b=c=F falsifies only (ā ∨ b ∨ c), the last clause
+OK   book's construction (text: (i,0)..(i,2k)): H has 59 vertices and the Hamiltonian cycle row a left-to-right, (a,16) -> [8] -> (b,16), row b and row c right-to-left, other clauses by ordinary detours  [59 vertices]
+OK   book's construction (figure: 2k vertices per row): H has 56 vertices and the Hamiltonian cycle row a left-to-right, (a,16) -> [8] -> (b,16), row b and row c right-to-left, other clauses by ordinary detours  [56 vertices]
+OK   book's claim: the variable-gadget graph G alone has exactly 2^n Hamiltonian cycles (n <= 4, k <= 2)
+OK   book's construction on (a ∨ c ∨ b) ∧ (b̄ ∨ ā ∨ c) has 'cheating' Hamiltonian cycles: 24 (text version) and 29 (figure version) instead of 16 assignment/literal choices  [(24, 29, 16)]
+== hamiltonian-cycle: the example
+OK   example: H has 3·8 + 2 = 26 vertices and 6·2·3 + 4·3 + 6·2 = 60 edges  [26, 60]
+OK   example: Phi has 6 satisfying assignments; H has exactly 12 Hamiltonian cycles = sum of products  [6, 12, 12]
+OK   example: the cycle h1, row a left to right with detour 1 -> [1] -> 2, h2, row b right to left, h3, row c right to left with detour 5 -> [2] -> 4, back to h1, is Hamiltonian; a = T, b = c = F satisfies Phi
+OK   example: for a = T, b = c = F, clause 1 has 2 true literals (a, b̄) and clause 2 has 1 (c̄): 2 of the 12 cycles
+== hamiltonian-cycle: the book's VertexCover -> DirectedHamCycle
+OK   VertexCover -> DirectedHamCycle (book): G has a vertex cover of size k <=> H Hamiltonian, for graphs without isolated vertices and 1 <= k <= n (348 instances)
+OK     ... with isolated vertices it can fail: e.g. one edge plus an isolated vertex, k = 3 (cover exists, H has 3 cover vertices but only 2 vertex chains)  [[(1, 0, 1), (2, 0, 1), (2, 0, 2), (3, 0, 1), (3, 0, 2), (3, 0, 3)]]
+OK     ... repaired: delete isolated vertices, answer YES if k >= vertices left, else the book's H (361 instances, all graphs <= 4 vertices, 0 <= k <= n)
+OK   book's Figure 12.17 graph (edges uv, uw, ux, vx, wx; k = 2): H has 4E + k = 22 vertices and 6E + (2E - V) + 2kV = 52 edges, exactly 2 Hamiltonian cycles; {u, x} (Figure 12.18) is the only cover of size 2  [22 vertices, 52 edges, 2 cycles, covers [{0, 3}]]
+== hamiltonian-cycle: directed -> undirected, TSP
+OK   DirectedHamCycle -> UndirectedHamCycle by splitting v into v_in - v_mid - v_out, u->v becoming u_out v_in (300 random digraphs, n <= 6)
+OK   TSP with every weight 1: a tour of weight V exists <=> G has a Hamiltonian cycle (200 random graphs)
+== page text
+OK   independent-set: frontmatter tags [concept, algorithms, complexity]; Related: is the last line
+OK   graph-coloring: frontmatter tags [concept, algorithms, complexity]; Related: is the last line
+OK   hamiltonian-cycle: frontmatter tags [concept, algorithms, complexity]; Related: is the last line
+OK   independent-set: every checked number/construction above is stated on the page (7 phrases)  [[]]
+OK   graph-coloring: every checked number/construction above is stated on the page (6 phrases)  [[]]
+OK   hamiltonian-cycle: every checked number/construction above is stated on the page (11 phrases)  [[]]
+OK   independent-set: anchors into the chapter page use the fixed slugs  [['127-maximum-independent-set-from-3sat', '128-the-general-pattern', '129-clique-and-vertex-cover-from-independent-set', '1211-hamiltonian-cycle', '1212-subset-sum-from-vertex-cover', '1214-choosing-the-right-problem']]
+OK   graph-coloring: anchors into the chapter page use the fixed slugs  [['1210-graph-coloring-from-3sat', '1214-choosing-the-right-problem']]
+OK   hamiltonian-cycle: anchors into the chapter page use the fixed slugs  [['1214-choosing-the-right-problem', '1211-hamiltonian-cycle', '1213-other-useful-np-hard-problems', '1214-choosing-the-right-problem']]
+OK   aliases are unique site-wide  [[]]
+
+ALL OK

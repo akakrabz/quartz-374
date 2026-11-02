@@ -35,12 +35,33 @@ The chapters tell the story in the book's order; **concept pages** are the gloss
 ## Part 2 · Algorithms
 
 ### Recursion and divide and conquer
-[[concepts/recursion]] · [[concepts/divide-and-conquer]] · [[concepts/recursion-trees]] · [[concepts/linear-time-selection]]
+[[concepts/recursion]] · [[concepts/divide-and-conquer]] · [[concepts/recursion-trees]] · [[concepts/master-theorem]] · [[concepts/linear-time-selection]]
 
 ### Backtracking
 [[concepts/backtracking]] · [[concepts/subset-sum]] · [[concepts/longest-increasing-subsequence]]
 
 ### Dynamic programming
 [[concepts/dynamic-programming]] · [[concepts/memoization]] · [[concepts/edit-distance]] · [[concepts/optimal-binary-search-trees]] · [[concepts/dynamic-programming-on-trees]]
+
+### Greedy algorithms
+[[concepts/greedy-algorithms]] · [[concepts/interval-scheduling]] · [[concepts/huffman-codes]] · [[concepts/stable-matching]]
+
+### Graphs and graph search
+[[concepts/graphs]] · [[concepts/whatever-first-search]] · [[concepts/graph-reductions]]
+
+### Depth-first search
+[[concepts/depth-first-search]] · [[concepts/topological-sort]] · [[concepts/dynamic-programming-on-dags]] · [[concepts/strongly-connected-components]]
+
+### Minimum spanning trees
+[[concepts/minimum-spanning-trees]] · [[concepts/union-find]]
+
+### Shortest paths
+[[concepts/shortest-paths]] · [[concepts/breadth-first-search]] · [[concepts/dijkstras-algorithm]] · [[concepts/bellman-ford]] · [[concepts/all-pairs-shortest-paths]] · [[concepts/johnsons-algorithm]] · [[concepts/floyd-warshall]]
+
+### Maximum flows and their applications
+[[concepts/maximum-flow]] · [[concepts/ford-fulkerson]] · [[concepts/flow-reductions]] · [[concepts/bipartite-matching]]
+
+### NP-hardness
+[[concepts/np-hardness]] · [[concepts/polynomial-time-reductions]] · [[concepts/satisfiability]] · [[concepts/independent-set]] · [[concepts/graph-coloring]] · [[concepts/hamiltonian-cycle]] · [[concepts/subset-sum]] · and from Part 1, [[concepts/cook-levin-theorem]]
 
 The four classes of languages and the closure properties of each are drawn together on [[0-toolkit/03-the-big-picture|the big picture]]; the exam boilerplate for each kind of proof is collected on [[0-toolkit/02-proof-templates|proof templates]].

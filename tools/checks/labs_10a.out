@@ -1,0 +1,63 @@
+== Problem 1: shortest s-t path with exactly one negative edge u->v (no negative cycle)
+OK   random graphs with one negative edge: Bellman-Ford == exhaustive simple-path search (a shortest walk is a simple path, so it uses u->v at most once)  [6000 graphs]
+OK   Solution 1: min{d_s(t), d_s(u) + w(u->v) + d_v(t)} from two Dijkstra runs in G - (u->v) == Bellman-Ford, every source/target pair  [26888 pairs, 5358 of them answered through u->v]
+OK   Solution 1: the rebuilt walk (pred path to u, u->v, pred path from v; or pred path to t) goes from s to t, has the computed length, and with ties to d_s(t) is a simple path
+OK   one-run variant: Dijkstra in the two-layer graph, crossing edge of weight 0, then + w(u->v) == Bellman-Ford
+OK   Solution 2: the book's Dijkstra on G unmodified computes every distance correctly (any tie-breaking)
+OK   Solution 2: every vertex is extracted at most twice, the tail u at most once  [max extractions of one vertex: 2; graphs with a vertex extracted twice: 439]
+OK   Solution 2: the extracted keys decrease at most once, from the extraction of u to the extraction of v right after it  [2994 drops in 6000 runs]
+OK   Solution 2: every extraction after u's extraction (all of them if u is never extracted) has its final distance
+OK   Solution 2: ExtractMin <= 2V and relaxations <= 2E; Insert + DecreaseKey = relaxations + 1
+OK   Solution 2: predecessor paths are shortest simple paths
+OK   the bound 'twice' is attained, and a target can leave the queue first with a wrong distance (no early stop at its first extraction)  [targets extracted twice: 556, first key wrong: 556]
+OK   NonnegativeDijkstra (a finished vertex is never scanned again) is wrong on some of these graphs  [452 of 6000 graphs]
+OK   a heap with stale copies (skip a popped key > dist) makes exactly the same extractions as Insert/DecreaseKey
+OK   adversarial graphs (zero-weight cycles, |w(u->v)| up to the limit set by the cycles through u->v, fixed and random tie-breaking): all three solutions correct, extraction bounds hold  [0 failures]
+OK   growing random graphs (E = 4V, w(u->v) = -d_v(u), the most negative allowed): ExtractMin <= 2V, relaxations <= 2E, correct  [V=200: ExtractMin/V=1.03 (10 vertices twice), relax/E=0.40; V=800: ExtractMin/V=1.00 (16 vertices twice), relax/E=0.34; V=3200: ExtractMin/V=1.09 (341 vertices twice), relax/E=0.37]
+OK   example: exactly one negative edge, no negative cycle, and not a dag (t->a->t)
+OK   example: d_s = s 0, a 1, b 3, t 6, u 7, v inf  [{'s': 0, 'a': 1, 'b': 3, 't': 6, 'u': 7, 'v': inf}]
+OK   example: d_v = v 0, b 0, t 3, a 5, s inf, u inf  [{'s': inf, 'a': 5, 'b': 0, 't': 3, 'u': inf, 'v': 0}]
+OK   example: delta(s,t) = min{6, 7 - 5 + 3} = 5 along s u v b t; true distances s 0, a 1, u 7, v 2, b 2, t 5  [{'s': 0, 'a': 1, 'b': 2, 't': 5, 'u': 7, 'v': 2}]
+OK   example: the book's Dijkstra extracts s 0, a 1, b 3, t 6, u 7, v 2, b 2, t 5 (b and t twice, u once)  [[('s', 0), ('a', 1), ('b', 3), ('t', 6), ('u', 7), ('v', 2), ('b', 2), ('t', 5)]]
+OK   example: the run makes 8 Insert (b and t twice), 1 DecreaseKey (t 7 -> 6 while queued), 8 ExtractMin  [{'insert': 8, 'decrease': 1, 'extract': 8, 'relax': 8, 'scan': 10}]
+OK   example: stopping at t's first extraction would report 6; NonnegativeDijkstra reports 6
+OK   example: the one-run layered graph also gives 5
+OK   example: the book's NonnegativeDijkstra lowers b to 2 but never rescans it, and reports 6 for t
+OK   trap: adding 5 to every edge makes Dijkstra pick s a t (shifted 17, real length 7), not s u v b t (shifted 25)
+OK   example: the page's run table (relaxations, Insert vs DecreaseKey, queue after each step)  [[('s', 0, [('a', inf, 1, 'ins'), ('u', inf, 7, 'ins')], {'a': 1, 'u': 7}), ('a', 1, [('b', inf, 3, 'ins'), ('t', inf, 7, 'ins')], {'u': 7, 'b': 3, 't': 7}), ('b', 3, [('t', 7, 6, 'dec')], {'u': 7, 't': 6}), ('t', 6, [], {'u': 7}), ('u', 7, [('v', inf, 2, 'ins')], {'v': 2}), ('v', 2, [('b', 3, 2, 'ins')], {'b': 2}), ('b', 2, [('t', 6, 5, 'ins')], {'t': 5}), ('t', 5, [], {})]]
+OK   example: a is not lowered by t->a (6 + 2 > 1, 5 + 2 > 1)
+OK   no negative cycle <=> d_v(u) + w(u->v) >= 0 (every cycle through u->v is u->v plus a v-u path in G+)
+== Problem 2: where to meet
+OK   random graphs: two Dijkstra runs + scan == exhaustive simple-path search (value and the set of best cities); undirected, and directed (one-way roads) in a quarter of the cases  [4000 instances, 513 with no common reachable city]
+OK   trap: minimizing d(p,t) + d(q,t) can pick a city with a later meeting  [694 random instances]
+OK   trap: the best city can lie off every shortest p-q path  [72 random instances]
+OK   undirected: every meeting time is >= d(p,q)/2
+OK   trap example: meeting times p 10, a 9, q 10, c 6; best city c; d(p,q) = 10 along p a q, c is on no shortest p-q path (6 + 6 = 12 > 10)  [{'p': 10, 'a': 9, 'q': 10, 'c': 6}]
+OK   sum trap (Ex 8.14's example): on p - a - q with two roads of length 1 the sum is 2 everywhere, but only a gives meeting time 1
+OK   mid-road remark: one road p-q of length 2: best city time 2, halfway point time 1
+== Problem 3: looped trees
+OK   random looped trees, n = 1..12: the split-root dag + two DagSSSP runs == Floyd-Warshall for every pair  [81979 pairs: {'desc': 19005, 'notdesc': 53219, 'same': 9755, 'to_root': 8255, 'from_root': 8255}]
+OK   random looped trees: closed form D(v) - D(u) (u ancestor of v) / L(u) + D(v) == Floyd-Warshall
+OK   random looped trees: the one-query procedure (walk up from v, postorder of the subtree of u) == Floyd-Warshall
+OK   leaves <= (n+1)/2 and E = n - 1 + leaves <= (3n-1)/2
+OK   O(1) queries after O(n) preprocessing (D, L, and 'u = v or u is an ancestor of v' as pre(u) <= pre(v) and post(u) >= post(v)) == Floyd-Warshall
+OK   H is a dag: preorder (r_out first) then r_in is a topological order; H has as many edges as G
+OK   a looped tree is strongly connected (every distance finite)
+OK   a full binary tree attains E = (3n-1)/2 (n = 7: 10 edges)
+OK   one leaf: the looped tree is a single cycle, and the formula is right with any vertex as the root
+OK   given only the graph: with >= 2 leaves the root is the unique vertex of in-degree != 1 (in-degree = number of leaves); with one leaf every in-degree is 1
+OK   handout tree: D = r 0, a 5, b 8, c 22, d 5, e 45, f 9, g 18, h 23  [{'r': 0, 'a': 5, 'b': 8, 'f': 9, 'g': 18, 'h': 23, 'c': 22, 'd': 5, 'e': 45}]
+OK   handout tree: L = r 21, a 16, b 17, c 27, d 16, e 4, f 16, g 7, h 42  [{'e': 4, 'c': 27, 'd': 16, 'a': 16, 'g': 7, 'h': 42, 'f': 16, 'b': 17, 'r': 21}]
+OK   handout tree: delta(b, d) = L(b) + D(d) = 17 + 5 = 22 along b f g r a d (1 + 9 + 7 + 5 + 0)
+OK   handout tree: the other way out of b, through h, costs 1 + 14 + 42 = 57 to the root (62 to d)
+OK   handout tree: no way up -- delta(c, d) = L(c) + D(d) = 27 + 5 = 32 along c e r a d, not 17 + 0 through a
+OK   handout tree: Exercise 8.1's numbers delta(a,h) = 39, delta(c,a) = 32, delta(a,e) = 40 (tree path; via the root 16 + 45 = 61)
+OK   handout tree: delta(r, v) = D(v) and delta(u, r) = L(u) for all u != r
+OK   handout tree: n = 9, 4 leaves, 12 edges <= (3*9-1)/2 = 13
+OK   handout tree: closed form right for all 81 pairs
+OK   handout tree: the case u = v must go to D(v) - D(u) = 0 -- L(u) + D(u) > 0 for every u (strict 'ancestor' would be wrong on the diagonal)
+OK   growing looped trees: the one-query procedure takes <= n steps, the two DagSSSP runs <= 2E edge scans  [n=1000: one-query steps <= 32 (<= n), DagSSSP edge scans 2104 (<= 2E = 2752), Dijkstra heap ops 2000; n=4000: one-query steps <= 157 (<= n), DagSSSP edge scans 9790 (<= 2E = 11036), Dijkstra heap ops 8000; n=16000: one-query steps <= 62 (<= n), DagSSSP edge scans 37952 (<= 2E = 44216), Dijkstra heap ops 32000]
+OK   (a) Dijkstra on a looped tree: each vertex extracted once, at most E relaxations
+OK   lower-bound remark: with tree edges 0 and loop edges 1, L(u) = 1, and setting any one loop edge below u to 0 makes L(u) = 0
+
+ALL OK

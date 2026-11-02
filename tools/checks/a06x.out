@@ -1,0 +1,95 @@
+OK   black boxes: Kosaraju-Sharir equals mutual reachability; reverse postorder is a topological order
+== Exercise 6.0: reversal and the strong component graph
+OK   6.0(a) Reverse produces exactly the reversed edges in O(V+E) (each edge copied once)  [400 random digraphs]
+OK   6.0(b) scc(G) is acyclic  [400 random digraphs]
+OK   6.0(c) scc(rev(G)) = rev(scc(G))
+OK   6.0(d) u reaches v in G iff S(u) reaches S(v) in scc(G)
+== Exercise 6.1: semi-connected graphs
+OK   6.1(a) s->a, s->b: a dag with the unique source s that is not semi-connected
+OK   6.1(b) SemiConnectedDag vs brute force on random dags  [1500 dags, 923 semi-connected]
+OK   6.1(b) the answer does not depend on which topological order is used
+OK   6.1(b) a semi-connected dag has exactly one topological order
+OK   6.1(c) SemiConnected (run (b) on scc(G)) vs brute force on random digraphs  [1500 digraphs, 702 semi-connected]
+== Exercise 6.2: one-way streets
+OK   6.2(a) strong connectivity by two searches vs brute force  [1500 random digraphs]
+OK   6.2(b) good vertices = vertices of sink components, vs the definition
+OK   6.2(b) 'over 95%' test: 20 * good > 19 * V (integer arithmetic)
+== Exercise 6.3: (s,t)-cut vertices in a dag
+OK   6.3 sweep over a topological order vs deleting each vertex  [2000 random dags, 447 cut vertices in all]
+OK   6.3 Figure 6.20: a dag with unique source s and unique sink t
+OK   6.3 Figure 6.20: exactly three cut vertices, g, c, j (the red ones)  [['c', 'g', 'j']]
+OK   6.3 Figure 6.20: s f g a b h c d i j e t is a topological order
+OK   6.3 Figure 6.20: jumped-over vertices are all but s, g, c, j, t  [jumped: ['a', 'b', 'd', 'e', 'f', 'h', 'i']]
+OK   6.3 Figure 6.20: the 11 edges that jump over a vertex in this order  [['ac', 'ah', 'bc', 'ci', 'cj', 'dj', 'gb', 'gc', 'gh', 'jt', 'sg']]
+== Exercises 6.4 and 6.5: cut vertices and bridges
+OK   6.4(c) CutDFS vs deleting each vertex  [1500 random connected graphs, 1151 cut vertices]
+OK   6.4(b)i root of a DFS tree is a cut vertex iff it has >= 2 children
+OK   6.4(b)ii corrected: non-root v is a cut vertex iff SOME child's subtree has no neighbor among v's proper ancestors
+OK   6.4(b)ii as printed ('each child's subtree HAS such a neighbor') is the condition for NOT being a cut vertex  [printed version wrong for 6666 vertices, 2502 of them leaves]
+OK   6.5(d) BridgeDFS (low(v) = v.pre) vs deleting each edge  [1723 bridges]
+OK   6.5(b) every bridge lies in every spanning tree (4500 random spanning trees)
+OK   6.5(c) tree edge uv is a bridge iff uv is the only edge with exactly one endpoint in T_v
+OK   6.5(d) trap: counting the parent edge in low keeps the cut-vertex test correct
+OK   6.5(d) trap: ... but then no bridge is ever reported
+OK   6.4(b) hint: in the 4-cycle the BFS tree from 0 has two children at the root, but 0 is not a cut vertex
+OK   6.4 Figure 6.21: four cut vertices (D, F, G, K in our labeling)  [['D', 'F', 'G', 'K']]
+OK   6.4 Figure 6.21: CutDFS finds them from every root
+OK   6.4 figure: DFS from a (alphabetical lists) visits a b d c e f g i j k l m h
+OK   6.4 figure: pre(d)=3, low(c)=3; pre(f)=6, low(h)=13; pre(g)=7, low(i)=7; pre(k)=10, low(l)=10; a has one child  [{'A': (1, 1), 'B': (2, 1), 'C': (4, 3), 'D': (3, 1), 'E': (5, 3), 'F': (6, 3), 'G': (7, 3), 'H': (13, 13), 'I': (8, 7), 'J': (9, 7), 'K': (10, 7), 'L': (11, 10), 'M': (12, 10)}]
+OK   6.5 Figure 6.21 has exactly one bridge, F-H
+== Exercise 6.6: transitive closure and reduction
+OK   6.6(a) closure by V searches vs Floyd-Warshall  [600 random digraphs]
+OK   6.6(b) every dag has exactly one transitive reduction: its essential edges  [all digraphs on <= 4 vertices]
+OK   6.6(b) as printed ('only if') is false: some cyclic graphs have a unique reduction  [25 cyclic graphs on <= 4 vertices with a unique reduction]
+OK   6.6(b) the 2-cycle u->v->u is its own unique transitive reduction
+OK   6.6(b) number of reductions = prod (|C|-1)! * prod_{C->C' in red(scc)} |C||C'|
+OK   6.6(b) unique iff all strong components have <= 2 vertices and 2-vertex ones are isolated in scc(G)
+OK   6.6(b) a->b->c->a and a->c->b->a: two different reductions of the same closure
+OK   6.6(c) TransitiveReduction has the same closure and the minimum number of edges  [all digraphs on <= 4 vertices]
+OK   6.6(c) TransitiveReduction preserves the closure on larger random digraphs  [300 digraphs, 5-12 vertices]
+== Exercise 6.7: Tarry's algorithm
+OK   6.7(a) pointer implementation walks the same way; work <= 2(2E) + 1 = O(V+E)  [1500 random graphs]
+OK   6.7(b) no arc is traversed twice (random choice of white arcs)
+OK   6.7(c) at the k-th visit: s has k-1 red arcs in and k-1 out; v != s has k in and k-1 out
+OK   6.7(d) visits(v) <= deg(v), visits(s) <= deg(s) + 1
+OK   6.7(e) the last vertex visited is s
+OK   6.7(f) all arcs are red at the end
+OK   6.7(g) every vertex visited and every arc traversed exactly once (2E traversals)
+== Exercise 6.8: Tarry2 is not depth-first search
+OK   6.8 example adjacency lists match the undirected edges sa, ab, bs, sx, xb
+OK   6.8 example: green edges sa, ab, sx
+OK   6.8 example: pre s,a,b,x = 1,2,3,4; post x,b,a = 5,6,7; s gets no post label  [pre [1, 2, 3, 4], post [None, 7, 6, 5]]
+OK   6.8 example: the green tree is not a depth-first tree for ANY order of the adjacency lists  [3 different DFS trees exist]
+OK   6.8 example: [x.pre, x.post] = [4, 5] is nested in [b.pre, b.post] = [3, 6] but x is not b's descendant
+OK   6.8 on connected graphs with <= 3 vertices the green tree is always a DFS tree (so 4 vertices is the minimum)
+OK   6.8 s never receives a post label (3-vertex graphs, all orders)
+OK   6.8 random graphs: the green tree is often not a DFS tree  [6 of 400]
+== Exercise 6.9: keys locked in boxes
+OK   6.9(a) reachability from the smashed box vs simulating the unlocking  [1500 random instances]
+OK   6.9(b) count of source components with a key vs the smallest smash set (all subsets)
+== Exercise 6.10: is T a depth-first / breadth-first tree?
+OK   6.10(a) undirected DFS-tree test vs all DFS trees over all adjacency orders  [1163 yes / 945 no]
+OK   6.10(b) undirected BFS-tree test vs all BFS trees over all adjacency orders  [758 yes / 1350 no; 12 shortest-path trees that are not BFS trees]
+OK   6.10(c) directed BFS-tree test vs brute force  [216 yes / 668 no]
+OK   6.10(d) directed DFS-tree test vs brute force  [504 yes / 380 no]
+OK   6.10(b) example: T = {sa, sb, ac, bd} is a shortest-path tree but not a BFS tree  [2 BFS trees exist]
+== Exercise 6.11(a): parallel assignment
+OK   6.11(a) serializable without temporaries iff the dependency graph is acyclic; the topological order works  [1500 random assignments, 1001 serializable]
+OK   6.11 a,b = 0,1: both orders work
+OK   6.11 x,y = x+1,x+y: only y first
+OK   6.11 a,b = b,a and x,y = x+y,x-y: cycles
+OK   6.11 x,y = x+y,x-y needs only ONE temporary: t=x; x=x+y; y=t-y (book says two)
+== Exercise 6.12: scheduling jobs in a dag
+OK   6.12(b) ES by the recurrence in topological order vs all paths  [600 random dags]
+OK   6.12(a) shortest completion time = max ES(v)+T(v) = heaviest chain
+OK   6.12(c) latest start (others at ES) = min({CT} U {ES(w)}) - T(v) vs trying every start time
+OK   6.12(c) remark: classic LS(v) = CT - heaviest path from v, never earlier than the part (c) value
+== Exercise 6.13: paths in a dag with one source and one sink
+OK   6.13(a) Hamiltonian path iff longest path has V vertices (iff semi-connected, 6.1(b))  [800 random st-dags, 352 with a Hamiltonian path]
+OK   6.13(b) MaxPath vs all s-t paths
+OK   6.13(c) MaxPathL (j outer, vertices inner) vs all s-t paths with <= l edges
+OK   6.13(d) MaxImp vs all s-t paths with >= k important vertices
+OK   6.13(e) NumPaths vs listing all s-t paths
+OK   6.13(e) on Figure 6.20's dag there are 128 = 2*8*4*2 s-t paths (example on the page)  [128]
+
+ALL OK

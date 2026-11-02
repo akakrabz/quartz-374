@@ -1,0 +1,103 @@
+============================== Practice test 1 ==============================
+OK   P1 1(a) A(n) = A(5n/11) + sqrt(n) is Theta(sqrt n): A(n)/sqrt(n) settles  [[2.951, 3.031, 3.058, 3.066, 3.068, 3.069, 3.069, 3.069, 3.069, 3.069]]
+OK   P1 1(a) B(n) = 8B(n/2) + n^2 is Theta(n^3): B(n)/n^3 settles  [[1.984, 1.998, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0]]
+OK   P1 1(a) C(n) = C(n/2)+C(n/3)+C(n/6) + n is Theta(n log n): C(n)/(n lg n) settles  [[0.756, 0.717, 0.73, 0.724, 0.708, 0.707, 0.712, 0.704, 0.701, 0.704]]
+OK   P1 1(a) C: the three fractions sum to 1, so every full level of the recursion tree sums to n
+OK   P1 1(b) Foo: the iterative order (i down, k up) equals the recursion on 300 random arrays
+OK   P1 1(b) Foo: no entry is read before it is written
+OK   P1 1(b) Foo: O(n^2) entries with O(n) work each, O(n^3) total  [0.333]
+OK   P1 1(b) Bar: the iterative order (i up, s down) equals the recursion on 300 random arrays
+OK   P1 1(b) Bar: no entry is read before it is written; (n+1)(floor(lg n)+1) = O(n log n) entries
+OK   P1 1(b) Bar: the swapped order (s down outer, i up inner) also works
+OK   P1 2(b) MaxMoves equals exhaustive search over all move sequences on 400 random puzzles
+OK   P1 2: the handout's figure is a legal sequence of 6 moves (4, 1, 3, 2, 2, 1) that leaves the board
+OK   P1 2(a) greedy on the handout's puzzle: 5 moves (squares 1, 2, 4, 7, 13)
+OK   P1 2(b) the handout's puzzle allows 7 moves at most  [7]
+OK   P1 2(b) the table MaxMoves(1..13) on the handout's puzzle is 7 6 1 4 5 4 2 3 3 3 2 1 1
+OK   P1 2(b) an optimal sequence: squares 1, 2, 5, 6, 9, 11, 13 with hops 1, 3, 1, 3, 2, 2, 1
+OK   P1 2(a) small counterexample: greedy 2 moves, optimum 3 (2, 1, 1)
+OK   P1 3 max{h(v) : dist(s,v) + dist(v,t) <= L} equals exhaustive search over all walks on 300 random graphs
+OK   P1 4 MaxWords equals exhaustive search over all sets of disjoint word occurrences on 300 random strings
+OK   P1 4 the handout's two verbal subsequences occur in order without overlap
+OK   P1 4 with exactly the handout's eight words as the dictionary, the answer on its example is 5
+OK   P1 5 ClosestPair equals the minimum over all pairs on 300 random point sets
+OK   P1 5 n = 64: total size of the IWalkTheLine calls is at most n lg n  [320 <= 384]
+OK   P1 5 n = 1024: total size of the IWalkTheLine calls is at most n lg n  [9216 <= 10240]
+OK   P1 5 n = 4096: total size of the IWalkTheLine calls is at most n lg n  [45056 <= 49152]
+============================== Practice test 2 ==============================
+OK   P2 1 the graph has 7 vertices and 15 edges
+OK   P2 1(d) the graph is a dag with exactly one topological order: t v w u z y x  [['tvwuzyx']]
+OK   P2 1(a) DFS from v (alphabetical): tree edges v->u, u->x, u->z, z->y, v->w; t is not reachable  [['vu', 'ux', 'uz', 'zy', 'vw']]
+OK   P2 1(a) the depth-first trees rooted at v are not unique (several neighbor orders)  [14]
+OK   P2 1(b) BFS from w (alphabetical): u, y, z at distance 1 (parent w), x at distance 2 (parent u); t, v unreachable  [({'w': 0, 'u': 1, 'y': 1, 'z': 1, 'x': 2}, {'u': 'w', 'y': 'w', 'z': 'w', 'x': 'u'})]
+OK   P2 1(b) x could also hang below y or z (edges y->x and z->x, both from distance 1)
+OK   P2 1(c) distances from t: v 3, w 9, u 4, z 1, y -6, x -4  [{'t': 0, 'u': 4, 'v': 3, 'w': 9, 'x': -4, 'y': -6, 'z': 1}]
+OK   P2 1(c) the shortest-path tree is unique: t->u, t->v, v->w, v->z, z->y, y->x  [{'t': [], 'u': ['t'], 'v': ['t'], 'w': ['v'], 'x': ['y'], 'y': ['z'], 'z': ['v']}]
+OK   P2 1(c) Bellman-Ford from t gives the same distances
+OK   P2 1(c) Dijkstra without re-extraction finishes y at 2 before z->y is relaxed, and ends with dist(x) = 2, not -4  [({'t': 0, 'y': 2, 'v': 3, 'z': 1, 'x': 2, 'u': 4, 'w': 9}, {'t': 0, 'u': 4, 'v': 3, 'w': 9, 'x': 2, 'y': -6, 'z': 1})]
+OK   P2 2 reachability in the color-layered graph equals exhaustive search over rainbow walks (200 random graphs)
+OK   P2 2 the layered graph has 3V + 1 vertices and at most 3E edges
+OK   P2 3 SquareDepth equals exhaustive search over all 2^n deletion sequences on 300 random integers
+OK   P2 3 the handout's 32492 has square-depth 3 (3249 = 57^2, 324 = 18^2, 4 = 2^2)
+OK   P2 3 total IsSquare cost sum over intervals of (j-i+1)^2 is at most n^4
+OK   P2 4 MergeAll returns the sorted union on 300 random inputs
+OK   P2 4 the merges cost at most n k ceil(lg k) steps (k = 2, 8, 64, 512)
+OK   P2 5(a) Term(v) is a valid schedule and max Term equals the brute-force minimum number of terms (150 random dags)
+OK   P2 5(b) the smallest T with |{v : Term(v) <= T}| >= 3V/4 equals the brute-force minimum (150 random dags)
+============================== Practice test 3 ==============================
+OK   P3 1(a) A(n) = 3A(n/2) + n^2 is Theta(n^2)
+OK   P3 1(a) B(n) = 7B(n/2) + n^2 is Theta(n^lg 7)
+OK   P3 1(a) C(n) = 4C(n/2) + n^2 is Theta(n^2 log n)
+OK   P3 1(a) lg 7 = 2.807...
+OK   P3 1(b) s->a, s->b, a->t, b->t: one source, one sink, topological orders sabt and sbat
+OK   P3 1(c) weights 1, 2, 3, 4 are distinct and positive; both s-t paths have length 5, the minimum
+OK   P3 1(d) Huh: the iterative order (i down, k up) equals the recursion and never reads an unwritten entry
+OK   P3 2(b) the recurrence equals game-tree search against greedy Elmo on 400 random rows
+OK   P3 2(a) cards 4 3 7 1 2: greedy you gets 5 (Elmo 12); best play gets 9 (Elmo 8), a win
+OK   P3 2(a) no row of at most 4 cards (values 1..7) works as a counterexample, so 5 cards is the minimum
+OK   P3 3 three BFS runs from color super-sources give every vertex's remoteness (300 random graphs)
+OK   P3 4 binary search on good(m) finds the unique i with A[i] + A[i+1] even, in <= ceil(lg n) steps (2000 arrays)
+OK   P3 4 on the handout's array the search narrows (1,15) (1,8) (4,8) (6,8) (6,7)  [[(1, 15), (1, 8), (4, 8), (6, 8), (6, 7)]]
+OK   P3 4 on the handout's array m is good exactly when A[m] + m is even
+OK   P3 4 the handout's array: answer 6
+OK   P3 5 Dijkstra in the two-copy graph equals exhaustive search over zigzag walks (250 random graphs)
+OK   P3 5 the handout's walk a->b<-d->f<-c->e uses five edges of the figure, alternately forward and backward
+OK   P3 5 in the handout's graph (unit weights) the shortest zigzag walk from a to e has length 5, so the handout's walk is a shortest one
+============================== Dynamic programming practice ==============================
+OK   DP 1 MaxScore equals the best over all subsets of songs on 300 random contests
+OK   DP 1 greedy (highest score first) on Score [3,2,2], Wait [2,0,0]: 3, optimum 4
+OK   DP 2 MaxGood equals exhaustive search over all legal partitions (300 random streets; -inf when none exists)
+OK   DP 2 the handout's partition: 22 addresses, sizes in [2, 4], 4 good and 3 bad districts
+OK   DP 2 on the handout's street no legal partition has more than 4 good districts (the figure is optimal)  [4]
+OK   DP 3 MinCost equals exhaustive search over all ways to cut into k non-empty intervals (300 random arrays)
+OK   DP 3 the handout's example: cost 37 (intervals summing to 37, 36, 35)
+OK   DP 4 the length recurrence equals exhaustive search over all subsequences (300 random arrays)
+OK   DP 4 the odd elements of the example form the increasing sequence 1 7 13 19 25 (5 < 7); the answer has 3 evens
+OK   DP 4 the handout's example: answer 7; its witness is increasing and mostly odd; the length-11 one is not
+============================== Cheat sheet (content/0-toolkit/09-midterm-2-cheat-sheet.md) ==============================
+OK   Cheat sheet 2: T(n/2) + 1 = Theta(stated solution)  [[1.022, 1.02, 1.019, 1.017]]
+OK   Cheat sheet 2: T(n/2) + n = Theta(stated solution)  [[2.0, 2.0, 2.0, 2.0]]
+OK   Cheat sheet 2: 2T(n/2) + 1 = Theta(stated solution)  [[2.0, 2.0, 2.0, 2.0]]
+OK   Cheat sheet 2: 2T(n/2) + n = Theta(stated solution)  [[1.022, 1.02, 1.019, 1.017]]
+OK   Cheat sheet 2: 2T(n/2) + n^2 = Theta(stated solution)  [[2.0, 2.0, 2.0, 2.0]]
+OK   Cheat sheet 2: 3T(n/2) + n = Theta(stated solution)  [[3.0, 3.0, 3.0, 3.0]]
+OK   Cheat sheet 2: 4T(n/2) + n = Theta(stated solution)  [[2.0, 2.0, 2.0, 2.0]]
+OK   Cheat sheet 2: 3T(n/2) + n^2 = Theta(stated solution)  [[4.0, 4.0, 4.0, 4.0]]
+OK   Cheat sheet 2: 4T(n/2) + n^2 = Theta(stated solution)  [[1.022, 1.02, 1.019, 1.017]]
+OK   Cheat sheet 2: 7T(n/2) + n^2 = Theta(stated solution)  [[2.333, 2.333, 2.333, 2.333]]
+OK   Cheat sheet 2: 8T(n/2) + n^2 = Theta(stated solution)  [[2.0, 2.0, 2.0, 2.0]]
+OK   Cheat sheet 2: T(n/5) + T(7n/10) + n = Theta(stated solution)  [[9.817, 9.873, 9.913, 9.939]]
+OK   Cheat sheet 2: T(n/2) + T(n/3) + n = Theta(stated solution)  [[5.972, 5.984, 5.989, 5.994]]
+OK   Cheat sheet 2: T(n/3) + T(2n/3) + n = Theta(stated solution)  [[1.079, 1.08, 1.081, 1.082]]
+OK   Cheat sheet 2: T(n/2) + T(n/3) + T(n/6) + n = Theta(stated solution)  [[0.701, 0.704, 0.696, 0.697]]
+OK   Cheat sheet 2: T(5n/11) + sqrt n = Theta(stated solution)  [[3.069, 3.069, 3.069, 3.069]]
+OK   Cheat sheet 2: 4T(n/16) + sqrt n = Theta(stated solution)  [[0.271, 0.269, 0.268, 0.267]]
+OK   Cheat sheet 2: T(n/2) + lg n = Theta(stated solution)  [[0.511, 0.51, 0.51, 0.509]]
+OK   Cheat sheet 2: T(sqrt n) + 1 = Theta(stated solution)  [[1.222, 1.2, 1.182, 1.167]]
+OK   Cheat sheet 2: T(n-1) + 1 = Theta(n), T(n-1) + n = Theta(n^2), 2T(n-1) + 1 = 2^n - 1 exactly
+OK   Cheat sheet 2: lg 3 ~ 1.585, lg 5 ~ 2.32, lg 7 ~ 2.807
+OK   Cheat sheet 2: sum over intervals of (j-i+1)^2 is Theta(n^4) (ratio to n^4 tends to 1/12)
+OK   Cheat sheet 3: coins {1,3,4} paying 6: greedy 3 coins, best 2
+OK   Cheat sheet 3: the quadhopper, card and dance counterexamples (as on the practice pages)
+
+ALL OK

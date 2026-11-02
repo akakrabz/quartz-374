@@ -2,7 +2,7 @@
 title: "Recursion trees"
 description: "Solve a divide-and-conquer recurrence by adding up its recursion tree level by level: decreasing level sums mean the root dominates, equal sums mean levels times level sum, increasing sums mean the leaves dominate. With the n^d shortcut, floors and ceilings, and recurrences that fit none of the cases."
 tags: [concept, algorithms, recursion, midterm-2]
-aliases: ["recursion tree", "recursion-tree method", "master theorem", "solving recurrences", "level sums"]
+aliases: ["recursion tree", "recursion-tree method", "solving recurrences", "level sums"]
 ---
 
 > [!key] The recursion-tree method
@@ -33,6 +33,8 @@ aliases: ["recursion tree", "recursion-tree method", "master theorem", "solving 
 > - $T(n) = T(n/3) + T(2n/3) + O(n)$ is $\Theta(n\log n)$, not $\Theta(n)$: the subproblem sizes add up to $n$, so the level sums do not shrink.
 
 **Example: Strassen's recurrence.** $T(n) = 7T(n/2) + n^2$ (the recurrence of Strassen's matrix multiplication). Level $i$ has $7^i$ nodes of value $(n/2^i)^2 = n^2/4^i$, so it sums to $(7/4)^i n^2$ — increasing. The leaves dominate: there are $7^{\lg n} = n^{\lg 7}$ of them, so $T(n) = \Theta(n^{\lg 7}) \approx \Theta(n^{2.807})$, beating the $\Theta(n^3)$ of $8T(n/2) + n^2$. With $T(1) = 1$ the exact value at powers of two is $T(2^k) = (7^{k+1} - 4^{k+1})/3$.
+
+The same three cases as a formula for $T(n) = a\,T(n/b) + f(n)$ — with exact conditions, the recurrences they miss, and Akra–Bazzi for unequal splits — are the [[concepts/master-theorem|Master Theorem]].
 
 **Where it appears.** [[2-algorithms/01-recursion#17-recursion-trees|§1.7]] (the method, a table of worked recurrences, ignoring floors and ceilings), [[2-algorithms/01-recursion#14-mergesort|§1.4]] mergesort (equal), [[2-algorithms/01-recursion#18-linear-time-selection|§1.8]] selection (decreasing, and why blocks of 3 fail), [[2-algorithms/01-recursion#19-fast-multiplication|§1.9]] multiplication (increasing), [[2-algorithms/01-recursion#110-exponentiation|§1.10]] repeated squaring.
 

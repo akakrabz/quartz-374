@@ -1,10 +1,10 @@
 ---
 title: "HW7 — more dynamic programming, worked through"
 description: "Homework 7 (CS/ECE 374 A, Fall 2026) explained for someone new to dynamic programming: the recipe and the rubric in one page, then the longest common decreasing subsequence (anchor on the last element), the longest common palindromic subsequence (shrink two intervals from both ends), the largest orthogonally separable set of rectangles (the subproblem is a box, not a set), and broadcasting in a binary tree (a function on subtrees) — each built from the question 'what is a subproblem?' to a recurrence, an array, an order and a running time."
-tags: [algorithms, dynamic-programming, homework]
+tags: [homework, algorithms, dynamic-programming, midterm-2]
 ---
 
-*Homework 7 · Erickson, Algorithms, Chapter 3 (Dynamic Programming) · private: homework solutions stay off the public site*
+*Homework 7 · CS/ECE 374 A, Fall 2026 · more dynamic programming · the method: [[2-algorithms/03-dynamic-programming|Chapter 3]], [[concepts/dynamic-programming|dynamic programming]], [[concepts/dynamic-programming-on-trees|DP on trees]] · the rubric: [[0-toolkit/06-how-exams-are-graded#12-dynamic-programming|how exams are graded §12]] · the write-up template: [[0-toolkit/02-proof-templates#20-writing-up-a-dynamic-program|proof templates §20]] · the first DP homework: [[3-homework-and-exams/hw6-dynamic-programming|HW6]]*
 
 > [!abstract] In one breath
 > Every problem on this homework is solved the same way: name a function of a few integers (or of a tree node) whose value is the answer to a *smaller version* of the problem, say in English what it returns, write a recurrence by asking one question about an optimal solution, store the values in an array, fill it in an order where everything you need is already there, and count entries × work per entry. The four problems differ only in what the smaller version is: **a pair of prefixes** and the last element taken (1a), **a pair of intervals** shrinking from both ends (1b), **a box** of the plane (2), and **a subtree** (3). If you can say what the subproblem is, the rest is routine.
@@ -221,7 +221,7 @@ The $\min$ is over the two orders; the $\max$ is the round in which the later of
 > [!tip] If the tree were not binary
 > With $k$ children, the question becomes "in what order?", and the greedy answer — decreasing $\textsf{Rounds}(w)$ — needs a short exchange argument: $\textsf{Rounds}(v) = \max_{t} \big(t + \textsf{Rounds}(w_{(t)})\big)$ where $w_{(1)}, w_{(2)}, \dots$ are the children sorted by decreasing $\textsf{Rounds}$. Sorting makes it $O(n \log n)$ overall. For a binary tree the $\min$ over two orders avoids the proof.
 
-## Checklist before you submit
+## Checklist for every dynamic program you write
 
 1. Every function has a **name**, explicit **parameters**, and an English sentence of the form "is the (length / size / number) of the (best thing) for (which part of the input)".
 2. The **final answer** is stated as a call (or a max over calls) of that function.

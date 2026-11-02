@@ -1,0 +1,74 @@
+== Problem 1: ground truth
+OK   Floyd-Warshall = minimum over all simple paths on 400 random graphs without negative cycles
+OK   instances: 4000 lowered and 4000 raised weights; many graphs have a zero-length cycle  [zero cycles in 640 and 1138]
+== Problem 1: column u and row v never change
+OK   dist'(x,u) = dist(x,u) and dist'(v,y) = dist(v,y) for all x, y (both lowered and raised weights)
+== Problem 1(a): repair after lowering the weight
+OK   lemma: dist'(x,y) = min{dist(x,y), dist(x,u) + w'(u->v) + dist(v,y)} on 4000 instances
+OK   RepairDecrease in place, row by row, equals Floyd-Warshall with w' (and makes exactly V^2 updates)
+OK   RepairDecrease in place in a random order and column by column: same result
+OK   the array actually changes in many instances  [3666 of 4000]
+OK   Ch 9 running example: dist matrix as on the Ch 9 page  [[[0, -2, 2, 5], [4, 0, 4, 7], [0, -2, 0, 3], [-3, -5, -1, 0]]]
+OK   example (a): w'(2->3) = 2 creates no negative cycle; 1->2->3->4->1 becomes a zero cycle
+OK   example (a): repaired matrix rows (0 -2 0 3), (2 0 2 5), (0 -2 0 3), (-3 -5 -3 0) = Floyd-Warshall  [[[0, -2, 0, 3], [2, 0, 2, 5], [0, -2, 0, 3], [-3, -5, -3, 0]]]
+OK   example (a): exactly six entries change: (1,3), (1,4), (2,1), (2,3), (2,4), (4,3)  [[(1, 3), (1, 4), (2, 1), (2, 3), (2, 4), (4, 3)]]
+OK   example (a): column 2 is (-2, 0, -2, -5) and row 3 is (0, -2, 0, 3), before and after
+== Problem 1(b): the O(1) test after lowering the weight
+OK   dist[u,v] <= w'(u->v) iff the array is still correct (4000 instances)  [334 still correct, 3666 wrong]
+OK   example (b): w'(3->2) = 0 or -2 keeps the array correct; w'(3->2) = -3 does not; w'(2->3) = 2 does not
+OK   after a raise, dist[u,v] <= w'(u->v) always holds (so it proves nothing)
+== Problem 1(c): checking an array
+OK   CheckAPSP on the old array = actual correctness (8000 instances, lowered and raised weights)  [6853 wrong arrays]
+OK   CheckAPSP accepts every correct array
+OK   CheckAPSP: at most V(2E + 2V) steps on accepted arrays (O(V(V+E)))
+OK   CheckAPSP = actual correctness on perturbed and adversarial arrays  [12611 arrays]
+OK   trap: 'D[x,x] = 0 and no tense edge' accepts wrong arrays  [5234 fooled]
+OK   trap: '... and every finite entry has a tight incoming edge' accepts wrong arrays, but only in graphs with a zero-length cycle  [131 fooled, 0 without zero cycle]
+OK   after a raise the old array never has a tense edge (all wrong old arrays pass the no-tense test)
+OK   the tight-incoming-edge test is fooled by some old arrays after a raise, only with zero cycles  [151 fooled]
+OK   trap example: dist[u,v] = 1 but the true distance is 5; the array is wrong
+OK   trap example: no tense edge and every finite entry has a tight incoming edge, yet CheckAPSP rejects
+OK   trap example: the out-neighbor test is fooled (w(u->a) + dist[a,v] = 0 + 1 = dist[u,v])
+OK   trap example: the one-search test rejects (v and b are not reached from u along tight edges)
+OK   lemma: the array is correct iff dist'(u,v) = dist[u,v] (lowered and raised weights)
+OK   one search from u (or test (b) if w' <= w) = actual correctness on 8000 instances
+OK   shortcut: after a raise, dist[u,v] < w(u->v) implies the array is correct  [511 cases]
+OK   out-neighbor test is right in every graph without a zero-length cycle, wrong in some with one  [157 wrong]
+OK   example (c): checkers agree with the truth when raising 1->2
+OK   example (c): checkers agree with the truth when raising 2->3
+OK   example (c): checkers agree with the truth when raising 3->2
+OK   example (c): checkers agree with the truth when raising 3->4
+OK   example (c): checkers agree with the truth when raising 4->3
+OK   example (c): checkers agree with the truth when raising 4->1
+OK   example (c): raising 3->2 or 4->3 (by 1 or by 100) keeps the array correct; raising any other edge by 1 breaks it
+OK   example (c): dist[3,2] = -2 < 1 = w(3->2) and dist[4,3] = -1 < 2 = w(4->3)
+OK   example (c): each of 1->2, 2->3, 3->4, 4->1 is the only path from its tail to its head
+OK   example (c): raising 1->2 by 1: slack 0 + (-1) - (-2) = 1 > 0, and 1 has no other out-edge
+== Problem 1(d): the reduction from APSP
+OK   reduction: G has n + 2 vertices and m + 2n + 1 edges
+OK   reduction: no negative cycle under w or w'
+OK   reduction: the old array of G is all zeros
+OK   reduction: dist'(x,y) = min{dist_H(x,y), M}, and decoding (>= M means unreachable) gives H's distances  [1500 graphs H, 867 with unreachable pairs]
+OK   (a) is optimal: lowering one weight can change Theta(V^2) entries (the gadget, u->v lowered from M to 0, positive weights in H: every pair of distinct vertices of H changes)
+OK   figure example: H = p->q 2, q->r 1, r->q 3; M = 7; corrected distances p->q 2, p->r 3, q->r 1, r->q 3, q->p = r->p = 7 (decoded: unreachable)
+== Problem 2: arbitrage
+OK   instances: 1500 random rate matrices, with and without arbitrage, some with product-exactly-1 cycles  [614 with arbitrage, 549 without but with a product-1 cycle]
+OK   (a) max-product Bellman-Ford from currency 1 = best product over all simple paths (exact)  [886 matrices without arbitrage]
+OK   (a) the -ln version, exp(-dist(1, i)), agrees to 1e-9
+OK   (a) (n - 1) n (n - 1) relaxation tests: O(n^3)
+OK   (b) all amounts start at 1, n - 1 rounds, test pass: detects arbitrage iff some simple cycle has product > 1
+OK   (b) Bellman-Ford from a super-source (rate 1 to every currency, n rounds): same answers
+OK   (b) max-product Floyd-Warshall (some M[i,i] > 1): same answers
+OK   (c) ArbitrageCycle returns a simple cycle of positive rates with product > 1 iff arbitrage exists; at most n * n(n - 1) tests
+OK   handout: 120 * 0.01 * 1.2 = 1.44 exactly
+OK   figure market: cycle products $Y 0.96, $E 0.96, YE 1, $YE$ 1.44, $EY$ 0.64  [{(0, 1): Fraction(24, 25), (0, 1, 2): Fraction(36, 25), (0, 2): Fraction(24, 25), (0, 2, 1): Fraction(16, 25), (1, 2): Fraction(1, 1)}]
+OK   figure labels: -ln 120 = -4.79, -ln 0.01 = 4.61, -ln 1.2 = -0.18, -ln 0.008 = 4.83, -ln 100 = -4.61, -ln 0.8 = 0.22  [{(0, 1): -4.79, (0, 2): 0.22, (1, 0): 4.83, (1, 2): 4.61, (2, 0): -0.18, (2, 1): -4.61}]
+OK   figure: the arbitrage cycle has length -ln 1.44 = -0.36 (and -4.79 + 4.61 - 0.18 = -0.36)
+OK   trace: amounts ($, Y, E) start (1, 1, 1), after round 1 (1.44, 120, 1.2), after round 2 (2.0736, 172.8, 1.728)  [[[Fraction(1, 1), Fraction(1, 1), Fraction(1, 1)], [Fraction(36, 25), Fraction(120, 1), Fraction(6, 5)], [Fraction(1296, 625), Fraction(864, 5), Fraction(216, 125)]]]
+OK   trace: the test pass finds $ -> Y tense (2.0736 * 120 = 248.832 > 172.8) and returns E -> $ -> Y -> E  [((0, 1), [2, 0, 1])]
+OK   no-arbitrage example (E -> $ = 0.8): no arbitrage, MaxCurrency = (1, 120, 1.2)
+OK   no-arbitrage example: direct $ -> E gives only 0.8; via yen 120 * 0.01 = 1.2
+OK   floating point: 1/6 * 2 * 3 = 1 exactly, but -ln(1/6) - ln 2 - ln 3 in double precision is about -2.2e-16  [-2.220446049250313e-16]
+OK   floating point: -ln 10 - ln 0.1 is about -4.4e-16 in double precision  [-4.440892098500626e-16]
+
+ALL OK

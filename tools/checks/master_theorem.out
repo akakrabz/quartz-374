@@ -1,0 +1,102 @@
+OK   lg 3 = 1.585 (to 3 places)  [1.584963]
+OK   lg 7 = 2.807 (to 3 places)  [2.807355]
+OK   log_{3/2} 3 = 2.71 (to 2 places)  [2.709511]
+OK   log_3 2 = 0.63 (to 2 places)  [0.630930]
+OK   log_4 2 = 1/2
+OK   number of leaves a^(log_b n) = n^(log_b a)
+OK   case of row MergeSort 2T(n/2)+n: textbook form 'equal', ratio form 'equal' (ratio 1.0000), solution n^1.000 lg^1 n
+OK   case of row BinarySearch T(n/2)+1: textbook form 'equal', ratio form 'equal' (ratio 1.0000), solution n^0.000 lg^1 n
+OK   case of row PingalaPower T(n/2)+2: textbook form 'equal', ratio form 'equal' (ratio 1.0000), solution n^0.000 lg^1 n
+OK   case of row QuickSelect median T(n/2)+n: textbook form 'root', ratio form 'root' (ratio 0.5000), solution n^1.000 lg^0 n
+OK   case of row MinMax 2T(n/2)+2: textbook form 'leaves', ratio form 'leaves' (ratio 2.0000), solution n^1.000 lg^0 n
+OK   case of row Cruel 2T(n/2)+n^lg3: textbook form 'root', ratio form 'root' (ratio 0.6667), solution n^1.585 lg^0 n
+OK   case of row SplitMultiply 4T(n/2)+n: textbook form 'leaves', ratio form 'leaves' (ratio 2.0000), solution n^2.000 lg^0 n
+OK   case of row Karatsuba 3T(n/2)+n: textbook form 'leaves', ratio form 'leaves' (ratio 1.5000), solution n^1.585 lg^0 n
+OK   case of row Strassen 7T(n/2)+n^2: textbook form 'leaves', ratio form 'leaves' (ratio 1.7500), solution n^2.807 lg^0 n
+OK   case of row StoogeSort 3T(2n/3)+1: textbook form 'leaves', ratio form 'leaves' (ratio 3.0000), solution n^2.710 lg^0 n
+OK   case of row Ex 1.6 A: 2T(n/4)+sqrt n: textbook form 'equal', ratio form 'equal' (ratio 1.0000), solution n^0.500 lg^1 n
+OK   case of row 2T(n/2)+n lg n: textbook form 'equal', ratio form 'none' (ratio 0.9938), solution n^1.000 lg^2 n
+OK   case of row 4T(n/2)+n lg n: textbook form 'leaves', ratio form 'none' (ratio 1.9875), solution n^2.000 lg^0 n
+OK   n lg n rows: a f(n/2)/f(n) = (a/2)(lg n - 1)/lg n, and for a = 4 it is >= 3/2 iff n >= 16
+OK   n lg n = O(n^1.5): n lg n / n^1.5 = lg n / sqrt n <= 1.5 for all n >= 1, -> 0
+OK   regularity holds in root row QuickSelect median T(n/2)+n: a f(n/b) = 0.5000 f(n), kappa < 1
+OK   regularity holds in root row Cruel 2T(n/2)+n^lg3: a f(n/b) = 0.6667 f(n), kappa < 1
+OK   regularity for f = n^2 lg n, a = b = 2: ratio (1/2)(lg n - 1)/lg n <= 1/2 for all n >= 2
+OK   a f(n/b) = kappa f(n) forces f(b^k) = f(1) n^(log_b a + log_b(1/kappa)): a=b=2, kappa=1/2 gives f = n^2
+OK   MergeSort 2T(n/2) + n = Theta(n log n)  [T/g at n=b^128, b^512, b^1024: 1.0078, 1.0020, 1.0010; drift 0.10%; g*lg n rejected: True; g/lg n rejected: True]
+OK   MergeSort exact: T(2^k) = 2^k (k + 1) with T(1) = 1
+OK   BinarySearch T(n/2) + 1 = Theta(log n)  [T/g at n=b^128, b^512, b^1024: 1.0078, 1.0020, 1.0010; drift 0.10%; g*lg n rejected: True; g/lg n rejected: True]
+OK   PingalaPower T(n/2) + 2 = Theta(log n)  [T/g at n=b^128, b^512, b^1024: 2.0078, 2.0020, 2.0010; drift 0.05%; g*lg n rejected: True; g/lg n rejected: True]
+OK   QuickSelect, median pivot: T(n/2) + n = Theta(n)  [T/g at n=b^128, b^512, b^1024: 2.0000, 2.0000, 2.0000; drift 0.00%; g*lg n rejected: True; g/lg n rejected: True]
+OK   MinMax 2T(n/2) + 2 = Theta(n)  [T/g at n=b^128, b^512, b^1024: 3.0000, 3.0000, 3.0000; drift 0.00%; g*lg n rejected: True; g/lg n rejected: True]
+OK   MinMax exact: T(2) = 1, T(n) = 2T(n/2) + 2 gives 3n/2 - 2 at powers of 2
+OK   Cruel 2T(n/2) + n^lg3 = Theta(n^lg3)  [T/g at n=b^128, b^512, b^1024: 3.0000, 3.0000, 3.0000; drift 0.00%; g*lg n rejected: True; g/lg n rejected: True]
+OK   SplitMultiply 4T(n/2) + n = Theta(n^2)  [T/g at n=b^128, b^512, b^1024: 2.0000, 2.0000, 2.0000; drift 0.00%; g*lg n rejected: True; g/lg n rejected: True]
+OK   Karatsuba 3T(n/2) + n = Theta(n^lg3)  [T/g at n=b^128, b^512, b^1024: 3.0000, 3.0000, 3.0000; drift 0.00%; g*lg n rejected: True; g/lg n rejected: True]
+OK   Strassen 7T(n/2) + n^2 = Theta(n^lg7)  [T/g at n=b^128, b^512, b^1024: 2.3333, 2.3333, 2.3333; drift 0.00%; g*lg n rejected: True; g/lg n rejected: True]
+OK   StoogeSort 3T(2n/3) + 1 = Theta(n^log_{3/2} 3)  [T/g at n=b^128, b^512, b^1024: 1.5000, 1.5000, 1.5000; drift 0.00%; g*lg n rejected: True; g/lg n rejected: True]
+OK   Ex 1.6 A: 2T(n/4) + sqrt n = Theta(sqrt n log n)  [T/g at n=b^128, b^512, b^1024: 0.5039, 0.5010, 0.5005; drift 0.10%; g*lg n rejected: True; g/lg n rejected: True]
+OK   2T(n/2) + n lg n = Theta(n log^2 n)  [T/g at n=b^128, b^512, b^1024: 0.5040, 0.5010, 0.5005; drift 0.10%; g*lg n rejected: True; g/lg n rejected: True]
+OK   4T(n/2) + n lg n = Theta(n^2)  [T/g at n=b^128, b^512, b^1024: 3.0000, 3.0000, 3.0000; drift 0.00%; g*lg n rejected: True; g/lg n rejected: True]
+OK   MergeSort with floors and ceilings T(ceil n/2) + T(floor n/2) + n = Theta(n log n)  [ratio band 1.017..1.053 for n in [2.0^20, 2.0^60); bucket means 1.044, 1.033, 1.026, 1.022, 1.019]
+OK   BinarySearch with floors T(floor n/2) + 1 = Theta(log n)  [ratio band 1.000..1.050 for n in [2.0^20, 2.0^60); bucket means 1.020, 1.016, 1.013, 1.011, 1.009]
+OK   Karatsuba with ceilings 3T(ceil n/2) + n = Theta(n^lg3)  [ratio band 3.003..7.498 for n in [2.0^20, 2.0^60); bucket means 4.807, 4.862, 4.835, 4.899, 4.787]
+OK   Strassen with ceilings 7T(ceil n/2) + n^2 = Theta(n^lg7)  [ratio band 2.339..13.294 for n in [2.0^20, 2.0^60); bucket means 6.050, 6.142, 6.296, 6.077, 6.056]
+OK   StoogeSort with ceilings 3T(ceil 2n/3) = Theta(n^log_{3/2} 3)  [ratio band 0.270..0.808 for n in [1.5^24, 1.5^64); bucket means 0.502, 0.491, 0.500, 0.489, 0.500]
+OK   QuickSelect median pivot with floors T(floor n/2) + n = Theta(n)  [ratio band 2.000..2.000 for n in [2.0^20, 2.0^60); bucket means 2.000, 2.000, 2.000, 2.000, 2.000]
+OK   extension, equal case: 2T(n/2) + n^1 lg^0 n = Theta(n^1 log^1 n)  [T/g at n=b^128, b^512, b^1024: 1.0078, 1.0020, 1.0010; drift 0.10%; g*lg n rejected: True; g/lg n rejected: True]
+OK   extension, equal case: 2T(n/2) + n^1 lg^1 n = Theta(n^1 log^2 n)  [T/g at n=b^128, b^512, b^1024: 0.5040, 0.5010, 0.5005; drift 0.10%; g*lg n rejected: True; g/lg n rejected: True]
+OK   extension, equal case: 2T(n/2) + n^1 lg^2 n = Theta(n^1 log^3 n)  [T/g at n=b^128, b^512, b^1024: 0.3373, 0.3343, 0.3338; drift 0.15%; g*lg n rejected: True; g/lg n rejected: True]
+OK   extension, equal case: 4T(n/2) + n^2 lg^0 n = Theta(n^2 log^1 n)  [T/g at n=b^128, b^512, b^1024: 1.0078, 1.0020, 1.0010; drift 0.10%; g*lg n rejected: True; g/lg n rejected: True]
+OK   extension, equal case: 4T(n/2) + n^2 lg^1 n = Theta(n^2 log^2 n)  [T/g at n=b^128, b^512, b^1024: 0.5040, 0.5010, 0.5005; drift 0.10%; g*lg n rejected: True; g/lg n rejected: True]
+OK   extension, equal case: 4T(n/2) + n^2 lg^2 n = Theta(n^2 log^3 n)  [T/g at n=b^128, b^512, b^1024: 0.3373, 0.3343, 0.3338; drift 0.15%; g*lg n rejected: True; g/lg n rejected: True]
+OK   extension, equal case: 1T(n/2) + n^0 lg^1 n = Theta(n^0 log^2 n)  [T/g at n=b^128, b^512, b^1024: 0.5040, 0.5010, 0.5005; drift 0.10%; g*lg n rejected: True; g/lg n rejected: True]
+OK   extension, equal case: 1T(n/2) + n^0 lg^2 n = Theta(n^0 log^3 n)  [T/g at n=b^128, b^512, b^1024: 0.3373, 0.3343, 0.3338; drift 0.15%; g*lg n rejected: True; g/lg n rejected: True]
+OK   extension, k = -2: 2T(n/2) + n/lg^2 n = Theta(n)  [T/g at n=b^128, b^512, b^1024: 2.6372, 2.6430, 2.6440; drift 0.04%; g*lg n rejected: True; g/lg n rejected: True]
+OK   extension, k = -2: T(2^k)/2^k = 1 + sum 1/j^2 -> 1 + pi^2/6  [2.64244 vs 2.64493]
+OK   extension, root case with a log: 2T(n/2) + n^2 lg n = Theta(n^2 log n)  [T/g at n=b^128, b^512, b^1024: 1.9844, 1.9961, 1.9980; drift 0.10%; g*lg n rejected: True; g/lg n rejected: True]
+OK   extension, leaves case with a log: 3T(n/2) + n lg^2 n = Theta(n^lg3)  [T/g at n=b^128, b^512, b^1024: 31.0000, 31.0000, 31.0000; drift 0.00%; g*lg n rejected: True; g/lg n rejected: True]
+OK   T(n) = T(n-1) + n, T(0) = 0: exactly n(n+1)/2
+OK   T(n) = T(n-1) + n = Theta(n^2): T/n^2 settles at 1/2  [0.5010 0.5005 0.5002 0.5001 0.5001]
+OK   T(n) = T(n-1) + n is not Theta(n log n): T/(n lg n) grows
+OK   Hanoi T(n) = 2T(n-1) + 1, T(0) = 0: exactly 2^n - 1
+OK   MomSelect T(n/5) + T(7n/10) + n = Theta(n) (real sizes): T/n settles below 10  [9.1979 9.6227 9.8094 9.9102]
+OK   MomSelect with floors T(floor n/5) + T(floor 7n/10) + n = Theta(n)  [ratio band 8.850..9.920 for n in [2.0^20, 2.0^44); bucket means 9.215, 9.684, 9.872]
+OK   T(n/3) + T(2n/3) + n = Theta(n log n) (floors)  [ratio band 1.094..1.101 for n in [2.0^20, 2.0^44); bucket means 1.099, 1.097, 1.095]
+OK   gap 2T(n/2) + n/lg n: exactly T(2^k) = 2^k (1 + H_k) with T(1) = 1
+OK   gap: T(n)/n - ln lg n -> 1 + gamma (so T(n) = n ln lg n + O(n) = Theta(n log log n))  [at lg n = 1e6: 1.577216]
+OK   gap: T/(n ln lg n) bounded on lg n in [1e6/8, 1e6] and not drifting (< 2%)  [1.2284 1.1344 1.1269 1.1202 1.1142]
+OK   gap: Theta(n) is wrong: T/n = 1 + H_lg n grows without bound (drift > 2% from lg n = 5e5 to 1e6)  [14.6996 -> 15.3927]
+OK   gap: Theta(n log n) is wrong: T/(n lg n) -> 0
+OK   gap: ratio form a f(n/b)/f(n) = lg n/(lg n - 1) is never exactly 1 (none of Erickson's cases)
+OK   gap with floors 2T(floor n/2) + n/lg n: T/(n ln lg n) stays in a band  [ratio band 1.006..1.522 for n in [2.0^20, 2.0^60); bucket means 1.226, 1.201, 1.202, 1.181, 1.181]
+OK   sqrt(n) T(sqrt n) + n with T(2) = 1: exactly n (lg lg n + 1/2) at n = 2^(2^j), j = 0..6
+OK   sqrt(n) T(sqrt n) + n with floors: T/(n lg lg n) stays in a band  [ratio band 0.851..1.140 for n in [2.0^24, 2.0^60); bucket means 0.995, 0.947, 1.000]
+OK   2T(sqrt n) + lg n (floors), T(n) = 1 for n <= 2: exactly lg n (lg lg n + 1) at n = 2^(2^j), j = 0..20
+OK   domain transformation: S(m) = T(2^m) satisfies S(m) = 2S(m/2) + m at m = 2^j (checked on the original recurrence)
+OK   2T(sqrt n) + lg n with floors at random n with lg n in [64, 2^18]: T/(lg n lg lg n) in a band (max/min < 1.5)  [0.967..1.072]
+OK   2T(sqrt n) + lg n is not Theta(log n): T/lg n = lg lg n + 1 grows (11 at lg n = 2^10, 21 at 2^20)
+OK   Akra-Bazzi, MomSelect (1/5)^rho + (7/10)^rho = 1: rho = 0.83978 (to 5 places), so 0 < rho < 1  [0.83978030]
+OK   Akra-Bazzi, MomSelect: (1/5)^rho + (7/10)^rho is 2 at rho = 0 and 9/10 at rho = 1, decreasing
+OK   Akra-Bazzi, ham-sandwich (1/2)^rho + (1/4)^rho = 1: rho = lg phi = 0.69424 (to 5 places)  [0.69424191]
+OK   Akra-Bazzi, T(n/3) + T(2n/3) + n: rho = 1
+OK   Akra-Bazzi, T(3n/4) + T(n/4) + n: rho = 1
+OK   Akra-Bazzi, (1/4)T(n/4) + (3/4)T(3n/4) + 1: rho = 0
+OK   Akra-Bazzi, single term a T(n/b): rho = log_b a
+OK   Akra-Bazzi, MomSelect integral at n = 1e+06 equals (n^(1-rho) - 1)/(1 - rho)
+OK   Akra-Bazzi, MomSelect integral at n = 1e+12 equals (n^(1-rho) - 1)/(1 - rho)
+OK   Akra-Bazzi, ham-sandwich: x = 2^rho solves 1/x + 1/x^2 = 1, so x = phi
+OK   Akra-Bazzi, ham-sandwich: integral_1^n u^(-rho-1) du = (1 - n^-rho)/rho < 1/rho
+OK   Akra-Bazzi with one term reproduces the Master Theorem: 3T(n/2) + n^1: leaves  [2.7095 2.7095 2.7095 2.7095]
+OK   Akra-Bazzi with one term reproduces the Master Theorem: 4T(n/2) + n^1: leaves  [2.0000 2.0000 2.0000 2.0000]
+OK   Akra-Bazzi with one term reproduces the Master Theorem: 2T(n/2) + n^1: equal  [1.0217 1.0109 1.0072 1.0054]
+OK   Akra-Bazzi with one term reproduces the Master Theorem: 2T(n/4) + n^0.5: equal  [1.0217 1.0109 1.0072 1.0054]
+OK   Akra-Bazzi with one term reproduces the Master Theorem: 1T(n/2) + n^1: root  [1.0000 1.0000 1.0000 1.0000]
+OK   Akra-Bazzi with one term reproduces the Master Theorem: 2T(n/2) + n^2: root  [1.0000 1.0000 1.0000 1.0000]
+OK   Akra-Bazzi with one term reproduces the Master Theorem: 7T(n/2) + n^2: leaves  [2.2386 2.2386 2.2386 2.2386]
+OK   Akra-Bazzi with one term reproduces the Master Theorem: 1T(n/2) + n^0: equal  [1.0217 1.0109 1.0072 1.0054]
+OK   ham-sandwich T(n/2) + T(n/4) + 1 at n = 2^k: T/n^(lg phi) settles  [2.341641]
+OK   Akra-Bazzi on the gap: integral_2^n du/(u lg u) = ln2 (ln ln n - ln ln 2) at n = 2^64
+OK   Akra-Bazzi on the gap: integral_2^n du/(u lg u) = ln2 (ln ln n - ln ln 2) at n = 2^1000
+
+ALL OK

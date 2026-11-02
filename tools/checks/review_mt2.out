@@ -1,0 +1,152 @@
+== 1. recurrences
+OK   key box: the three cases on a in 1..9, b in {2,3,4}, d in {0,1,2} (exact at powers of b)
+OK   drill A4: 4T(n/16)+sqrt(n) = sqrt(n)(log_16 n + 1) exactly at powers of 16 (Theta(sqrt n log n))
+OK   drill A1: 4T(n/2)+n^2 = n^2(lg n + 1) exactly (Theta(n^2 log n))
+OK   drill A2: 5T(n/2)+n^2 / n^(lg 5) settles (Theta(n^lg5), lg 5 ~ 2.32)  [(5.0, 5.0)]
+OK   drill A3: T(n/2)+T(n/3)+n is Theta(n) (T(n)/n in a band, at most 6)  [(5.943097877116838, 5.996168111617326)]
+OK   T(n/2)+T(n/3)+T(n/6)+n is Theta(n log n): T/(n lg n) in a band, T/n grows  [(0.6957140330525293, 0.7095535710565309, [9.5303, 34.827337389867054])]
+OK   T(n/3)+T(2n/3)+n is Theta(n log n)  [(1.0753593342811723, 1.0824771548970986)]
+OK   median of medians T(n/5)+T(7n/10)+n is Theta(n) (ratio <= 10)  [(9.681033842233829, 9.957810470100785)]
+OK   pieces adding to more than 1 (1/2+1/2+1/3): Theta(n^rho), rho = 1.3646  [(3.1426843938841986, 3.4377647434717806)]
+OK   different sizes with d = 2: T(n/2)+T(n/3)+n^2 is Theta(n^2)  [(1.5652173901871134, 1.5652173913043437)]
+OK   different sizes, equal case with d = 1/2: Theta(sqrt n log n)  [(0.5025500985606816, 0.5483865471415801)]
+OK   T(n-1)+1 = n (Theta(n))
+OK   T(n-1)+n = n(n+1)/2 (Theta(n^2)): quicksort and quickselect worst case
+OK   Hanoi T(n) = 2T(n-1)+1 = 2^n - 1 exactly
+OK   Hanoi algorithm makes 2^n - 1 moves for n <= 12
+OK   mergesort 2T(n/2)+n = n lg n exactly at powers of 2
+OK   mergesort with floors and ceilings is Theta(n log n)  [(1.0000097613182333, 1.0026457426644801)]
+OK   MergeSort sorts 300 random arrays
+OK   random quicksort: C(n) = n-1 + (2/n) sum_{k<n} C(k) equals 2(n+1)H_n - 4n exactly (n <= 300)
+OK   random quicksort is Theta(n log n): C(n)/(n ln n) increases towards 2 and stays below it  [[1.59, 1.691, 1.753, 1.794, 1.823]]
+OK   randomized quicksort on 60 distinct keys averages close to C(60)  [(331.52, 330.94)]
+OK   binary search T(floor(n/2))+1 = floor(lg n)+1 (Theta(log n))
+OK   quickselect with median pivot T(n/2)+n is Theta(n) (ratio -> 2)  [(1.999999994624128, 1.99999999999998)]
+OK   4T(n/2)+n = 2n^2 - n exactly (Theta(n^2))
+OK   Karatsuba 3T(n/2)+n = 3n^(lg 3) - 2n exactly (Theta(n^lg3))
+OK   lg 3 < 1.585 and lg 7 < 2.808
+OK   Strassen-like 7T(n/2)+n^2 = (7 n^lg7 - 4 n^2)/3 exactly (Theta(n^lg7))
+OK   repeated squaring: correct, between floor(lg n) and 2 floor(lg n) multiplications (Theta(log n))
+OK   drill A5: T(n/2)+lg n = lg n (lg n + 1)/2 at powers of 2 (Theta(log^2 n))
+OK   drill A3: level 1 of the tree for T(n/2)+T(n/3)+n sums to (5/6)^1 n
+OK   drill A3: level 2 of the tree for T(n/2)+T(n/3)+n sums to (5/6)^2 n
+OK   drill A3: level 3 of the tree for T(n/2)+T(n/3)+n sums to (5/6)^3 n
+OK   drill A3: level 4 of the tree for T(n/2)+T(n/3)+n sums to (5/6)^4 n
+OK   drill A3: level 5 of the tree for T(n/2)+T(n/3)+n sums to (5/6)^5 n
+OK   drill A3: level 6 of the tree for T(n/2)+T(n/3)+n sums to (5/6)^6 n
+OK   T(n/2)+T(n/3)+T(n/6)+n: every level sums to at most n, exactly n for the first floor(log_6 n) levels
+OK   log factor: 2 f(n/2)/f(n) for f = n lg n is (lg n - 1)/lg n, increasing towards 1 (no constant ratio)
+== 2. backtracking
+OK   SubsetSum(X, i, T) with T > sum X makes 2^(n+1) - 1 calls (O(2^n))
+OK   SubsetSum(X, n, T) correct against all subsets (200 random)
+OK   backtracking Splittable makes at most 2^n calls on a^(n-1)b with every a^k a word
+OK   LISbigger and LISfirst backtracking: correct, at most 2^(n+1) and 2^n calls
+OK   OptCost backtracking makes exactly 3^n calls (Theta(3^n))
+== 3. dynamic programs
+OK   Fib(i) = Fib(i-1) + Fib(i-2) gives the Fibonacci numbers
+OK   Splittable(i) recurrence, i decreasing, against all segmentations (400 random)
+OK   LISfirst(i) = 1 + max{LISfirst(j) : j > i, A[j] > A[i]} (max over nothing = 0), against brute force
+OK   Edit(i, j) recurrence, row by row, against BFS over strings (150 random pairs)
+OK   SS(i, t) = SS(i+1, t) or SS(i+1, t - X[i]), i decreasing, against all subsets
+OK   OptCost(i, k) = sum f + min over roots, i decreasing / k increasing, against all BSTs
+OK   MISyes/MISno in postorder against all vertex subsets of 200 random trees
+OK   LLP(v) = max over v->w of l(v->w) + LLP(w), in DFS postorder, against all paths (200 random dags)
+OK   order: SS with i decreasing outer, t up inner
+OK   order: SS with i decreasing outer, t down inner
+OK   order: LISbigger with the suffix index j decreasing outer, i in either direction
+OK   order: LISbigger row by row from the top is NOT valid (the trap of §3.4)
+OK   order: Edit with i increasing outer, j increasing inner
+OK   order: interval DP with i decreasing outer and k increasing inner, and by increasing length
+OK   order: Splittable(i) with i decreasing
+OK   order: Bellman-Ford DP with i increasing outer, vertices in any order
+OK   order: Floyd-Warshall recurrence with r increasing outer
+== 4. greedy counterexample
+OK   coins 1, 3, 4: largest-first pays 6 as 4+1+1 (3 coins); optimum 3+3 (2 coins)
+== 5. graph algorithms
+OK   whatever-first search with a stack, a queue or a random bag marks exactly reach(s), parents form a tree
+OK   WFSAll counts the components of 200 random undirected graphs
+OK   DFS edge classes match the interval table (tree/forward nested, back containing, cross disjoint)
+OK   finishing times: u.post < v.post exactly for back edges
+OK   no edge u->v ever has u.post < v.pre
+OK   cycle iff back edge iff some edge has u.post < v.post (400 random digraphs, Kahn as reference)
+OK   undirected DFS: every edge joins an ancestor and a descendant
+OK   in a dag every edge has u.post > v.post, so decreasing finishing time is a topological order
+OK   preorder is not a topological order, read either way (a b d e c f)
+OK   Kosaraju-Sharir (DFSAll on rev(G), then WFS in G in decreasing finishing time) = mutual reachability
+OK   Kosaraju-Sharir finds a sink component first
+OK   the condensation scc(G) is a dag
+OK   breadth-first search distances = fewest edges (brute force over paths)
+OK   DagSSSP (relax in topological order) with negative weights = brute force (300 random dags)
+OK   longest paths in a dag = DagSSSP with negated weights
+OK   Dijkstra (binary heap) with non-negative weights = brute force
+OK   Bellman-Ford DP: dist_{<=i}(v) = shortest walk with at most i edges (brute force over walks)
+OK   Bellman-Ford DP: row V-1 = distances without negative cycles; row V improves iff a negative cycle is reachable
+OK   Bellman-Ford (V-1 rounds) = brute force when no negative cycle is reachable
+OK   Bellman-Ford's test (an edge tense after V-1 rounds) iff a negative cycle is reachable from s
+OK   a super-source with 0-weight edges makes Bellman-Ford detect every negative cycle
+OK   Floyd-Warshall (r outer, in place, diagonal 0) = brute force without negative cycles
+OK   in-place Floyd-Warshall = the three-index recurrence dist(u, v, r)
+OK   negative cycle iff dist[v][v] < 0 for some v after Floyd-Warshall (500 random digraphs)
+OK   with r as the innermost loop, one pass is sometimes wrong  [45 random graphs]
+OK   layered dag (k+1 copies): DagSSSP gives the shortest walks with at most k edges, negative cycles allowed
+OK   all pairs in a dag: DagSSSP from every vertex = Floyd-Warshall (200 random dags, negative weights)
+OK   distances to t from every vertex = Dijkstra from t in the reversed graph
+OK   splitting every vertex into v_in -> v_out carries vertex weights correctly
+OK   token pairs: n^2 vertices, 2nm edges when one token moves, m^2 when both move
+== 6. drill
+OK   drill B6: Huh row by row (i up outer, j up inner) and with the loops swapped are valid orders
+OK   drill B6: the iterative fill equals the recursion; (n+1)(k+1) entries, O(1) each
+OK   drill B7: Meh with i down outer / j up inner, and by increasing j - i, are valid; i up outer is not
+OK   drill B7: the iterative fill equals the recursion
+OK   drill B7: total work of the mins is Theta(n^3) (ratio to n^3 -> 1/6)  [[0.1617, 0.1642, 0.1654]]
+OK   drill C8: a dag on 4 vertices has exactly one topological order iff it contains a path through all vertices
+OK   drill C8: a->b->c->d has exactly one topological order
+OK   drill C9: times a[1,6], b[2,5], c[3,4], d[7,8]
+OK   drill C9: a->b, b->c tree; c->a back; a->c forward; d->b cross
+OK   drill C10: one negative edge, no negative cycle
+OK   drill C10: delta(c) = 2 via s->b->a->c; NonnegativeDijkstra returns 3 (both variants); re-inserting returns 2
+OK   drill graph: 7 vertices, 9 edges, a dag
+OK   drill D11: times a[1,12] b[2,9] c[3,6] f[4,5] e[7,8] d[10,11] g[13,14]  [{'a': (1, 12), 'b': (2, 9), 'c': (3, 6), 'd': (10, 11), 'e': (7, 8), 'f': (4, 5), 'g': (13, 14)}]
+OK   drill D11: tree a->b, b->c, c->f, b->e, a->d; a->e forward; e->f, d->e, g->d cross
+OK   drill D12: decreasing finishing time g a d b e c f; a g b c d e f is another topological order
+OK   drill D12: only a and g can come first; 14 topological orders
+OK   drill D13: postorder f c e b d a g
+OK   drill D13: N(f)=1, N(c)=N(e)=1, N(b)=2, N(d)=1, N(a)=4 paths to f (brute force agrees)
+OK   drill D13: the longest path from a has 3 edges; a->b->c->f is one
+OK   drill D13: breadth-first tree from a: a->b, a->d, a->e, b->c, e->f; g unreachable
+== 7. page text
+OK   page states: $2^n - 1$ exactly
+OK   page states: $\Theta(n^{\lg 3}) = O(n^{1.585})$
+OK   page states: $\Theta(n^{\lg 7}) = O(n^{2.808})$
+OK   page states: root: $\tfrac15 + \tfrac7{10} = \tfrac9{10}$
+OK   page states: equal: $\tfrac12 + \tfrac13 + \tfrac16 = 1$
+OK   page states: Level ratio $4/2^2 = 1$: equal, $\Theta(n^2\log n)$
+OK   page states: $\Theta(n^{\lg 5})\approx\Theta(n^{2.32})$
+OK   page states: $(5/6)^i n$: root, $\Theta(n)$
+OK   page states: equal, $\Theta(\sqrt n\log n)$
+OK   page states: sum directly: $\Theta(\log^2 n)$
+OK   page states: $O(nk)$ time
+OK   page states: $O(n^3)$ time
+OK   page states: $a$ $[1, 6]$, $b$ $[2, 5]$, $c$ $[3, 4]$, $d$ $[7, 8]$
+OK   page states: $a$ $[1, 12]$, $b$ $[2, 9]$, $c$ $[3, 6]$, $f$ $[4, 5]$, $e$ $[7, 8]$,
+OK   page states: $g, a, d, b, e, c, f$
+OK   page states: $a, g, b, c, d, e, f$
+OK   page states: 14 topological orders
+OK   page states: $N(a) = N(b) + N(d) + N(e) = 4$
+OK   page states: $a\to b$, $a\to d$, $a\to e$, $b\to c$, $e\to f$
+OK   page states: $s\to a$ (weight 1), $s\to b$ (2), $b\to a$ ($-2$), $a\to c$ (2)
+OK   page states: pays $4 + 1 + 1$, three coins; $3 + 3$ uses two
+OK   page states: $\mathit{dist}[v, v] < 0$ for some $v$ at the end
+OK   page states: **$r$ is the outer loop**
+OK   page states: \min\big\{\mathit{dist}_{\le i-1}(v),\ \min_{u\to v}\{\mathit{dist}_{\
+OK   page states: \min\{\textsf{dist}(u, v, r-1),\ \textsf{dist}(u, r, r-1) + \textsf{di
+OK   page states: | tree or forward ($v$ a descendant of $u$) | $u.\mathit{pre} < v.\mat
+OK   page states: | back ($v$ an ancestor of $u$, still active) | $v.\mathit{pre} < u.\m
+OK   page states: | cross ($v$ finished, unrelated) | $v.\mathit{pre} < v.\mathit{post} 
+OK   page states: above 1: $\Theta(n^\rho)$, where $\sum_i\alpha_i^{\,\rho} = 1$
+OK   page states: every level sums to at most $n$ (the first $\log_6 n$ levels to exactl
+OK   page states: a $\max$ over nothing is 0 in $\textsf{LISfirst}$ but $-\infty$ in $\t
+OK   page states: in a dag: DagSSSP from every vertex, $O(VE)$
+OK   page states: a negative cycle is reachable from $s$ exactly when row $V$ would stil
+
+ALL OK

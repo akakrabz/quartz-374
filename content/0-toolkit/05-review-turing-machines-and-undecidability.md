@@ -145,7 +145,7 @@ Also undecidable: $\textsf{NeverReject}$, $\textsf{NeverHalt}$, $\textsf{NeverDi
 | complexity classes | $\textsf{TIME}$, $\textsf{NTIME}$, $\textsf{SPACE}$, $\textsf{NSPACE}$ on multi-tape machines; $\textsf{P} = \bigcup_k\textsf{TIME}(n^k)$, $\textsf{NP} = \bigcup_k\textsf{NTIME}(n^k)$; $\textsf{P}\subseteq\textsf{NP}\subseteq$ exponential time; $\textsf{NP}$ = languages with polynomial-time verifiers |
 | Cook–Levin | if $\textsf{SAT}\in\textsf{P}$ then $\textsf{P} = \textsf{NP}$. For $L\in\textsf{NP}$ with a verifier running $N = \max\{1, n^k\}$ steps, the formula $\Phi_w$ has variables $Q_{t,i,q}$ (state $q$, head on cell $i$, time $t$) and $T_{t,i,a}$ (cell $i$ holds $a$), five kinds of constraints (boundaries, initialization, advice, transitions, acceptance), size $O(N^2) = O(n^{2k})$, and is satisfiable iff $w\in L$ |
 
-So $\textsf{SAT}$ is NP-hard — every $L\in\textsf{NP}$ reduces **to** it — and, being in $\textsf{NP}$, NP-complete. To prove another problem NP-hard, reduce $\textsf{SAT}$ to it: the same direction rule as for undecidability ([[1-models-of-computation/09-nondeterministic-turing-machines#96-the-cooklevin-theorem|§9.6]]).
+So $\textsf{SAT}$ is NP-hard — every $L\in\textsf{NP}$ reduces **to** it — and, being in $\textsf{NP}$, NP-complete. To prove another problem NP-hard, reduce $\textsf{SAT}$ to it: the same direction rule as for undecidability ([[1-models-of-computation/09-nondeterministic-turing-machines#96-the-cooklevin-theorem|§9.6]]; the reductions themselves are in [[2-algorithms/12-np-hardness|Algorithms, Chapter 12]]).
 
 ## 6. Which tool for which question
 

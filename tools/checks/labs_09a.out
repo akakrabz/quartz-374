@@ -1,0 +1,102 @@
+== the handout's 5x5 example
+OK   example, goal label 1: page answers 1..6 = 8, none, 10, none, none, none  [{1: '8', 2: 'none', 3: '10', 4: 'none', 5: 'none', '5d': 'none', 6: 'none'}]
+OK   example, goal label 1: independent exact searches agree  [{1: 8, 2: None, 3: 10, 4: None, 5: None, 6: None}]
+OK   example, goal label 2: page answers 1..6 = 8, none, 10, none, none, none  [{1: '8', 2: 'none', 3: '10', 4: 'none', 5: 'none', '5d': 'none', 6: 'none'}]
+OK   example, goal label 2: independent exact searches agree  [{1: 8, 2: None, 3: 10, 4: None, 5: None, 6: None}]
+OK   example, goal label 3: page answers 1..6 = 8, none, 10, none, none, none  [{1: '8', 2: 'none', 3: '10', 4: 'none', 5: 'none', '5d': 'none', 6: 'none'}]
+OK   example, goal label 3: independent exact searches agree  [{1: 8, 2: None, 3: 10, 4: None, 5: None, 6: None}]
+OK   example, goal label 3: raw enumeration of all sequences up to 12 moves agrees  [{1: 8, 2: None, 3: 10, 4: None, 5: None, 6: None}]
+OK   example, goal label 3: problem 5 conclusive (all sequences up to n - 1 = 4 moves): none
+OK   example, goal label 4: page answers 1..6 = 8, none, 10, none, none, none  [{1: '8', 2: 'none', 3: '10', 4: 'none', 5: 'none', '5d': 'none', 6: 'none'}]
+OK   example, goal label 4: independent exact searches agree  [{1: 8, 2: None, 3: 10, 4: None, 5: None, 6: None}]
+OK   example, goal label 5: page answers 1..6 = 8, none, 10, none, none, none  [{1: '8', 2: 'none', 3: '10', 4: 'none', 5: 'none', '5d': 'none', 6: 'none'}]
+OK   example, goal label 5: independent exact searches agree  [{1: 8, 2: None, 3: 10, 4: None, 5: None, 6: None}]
+OK   example, goal label 5: raw enumeration of all sequences up to 12 moves agrees  [{1: 8, 2: None, 3: 10, 4: None, 5: None, 6: None}]
+OK   example, goal label 5: problem 5 conclusive (all sequences up to n - 1 = 4 moves): none
+OK   example, goal label 6: page answers 1..6 = 8, none, 10, none, none, none  [{1: '8', 2: 'none', 3: '10', 4: 'none', 5: 'none', '5d': 'none', 6: 'none'}]
+OK   example, goal label 6: independent exact searches agree  [{1: 8, 2: None, 3: 10, 4: None, 5: None, 6: None}]
+OK   example, goal label 7: page answers 1..6 = 8, none, 10, none, none, none  [{1: '8', 2: 'none', 3: '10', 4: 'none', 5: 'none', '5d': 'none', 6: 'none'}]
+OK   example, goal label 7: independent exact searches agree  [{1: 8, 2: None, 3: 10, 4: None, 5: None, 6: None}]
+OK   example, goal label 8: page answers 1..6 = 8, none, 10, none, none, none  [{1: '8', 2: 'none', 3: '10', 4: 'none', 5: 'none', '5d': 'none', 6: 'none'}]
+OK   example, goal label 8: independent exact searches agree  [{1: 8, 2: None, 3: 10, 4: None, 5: None, 6: None}]
+OK   example, goal label 9: page answers 1..6 = 8, none, 10, none, none, none  [{1: '8', 2: 'none', 3: '10', 4: 'none', 5: 'none', '5d': 'none', 6: 'none'}]
+OK   example, goal label 9: independent exact searches agree  [{1: 8, 2: None, 3: 10, 4: None, 5: None, 6: None}]
+OK   example: the drawn solution R3 D4 L2 R1 U3 L1 R3 D3 reaches the goal  [[(0, 0), (0, 3), (4, 3), (4, 1), (4, 2), (1, 2), (1, 1), (1, 4), (4, 4)]]
+OK   example: the drawn solution is valid for none of problems 2-6  [[False, False, False, False, False]]
+OK   example, goal label 1: the drawn solution is the only one with 8 moves; none has 5 moves; the only one with 10 moves that does not pass through the goal is R3 D4 L2 R1 U3 L1 R3 L3 R3 D3  [(1, 0, ['R3 D4 L2 R1 U3 L1 R3 L3 R3 D3'])]
+OK   example, goal label 2: the drawn solution is the only one with 8 moves; none has 5 moves; the only one with 10 moves that does not pass through the goal is R3 D4 L2 R1 U3 L1 R3 L3 R3 D3  [(1, 0, ['R3 D4 L2 R1 U3 L1 R3 L3 R3 D3'])]
+OK   example, goal label 3: the drawn solution is the only one with 8 moves; none has 5 moves; the only one with 10 moves that does not pass through the goal is R3 D4 L2 R1 U3 L1 R3 L3 R3 D3  [(1, 0, ['R3 D4 L2 R1 U3 L1 R3 L3 R3 D3'])]
+     goal label 3, all 10-move solutions: ['R3 D4 L2 R1 U3 L1 R3 D3 U3 D3', 'R3 D4 L2 R1 U3 L1 R3 L3 R3 D3']
+OK   example, goal label 4: the drawn solution is the only one with 8 moves; none has 5 moves; the only one with 10 moves that does not pass through the goal is R3 D4 L2 R1 U3 L1 R3 L3 R3 D3  [(1, 0, ['R3 D4 L2 R1 U3 L1 R3 L3 R3 D3'])]
+OK   example, goal label 5: the drawn solution is the only one with 8 moves; none has 5 moves; the only one with 10 moves that does not pass through the goal is R3 D4 L2 R1 U3 L1 R3 L3 R3 D3  [(1, 0, ['R3 D4 L2 R1 U3 L1 R3 L3 R3 D3'])]
+OK   example, goal label 6: the drawn solution is the only one with 8 moves; none has 5 moves; the only one with 10 moves that does not pass through the goal is R3 D4 L2 R1 U3 L1 R3 L3 R3 D3  [(1, 0, ['R3 D4 L2 R1 U3 L1 R3 L3 R3 D3'])]
+OK   example, goal label 7: the drawn solution is the only one with 8 moves; none has 5 moves; the only one with 10 moves that does not pass through the goal is R3 D4 L2 R1 U3 L1 R3 L3 R3 D3  [(1, 0, ['R3 D4 L2 R1 U3 L1 R3 L3 R3 D3'])]
+OK   example, goal label 8: the drawn solution is the only one with 8 moves; none has 5 moves; the only one with 10 moves that does not pass through the goal is R3 D4 L2 R1 U3 L1 R3 L3 R3 D3  [(1, 0, ['R3 D4 L2 R1 U3 L1 R3 L3 R3 D3'])]
+OK   example, goal label 9: the drawn solution is the only one with 8 moves; none has 5 moves; the only one with 10 moves that does not pass through the goal is R3 D4 L2 R1 U3 L1 R3 L3 R3 D3  [(1, 0, ['R3 D4 L2 R1 U3 L1 R3 L3 R3 D3'])]
+OK   example: the 10-move solution is the 8-move one with the detour L3 R3 inserted before the last move  [[(0, 0), (0, 3), (4, 3), (4, 1), (4, 2), (1, 2), (1, 1), (1, 4), (1, 1), (1, 4), (4, 4)]]
+OK   example, goal label 1: only D3 from (2,5) enters the goal; only R3 from (2,2) (or U3 from the goal when its label is 3) enters (2,5); only L1 from (2,3) and L3 from (2,5) enter (2,2)
+OK   example, goal label 2: only D3 from (2,5) enters the goal; only R3 from (2,2) (or U3 from the goal when its label is 3) enters (2,5); only L1 from (2,3) and L3 from (2,5) enter (2,2)
+OK   example, goal label 3: only D3 from (2,5) enters the goal; only R3 from (2,2) (or U3 from the goal when its label is 3) enters (2,5); only L1 from (2,3) and L3 from (2,5) enter (2,2)
+OK   example, goal label 4: only D3 from (2,5) enters the goal; only R3 from (2,2) (or U3 from the goal when its label is 3) enters (2,5); only L1 from (2,3) and L3 from (2,5) enter (2,2)
+OK   example, goal label 5: only D3 from (2,5) enters the goal; only R3 from (2,2) (or U3 from the goal when its label is 3) enters (2,5); only L1 from (2,3) and L3 from (2,5) enter (2,2)
+OK   example, goal label 6: only D3 from (2,5) enters the goal; only R3 from (2,2) (or U3 from the goal when its label is 3) enters (2,5); only L1 from (2,3) and L3 from (2,5) enter (2,2)
+OK   example, goal label 7: only D3 from (2,5) enters the goal; only R3 from (2,2) (or U3 from the goal when its label is 3) enters (2,5); only L1 from (2,3) and L3 from (2,5) enter (2,2)
+OK   example, goal label 8: only D3 from (2,5) enters the goal; only R3 from (2,2) (or U3 from the goal when its label is 3) enters (2,5); only L1 from (2,3) and L3 from (2,5) enter (2,2)
+OK   example, goal label 9: only D3 from (2,5) enters the goal; only R3 from (2,2) (or U3 from the goal when its label is 3) enters (2,5); only L1 from (2,3) and L3 from (2,5) enter (2,2)
+OK   example, goal label 1: all 12 solutions with <= 14 moves contain a left move into (2,2) followed by R3, start with lengths 3, 4 and end with lengths 3, 3
+OK   example, goal label 2: all 13 solutions with <= 14 moves contain a left move into (2,2) followed by R3, start with lengths 3, 4 and end with lengths 3, 3
+OK   example, goal label 3: all 26 solutions with <= 14 moves contain a left move into (2,2) followed by R3, start with lengths 3, 4 and end with lengths 3, 3
+OK   example, goal label 4: all 12 solutions with <= 14 moves contain a left move into (2,2) followed by R3, start with lengths 3, 4 and end with lengths 3, 3
+OK   example, goal label 5: all 12 solutions with <= 14 moves contain a left move into (2,2) followed by R3, start with lengths 3, 4 and end with lengths 3, 3 (and end R3 from (2,2), D3)
+OK   example, goal label 6: all 12 solutions with <= 14 moves contain a left move into (2,2) followed by R3, start with lengths 3, 4 and end with lengths 3, 3 (and end R3 from (2,2), D3)
+OK   example, goal label 7: all 12 solutions with <= 14 moves contain a left move into (2,2) followed by R3, start with lengths 3, 4 and end with lengths 3, 3 (and end R3 from (2,2), D3)
+OK   example, goal label 8: all 12 solutions with <= 14 moves contain a left move into (2,2) followed by R3, start with lengths 3, 4 and end with lengths 3, 3 (and end R3 from (2,2), D3)
+OK   example, goal label 9: all 12 solutions with <= 14 moves contain a left move into (2,2) followed by R3, start with lengths 3, 4 and end with lengths 3, 3 (and end R3 from (2,2), D3)
+OK   example: the first move is R3 to (1,4) or D3 to (4,1), both labeled 4
+== the traps
+OK   trap (Problem 2): on 111/111/121 the square-marking BFS reports no solution, the page's answer is 4
+OK   trap (Problem 2): the square-marking BFS reaches the center by down, right; from it up hits the marked (1,2) and down reaches (3,2), which has no horizontal move; it marks only (1,1), (2,1), (1,2), (2,2), (3,2)  [{(0, 0): None, (1, 0): 'D', (0, 1): 'R', (1, 1): 'R', (2, 1): 'D'}]
+OK   trap (Problem 2): right, down, right, down is a valid 4-move solution of 111/111/121  [[(0, 0), (0, 1), (1, 1), (1, 2), (2, 2)]]
+OK   trap (Problem 3): in the all-1 2x2 maze Problem 1 gives 2 and Problem 3 gives 10, and no walk of odd length reaches the goal
+== out-degrees stated on the page
+OK   Problem 2: at most 2 edges leave each vertex
+OK   Problem 4: at most 3 edges leave each vertex, at most 2 leave s
+OK   Problem 6: at most 16 edges leave each vertex
+OK   Problem 5: at most 2(n-1) edges enter t
+OK   Problem 6: the all-1 5x5 maze attains out-degree 16
+== page vs independent exact searches (both readings of the rules)
+OK   all 1x1 and 2x2 mazes, labels 1..3: page == exact on 84 mazes, both readings  [solvable (pass-through reading) per problem: 1:18, 2:18, 3:18, 4:18, 5:3, 6:18]
+OK   all 3x3 mazes, labels 1..3: page == exact on 19683 mazes, both readings  [solvable (pass-through reading) per problem: 1:7764, 2:5460, 3:7660, 4:7614, 5:0, 6:5887]
+OK   random 4x4 mazes, labels 1..4: page == exact on 1500 mazes, both readings  [solvable (pass-through reading) per problem: 1:610, 2:333, 3:597, 4:541, 5:46, 6:231]
+OK   random 4x4 mazes, labels 1..3: page == exact on 1500 mazes, both readings  [solvable (pass-through reading) per problem: 1:1198, 2:768, 3:1197, 4:1117, 5:103, 6:536]
+OK   random 5x5 mazes, labels 1..5: page == exact on 800 mazes, both readings  [solvable (pass-through reading) per problem: 1:357, 2:144, 3:356, 4:285, 5:10, 6:111]
+OK   random 5x5 mazes, labels 1..4: page == exact on 800 mazes, both readings  [solvable (pass-through reading) per problem: 1:636, 2:346, 3:636, 4:554, 5:21, 6:217]
+OK   random 4x4..6x6 mazes, mostly ones where problem 5 has a solution: page == exact on 360 mazes, both readings  [solvable (pass-through reading) per problem: 1:341, 2:173, 3:341, 4:332, 5:230, 6:83]
+OK   random 5x5 mazes, labels 1..2: page == exact on 300 mazes, both readings  [solvable (pass-through reading) per problem: 1:269, 2:220, 3:269, 4:269, 5:0, 6:211]
+== page vs raw enumeration of move sequences (no state, condition checked on the whole sequence)
+OK   raw enumeration (budget 60000 sequences, L from 10 to 2500): every page answer <= L found by the raw search, and nothing found when the page says > L or none  [8400 comparisons, 2940 with a solution found; 5023 conclusive by the length bound (of which 4000 'no solution')]
+OK   problem 5: raw enumeration up to n - 1 moves (conclusive bound) equals the page on every random maze
+OK   all 2x2 mazes, labels 1..2: raw enumeration up to the pigeonhole bound (3, 8, 19, 16, 1 moves) equals the page for problems 1-5  [80 comparisons, mismatches: []]
+== vertex and edge counts against the page's bounds
+OK   problem 1: V = formula and E <= bound on random mazes, n = 1..8 (n = 1..6 for problem 6)  [largest E / bound = 0.875]
+OK   problem 2: V = formula and E <= bound on random mazes, n = 1..8 (n = 1..6 for problem 6)  [largest E / bound = 0.876]
+OK   problem 3: V = formula and E <= bound on random mazes, n = 1..8 (n = 1..6 for problem 6)  [largest E / bound = 0.875]
+OK   problem 4: V = formula and E <= bound on random mazes, n = 1..8 (n = 1..6 for problem 6)  [largest E / bound = 0.874]
+OK   problem 5: V = formula and E <= bound on random mazes, n = 1..8 (n = 1..6 for problem 6)  [largest E / bound = 0.476]
+OK   problem 5d: V = formula and E <= bound on random mazes, n = 1..8 (n = 1..6 for problem 6)  [largest E / bound = 0.259]
+OK   problem 6: V = formula and E <= bound on random mazes, n = 1..8 (n = 1..6 for problem 6)  [largest E / bound = 0.694]
+OK   problem 2: from (1,1) only the moves right and down can stay on the board (s has at most 2 edges)
+OK   problem 5: both graphs are dags (labels strictly increase along square-to-square edges)
+OK   problem 5: capping labels at n changes no edge, and squares by capped label (then t) is a topological order
+OK   problem 2: BFS from each of the two copies of (1,1), keeping the smaller distance, gives the page's answer (n = 1 included)
+OK   problems 1-4 and 6: the graphs of the all-1 2x2 maze have cycles (not dags in general)
+== graph size and BFS work on growing mazes
+OK   problem 1: graph size V + E <= the bounds and BFS work <= V + E, n = (16, 32, 64)  [(V+E)/n^2 = 4.03 4.20 4.16; BFS work/n^2 = 3.95 4.16 4.10]
+OK   problem 2: graph size V + E <= the bounds and BFS work <= V + E, n = (16, 32, 64)  [(V+E)/n^2 = 5.05 5.16 5.16; BFS work/n^2 = 3.61 3.83 4.04]
+OK   problem 3: graph size V + E <= the bounds and BFS work <= V + E, n = (16, 32, 64)  [(V+E)/n^2 = 20.68 20.70 20.87; BFS work/n^2 = 19.71 20.47 20.56]
+OK   problem 4: graph size V + E <= the bounds and BFS work <= V + E, n = (16, 32, 64)  [(V+E)/n^2 = 13.14 13.43 13.49; BFS work/n^2 = 7.98 8.37 8.57]
+OK   problem 5: graph size V + E <= the bounds and BFS work <= V + E, n = (16, 32, 64)  [(V+E)/n^2 = 1.50 1.50 1.50; BFS work/n^2 = 0.25 0.12 0.06]
+OK   problem 5d: graph size V + E <= the bounds and BFS work <= V + E, n = (8, 16, 32)  [(V+E)/n^3 = 1.50 1.37 1.31; BFS work/n^3 = 0.07 0.02 0.00]
+OK   problem 6: graph size V + E <= the bounds and BFS work <= V + E, n = (6, 9, 12)  [(V+E)/n^4 = 6.30 7.16 7.14; BFS work/n^4 = 2.25 2.53 2.52]
+
+ALL OK
