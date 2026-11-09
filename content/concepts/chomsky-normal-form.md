@@ -40,8 +40,8 @@ T_{\mathtt{1}} &\to \mathtt{1}.
 $$
 For instance, `010` has one parse tree, with the $2\cdot3-1 = 5$ nonterminal nodes $S'$, $T_{\mathtt{0}}$, $X$, $P$, $T_{\mathtt{0}}$.
 
-**Where it appears.** [[1-models-of-computation/05-context-free-languages#58-chomsky-normal-form|§5.8]] (definition, binary parse trees), [[1-models-of-computation/05-context-free-languages#59-the-cnf-conversion-algorithm|§5.9]] (Theorem 5.7; the algorithm on the book's running example), [[1-models-of-computation/05-context-free-languages#53-from-grammar-to-language|§5.3]] (why $\varepsilon$-rules complicate proofs), [[1-models-of-computation/05-context-free-languages#52-parse-trees-and-ambiguity|§5.2]] (parse trees).
+**Where it appears.** [[1-models-of-computation/05-context-free-languages#58-chomsky-normal-form|§5.8]] (definition, binary parse trees), [[1-models-of-computation/05-context-free-languages#59-the-cnf-conversion-algorithm|§5.9]] (Theorem 5.7; the algorithm on the book's running example), [[1-models-of-computation/05-context-free-languages#53-from-grammar-to-language|§5.3]] (why $\varepsilon$-rules complicate proofs), [[1-models-of-computation/05-context-free-languages#52-parse-trees-and-ambiguity|§5.2]] (parse trees), [[4-lecture-notes/c-dynamic-programming-for-automata#c4-cfg-parsing|lecture note C, §C.4]] (CYK parsing, and why CNF makes its recursion terminate).
 
 **Practice.** [[practice/topics#parse-trees-ambiguity-and-chomsky-normal-form|Parse trees, ambiguity and Chomsky normal form]] (4 problems) — for example [[practice/05-context-free-languages#51-closure-and-ambiguity-true-or-false|5.1 Closure and ambiguity, true or false]] (easy), [[practice/05-context-free-languages#56-the-dangling-else|5.6 The dangling else]] (medium).
 
-Related: [[concepts/context-free-grammars]] · [[concepts/parse-trees-and-ambiguity]] · [[concepts/recursive-automata]]
+Related: [[concepts/context-free-grammars]] · [[concepts/parse-trees-and-ambiguity]] · [[concepts/recursive-automata]] · [[concepts/cyk-algorithm]]

@@ -1,0 +1,50 @@
+OK   C.2: delta* recurrence (p. 2) matches walk enumeration (300 random NFAs, |Q|<=4, all w up to length 6)  [38100 cases]
+OK   C.2: Accepts?(q, w) recurrence matches walk enumeration
+OK   C.2: backtracking Accepts?(q, i) (with delta[q,a,r] meaning r in delta(q,a)) is correct
+OK   C.2: NFAaccepts? dynamic program, as printed, is correct; every read is of a written entry
+OK   C.2: library set simulation agrees (independent brute force)
+OK   C.2 note error p. 3: literal reading 'delta[p,a,q] iff p in delta(q,a)' makes NFAaccepts? wrong on some inputs  [4480 wrong answers]
+OK   C.2: backtracking makes sum_k |Q|^k calls on a complete rejecting NFA (|Q|=2, n=8): Theta(|Q|^n)  [511]
+OK   C.2: backtracking makes sum_k |Q|^k calls on a complete rejecting NFA (|Q|=3, n=6): Theta(|Q|^n)  [1093]
+OK   C.2: backtracking makes sum_k |Q|^k calls on a complete rejecting NFA (|Q|=4, n=5): Theta(|Q|^n)  [1365]
+OK   C.2: NFAaccepts? runs its innermost test exactly n|Q|^2 times (O(n|Q|^2))
+OK   C.2 example: Accepts? table for 0110, columns i = 1..5  [{'s': 'TTFFF', 'a': 'TFFTF', 'b': 'FTTFF', 'c': 'TTTTT'}]
+OK   C.2 example: 0110 accepted (Accepts?[s,1] = T)
+OK   C.2 example: 0101 rejected; table  [{'s': 'FFFFF', 'a': 'TFTFF', 'b': 'FTFTF', 'c': 'TTTTT'}]
+OK   C.2 example: forward set simulation agrees on 0110 and 0101
+OK   C.2 example: every table entry equals [delta*(q, w[i..n]) meets A]
+OK   C.1 extra: Dist(k,p,q) layers equal 'some string of length <= k distinguishes p,q' (k <= 4, 400 random DFAs)
+OK   C.1 extra: the stable layer marks exactly the distinguishable pairs (strings up to length n)
+OK   C.1 extra: the layers stop changing after at most n - 2 rounds (so at most n layers are ever computed)
+OK   C.1 extra: the n - 2 bound is attained (chain DFAs, n = 3..8): the first repeated layer can be layer n - 1
+OK   C.1 extra: merging unmarked reachable states gives the minimal DFA's state count
+OK   C.1 extra: in-place table filling (Ch 3 §3.10) needs at most as many marking passes as the layered DP has rounds
+OK   C.4: corrected CYKParse agrees with the Earley recognizer (250 random CNF grammars, all w up to length 7)  [63750 cases]
+OK   C.4: corrected CYKParse never reads an unwritten entry (order: j increasing, i decreasing)
+OK   C.4: Gen?(A, x) string recurrence (p. 5) is correct
+OK   C.4: Gen?(A, i, j) index recurrence (p. 6) is correct with S as the answer
+OK   C.4: innermost test runs exactly (#binary rules) * (n^3 - n)/6 times: O(n^3 L)
+OK   C.4 note error p. 6: printed loop 'for i <- n down to j+1' never fills Gen[S,1,n] (read of unwritten entry, every w with n >= 2)  [63000 of 63000]
+OK   C.4 note error p. 6: with all-False initialization the printed CYKParse rejects members of length >= 2  [16127 members rejected]
+OK   C.4 note error p. 6: 'Gen?(A,1,n) for some A' (instead of S) accepts non-members  [9278 disagreements]
+OK   C.4: the note's parenthesis grammar generates only the empty string (strings up to length 10)  [['']]
+OK   C.4: in the note's grammar, A generates no string of length <= 10
+OK   C.4: in the note's grammar, B generates no string of length <= 10
+OK   C.4: in the note's grammar, C generates no string of length <= 10
+OK   C.4 page: corrected grammar is in CNF  [(True, None)]
+OK   C.4 page: corrected grammar generates exactly the balanced strings (Earley, all strings up to length 12)
+OK   C.4 page: CYK on the corrected grammar = balanced, all strings up to length 12
+OK   C.4 page: A generates the non-empty balanced strings
+OK   C.4 page: B generates x) with x non-empty balanced
+OK   C.4 page example: CYK table for (())() (nonempty cells: L,L,R,R,L,R; [2..3],[5..6] = S,A; [2..4] = B; [1..4],[1..6] = S,A)  [{(1, 1): 'L', (1, 4): 'SA', (1, 6): 'SA', (2, 2): 'L', (2, 3): 'SA', (2, 4): 'B', (3, 3): 'R', (4, 4): 'R', (5, 5): 'L', (5, 6): 'SA', (6, 6): 'R'}]
+OK   C.4 page example: (())() is accepted
+OK   C.4 page example: the only rule/split for [1..6] is A A at k = 4  [[4]]
+OK   concept: grammar S -> ZO|ZT, T -> XO, X -> ZO|ZT, Z -> 0, O -> 1 is CNF
+OK   concept: it generates exactly {0^n 1^n : n >= 1} (CYK, all strings up to length 12)
+OK   concept: Earley agrees (up to length 10)
+OK   concept example: table for 0011: [1..1],[2..2] = Z; [3..3],[4..4] = O; [2..3] = S,X; [2..4] = T; [1..4] = S,X; all other cells empty  [{(1, 1): 'Z', (1, 2): '', (1, 3): '', (1, 4): 'SX', (2, 2): 'Z', (2, 3): 'SX', (2, 4): 'T', (3, 3): 'O', (3, 4): '', (4, 4): 'O'}]
+OK   concept example: 0101 is rejected; [1..2] and [3..4] contain S,X but no rule joins them
+OK   concept: counting version (+ and x) equals the number of parse trees (library count, 150 random CNF grammars, all strings of length 1..6)
+OK   concept: walking down stored rule/split choices from (S,1,n) gives a valid parse tree of w
+
+ALL OK

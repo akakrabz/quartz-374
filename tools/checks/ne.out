@@ -1,0 +1,79 @@
+OK   uniform U(k,n), all 0<=k<=n<=5: matroid
+OK   uniform: the bases are the k-subsets
+OK   uniform: the circuits are the (k+1)-subsets (k < n)
+OK   Theorem E.1: GreedyBasis returns a maximum-weight basis — U(3,5)
+OK     ... which is also a maximum-weight independent set (non-negative weights) — U(3,5)
+OK     ... and dominates every basis rank by rank (the proof's first-difference step) — U(3,5)
+OK   Theorem E.1: GreedyBasis returns a maximum-weight basis — U(3,5), weights of any sign
+OK     ... and dominates every basis rank by rank (the proof's first-difference step) — U(3,5), weights of any sign
+OK   uniform: greedy computes the k largest elements
+OK   graphic M(G), all 64 graphs on 4 labelled vertices: matroid
+OK   graphic: circuits = edge sets of simple cycles (all 64 graphs)
+OK   graphic, connected G (38 graphs): bases = spanning trees
+OK   graphic, disconnected G: bases = spanning forests (one tree per component), not spanning trees
+OK   cographic M*(G), connected G: matroid
+OK   cographic, connected G: bases = complements of spanning trees
+OK   cographic, connected G: circuits = bonds (minimal disconnecting edge sets)
+OK   cographic as defined in the note, disconnected G: no set (not even the empty set) is independent
+OK   cographic corrected (removing X keeps the number of components): matroid for disconnected G too
+OK   graphic: 25 random graphs on 5 vertices: matroid
+OK   Theorem E.1: GreedyBasis returns a maximum-weight basis — graphic M(K5) (maximum spanning tree)
+OK     ... which is also a maximum-weight independent set (non-negative weights) — graphic M(K5) (maximum spanning tree)
+OK     ... and dominates every basis rank by rank (the proof's first-difference step) — graphic M(K5) (maximum spanning tree)
+OK   cographic M*(K5): greedy's complement is a minimum spanning tree (150 random weightings)
+OK   linear: 60 random rational matrices (2x4, 3x5, 3x6): matroid
+OK   linear: matroid rank of every subset = linear-algebra rank of its columns
+OK   linear: every basis spans the column space
+OK   Theorem E.1: GreedyBasis returns a maximum-weight basis — a 3x5 linear matroid
+OK     ... which is also a maximum-weight independent set (non-negative weights) — a 3x5 linear matroid
+OK     ... and dominates every basis rank by rank (the proof's first-difference step) — a 3x5 linear matroid
+OK   matching matroid: 80 random graphs on 4-6 vertices: matroid
+OK   matching matroid with equal weights: greedy basis = V iff G has a perfect matching
+OK   matchings as edge sets (path a-b-c-d): hereditary but not a matroid  [X=[('a', 'b'), ('c', 'd')], Y=[('b', 'c')]]
+OK   edge-disjoint-path matroid: 40 random digraphs on 5 vertices, s = 0: matroid
+OK   all 19 hereditary families on 3 elements enumerated (Dedekind number minus the empty family: 19)
+OK     16 of them are matroids; for each, greedy is optimal for all weights in {0..3}^3 and every tie-breaking order
+OK     for each of the 3 non-matroids, the proof's weights make greedy return exactly m(m+2), for every tie-breaking order
+OK     ... while w(X) >= (m+1)^2 > m(m+2), and m = |Y| >= 1
+OK   all 167 hereditary families on 4 elements enumerated (Dedekind number minus the empty family: 167)
+OK     68 of them are matroids; for each, greedy is optimal for all weights in {0..3}^4 and every tie-breaking order
+OK     for each of the 99 non-matroids, the proof's weights make greedy return exactly m(m+2), for every tie-breaking order
+OK     ... while w(X) >= (m+1)^2 > m(m+2), and m = |Y| >= 1
+OK   iff stated for non-negative weights: on the matroid U(1,1) with w = -1, GreedyBasis returns {1} (weight -1), not the best independent set (empty, weight 0)
+OK   classes [0,2], [3,5], [1,4]: hereditary, not a matroid
+OK     heaviest-first greedy with weights 2, 2, 3 takes only [1,4]: weight 3, optimum 4
+OK   two classes never defeat heaviest-first greedy (all pairs of intervals in [0,5], weights 0..3)
+OK   two classes defeat earliest-finish: [0,2] worth 1, [1,10] worth 5 -> 1 versus 5
+OK   Lemma E.3: X realistic (brute force over schedules) iff |X(t)| <= t for all t — every D, n <= 4
+OK   Lemma E.4: realistic sets form a matroid — every deadline vector, n <= 4
+OK   Lemma E.4's proof: t* exists, some j in X \ Y has deadline t* + 1, and Z = Y + j is realistic
+OK     for t > t*: |Z(t)| = |Y(t)| + 1 <= |X(t)| <= t
+OK     the note's strict '|X(t)| < t' fails: |X(t)| = t can happen for t > t*  [D=(1,), X=[0], Y=[], t=1]
+OK   Lemma E.4 on 40 random deadline vectors with n = 5, 6
+OK   example: greedy by decreasing penalty keeps a, b, d, f and rejects c and e
+OK   example: canonical schedule b, a, d, f on days 1-4 (all on time), then c and e (late)
+OK   example: total penalty 11 = 7 + 4, the minimum over all 720 schedules
+OK   example: on-time penalty 9 + 8 + 5 + 2 = 24 of 35
+OK   example: the printed 'increasing order' keeps c, d, e, f and pays 9 + 8 = 17
+OK   Realistic? as printed starts with j <- 0 and reads the undefined X[0]
+OK   Realistic? with j <- 1 but 'if' accepts {a, b, c}, which has three deadlines <= 2
+OK   Realistic? corrected (j <- 1, 'while') agrees with Lemma E.3 on every subset, every D, n <= 5
+OK     the 'if' version disagrees somewhere (n = 4)
+OK   GreedySchedule (decreasing penalty) matches the brute-force minimum on 150 random instances
+OK   GreedySchedule as printed (increasing penalty) is suboptimal on some of them  [70 of 150]
+OK   concept example: matroid
+OK   concept example: greedy order v3, v1, v2, v5, v4; keeps v3, v1, v5; rejects v2 (= v3 - v1) and v4
+OK   concept example: weight 14, the maximum over all bases; next best 13
+OK   concept example: {v1, v2, v3} is a circuit
+OK   concept example: the bases are exactly the 3-sets of rank 3 (8 of the 10)
+OK   page mentions '7 + 4 = 11'
+OK   page mentions '9 + 8 = 17'
+OK   page mentions 'm(m+2)'
+OK   page mentions '(m+1)^2'
+OK   page mentions 'every choice of non-negative weights'
+OK   concept page mentions '14'
+OK   concept page mentions 'v_3'
+OK   concept page mentions 'v_5'
+OK   concept page mentions 'optimal for all non-negative weights'
+
+ALL OK

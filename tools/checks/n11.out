@@ -1,0 +1,128 @@
+OK   11.1 Union(2,1), ..., Union(2,1) builds the path 1->2->...->2
+OK   11.1 that sequence costs (n-1)(n-2)/2 = 0 Find steps (Theta(n^2)), n=2  [0]
+OK   11.1 then Find(1) walks n-1 = 1 edges
+OK   11.1 Union(2,1), ..., Union(5,1) builds the path 1->2->...->5
+OK   11.1 that sequence costs (n-1)(n-2)/2 = 6 Find steps (Theta(n^2)), n=5  [6]
+OK   11.1 then Find(1) walks n-1 = 4 edges
+OK   11.1 Union(2,1), ..., Union(10,1) builds the path 1->2->...->10
+OK   11.1 that sequence costs (n-1)(n-2)/2 = 36 Find steps (Theta(n^2)), n=10  [36]
+OK   11.1 then Find(1) walks n-1 = 9 edges
+OK   11.1 Union(2,1), ..., Union(50,1) builds the path 1->2->...->50
+OK   11.1 that sequence costs (n-1)(n-2)/2 = 1176 Find steps (Theta(n^2)), n=50  [1176]
+OK   11.1 then Find(1) walks n-1 = 49 edges
+OK   11.1 Union(2,1), ..., Union(200,1) builds the path 1->2->...->200
+OK   11.1 that sequence costs (n-1)(n-2)/2 = 19701 Find steps (Theta(n^2)), n=200  [19701]
+OK   11.1 then Find(1) walks n-1 = 199 edges
+OK   11.1 union by depth: the depth field of every leader equals the height of its tree
+OK   11.1 union by depth: size of every set >= 2^depth(leader)
+OK   11.1 union by depth: every Find walks at most floor(lg n) edges
+OK   11.1 balanced rounds on 2^1 elements give depth exactly 1 = lg n
+OK   11.1 balanced rounds on 2^2 elements give depth exactly 2 = lg n
+OK   11.1 balanced rounds on 2^3 elements give depth exactly 3 = lg n
+OK   11.1 balanced rounds on 2^4 elements give depth exactly 4 = lg n
+OK   11.1 balanced rounds on 2^5 elements give depth exactly 5 = lg n
+OK   11.1 balanced rounds on 2^6 elements give depth exactly 6 = lg n
+OK   11.1 balanced rounds on 2^7 elements give depth exactly 7 = lg n
+OK   11.1 balanced rounds on 2^8 elements give depth exactly 8 = lg n
+OK   11.1 balanced rounds on 2^9 elements give depth exactly 9 = lg n
+OK   11.1 balanced rounds on 2^10 elements give depth exactly 10 = lg n
+OK   11.1 printed Union(x, x) on a singleton sets depth(x) = 1 > lg 1 (needs an 'if xbar = ybar return' guard)
+OK   11.2 as printed (MakeSet sets next(x) <- x, Union loops while next(y) != Null) Union never terminates
+OK   11.2 Null-terminated threads: Union(x, y) relabels exactly the set of y; threads list each set from its leader
+OK   11.2 WorstCaseSequence as printed (Union(1, i)) does only n-1 = 1 relabels, n=2
+OK   11.2 with Union(i, 1) it does n(n-1)/2 = 1 relabels (Theta(n^2)), n=2
+OK   11.2 WorstCaseSequence as printed (Union(1, i)) does only n-1 = 2 relabels, n=3
+OK   11.2 with Union(i, 1) it does n(n-1)/2 = 3 relabels (Theta(n^2)), n=3
+OK   11.2 WorstCaseSequence as printed (Union(1, i)) does only n-1 = 9 relabels, n=10
+OK   11.2 with Union(i, 1) it does n(n-1)/2 = 45 relabels (Theta(n^2)), n=10
+OK   11.2 WorstCaseSequence as printed (Union(1, i)) does only n-1 = 99 relabels, n=100
+OK   11.2 with Union(i, 1) it does n(n-1)/2 = 4950 relabels (Theta(n^2)), n=100
+OK   11.2 WorstCaseSequence as printed (Union(1, i)) does only n-1 = 299 relabels, n=300
+OK   11.2 with Union(i, 1) it does n(n-1)/2 = 44850 relabels (Theta(n^2)), n=300
+OK   11.2 WeightedUnion: every object changes leader at most floor(lg(size of its final set)) times
+OK   11.2 WeightedUnion: after n unions no object changed leader more than floor(lg(n+1)) times
+OK   11.2 WeightedUnion: at most 2n objects are in non-singleton sets after n unions
+OK   11.2 counterexample to 'the largest set has at most n members' (n = 1 union makes a set of 2 = n + 1)
+OK   11.2 counterexample to 'at most n objects are not in singletons' (5 unions of pairs: 10 = 2n objects)
+OK   11.2 most relabels to build a set of s objects is <= (s/2) lg s, s <= 256
+OK   11.2 ... with equality k 2^(k-1) exactly when s = 2^k (balanced rounds)
+OK   11.2 balanced rounds on 2^1 objects: 1 relabels by 1 WeightedUnions
+OK   11.2 balanced rounds on 2^2 objects: 4 relabels by 3 WeightedUnions
+OK   11.2 balanced rounds on 2^3 objects: 12 relabels by 7 WeightedUnions
+OK   11.2 balanced rounds on 2^4 objects: 32 relabels by 15 WeightedUnions
+OK   11.2 balanced rounds on 2^5 objects: 80 relabels by 31 WeightedUnions
+OK   11.2 balanced rounds on 2^6 objects: 192 relabels by 63 WeightedUnions
+OK   11.2 balanced rounds on 2^7 objects: 448 relabels by 127 WeightedUnions
+OK   11.2 balanced rounds on 2^8 objects: 1024 relabels by 255 WeightedUnions
+OK   11.3 rank(x) < rank(parent(x)) for every non-leader x (after every operation)
+OK   11.3 whenever path compression changes parent(x), the new parent has larger rank than the old one
+OK   11.3 whenever x's leader changes, the new leader has larger rank than the old one
+OK   11.3 size of every set >= 2^rank(leader)
+OK   11.3 every rank <= floor(lg n)
+OK   11.3 at most n/2^r objects of rank r, for every r
+OK   11.3 depth <= floor(lg n) at all times: Find is O(log n) worst case even with path compression
+OK   11.3 rank(x) >= height of the subtree of x, for every node x at all times
+OK   lg* values: lg* n = 1, 2, 3, 4, 5 on n <= 2, 3..4, 5..16, 17..65536, 65537..2^65536
+OK   exact integer lg* agrees with the definition for n < 2*10^5
+OK   lg* 2^65536 = 5 and lg* (2^65536 + 1) = 6 (exact)
+OK   lg* n = number of lg's until the value is <= 1 (not '< 1': for n = 2 that count is 2, the formula 1), n >= 2
+OK   ... the note's words ('until less than 1') give 2 for n = 2, the formula gives 1
+OK   lg** values: 1 (n <= 2), 2 (3..4), 3 (5..65536), 4 above
+OK   for n <= 2^256: lg* n <= 5, lg** n <= 4, lg^{*c} n <= 3 for c >= 3 (at n = 2^256, functions monotone)
+OK   lg^{*c} is non-decreasing (c = 1..4, n < 3000)
+OK   lg^{*c} 5 = 3 for every c = 1..8: the threshold 2 would never be reached (the note says '>= 2')
+OK   lg^{*c} n >= 2 for every n > 2, c >= 1
+OK   lg^{*c} n = min{k >= 1 : 2 ↑^{c+1} k >= n} (c = 1..4, n < 70000 and n = 2^100, 2^65536)
+OK   alpha(n) = 1 for n <= 16, 2 for 17..65536, 3 at 65537 and at 2^65536
+OK   alpha(n) = min{c >= 1 : 2 ↑^{c+1} 3 >= n} (n < 70000)
+OK   ... not 2 ↑^{c+2} 3 as printed: that would give alpha(17) = 1, but lg* 17 = 4 > 3 so alpha(17) = 2
+OK   footnote 5: alpha~(n) <= alpha(n) <= alpha~(n) + 2 for n > 65536 (computable range n < 70000, n = 2^100); alpha~(16) = 3 > alpha(16) = 1, so 'large n' is needed
+OK   footnote 5 via the inverse relation: alpha~(n) <= c iff n <= 2↑^{c+1} c, for c = 1..3 and n < 70000
+OK   alpha(m, n) as printed: for n = 17..3000, lg^{*c}(lg n) >= 3 for c = 1..7, so no c qualifies at m = 3n - 1; m = 3n works
+OK   ... so it is undefined for m = n (every n = 5..3000): 'alpha(m,n) = Theta(alpha(n)) when m = Theta(n)' needs m >= 3n; at m = 3n it equals alpha(lg n) <= alpha(n) (n = 17..70000)
+OK   Ackermann table: rows 2n, 2↑n, 2↑↑n (to n = 5) and 2↑↑↑n (to n = 3) as printed
+OK   2 ↑^c 2 = 4 for every c = 0..8
+OK   2 ↑^c 1 = 2 for every c
+OK   2↑↑↑4 = 2↑↑65536 and 2↑↑↑↑3 = 2↑↑↑4 (identity 2↑^{c+1}3 = 2↑^c 4) — both towers, not computed
+OK   2↑↑n is a tower of n 2s
+OK   each row 2↑^c n increases in n (computable entries)
+OK   11.4 s = floor(lg r) does not give r/2^s <= 1 (r = 3: 1.5), so 'T(F+, C+) <= n' needs s = ceil(lg r)
+OK   lg*(ceil(lg r)) = lg* r - 1 for 3 <= r <= 2*10^5 (lg* only steps at the integers 2, 4, 16, 65536)
+OK   recurrence T'(r) <= T'(ceil lg r) + 2n solves to <= 2n lg* r (r <= 2*10^5)
+OK   recurrence T''(r) <= T''(lg* r) + 3n solves to <= 3n lg** r (r <= 2*10^5)
+OK   lg* r / 2^{lg* r} <= 1/2, so Theorem 3 on F+ with s = lg* r costs <= m+ + n (the note bounds it by m+ + 2n)
+OK   general crank: T - cm <= (c+1) n lg^{*c} r (c = 1..4, r <= 10^5)
+OK   simulations: pointer changes T <= 2m+3n lg** r on every run (largest ratio 0.087, on merge-and-compress 2^13)
+OK   simulations: pointer changes T <= Thm2 n r on every run (largest ratio 0.288, on small random #298)
+OK   simulations: pointer changes T <= Thm3 m+2n lg* r on every run (largest ratio 0.151, on merge-and-compress 2^13)
+OK   simulations: pointer changes T <= Thm4 m alpha(r)+3n(alpha(r)+1) on every run (largest ratio 0.151, on merge-and-compress 2^13)
+OK   11.4 Unions moved before all Compresses: same number of pointer assignments and the same final forest, when Find(x) is Compress(x, y) with y the child of the root (as in the note's figure)
+OK   11.4 ... but not with y = the leader (the note's text): counts differ in 344 of 400 random runs
+OK   11.4 example: x->a, c->b; Find(x); Union(a, b); Find(x): leader convention 3 assignments in order, 2 after reordering; child-of-root convention 1 and 1
+OK   11.4 split: every Compress assignment changes a pointer (y is never a root)
+OK   11.4 split: low nodes whose parent jumps from low to high (the Shatters) — each at most once, <= n-
+OK   11.4 split: low nodes moved from one high parent to another (the (!?) line) — at most one per Compress whose top node is high, <= m+
+OK   11.4 split: T(F,C) = T(F+,C+) + T(F-,C-) + shatters + (!?) <= T(F+,C+) + T(F-,C-) + m+ + n
+OK   11.4 split: n+ <= n/2^s
+OK   11.4 split: T(F+,C+) <= n+ (r - s) (Theorem 2 inside F+)
+OK   page mentions 2^{65536}
+OK   page mentions 65536
+OK   page mentions \lfloor\lg(n+1)\rfloor
+OK   page mentions $2n$
+OK   page mentions \lceil\lg r\rceil
+OK   page mentions (n-1)(n-2)/2
+OK   page mentions n(n-1)/2
+OK   page mentions k\,2^{k-1}
+OK   page mentions \alpha(17) = 2
+OK   page mentions 2\uparrow^{c+1} 3
+OK   page mentions m + 2n\lg^* r
+OK   page mentions m\,\alpha(r) + 3n(\alpha(r) + 1)
+OK   page mentions 2m + 3n\lg^{**} r
+OK   page mentions 1 + 2
+OK   page mentions 1 + 1
+OK   page mentions 1.5n
+OK   page mentions \lg^{*^c} 5 = 3
+OK   page mentions $m < 3n$ and $n\ge 17$
+OK   page mentions m\ge 3n
+
+ALL OK

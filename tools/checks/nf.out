@@ -1,0 +1,61 @@
+OK   note's network: balances sum to zero
+OK   G': edges s->a, s->c, s->e with capacities 5, 1, 4 and b->t, d->t, f->t with 2, 6, 2
+OK   p. 3 figure: the flow 10, 5, 3, 9, 7, 10, 1, 5, 5 is feasible in G
+OK   G' has a saturating flow: maximum flow 10 = 5 + 1 + 4 = 2 + 6 + 2
+OK   p. 5 pseudoflow: residual balances a = -5, e = +5, all others 0
+OK   p. 5 residual graph: the 15 residual capacities in the middle panel
+OK   augmenting path a->b->f->c->e: residual capacities 15, 7, 4, 10, R = min(5, 5, 4) = 4
+OK   after pushing 4: psi(a->b) = 9, psi(b->f) = 7, psi(c->f) = 0, psi(e->c) = 6 (p. 5, right)
+OK     residual balances now a = -1, e = +1; B = 1
+OK   one more augmentation a->b->c->e (residual 11, 5, 6) moves R = 1 unit and gives a feasible flow
+OK     that flow: a->b 10, b->c 1, b->f 7, c->f 0, c->d 7, e->c 5, d->e 1, f->e 0, f->a 5
+OK   literal 'psi(e) <- psi(e) - R' on the reversed edges f->c, c->e leaves psi(c->f), psi(e->c) unchanged: e still has +5, f gets -4  [residual balances {'a': -1, 'b': 0, 'c': 0, 'd': 0, 'e': 5, 'f': -4}]
+OK   variant with c->d capacity 5: T = {d} is an infeasible cut (5 < 6) and the LP finds no feasible flow
+OK   the note's B_psi := sum_v |b_psi(v)| is twice the total residual supply (10 = 2 * 5) and the push of R = 4 lowers it by 2R = 8; sum|b_psi|/2 (the pseudocode's B) drops by R
+OK   Lemma F.1 on 400 random networks: feasible (LP) iff G' has a saturating flow (157 feasible, 243 not)
+OK   Theorem F.2: a feasible flow exists iff no cut (S, T) has ||S,T|| < b(T) (all 2^V cuts)
+OK   Theorem F.2 without sum b = 0 fails: one vertex with b = -1 has no feasible flow and no infeasible cut
+OK     with sum b != 0 there is never a feasible flow; sum b > 0 is caught by the cut T = V (100 networks)
+OK   FeasibleFlow (random supply, random reachable demand, random path) agrees with the LP on 500 networks
+OK     invariants after every push: 0 <= psi <= c, B = sum|b_psi|/2 drops by exactly R, sum b_psi = 0
+OK     at most B = sum|b|/2 iterations (integer data)
+OK     when it returns Infeasible: S = vertices reachable from the stuck supply vertex gives ||S,T|| < b(T); for a demand vertex no supply reaches, T = vertices that reach it does
+OK     the note's orientation (b_psi(v) < 0: T = vertices that can reach v) is not an infeasible cut in some cases  [275 of 302]
+OK   shortest augmenting paths (multi-source BFS): same answers, iterations <= V'E' of G'
+OK   page example x->y (2), y->z (5), b = -3, 0, +3: one push of 2, then Infeasible
+OK     S = reachable from x = {x}: ||S,T|| = 2 < b(T) = 3
+OK     the note's rule: vertices that can reach x = {x, y, z}, so S would be empty — not a cut
+OK     demand side: T = vertices that can reach z = {y, z}, the same cut; the note's 'reachable from z' is all of V
+OK   F.4 two-stage maximum flow with balances (z with edges both ways) = LP maximum on 300 networks (209 feasible)
+OK     the note's z construction (only t->z and z->s) wrongly reports infeasible on some feasible instances  [11 of 209]
+OK   page counterexample s->t (10), t->v (20), v absorbs 15: LP maximum 10
+OK     the note's G' has no feasible flow (t->z would need -15 + |f| < 0)
+OK     with z->t and s->z added: maximum flow 10, with f(t->v) = 15
+OK   lower bounds (some negative): psi = max(l,0), opposing edges, two stages = LP maximum (154 of 200 feasible)
+OK   antisymmetric residual bounds: l_psi(e) = l(e) - psi(e), c_psi(e) = c(e) - psi(e) for e and its reversal; l_psi(v->u) = -c_psi(u->v)
+OK     the printed second case (psi of the pair itself, under antisymmetry) breaks antisymmetry whenever psi != 0  [242 of 300]
+OK   push-relabel (arbitrary active vertex, random downward edge, relabel +1) = Edmonds-Karp value, 250 networks
+OK     Lemma F.3: heights compatible with psi after every operation
+OK     Lemma F.4: no residual path from s to t after every operation
+OK     preflow: every vertex except s has non-negative excess
+OK     Lemma F.6's proof: every active vertex has a residual path to s; every height < 2V
+OK     Lemma F.6: each vertex is relabeled fewer than 2V times
+OK     Lemma F.7: at most V saturating pushes along each residual edge  [max seen 4]
+OK     Lemma F.8: each non-saturating push lowers Phi by >= 1; their number <= total increase of Phi
+OK   FIFO selection: correct, non-saturating pushes <= 4V^3
+OK   highest-label selection: correct
+     trace: [('relabel', 'a', 1), ('push', 'a', 'b', 1, True), ('push', 'a', 't', 2, True), ('relabel', 'b', 1), ('push', 'b', 't', 3, True)] heights {'s': 4, 'a': 1, 'b': 1, 't': 0}
+OK   page trace (FIFO): value 5
+OK   page trace: a relabels to 1 and pushes 1 to b and 2 to t; b relabels to 1 and pushes 3 to t (all saturating)  [[('relabel', 'a', 1), ('push', 'a', 'b', 1, True), ('push', 'a', 't', 2, True), ('relabel', 'b', 1), ('push', 'b', 't', 3, True)]]
+     trace: [('relabel', 'a', 1), ('push', 'a', 't', 1, True), ('relabel', 'a', 2), ('relabel', 'a', 3), ('relabel', 'a', 4), ('push', 'a', 's', 2, False)] heights {'s': 3, 'a': 4, 't': 0}
+OK   page trace 2 (s->a 3, a->t 1): a relabels to 1, pushes 1 to t, relabels to 2, 3, 4 = |V| + 1, pushes 2 back to s; value 1  [[('relabel', 'a', 1), ('push', 'a', 't', 1, True), ('relabel', 'a', 2), ('relabel', 'a', 3), ('relabel', 'a', 4), ('push', 'a', 's', 2, False)]]
+OK   page mentions '\min\{5, 5, 4\} = 4'
+OK   page mentions '15, 7, 4, 10'
+OK   page mentions '||S,T||'
+OK   page mentions '2 < 3'
+OK   page mentions '11, 5, 6'
+OK   page mentions '10, 1, 7, 0, 7, 5, 1, 0, 5'
+OK   page mentions 'whose balances sum to zero'
+OK   page mentions 'twice the total residual supply'
+
+ALL OK

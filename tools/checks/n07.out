@@ -1,0 +1,98 @@
+== algorithms against brute force, exhaustively ==
+OK   AlmostBruteForce = brute force on all 194586 (text, pattern) pairs (|T| <= 9 over AB, <= 6 over ABC)
+OK   ComputeFailure = definition (longest proper border + 1) for every pattern
+OK   ComputeFailure makes at most 2m character comparisons
+OK   recursive definition (base case i = 1, P[0] matches everything) = ComputeFailure
+OK   OptimizeFailure(ComputeFailure) = ComputeOptFailure (P[0] matches nothing) = definition of the optimized function
+OK   KnuthMorrisPratt with ComputeFailure = brute force on all pairs
+OK   KnuthMorrisPratt with the optimized failure function = brute force on all pairs
+OK   the optimized failure function never causes more comparisons than the unoptimized one
+OK   KMP: successful comparisons <= n, failed comparisons <= n, total <= 2n - 1 (max over all inputs)  [max succ {0: 0, 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9}; max failed {0: 0, 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9}; max total {0: 0, 1: 1, 2: 3, 3: 5, 4: 7, 5: 9, 6: 11, 7: 13, 8: 15, 9: 17}]
+OK   the note's 'at most n - 1 successful / n - 1 failed comparisons' is off by one: n successful (T = P = AB), n failed (T = B, P = A) are possible
+OK   2n - 1 is attained for every n >= 1 (bound is tight)  [{0: 0, 1: 1, 2: 3, 3: 5, 4: 7, 5: 9, 6: 11, 7: 13, 8: 15, 9: 17}]
+OK   KMP search: mismatches can exceed matches (T = BBB, P = A: 0 matches, 3 mismatches) — they are paid for by advances of j
+OK   ComputeFailure: mismatches <= increments of j (m - 1), matches <= m, total <= 2m (all patterns over AB, m <= 9); mismatches can exceed matches (P = AB: 0 and 1)
+OK   NumberSearch = brute force on all digit strings over {0,1,2} (|T| <= 7, |P| <= 3)
+OK   NumberSearch/KarpRabin read T[n+1] in the last update when no earlier match ends the loop
+OK   KarpRabin = brute force for every prime q < 100 (random digit texts, all patterns |P| <= 3 over 0-3)
+OK   page's KarpRabin (update guarded by s < n - m + 1) = brute force without reading T[n+1] (all digit strings over 0-2, |T| <= 7, |P| <= 3, primes < 30)
+OK   rolling update gives t_s mod q at every shift
+OK   false match at s  <=>  q divides p - t_s != 0
+OK   Lemma 2: every 1 <= x <= 200000 has at most floor(lg x) distinct prime divisors
+OK   random prime: Pr[false match at a shift] = #{prime q <= ceil(m^2 lg m) dividing |p - t_s|}/#primes <= floor(m lg 10)/#primes, m = 2..6  [m=2: U=4, 2 primes, worst 2 <= 6; m=3: U=15, 6 primes, worst 4 <= 9; m=4: U=32, 11 primes, worst 5 <= 13; m=5: U=59, 17 primes, worst 6 <= 16; m=6: U=94, 24 primes, worst 7 <= 19]
+OK   m * floor(m lg 10) / pi(m^2 lg m) stays bounded (about 5): the false-match probability is O(1/m)  [m=10: 4.93, m=30: 4.95, m=100: 5.01, m=300: 5.02, m=900: 5.01]
+OK   prime number theorem: pi(u) ln u / u in [1, 1.2] for u = 10^4 .. 10^7
+OK   Carter–Wegman: for P != T_s (characters < q), at most m - 1 of the q radices collide, and (m-1)/q < 1/m (exhaustive, m = 2..4, q = 5..17)
+OK   p(b) = sum_{i=0}^{m-1} b^i P[m-i] equals the Horner loop's fingerprint (the note's sum runs i = 1..m and reaches P[0])
+OK   counterexample: digits, q = 5 (> m^2 = 4), P = 00, T_s = 55 collide for all 5 radices (needs q > alphabet)
+OK   CarterWegmanKarpRabin = brute force for several (q, b), all digit strings over 0-2
+== the note's examples ==
+OK   AMANAPLANACATACANALPANAMA: CAN first at shift 15; SPAM: None
+OK   pi digits: t_17 = 2384 for m = 4
+OK   worst case A^3B in A^20: exactly (n-m+1)m = 68 comparisons
+OK   worst case A^4B in A^30: exactly (n-m+1)m = 130 comparisons
+OK   worst case A^5B in A^12: exactly (n-m+1)m = 42 comparisons
+OK   random window and pattern, sigma = 2, m = 4: E[comparisons at one shift] = 15/8 < 2
+OK   random window and pattern, sigma = 3, m = 3: E[comparisons at one shift] = 13/9 < 3/2
+OK   random window and pattern, sigma = 4, m = 3: E[comparisons at one shift] = 21/16 < 4/3
+OK   HOCUSPOCUS text: at s = 11 the comparison fails at the 5th position (T[15] = B, not C)
+OK   s = 12 and s = 13 fail at the first character; s = 14 is a full match (the note says s = 13, 14 fail, s = 15)
+OK   T[14] = P[4] = A (the note writes T[15] = P[4]; T[15] = B)
+OK   KMP on HOCUSPOCUS...: mismatch T[15] vs P[5], fail[5] = 2, i.e. next shift 15 - 2 + 1 = 14; finds 14
+OK   next reasonable shift rule: smallest s with T[s .. 14] a proper prefix of P is 14
+OK   ABRACADABRA: unoptimized fail as printed  [[0, 1, 1, 1, 2, 1, 2, 1, 2, 3, 4]]
+OK   ABRACADABRA optimized: printed table differs only at i = 11 (printed 1, correct 0)  [[0, 1, 1, 0, 2, 0, 2, 0, 1, 1, 0]]
+OK   ABRACADABRA optimized, i = 11: chain 11 -> 4 -> 1 -> 0 has P[4] = P[1] = A = P[11]
+OK   ANANABANANANA: unoptimized fail as printed  [[0, 1, 1, 2, 3, 4, 1, 2, 3, 4, 5, 6, 5]]
+OK   ANANABANANANA: optimized fail as printed  [[0, 1, 0, 1, 0, 4, 0, 1, 0, 1, 0, 6, 0]]
+OK   ABABCABABCABC: unoptimized fail as printed  [[0, 1, 1, 2, 3, 1, 2, 3, 4, 5, 6, 7, 8]]
+OK   ABABCABABCABC: optimized fail as printed  [[0, 1, 0, 1, 3, 0, 1, 0, 1, 3, 0, 1, 8]]
+OK   ABBABBABABBAB: unoptimized fail as printed  [[0, 1, 1, 1, 2, 3, 4, 5, 6, 2, 3, 4, 5]]
+OK   ABBABBABABBAB: optimized fail as printed  [[0, 1, 1, 0, 1, 1, 0, 1, 6, 1, 1, 0, 1]]
+OK   p. 11 says 'four more example strings' but prints three tables
+OK   ComputeFailure trace of p. 9 (30 lines) replayed step by step  [[('init', 0, 1), ('fail', 1, 0), ('adv', 1, 2), ('fail', 2, 1), ('back', 0, 2), ('adv', 1, 3)]]
+   compact (1, 'A', 0, [], 1)
+   compact (2, 'B', 1, [1], 1)
+   compact (3, 'R', 1, [1], 1)
+   compact (4, 'A', 1, [1], 2)
+   compact (5, 'C', 2, [2, 1], 1)
+   compact (6, 'A', 1, [1], 2)
+   compact (7, 'D', 2, [2, 1], 1)
+   compact (8, 'A', 1, [1], 2)
+   compact (9, 'B', 2, [2], 3)
+   compact (10, 'R', 3, [3], 4)
+   compact (11, 'A', 4, [4], 5)
+OK   P[1 .. fail^c[i] - 1] (c >= 1) are exactly the proper borders of P[1 .. i-1] (all patterns over AB, m <= 8)
+OK   the note's base case 'fail[i] = 0 if i = 0' must read i = 1: fail[1] = 0 and fail[0] is never used
+== the KMP automaton as a DFA ==
+OK   DFA built from the failure function = definition delta(k, a) = longest prefix of P that is a suffix of P[1..k]a
+OK   that DFA (state m absorbing) accepts exactly the strings containing P (all P, all w up to length 10 / 6)
+OK   it is minimal: m + 1 states after Moore minimization, for every P
+OK   fooling set: the m + 1 prefixes of P; P[j+1..m] distinguishes P[1..i] and P[1..j] for i < j
+OK   subset construction of the NFA for Sigma* P (strings ending in P) has exactly m + 1 reachable states
+OK   ABAB: fail = 0 1 1 2; DFA rows 0:(1,0) 1:(1,2) 2:(3,0) 3:(1,4) 4:(4,4)
+OK   KMP DFA for P = 11 over {0,1}: 0 -0-> 0, 0 -1-> 1, 1 -0-> 0, 1 -1-> 2, 2 absorbing (3 states, minimal)
+== concept page example ==
+   concept: fail [0, 1, 2, 1] opt [0, 0, 2, 0] kmp (2, 5, 1) kmp opt (2, 5, 1) first match 2
+   trace ([(1, 'A', [1]), (2, 'A', [2]), (3, 'A', [3, 2]), (4, 'B', [3]), (5, 'A', [4])], 2)
+   trace opt ([(1, 'A', [1]), (2, 'A', [2]), (3, 'A', [3, 2]), (4, 'B', [3]), (5, 'A', [4])], 2)
+== page text ==
+OK   page and concept page exist
+OK   page §7.7 table: the four patterns, their failure functions and optimized versions are the computed ones  [['ABRACADABRA', 'ANANABANANANA', 'ABABCABABCABC', 'ABBABBABABBAB']]
+OK   page §7.6 definition table: fail of ABRACADABRA
+OK   page §7.6 ComputeFailure table matches the replay (fail[i], the j's compared, j afterwards)
+OK   page states $t_{17} = 2384$
+OK   page states shift 15
+OK   page states at most $2n - 1$ comparisons
+OK   page states $O(m\log^{3.5} m)$
+OK   page states $\mathtt{00}$ and $\mathtt{55}$
+OK   page states 194,586
+OK   page: 194,586 = number of (text, pattern) pairs tested
+OK   page: numerically the ratio stays near 5 for m from 10 to 900
+OK   concept example: fail(AABA) = 0 1 2 1, optimized 0 0 2 0
+OK   concept example: on AABBAABA a match at shift 5, 9 comparisons (8 with the optimized table)
+OK   concept trap: prefix function pi[j] = border length of P[1..j] = fail[j+1] - 1
+OK   figure n07-kmp-machine: caption lists both failure functions
+OK   figure n07-kmp-dfa: fail = 0 1 1 2 for ABAB, 5 states
+
+ALL OK

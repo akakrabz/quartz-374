@@ -1,0 +1,68 @@
+OK   intro: for n = 100, 2^n = 1.3e30, 1.5^n = 4.1e17, 1.25^n = 4.9e9
+OK   B.1 r^3 - r^2 - r - 1 has roots 1.83928676 and -0.41964338 ± 0.60629073i (sum of the roots = 1)  [1.8392867552, -0.4196433776+0.6062907292j]
+OK   B.1 ERROR p. 4 (last digits): the real part of the complex roots is -0.4196433776 = (1 - 1.8392867552)/2, not -0.419643337 as printed
+OK   B.1 the real root has the largest modulus (|complex roots| = 0.7374)
+OK   B.1 T(n) = T(n-1)+T(n-2)+T(n-3)+1: T(n)/T(n-1) -> 1.839287
+OK   B.1 T(n) = T(n-1)+T(n-2)+T(n-3)+n^3: same ratio (polynomial noise does not change the base)
+OK   B.1 O(lambda^n poly(n)) = O(1.83929^n) since 1.83928676 < 1.83929
+OK   B.1 T(n) <= 3T(n-1) + poly(n) gives 3^n
+OK   B.1 r^3 - 2r - 2: largest root 1.76929235 < 1.76930  [1.7692923542]
+OK   B.1 T(n) = 1 + max{T(n-1), 2T(n-2) + 2T(n-3)}: growth 1.769292 (the T(n-1) case is polynomial)
+OK   B.1 ERROR p. 4: r^(a_k) - sum r^(a_k - a_i) has a_k roots, not k: T(n) = T(n-1) + T(n-4) has k = 2 terms but r^4 - r^3 - 1 has 4 roots
+OK   B.1 for every recurrence on the page the unique positive root lambda > 1 has the largest modulus (ties: -lambda for r^10 - r^8 - r^2 - 2, two complex roots for r^3 - 3), and T(n) grows like lambda^n
+OK   B.1 test set: 2500 random formulas, 1-9 variables, clauses of at most 3 literals on distinct variables, both kinds  [1700 satisfiable]
+OK   B.1 3Sat (with the empty-clause base case) = brute force on all 2500 formulas
+OK   B.1 3Sat makes at most B(n) calls, B(n) = 1 + B(n-1) + B(n-2) + B(n-3)
+OK   B.1 ERROR p. 3: the printed 3Sat never returns False; on every unsatisfiable test formula the recursion reaches a formula with an empty clause, where it needs 'return False'
+OK   B.1 Faster3Sat (pure literals; branches x u, x ~u v, ~x y, ~x ~y z) = brute force on all 2500 formulas
+OK   B.1 Faster3Sat makes at most B'(n) calls, B'(n) = 1 + max{B'(n-1), 2B'(n-2) + 2B'(n-3)}
+OK   B.1 bound ratios: B(60)/B(59) -> 1.8393, B'(60)/B'(59) -> 1.7693
+OK   B.1 x AND Psi = x AND (Psi|x) (truth tables, 600 formulas)
+OK   B.1 a satisfiable formula stays satisfiable after setting any pure literal True
+OK   B.1 Local3Sat(Phi, A, r) = True exactly when some satisfying assignment is within Hamming distance r of A (every start A, every r, formulas with <= 6 variables)
+OK   B.1 Local3Sat makes at most 1 + 3 + ... + 3^r = (3^(r+1) - 1)/2 calls: O(3^r poly(n))
+OK   B.1 NOTE p. 6 (Figure B.2): read with one shared array A, the last branch leaves A[z] flipped; this changes answers (1091 of 56112 runs), so A must be passed by value (or the flip undone)  [smallest bad case: 5 clauses, n = 6, r = 2, correct False, shared True]
+OK   B.1 deterministic local search: radius floor(n/2) from all-True and from all-False decides every test formula
+OK   B.1 NOTE p. 6: with the shared array the search also misses satisfying assignments within distance r (636 runs), and the deterministic algorithm built on it answers wrongly on 22 of 2500 formulas
+OK   B.1 3^(n/2) = (sqrt 3)^n and sqrt 3 = 1.7320508 < 1.73206
+OK   B.1 P(r) >= V(r)/2^n: from a uniformly random start, local search with radius r succeeds with probability at least V(r)/2^n (exact enumeration over all starts)
+OK   B.1 with N(r) = n 2^n / V(r) runs the failure probability (1 - P)^N <= (1 - V/2^n)^(n 2^n/V) <= e^-n
+OK   B.1 H(alpha) = (1/alpha)^alpha (1/(1-alpha))^(1-alpha) is 2^(binary entropy): H(1/4) = 1.7548, H(1/2) = 2
+OK   B.1 V(n/4) = Omega(H(1/4)^n / sqrt n): V(n/4) sqrt(n) / H(1/4)^n stays between 0.4 and 1.6 for n = 4..800  [min 1.055, max 1.378]
+OK   B.1 3^alpha / H(alpha) = (3 alpha)^alpha (1-alpha)^(1-alpha)
+OK   B.1 2 (3a)^a (1-a)^(1-a) is minimized at a = 1/4, where it equals 3/2 (derivative ln 3a - ln(1-a))
+OK   B.1 total work 2^n 3^(n/4) / V(n/4) is at most 3 sqrt(n) (3/2)^n for n = 8..800
+OK   B.2 naive MaximumIndSetSize = brute force (33868 labelled graphs with <= 6 vertices + 320 random with 7-14)
+OK   B.2 degree-0 rule (take an isolated vertex) = brute force
+OK   B.2 degree-1 rule (take a vertex of degree <= 1) = brute force
+OK   B.2 degree >= 3 stage (three-way branch on a path u v w when every degree is 2) = brute force
+OK   B.2 final algorithm (Figure B.3, cycles solved directly) = brute force
+OK   B.2 Figure B.3 makes at most B(n) calls, B(n) = 1 + B(n-1) + B(n-4) (graphs up to 30 vertices)
+OK   B.2 if deg(v) <= 1, some maximum independent set contains v (all graphs with <= 6 vertices)
+OK   B.2 cycle C_k has maximum independent set floor(k/2), k = 3..16
+OK   B.2 an isolated vertex is in every maximal independent set (all graphs <= 6 vertices)
+OK   B.2 most maximal independent sets in an n-vertex graph, n = 1..6: 1, 2, 3, 4, 6, 9  [{1: 1, 2: 2, 3: 3, 4: 4, 5: 6, 6: 9}]
+OK   B.2 M(n) <= 2M(n-1), M(1) = 1 gives M(n) <= 2^(n-1) (tighter than the note's 2^n - 1); true maximum <= 3^(n/3)
+OK   B.2 two disjoint triangles have 3^2 = 9 maximal independent sets
+OK   B.2 degree 0: T(n-1) + T(n-2) -> phi = 1.6180340 < 1.61804
+OK   B.2 degree 1: r^3 - r^2 - 1 -> 1.4655712 < 1.46558  [1.46557123]
+OK   B.2 degree >= 3: 3T(n-3) -> r^3 - 3 -> 3^(1/3) = 1.4422496 < 1.44225
+OK   B.2 T(n-1) + T(n-4) -> r^4 - r^3 - 1 -> 1.3802776 < 1.38028  [1.38027757]
+OK   B.2 multi-case recurrences: growth of 1 + max{...} equals the largest single-case root
+OK   B.2 table of bases: 2, 1.6180340, 1.4655712, 1.4422496, 1.3802776 (7 decimals)
+OK   B.3 bases: 3^(1/3) = 1.44225 -> O(1.4423^n); 1 + 3^(1/3) = 2.44225 -> O(2.4423^n)
+OK   B.2 T(n-4) + T(n-5) (1.1673) is dominated by T(n-3) + T(n-5) (1.1939)  [1.16730 < 1.19386]
+OK   B.2 Figure B.4: of the 12 cases the third, T(n-2) + T(n-8) + 2T(n-10), has the largest root  [1.21061, 1.24245, 1.25602, 1.19386, 1.21061, 1.20852, 1.21861, 1.21921, 1.18253, 1.21983, 1.22604, 1.25524]
+OK   B.2 its characteristic polynomial is r^10 - r^8 - r^2 - 2 with root 1.25603 < 2^(1/3) = 1.25992  [1.2560202]
+OK   B.2 printed to 6 decimals the Tarjan-Trojanowski base is 1.256020; 2^(1/3) = 1.259921
+OK   B.2 ERROR p. 11: Robson's O(1.1889^n) is not O(2^(n/4) poly(n)) the other way round: 2^(1/4) = 1.18921 > 1.1889
+OK   B.3 3-coloring DP over subsets X (X independent, G - X bipartite, else OR of OPT(X + v)) = brute force (1260 graphs)
+OK   B.3 Lawler: G is 3-colorable iff G - I is bipartite for some maximal independent set I
+OK   B.3 whatever-first backtracking (first two vertices red, green; each later vertex 2 choices) = brute force
+OK   B.3 it examines exactly 2^(n-2) colorings of a connected component with n >= 2 vertices
+OK   B.3 Lawler's chromatic-number recurrence (1 + min over maximal independent sets I of OPT(X - I)) = brute force
+OK   B.3 ERROR p. 12: 'O(3^(k/3)) maximal independent sets of size k' is false (K_10 has 10 of size 1); the bound is 3^(k/3) for a graph with k vertices
+OK   B.3 sum_k C(n,k) 3^(k/3) = (1 + 3^(1/3))^n (binomial theorem), 1 + 3^(1/3) = 2.4422
+OK   Exercise 5(a) p. 13: the bound sum_{i<=an} C(n,i) < H(a)^n fails for a > 1/2 (a = 3/4, n = 40: 2^40 - 3.7e8 = 1.1e12 vs 5.9e9)  [1.099e+12 vs 5.872e+09]
+
+ALL OK

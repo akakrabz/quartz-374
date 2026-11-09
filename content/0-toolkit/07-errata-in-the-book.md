@@ -1,7 +1,7 @@
 ---
 title: "Errata in the books"
-description: "Slips in Erickson's two textbooks found while writing this site — in Models of Computation a wrong move in a printed Turing machine, a too-weak CNF rule and an off-by-one in the Cook–Levin tableau; in Algorithms wrong summation limits, a wrong growth rate, array ranges and loop bounds that do not fit their tables, a broken non-recursive Hanoi rule, wrong counts in exercise examples, a Huffman loop off by one, an unstable “stable” matching, graph-search pseudocode that recurses forever or labels nothing, an off-by-one negative-cycle test an all-pairs table entry that is read but never written, a sign slip in the definition of net flow, a false exercise about opposing edges, and a 3SAT → Hamiltonian-cycle reduction that is wrong as printed — each with the correction and the section here that has it right."
-tags: [toolkit, regular, context-free, turing-machines, undecidability, complexity, algorithms, flows]
+description: "Slips in Erickson's two textbooks found while writing this site — in Models of Computation a wrong move in a printed Turing machine, a too-weak CNF rule and an off-by-one in the Cook–Levin tableau; in Algorithms wrong summation limits, a wrong growth rate, array ranges and loop bounds that do not fit their tables, a broken non-recursive Hanoi rule, wrong counts in exercise examples, a Huffman loop off by one, an unstable “stable” matching, graph-search pseudocode that recurses forever or labels nothing, an off-by-one negative-cycle test an all-pairs table entry that is read but never written, a sign slip in the definition of net flow, a false exercise about opposing edges, a 3SAT → Hamiltonian-cycle reduction that is wrong as printed, and the most consequential slips in Erickson's other lecture notes — each with the correction and the section here that has it right."
+tags: [toolkit, regular, context-free, turing-machines, undecidability, complexity, algorithms, flows, lecture-notes]
 aliases: ["errata", "book errata", "typos in the book"]
 ---
 
@@ -208,6 +208,54 @@ The book is careful, and every item below is small. They are listed because each
 | pp. 400–401, 3SAT → DirectedHamCycle | rows of "$2k$ vertices $(i,0),\ldots,(i,2k)$" (that is $2k+1$; the figures draw $2k$), consecutive rows joined end to end | **wrong as printed**: for the eight clauses on $a, b, c$ with $(\bar a\vee b\vee c)$ last — unsatisfiable — the graph is Hamiltonian, because a cycle can leave the end of row $a$ through the last clause vertex into row $b$. The repair: spacer vertices between the clause positions and a hub between consecutive rows | copying the book's construction gives a reduction that is not correct — [[2-algorithms/12-np-hardness#from-3sat\|§12.11]], [[concepts/hamiltonian-cycle\|Hamiltonian cycle]] |
 | p. 402, VertexCover → SubsetSum | "a set $X$" of numbers | a **multiset**: two vertices can get equal numbers (one edge $uv$, $k = 2$) | read as a set, the reduction gives wrong answers — [[2-algorithms/12-np-hardness#1212-subset-sum-from-vertex-cover\|§12.12]] |
 | p. 403 | the "⇐" proof writes $t$ (twice) | $T$ | — [[2-algorithms/12-np-hardness#1212-subset-sum-from-vertex-cover\|§12.12]] |
+
+## Erickson's lecture notes (Part 3)
+
+The lecture notes outside the two books are rougher (several carry a status line such as “Unfinished”), and every Part 3 page lists, in its sources, all the slips found in its note — well over a hundred, most of them typos and index slips. The table keeps only those that change a statement, an algorithm or a number you might copy.
+
+| note | as printed | should be | details |
+|---|---|---|---|
+| 1, p. 11 | FairCoin keeps the flip when $x = y = 1$ | when $x = y = 0$; as printed it returns 1 with probability 1/5, not 1/2 | [[4-lecture-notes/01-discrete-probability#sources-for-this-page\|note 1]] |
+| 1, p. 6 | the tail-sum formula for $\operatorname{E}[X]$ sums over $x\ge0$ and $x\le0$ | over $x\ge1$ and $x\le-1$ (as printed, a fair die gives 9/2) | [[4-lecture-notes/01-discrete-probability#sources-for-this-page\|note 1]] |
+| 1, p. 4 | mutual independence: the product rule for the whole family | for every finite subfamily | [[4-lecture-notes/01-discrete-probability#sources-for-this-page\|note 1]] |
+| 3, p. 5 | expected depth $< 2\ln n - 2$ | $< 2\ln n$; the printed bound fails for every $n \le 16$ | [[4-lecture-notes/03-treaps-and-skip-lists#sources-for-this-page\|note 3]] |
+| 4, p. 9 | treap depth exceeds $c\ln n$ with probability $\le 2/n^{c\ln c - c}$ | false (for $n = 1000$, $c = 4$ the true value is 0.0033); the proof gives it for depth $> 2c\ln n$ | [[4-lecture-notes/04-tail-inequalities#sources-for-this-page\|note 4]] |
+| 4, pp. 6–7 | Chebyshev gives $1/((2\alpha-1)N)$ for coin flips; the levels in the treap argument are independent | the square is missing (the printed formula is false); the levels are dependent, but each is good with probability $\ge 1/2$ given the past | [[4-lecture-notes/04-tail-inequalities#sources-for-this-page\|note 4]] |
+| 5, p. 6 | Lemma 2 as an “if and only if” | only “only if” holds (and is all that is used) | [[4-lecture-notes/05-hashing#sources-for-this-page\|note 5]] |
+| 5, p. 9 | Theorem 2's third case $r < w - \ell$ | $r > w - \ell$ | [[4-lecture-notes/05-hashing#sources-for-this-page\|note 5]] |
+| 5, p. 15 | LooseBinaryProbe | its test never fires, and a fixed version depends on scan order; the page gives a correct one | [[4-lecture-notes/05-hashing#sources-for-this-page\|note 5]] |
+| 7, p. 11 | optimized failure function of ABRACADABRA: fail[11] = 1 | 0 | [[4-lecture-notes/07-string-matching#sources-for-this-page\|note 7]] |
+| 7, p. 6 | the HOCUSPOCUS example | off by one: shift 14 is a full match | [[4-lecture-notes/07-string-matching#sources-for-this-page\|note 7]] |
+| 8, pp. 2, 4 | GuessMinCut loops “down to 2”; Contract “down to $m$” | each contracts one edge too many | [[4-lecture-notes/08-randomized-minimum-cut#sources-for-this-page\|note 8]] |
+| 8, p. 5 | “Karger and Stein's proof implies $\alpha > 2$” | the proof gives $\alpha = \tfrac13\ln2$; the conclusion still holds | [[4-lecture-notes/08-randomized-minimum-cut#sources-for-this-page\|note 8]] |
+| 9, p. 7 | Ehrlich's focus-array invariant | 0 and 1 swapped | [[4-lecture-notes/09-amortized-analysis#sources-for-this-page\|note 9]] |
+| 10, pp. 6–7 | ranks $\lfloor\lg \text{size}\rfloor$; “$r(x)\ge r(y)$” in the roller-coaster case | with floored ranks the Access Lemma is false — use $\lg\text{size}$; $r(y)\ge r(x)$ | [[4-lecture-notes/10-scapegoat-and-splay-trees#sources-for-this-page\|note 10]] |
+| 11, p. 3 | MakeSet sets next(x) ← x | Null (as printed, Union never ends) | [[4-lecture-notes/11-disjoint-sets#sources-for-this-page\|note 11]] |
+| 11, pp. 9–10 | the definitions of $\alpha(n)$ and $\alpha(m,n)$ | an index shift in $\alpha(n)$; $\alpha(m,n)$ is undefined for $m < 3n$ | [[4-lecture-notes/11-disjoint-sets#sources-for-this-page\|note 11]] |
+| 13, p. 3 | Hide01's two middle branches | swapped; as printed the adversary fails already for $n = 2$ | [[4-lecture-notes/13-adversary-arguments#sources-for-this-page\|note 13]] |
+| 13, p. 7 | Exercise 1(c) | reversed: “11” is evasive exactly when $n \bmod 3 \ne 1$ | [[4-lecture-notes/13-adversary-arguments#sources-for-this-page\|note 13]] |
+| I, p. 18 | Theorem 8: $F_k$ is even iff $n$ is divisible by 3 | iff $k$ is | [[4-lecture-notes/98-proof-by-induction#sources-for-this-page\|Appendix I]] |
+| I, p. 29 | Exercise 22 | false: $x^{2\lg\pi}$ satisfies both conditions but is not $O(x)$ | [[4-lecture-notes/98-proof-by-induction#sources-for-this-page\|Appendix I]] |
+| II, pp. 12, 17 | $T(n) = 3T(n-1) - 8T(n-2) + 4T(n-3)$, annihilator $E^3 - 3E^2 + 8E - 4$ | coefficient 5: $E^3 - 5E^2 + 8E - 4$ | [[4-lecture-notes/99-solving-recurrences#sources-for-this-page\|Appendix II]] |
+| II, p. 17 | the $2^n - n^2$ example: “$\alpha\ne0$ for almost every set of base cases” | $\alpha = 2/3$ for every set of base cases; footnote 2's family is not a solution | [[4-lecture-notes/99-solving-recurrences#sources-for-this-page\|Appendix II]] |
+| A, pp. 10, 12 | Figure A.2's indices; the generic InverseFFT applies FFT to $P^*$ | $P[jq+k]$, $P^*[j+kp]$, …; conjugate the input too | [[4-lecture-notes/a-fast-fourier-transforms#sources-for-this-page\|note A]] |
+| B, pp. 3, 5–6 | 3Sat and Faster3Sat never return False; Figure B.2 shares one array | add the empty-clause base case; each call needs its own copy | [[4-lecture-notes/b-fast-exponential-algorithms#sources-for-this-page\|note B]] |
+| C, p. 3 | $\delta[p,a,q]$ is true iff $p\in\delta(q,a)$ | iff $q\in\delta(p,a)$, as the pseudocode uses it | [[4-lecture-notes/c-dynamic-programming-for-automata#sources-for-this-page\|note C]] |
+| C, p. 6 | CYKParse's loop “for $i \leftarrow n$ down to $j+1$” | “$j-1$ down to 1” (as printed, the start symbol's entry is never computed) | [[4-lecture-notes/c-dynamic-programming-for-automata#sources-for-this-page\|note C]] |
+| C, p. 5 | the parenthesis grammar | generates only $\varepsilon$ (the note itself marks it incorrect); the page gives a correct one | [[4-lecture-notes/c-dynamic-programming-for-automata#sources-for-this-page\|note C]] |
+| D, p. 4 | Figure D.1, column O, rows U–»: seven entries 3 | 2 | [[4-lecture-notes/d-advanced-dynamic-programming#sources-for-this-page\|note D]] |
+| D, pp. 5–6 | FindMatches, SparseLCS and FasterOptimalSearchTree | each has bugs that make it loop, read out of range or return wrong answers; the page gives corrected versions | [[4-lecture-notes/d-advanced-dynamic-programming#sources-for-this-page\|note D]] |
+| D, p. 12 | Reduce's comparison $\ge$ and its starting index | $>$, starting at $k = 2$ (as printed it loses leftmost minima on ties) | [[4-lecture-notes/d-advanced-dynamic-programming#sources-for-this-page\|note D]] |
+| E, p. 6 | GreedySchedule sorts penalties in increasing order | decreasing (the example then costs 11, not 17) | [[4-lecture-notes/e-matroids#sources-for-this-page\|note E]] |
+| F, pp. 4–6 | Theorem F.2; the infeasible-cut rules | needs balances summing to 0; the rules for excess and deficit are swapped | [[4-lecture-notes/f-balances-and-pseudoflows#sources-for-this-page\|note F]] |
+| G, p. 9 | successive shortest paths updates $\pi(v) \leftarrow \mathit{dist}(v)$ | $\pi(v) \leftarrow \pi(v) + \mathit{dist}(v)$ (as printed, reduced costs go negative) | [[4-lecture-notes/g-minimum-cost-flows#sources-for-this-page\|note G]] |
+| G, p. 4 | the negative cycle with the fewest edges is NP-hard to find | it is polynomial ($O(V^2E)$); the most negative cycle is the NP-hard one | [[4-lecture-notes/g-minimum-cost-flows#sources-for-this-page\|note G]] |
+| H, p. 16 | the complementary slackness theorem: $c\cdot x = yAx$ and $yAx = y\cdot b$ are each equivalent to optimality | only both together are | [[4-lecture-notes/h-linear-programming#sources-for-this-page\|note H]] |
+| H, pp. 6, 14 | uniqueness conditions for shortest-path and non-degenerate optima | the first is sufficient but not necessary; the second fails for $d\ge3$ (unit cube, $c = (1,1,0)$) | [[4-lecture-notes/h-linear-programming#sources-for-this-page\|note H]] |
+| I, p. 5 | a basis is locally optimal if $c$ has positive inner product with each normal | $c$ must be a positive *combination* of the normals | [[4-lecture-notes/i-linear-programming-algorithms#sources-for-this-page\|note I]] |
+| I, p. 11 | Seidel's second recursive call SeidelLP$(H, B\cup h)$ | SeidelLP$(H\setminus h, B\cup\partial h)$ | [[4-lecture-notes/i-linear-programming-algorithms#sources-for-this-page\|note I]] |
+| J, pp. 6, 10 | greedy set cover $O(\log\lvert F\rvert)$, hitting set $O(\log\lvert X\rvert)$ | swapped: set cover $H(\max\lvert S\rvert) \le 1 + \ln\lvert X\rvert$, hitting set $1+\ln\lvert F\rvert$ | [[4-lecture-notes/j-approximation-algorithms#sources-for-this-page\|note J]] |
+| J, p. 18 | the subset-sum FPTAS's case (2) | one step does not follow (counterexample on the page); the theorem still holds | [[4-lecture-notes/j-approximation-algorithms#sources-for-this-page\|note J]] |
 
 ## Not errors, but easy to trip over
 

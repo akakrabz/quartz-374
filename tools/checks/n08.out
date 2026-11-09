@@ -1,0 +1,68 @@
+== 8.1 the multigraph of p. 1 ==
+OK   p. 1 multigraph: 8 vertices, 16 edges, minimum cut 3  [degrees {'a': 4, 'b': 5, 'c': 4, 'd': 4, 'e': 3, 'f': 3, 'g': 5, 'h': 4}]
+OK   its minimum cuts: {a,c,d,g} | {b,e,f,h}, {e} | rest, {f} | rest — exactly three  [['acdg', 'e', 'f']]
+OK   GuessMinCut on it: every minimum cut has probability >= 2/(8*7) = 1/28 (exact)  [acdg: 0.1169, f: 0.1422, e: 0.1227; success 0.3818]
+== the figure of p. 2 (reconstructed) ==
+OK   p. 2 figure: the pictured G has minimum cut 2 (top vertex), no cut of size 1 as the text claims
+OK   contracting the highlighted edge keeps two pairs of parallel edges (the figure deletes one of each pair)
+== contraction lemmas ==
+OK   every cut of G/{u,v} is a cut of G with exactly the same crossing edges (300 random multigraphs)
+OK   contraction never decreases the minimum cut
+OK   contracting uv increases the minimum cut iff uv crosses every minimum cut
+OK   |E| >= lambda n/2, hence a random edge lies in a fixed minimum cut with probability <= 2/n
+== 8.2 GuessMinCut, exactly ==
+OK   GuessMinCut as printed ('for i <- n downto 2') contracts n - 1 edges and leaves 1 vertex, not 2
+OK   Contract(G, m) as printed ('for i <- n downto m') leaves m - 1 vertices
+OK   every minimum cut is returned with probability >= 2/(n(n-1)): all 787 connected simple graphs on 3-5 vertices and 60 random multigraphs on 5-7  [min ratio prob / bound = 1]
+OK   cycles C_3..C_8 attain the bound: each of the n(n-1)/2 minimum cuts has probability exactly 2/(n(n-1))
+OK   prod_{i=3}^{n} (i-2)/i = 2/(n(n-1)), n = 3..59
+OK   K_4: minimum cut 3, four minimum cuts (single vertices), each returned with probability 1/5 >= 1/6, success 4/5
+OK   C_4: six minimum cuts of size 2, each returned with probability exactly 1/6, success 1
+== number of minimum cuts ==
+OK   at most n(n-1)/2 minimum cuts: all connected simple graphs on 2-6 vertices, 300 random multigraphs on 7  [max found {2: 1, 3: 3, 4: 6, 5: 10, 6: 15} (attained by cycles)]
+== 8.3 amplification ==
+OK   1 - (1 - 2/(n(n-1)))^N >= 1 - e^{-2N/(n(n-1))} (the note prints <=; 1 + x <= e^x gives >=)
+OK   N = c C(n,2) ln n gives failure e^{-c ln n} = n^{-c}; N = n^2(n-1)/2 gives e^{-n}
+OK   N = n^2(n-1)/2: failure probability (1 - 2/(n(n-1)))^N is at most (not equal to) e^{-n}
+OK   p. 1 multigraph: exact success probability of one guess 0.3818; with N = 10 independent guesses failure 8.15e-03
+== 8.4 Karger–Stein ==
+OK   safe phase to n/2 vertices: prod_{i=n/2+1}^{n} (i-2)/i = (n-2)/(4(n-1)) < 1/4 (n even, 4..198)
+OK   contracting to n/2 + 1 vertices instead: (n+2)/(4(n-1)) > 1/4
+OK   footnote 4 is false: contracting to ceil(n/2) + 1 vertices gives t(t-1)/(n(n-1)) > 1/2 only for n = 5 (= 1/2 at n = 4, < 1/2 for n >= 6, tending to 1/4)  [n=4: 1/2, n=5: 3/5, n=10: 1/3, n=1000: 0.2508]
+OK   footnote 4 for every n >= 2: > 1/2 exactly for n = 2, 3 (ceil(n/2) + 1 = n: nothing contracted) and n = 5
+OK   contracting to ceil(1 + n/sqrt 2) vertices gives > 1/2 (n = 3..19999): the true Karger–Stein choice
+OK   test graph: 8-cycle, multiplicities 3,4,4,4,3,4,4,4 has a unique minimum cut of size 6
+OK   note's recurrence with P(2) = 1: P(4) = 1/4, P(8) = 175/1024
+OK   C_8: a fixed minimum cut survives contraction to 4 vertices with probability exactly 3/14 = (8-2)/(4*7) < 1/4
+OK   near-cycle: the unique minimum cut survives contraction to 4 vertices with probability 0.2984 >= 3/14
+OK   near-cycle: exact BetterGuess (to n/2, four calls, brute force at 2) succeeds with probability 0.1927 >= 0.1109, the recurrence with the exact survival factors 1/6 and 3/14  [124055552/643768125]
+OK   near-cycle: GuessMinCut 0.0682 >= 2/56; BetterGuess 0.1927 > GuessMinCut
+OK   near-cycle, contracting to h/2 + 1 (8 -> 5 -> 3): exact success 0.3818 >= recurrence bound 0.1709
+OK   p. 1 multigraph: BetterGuess (to h/2 + 1) succeeds with probability 0.8818 >= 0.1709
+OK   d(k) = 1/p(k): d(k-1) < d(k) <= d(k-1) + 3 and d(k) <= 3k - 2 for k = 2..2000  [d(2) = 4.0000, d(10) = 17.299, d(100) = 154.14, d(2000) = 3006.6]
+OK   the reciprocal form: 1/(1/4 - (1-1/d)^4/4) = 4d^4/(d^4 - (d-1)^4) (k = 2..50)
+OK   in fact d(k) grows like 3k/2: (d(2000) - d(1000))/1000 is about 1.5, so P(n) ~ 2/(3 lg n)  [1.5006]
+OK   x^4 - (x-1)^4 = 4x^3 - 6x^2 + 4x - 1 (> 0 for x >= 1)
+OK   (x+3)(x^4-(x-1)^4) - 4x^4 = 6x^3 - 14x^2 + 11x - 3 = (x-1)(6x^2 - 8x + 3) >= 0 for x >= 1 (discriminant < 0)
+OK   4x^4 - x(x^4-(x-1)^4) = 6x^3 - 4x^2 + x = x(6x^2 - 4x + 1) > 0 for x >= 1 (discriminant < 0)
+OK   numerically x < 4x^4/(x^4-(x-1)^4) <= x + 3 on [1, 1000]
+OK   P(n) >= 1/(3 lg n - 2): p(k) >= 1/(3k - 2) for k = 1..2000
+OK   alpha in P(n) >= alpha/ln n: the proof gives ln 2/3 = 0.231, the limit is (2/3) ln 2 = 0.462 — not > 2 as the note says  [0.4611]
+OK   with alpha = ln2/3, c = 1, n = 1000: success 0.80276 < 1 - n^(-c/alpha) = 1.00000 (note's inequality fails) but >= 1 - n^(-c alpha) = 0.79730
+OK   T(n) = n^2 + 4T(n/2), T(1) = 1 gives exactly n^2 (lg n + 1) for n = 2^k
+OK   with n/2 + 1 in place of n/2, T(n) = n^2 + 4T(n/2 + 1) is still Theta(n^2 log n): T(n)/n^2 - lg n settles to a constant  [2^4+2: 10.1140, 2^12+2: 14.3060, 2^20+2: 14.3332, 2^28+2: 14.3333, 2^36+2: 14.3333, 2^44+2: 14.3333, 2^52+2: 14.3333, 2^60+2: 14.3333]
+== flows ==
+OK   global minimum cut = min over t != s of the minimum (s,t)-cut (each edge in both directions, capacity = multiplicity): n - 1 maximum-flow computations (200 random multigraphs)
+== page text ==
+OK   page and concept page exist
+OK   page: p.1 graph probabilities 0.117 ({a,c,d,g}), 0.123 ({e}), 0.142 ({f}), success 0.382
+OK   page: near-cycle GuessMinCut 0.068, BetterGuess 0.193
+OK   page: 787 connected simple graphs on 3-5 vertices
+OK   page: alpha = ln2/3 = 0.23 from the proof, limit (2/3) ln 2 = 0.46
+OK   page: 2/56 = 0.036 and 2^(n-1) - 1 cuts in all
+OK   concept example: K_4 numbers 2/5, 2/5, 1/5 for the second contraction  [{'xc': Fraction(2, 5), 'xd': Fraction(2, 5), 'cd': Fraction(1, 5)}]
+OK   K_4 after one contraction: x joined to c and d by two edges each, plus cd (5 edges)
+OK   figure n08-multigraph: 8 vertices and 16 edges in the caption; e and f the other minimum cuts
+OK   figure n08-contraction: G has 9 edges, minimum cut 3 by {u}, {u,v}, {y}, {x,y}; G/{u,v} has 7 edges, minimum cut 3, cuts {y}, {x,y} and {w,x,y} = {u,v} | rest  [['u', 'uv', 'xy', 'y']; ['wxy', 'xy', 'y']]
+
+ALL OK

@@ -36,6 +36,6 @@ aliases: ["recursion tree", "recursion-tree method", "solving recurrences", "lev
 
 The same three cases as a formula for $T(n) = a\,T(n/b) + f(n)$ — with exact conditions, the recurrences they miss, and Akra–Bazzi for unequal splits — are the [[concepts/master-theorem|Master Theorem]].
 
-**Where it appears.** [[2-algorithms/01-recursion#17-recursion-trees|§1.7]] (the method, a table of worked recurrences, ignoring floors and ceilings), [[2-algorithms/01-recursion#14-mergesort|§1.4]] mergesort (equal), [[2-algorithms/01-recursion#18-linear-time-selection|§1.8]] selection (decreasing, and why blocks of 3 fail), [[2-algorithms/01-recursion#19-fast-multiplication|§1.9]] multiplication (increasing), [[2-algorithms/01-recursion#110-exponentiation|§1.10]] repeated squaring.
+**Where it appears.** [[2-algorithms/01-recursion#17-recursion-trees|§1.7]] (the method, a table of worked recurrences, ignoring floors and ceilings), [[2-algorithms/01-recursion#14-mergesort|§1.4]] mergesort (equal), [[2-algorithms/01-recursion#18-linear-time-selection|§1.8]] selection (decreasing, and why blocks of 3 fail), [[2-algorithms/01-recursion#19-fast-multiplication|§1.9]] multiplication (increasing), [[2-algorithms/01-recursion#110-exponentiation|§1.10]] repeated squaring; [[4-lecture-notes/99-solving-recurrences#3-divide-and-conquer-recurrences-recursion-trees|Appendix II, §3]] (harmonic and lopsided trees, weighted children).
 
-Related: [[concepts/divide-and-conquer]] · [[concepts/recursion]] · [[concepts/linear-time-selection]]
+Related: [[concepts/divide-and-conquer]] · [[concepts/recursion]] · [[concepts/linear-time-selection]] · [[concepts/linear-recurrences]]

@@ -1,0 +1,54 @@
+== §6.1 Bloom filters: the two procedures
+OK   BloomMembership never answers False for a member (no false negatives), and answers False exactly when some probed bit is 0 (300 random filters)
+OK   figure example: cat, dog, emu set bits 0, 1, 3, 6, 9, 11, 14 (7 of 16; bits 6 and 11 are set twice)
+OK   figure example: fox (2, 9, 14) is rejected by bit 2; gnu (1, 9, 14) is a false positive
+OK   figure example: a query with fresh random hashes is a false positive with probability (7/16)^3 = 343/4096 = 8.4%
+== §6.2 False positive rate
+OK   Pr[B[h] = 0] = (1 - 1/m)^{kn} and the exact false-positive rate, by enumerating every outcome (8 tiny cases)
+OK   footnote 3: (1 - e^{-kn/m})^k < (1 - (1-1/m)^{kn})^k < exact false-positive rate for k >= 2 (exact Fractions, m < 41, n <= 10, k <= 6); equality of the last two for k = 1
+OK   e^{-kn/m} > (1 - 1/m)^{kn}: the approximation p overestimates the fraction of 0-bits
+OK   the false-positive rate increases with n and decreases with m (exact, k = 2, 4)
+OK   ln p ln(1-p) is maximized at p = 1/2 (grid of 10^4 points)
+OK   for m/n = c the estimate (1 - e^{-k/c})^k is minimized at k = c ln 2, where it equals (1/2)^{c ln 2} (c = 4, 8, 10, 16, 32)
+OK   (1/2)^{ln 2} = e^{-(ln 2)^2} = 0.61850...  [0.618503]
+OK   10n bits and 7 hash functions: estimated false-positive rate 0.82% (< 1%)  [0.00819]
+OK   32n bits and 22 hash functions: 2.10e-7, 'just over 2 * 10^-7'  [2.104e-07]
+OK   delta = 1%: the best integer k at m/n = 9.585 is 7
+OK   delta = 1%: m/n = lg(100)/ln 2 = 9.585 and k = ceil(lg 100) = 7 give an estimate of 1.004% -- slightly ABOVE delta; no integer k reaches 1% at that size  [0.010039]
+OK   the sizing rule m = ceil(n lg(1/delta)/ln 2), k = ceil(lg(1/delta)) gives exactly delta when lg(1/delta) is an integer and up to 3% more otherwise (ratio estimate/delta)  [0.5: 1.0000; 0.25: 1.0000; 0.1: 1.0260; 0.05: 1.0206; 0.01: 1.0039; 0.001: 1.0000; 0.0001: 1.0079; 1e-06: 1.0000]
+OK   m = n lg(1/delta)/ln 2 = 1.44 n lg(1/delta) bits
+OK   exact false-positive rate, n = 1000, m = 10000, k = 7: 0.82%, just above the estimate  [0.008201 vs 0.008194]
+OK   exact false-positive rate, n = 1000, m = 32000, k = 22: 2.1e-7, just above the estimate  [2.1093e-07 vs 2.1042e-07]
+OK   simulation: 20 filters with n = 1000, m = 10000, k = 7 and 20000 queries each: false positives 0.82% +- 0.05%  [0.00837]
+OK   bits per key c = 4, 8, 10, 16: best integer k = 3, 6, 7, 11 with estimated rates 14.7%, 2.16%, 0.82%, 0.046%  [{4: (3, '14.6892%'), 8: (6, '2.1577%'), 10: (7, '0.8194%'), 16: (11, '0.0459%')}]
+== §6.4 The count-min sketch
+OK   figure example: stream a b a c a d b a (N = 8) into 3 rows of 5 counters gives rows [4,0,3,1,0], [0,3,0,5,0], [2,4,0,0,2]
+OK   figure example: estimates a 4, b 2, c 1 (exact) and d = min(3, 5, 2) = 2 > f_d = 1
+OK   CMEstimate never underestimates, and Count[i, h_i(x)] = f_x + X_{i,x} exactly (200 random sketches)
+OK   one row, over every salt of the universal family ((ax+b) mod 31) mod w: E[X_{i,x}] <= N/w and Pr[X_{i,x} > eps N] <= E[X]/(eps N) <= 1/(w eps) (exact)
+OK   the note's strict claim '< delta' holds: Pr[X_{i,x} > eps N] is 0 or strictly below E[X]/(eps N) (same exact computation), so the product over d rows is strictly below (1/(w eps))^d <= delta
+OK   eps = 0.01, delta = 0.001: w = ceil(e/eps) = 272, d = ceil(ln(1/delta)) = 7, 1904 counters, and (1/(w eps))^d <= delta
+OK   eps = 0.05, delta = 0.05: w = ceil(e/eps) = 55, d = ceil(ln(1/delta)) = 3, 165 counters, and (1/(w eps))^d <= delta
+OK   eps = 0.1, delta = 0.01: w = ceil(e/eps) = 28, d = ceil(ln(1/delta)) = 5, 140 counters, and (1/(w eps))^d <= delta
+OK   simulation, eps = delta = 0.05 (w = 55, d = 3), Zipf streams of 3000 items, 60 sketches x 500 queries: the fraction of estimates above f_x + eps N is at most delta  [4/30000 = 0.0001; largest overestimate 0.068 N]
+== §6.5 / Exercise 2: estimating distinct items with m / min h
+OK   Exercise 2(a): Pr[n~ > (1+eps)n] <= 1/(1+eps), exactly over the 2-uniform family (ax+b) mod p, m = p (p = 1009, 2003; n = 5, 20, 50; eps = 0.1, 0.5, 0.9)
+OK   Exercise 2(b): Pr[n~ < (1-eps)n] <= 1-eps, same setting  [p=1009,n=20,e=0.5: 0.500<= 0.667, 0.117<=0.5]
+OK   the family {(ax+b) mod p : a, b in [p]} is 2-uniform (p = 7)
+OK   with m = 211 and n = 50 (m not large), bound (a) can fail for eps = 0.9 -- the exercise's 'large m' matters  [0.555 > 0.526]
+OK   one item, m = p = 1009, eps = 0.9: Pr[n~ > 1.9 n] = 532/1009 > 1/1.9 (bound (a) fails, barely, because min h = 0 counts as an infinite estimate; without that value it would hold: 531/1009 < 1/1.9)
+OK   m = 211, n = 50: Pr[min h = 0] <= n/m, and without that event bound (a) holds -- the failure is the zero minimum  [Pr[min=0] = 0.236, rest 0.320]
+== numbers printed on the pages and in the figures
+OK   page quotes 0.61850, 0.82%, 2.1, 1.004%, 9.59
+OK   page quotes the count-min parameters 272 and 7 (1904 counters)
+OK   page quotes 532/1009 for the one-item failure
+OK   concept page quotes 14.7%, 2.16%, 0.82%, 0.046%
+OK   concept example: n = 10^6, delta = 1%: m = 1.44 * 10^6 * lg 100 = 9.6e6 bits = 1.2 MB, k = ceil(lg 100) = 7
+OK   concept example: 10^7 bits, 10^6 items, 7 functions: estimate 0.82%
+OK   concept page: m/(w eps) <= 1/e when w = ceil(e/eps)
+OK   figure n06-bloom exists
+OK   figure n06-countmin exists
+OK   figure n06-bloom: the 16 drawn bits are the filter of cat, dog, emu
+OK   figure n06-countmin: the 15 drawn counters are the sketch of the stream
+
+ALL OK

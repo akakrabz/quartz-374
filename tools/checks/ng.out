@@ -1,0 +1,59 @@
+OK   G.1 reduction: min-cost circulation with t->s of cost -1 = -(maximum flow), 150 networks (LP)
+OK     cycle canceling on these instances ends with cost -|f*|
+OK     the restriction's value is +f(t->s) (the note says -f(t->s))
+OK     every negative residual cycle of these instances passes through t->s
+OK   Klein's cycle canceling = LP = networkx on 250 random min-cost circulations (costs of both signs)
+OK     every cancellation: cost(f') = cost(f) + c_f(gamma) * cost(gamma), f' feasible
+OK     iterations <= |cost(f*)| <= E C K (integer data)
+OK   optimality criterion: a feasible circulation is optimal iff its residual graph has no negative cycle (51 non-optimal test circulations)
+OK   two-stage general min-cost flow (lower bounds, balances) = LP on 58 feasible random instances
+OK     the residual graph must give backward capacity f - l: with backward capacity f, cycle canceling violates a lower bound on some instances  [8]
+OK   SuccessiveShortestPaths (arbitrary s and t, Bellman-Ford) = LP on 39 feasible instances; on the others it ends with flow on q's edges
+OK     Lemma G.1: no negative residual cycle after every iteration
+OK     at most B iterations (integer data, B after enforcing the assumptions)
+OK     'report infeasible as soon as a path uses q' is wrong when t is arbitrary: false reports on feasible inputs  [1 of 39]
+OK     example s1->t1, s2->t2 (one unit each): pairing s1 with t2 routes through q; run to the end, q carries nothing
+OK   Lemma G.2 on 300 random digraphs: no negative cycle iff some potential makes every reduced cost >= 0
+OK   reduced cost of a path = pi(start) + cost - pi(end) (intermediate potentials cancel)
+OK   FastSuccessiveShortestPaths with pi <- pi + dist (Dijkstra) = LP on 104 feasible instances; every Dijkstra distance is the true one
+OK     Lemma G.3: after every iteration every residual edge has reduced cost >= 0
+OK     with the printed update pi <- dist, some reduced costs become negative  [96 of 104]
+OK     ... and Dijkstra then returns wrong distances or a non-optimal flow on some instances  [8 of 104]
+OK   Fulkerson's reduction: H has V + E vertices and 2E uncapacitated edges, all from an old vertex to a new one
+OK     min cost(G) = min cost(H) + sum l(e) cost(e); infeasible exactly together (200 random instances, LP)
+OK     in feasible instances every old vertex has balance <= 0 in H (a supply node), every z has c - l >= 0
+OK     the maps f -> f' and f' -> f preserve feasibility and shift the cost by sum l(e) cost(e)
+OK   transportation = assignment after replacing each vertex v by |b(v)| copies (150 random instances)
+OK   single-supply transshipment: minimum cost = sum_v dist(s, v) b(v) (150 random networks, LP)
+OK     the canonical flow on a shortest-path tree (f_T(u->v) = total demand below v) is feasible and optimal
+OK     with a unique shortest-path tree, successive shortest paths produces exactly f_T
+OK     some minimum-cost flow is positive only on the edges of a forest (network simplex)
+OK   page example: minimum cost 16 (LP and networkx)
+OK     optimal flow s->a 2, s->b 2, a->b 1, a->t 1, b->t 3
+OK     the feasible flow s->a 2, s->b 2, a->t 2, b->t 2 costs 2 + 6 + 8 + 2 = 18
+OK     its residual graph has the cycle a->b->t->a: capacities 2, 1, 2, costs 1, 1, -4, total -2
+OK     canceling it (1 unit) gives the optimal flow, cost 18 - 2 = 16, with no negative residual cycle left
+OK     ... and it is the only negative residual cycle of the 18-flow  [[(['a', 'b', 't'], -2)]]
+OK     SSP: paths s-a-b-t (cost 3, 2 units), s-b-t (4, 1 unit), s-b-a-t (6, 1 unit, uses b->a backward)  [[([('s', 'a'), ('a', 'b'), ('b', 't')], 2, 3), ([('s', 'b'), ('b', 't')], 1, 4), ([('s', 'b'), ('b', 'a'), ('a', 't')], 1, 6)]]
+OK     SSP total 2*3 + 4 + 6 = 16, the minimum
+OK     Dijkstra distances (reduced costs) (0,1,2,3), (0,1,1,1), (0,0,0,2); potentials after each iteration (0,1,2,3), (0,2,3,4), (0,2,3,6)  [[(0, 1, 2, 3), (0, 1, 1, 1), (0, 0, 0, 2)] [(0, 1, 2, 3), (0, 2, 3, 4), (0, 2, 3, 6)]]
+OK     second iteration reduced costs: s->b 1, a->t 2, b->t 0, b->a 0, a->s 0, t->b 0 (all >= 0)  [{('a', 's'): 0, ('s', 'b'): 1, ('b', 'a'): 0, ('a', 't'): 2, ('b', 't'): 0, ('t', 'b'): 0}]
+OK     with the printed update pi <- dist = (0,1,1,1), the residual edge b->s gets reduced cost 1 - 3 - 0 = -2
+OK   transportation example: minimum cost 23 (LP) = assignment on 5 x 5 copies
+OK     plan p->x 2, p->z 1, q->y 2: 8 + 9 + 6 = 23
+OK     23 is the unique minimum among all integral plans  [[23, 25, 27, 29, 31]]
+OK   concept example: SSP paths s-a-b-t (cost 3) then s-b-a-t (3 - 1 + 3 = 5), total 8
+OK     final flow = s-a-t plus s-b-t (a->b empty), cost 8 = minimum
+OK     after the first path, potentials (0,1,2,3) give reduced costs s->b 1, a->t 1, b->a 0, a->s 0, t->b 0  [{('a', 's'): 0, ('s', 'b'): 1, ('b', 'a'): 0, ('a', 't'): 1, ('t', 'b'): 0}]
+OK     using forward residual edges only, s cannot reach t after the first path (greedy path-by-path gets stuck)
+OK   p. 4: the negative cycle with fewest edges is NOT NP-hard: its length = the smallest k with a negative closed k-edge walk (polynomial recurrence), brute force on 400 digraphs  [204 with a negative cycle]
+OK   with every cost -1 the most negative simple cycle is a longest one (K4: cost -4, Hamiltonian)
+OK   page mentions '18-2=16'
+OK   page mentions '2\cdot3+4+6=16'
+OK   page mentions '8+9+6=23'
+OK   page mentions '1-3-0=-2'
+OK   page mentions 'butthatoneispolynomial'
+OK   concept page mentions '3-1+3=5'
+OK   concept page: 'at most B iterations' qualified by integer data
+
+ALL OK

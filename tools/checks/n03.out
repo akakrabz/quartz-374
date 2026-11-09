@@ -1,0 +1,77 @@
+OK   example treap (p. 1): M1 root; H2, T3; G7, I4 under H; R5 under T; A9, L8, O6 at the bottom
+OK   example treap: inorder A G H I L M O R T, heap-ordered
+OK   example treap equals the BST built by inserting in increasing priority
+OK   example treap: height 3; the deepest nodes are A, L and O  [{'M': 0, 'H': 1, 'G': 2, 'A': 3, 'I': 2, 'L': 3, 'T': 1, 'R': 2, 'O': 3}]
+OK   insert S with priority -1 (p. 3): leaf child of R at depth 3, then 3 rotations, S becomes the root  [depth 3, rotations 3]
+OK   insert S: the four stages of the note's figure (leaf; above R; above T; root)
+OK   insert S: the parent at insertion, R, is the inorder predecessor of S
+OK   delete S again: 3 rotations down, then the original treap
+OK   split the example at N: T< holds A G H I L M, T> holds O R T, both treaps
+OK   join T< and T> again (dummy root rotated down): the original treap
+OK   unsuccessful search for N in the example: path M T R O, ends at O, the successor of N  [['M', 'T', 'R', 'O']]
+OK   uniqueness: for every n <= 6 and every priority order (874 cases), exactly one of the Catalan-many BST shapes is heap-ordered, and it is the recursive treap and the insert-by-priority BST
+OK   1500 random insert/delete sequences: after every rotation-based insert and delete the tree is the unique treap of the current items
+OK   insertion: rotations <= depth of the new leaf before the rotations (cost ~ twice an unsuccessful search)
+OK   insertion: the new leaf's parent is its inorder predecessor or successor
+OK   unsuccessful search ends at the predecessor or the successor of the query
+OK   split by inserting a -inf dummy, and join by sinking a dummy root, agree with the recursive treaps
+OK   worst case: priorities increasing with the keys give a path of depth n - 1 (n = 30)
+OK   Lemma 1: for all n <= 7, all priority orders and all i != k: i above k iff x_i has the smallest priority in X(i, k)
+OK   Pr[i above k] = [i != k]/(|k - i| + 1) exactly, n <= 7
+OK   E[depth(x_k)] = H_k + H_{n-k+1} - 2 exactly, n <= 7, all k
+OK   table for n = 7: E[depth(x_k)] = 223/140, 39/20, 127/60, 13/6, 127/60, 39/20, 223/140 (1.593, 1.95, 2.117, 2.167); 2 ln 7 = 3.89  [223/140, 39/20, 127/60, 13/6, 127/60, 39/20, 223/140]
+OK   H_m - 1 <= ln m, so E[depth(x_k)] <= ln k + ln(n-k+1) (n <= 3000, all k)
+OK   ln k + ln(n-k+1) <= 2 ln((n+1)/2) < 2 ln n for n >= 2
+OK   the note's step 'H_k - 1 + H_{n-k+1} - 1 < ln k + ln(n-k+1) - 2' is false: the opposite strict inequality holds for every n <= 3000 and k
+OK   the note's final bound E[depth] < 2 ln n - 2 fails exactly for n = 1..16 (among n <= 30)  [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]]
+OK   example of the failure: n = 2, k = 1: E[depth] = 1/2 > 2 ln 2 - 2 = -0.61
+OK   2 ln n - 2 holds for every n >= 17: numerically up to 20000, and for n >= 31 by H_m < ln m + gamma + 1/(2m)
+OK   inserting keys in random order (no priorities) builds the treap whose priorities are the insertion times
+OK   BST-insertion quicksort sorts and makes exactly the comparisons of quicksort with the same pivots (= the ancestor/descendant pairs of the treap), all orders n <= 6 and random n = 40
+OK   Pr[x_i and x_k compared] = Pr[i above k] + Pr[k above i] = 2/(|k-i|+1), n <= 7
+OK   expected comparisons = sum of expected depths = 2(n+1)H_n - 4n, n <= 7
+OK   2(n+1)H_n - 4n = sum_{i<k} 2/(k-i+1) for n <= 300
+OK   2(n+1)H_n - 4n < 2n ln n for 2 <= n <= 10^5 (about 1.39 n lg n)
+OK   two-level list, all 2^n duplicate patterns, n <= 10: phase 1 examines (k-1)/2 + 2 nodes on average, phase 2 (when needed) 3 - 2^(1-k), in total k/2 + 3 - 2^(-k)
+OK   the note's '1 + sum_{k>=0} 2^-k = 2' (p. 7): the left side is 3
+OK   note's two-level example, search for 5: phase 1 examines -inf 0 1 3 6 (5 nodes), phase 2 examines 3 4 5 (3)  [5, 3]
+OK   note's skip list (6 levels incl. the empty top level): row sizes
+OK   search for 5 in the note's skip list: 9 moves, 5 down and 4 right, ends at 5 on the bottom level  [-inf@5 -inf@4 -inf@3 1@3 1@2 1@1 3@1 3@0 4@0 5@0]
+OK   search path for 5: -inf@5 -inf@4 -inf@3 1@3 1@2 1@1 3@1 3@0 4@0 5@0
+OK   the nodes looked at but not entered (the note's crosses): inf@5, 7@4, 7@3, 6@2, 6@1  [[(inf, 5), (7, 4), (7, 3), (6, 2), (6, 1)]]
+OK   backwards walk from 5 retraces the search path in reverse
+OK   SkipListFind on 3000 random skip lists: finds every stored key at its top copy and returns Null for absent keys
+OK   backwards analysis: up-if-possible-else-left from the found node retraces every search path
+OK   E[L(x)] = 1: solution of E = (1/2)0 + (1/2)(1 + E), and sum_l l 2^-(l+1) = 1
+OK   union bound Pr[L >= l] = 1 - (1 - 2^-l)^n <= n/2^l (exact for n <= 1000)
+OK   Pr[L >= c lg n] <= 1/n^(c-1) for c = 1.5, 2, 3, 4 and n from 2 to 10^6
+OK   E[L] = sum_{l>=1} Pr[L >= l] <= ceil(lg n) + 1 < lg n + 2, n <= 20000
+OK   the note's last step: sum_{i>=1} 2^-i = 1, not 2 (so the algebra gives lg n + 1 for n a power of 2)
+OK   E[L] - lg n stays between 0.33 and 0.67 for 2 <= n <= 20000 (n = 1000: E[L] = 10.30)  [0.333..0.667]
+OK   E[L] by both formulas, n = 10: sum l Pr[L = l] = sum Pr[L >= l]
+OK   expected moves of SkipListFind for x_k, exhaustive over capped heights (n <= 4, exact): equals E[L] + 1 - E[h_k] + sum_l sum_j Pr[h_j = l] Pr[h <= l]^(k-j)
+OK   uncapped: the right moves sum to E[L_k] = sum_{l>=1} (1 - (1 - 2^-l)^k) (the max height among x_1..x_k); down moves average E[L] + 1 - 1 = E[L]
+OK   simulation of the literal SkipListFind, n = 64, 20000 lists, largest key: mean 12.634 vs E[L_n] + E[L_k] = 12.688 (tolerance 4.5 standard errors = 0.126)
+OK   simulation of the literal SkipListFind, n = 64, 20000 lists, middle key: mean 11.722 vs E[L_n] + E[L_k] = 11.699 (tolerance 4.5 standard errors = 0.119)
+OK   largest key, n = 1000: 2 E[L] = 20.60 expected moves, below 2 ceil(lg n) + 2 = 22
+OK   search w.h.p.: with t = 4 c lg n, Pr[fewer than t/4 heads in t flips] < e^{-t/16} <= n^{-c/(4 ln 2)}
+OK   simulation: 3000 skip lists with n = 256, four searches each: longest search 34 moves, below 12 lg n = 96
+OK   FlipWalk: the number of tails before the l-th head has mean l (negative binomial), l = 1..30
+OK   concept example n = 4: E[depth] = 13/12, 4/3, 4/3, 13/12 (24 priority orders); total 29/6 = 2*5*H_4 - 16  [[Fraction(13, 12), Fraction(4, 3), Fraction(4, 3), Fraction(13, 12)]]
+OK   concept example: Pr[1 above 4] = 1/4 and Pr[2 above 3] = 1/2
+OK   concept example: x_1 is an ancestor of x_4 in exactly 6 of the 24 orders (x_1 first among x_1..x_4)
+OK   concept example: skip list, n = 1000: Pr[L >= 20] <= 1000/2^20 < 0.001 (exact 0.000953)
+OK   figure n03-treap exists and mentions M, 1, A, 9, geometric
+OK   figure n03-insert exists and mentions S, −1, three rotations
+OK   figure n03-skiplist exists and mentions 9 moves, −∞, ∞
+OK   03-treaps-and-skip-lists.md states H_k + H_{n-k+1} - 2
+OK   03-treaps-and-skip-lists.md states 2(n+1)H_n - 4n
+OK   03-treaps-and-skip-lists.md states 223/140
+OK   03-treaps-and-skip-lists.md states 13/6
+OK   03-treaps-and-skip-lists.md states k/2 + 3 - 2^{-k}
+OK   03-treaps-and-skip-lists.md states 20.6
+OK   03-treaps-and-skip-lists.md states 10.30
+OK   treaps.md states 13/12
+OK   treaps.md states 29/6
+
+ALL OK

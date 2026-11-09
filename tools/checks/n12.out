@@ -1,0 +1,37 @@
+OK   12.2 the animal tree identifies all six animals
+OK   12.2 T(frog) = 2 queries; worst case (depth) 3
+OK   12.2 the dictionary tree for the first eight primes returns the right index or 'none' for every x in 0..22.5
+OK   12.2 every root-to-leaf path asks 4 queries; the tree has 16 leaves (8 indices, 8 'none')
+OK   12.3 dictionary: n + 1 = 9 outputs need depth >= ceil(lg 9) = 4 — the tree is optimal
+OK   12.3 ceil(log_k (n+1)) for n = 8: k = 2 gives 4, k = 3 gives 2
+OK   12.5 ceil(lg n!) for n = 1..12: 0 1 3 5 7 10 13 16 19 22 26 29  [[0, 1, 3, 5, 7, 10, 13, 16, 19, 22, 26, 29]]
+OK   12.5 n! > (n/e)^n for n = 1..300
+OK   12.5 n! = (n/e)^n sqrt(2 pi n)(1 + Theta(1/n)): n * (ratio - 1) -> 1/12
+OK   12.5 lg n! >= n lg n - n lg e for n = 1..300
+OK   12.5 lg n! / (n lg n) -> 1 (0.9 at n = 10^6)
+OK   12.5 mergesort's worst case on all permutations, n <= 8, equals n ceil(lg n) - 2^ceil(lg n) + 1  [{1: 0, 2: 1, 3: 3, 4: 5, 5: 8, 6: 11, 7: 14, 8: 17}]
+OK   12.5 the closed form agrees with the recurrence W(n) = W(ceil(n/2)) + W(floor(n/2)) + n - 1, n <= 2000
+OK   12.5 table: n = 4, 5, 8, 12, 16: ceil(lg n!) = 5, 7, 16, 29, 45 and mergesort's worst case 5, 8, 17, 33, 49
+OK   12.5 exhaustive search: the best comparison tree sorts n = 1..5 elements in exactly ceil(lg n!) = 0 1 3 5 7 comparisons  [{1: 0, 2: 1, 3: 3, 4: 5, 5: 7}]
+OK   concept example: 5 elements need ceil(lg 120) = 7 comparisons, 7 suffice, mergesort needs 8
+OK   figure: insertion sort's comparison tree on 3 elements has 6 leaves, depth 3, two leaves at depth 2
+OK   figure: the six root-to-leaf paths and leaf labels as drawn
+OK   12.6 exhaustive search: finding the maximum needs exactly n - 1 comparisons, n = 1..7  [{1: 0, 2: 1, 3: 2, 4: 3, 5: 4, 6: 5, 7: 6}]
+OK   12.6 information-theoretic bound for the maximum is only ceil(lg n) (n = 7: 3 < 6)
+OK   12.6 ceil(lg n) 'unreasonable' yes/no questions (bits of the index) find the maximum, n <= 7
+OK   12.6 the linear scan uses exactly n - 1 comparisons and is correct (all permutations, n <= 7)
+OK   12.6 adversary x_i = i vs all 55400 comparison sequences of length < n - 1 (n = 2..6): x_n never marked, some x_k (k != n) unmarked
+OK   12.6 ... raising that x_k to n + 1 is consistent with every answer and moves the maximum from x_n to x_k
+OK   concept: counting sort sorts integers in 0..K-1 with no comparisons at all (random tests)
+OK   concept: insertion sort makes n - 1 comparisons on sorted input (n <= 50)
+OK   concept: k lg(n/k) <= lg C(n, k) <= k lg(e n / k) for 1 <= k <= n <= 200
+OK   12-lower-bounds.md mentions | 5 | 7 | 16 | 29 | 45 |
+OK   12-lower-bounds.md mentions | 5 | 8 | 17 | 33 | 49 |
+OK   12-lower-bounds.md mentions \lceil\lg 9\rceil = 4
+OK   12-lower-bounds.md mentions $0, 1, 3, 5, 7$
+OK   12-lower-bounds.md mentions 55,400
+OK   12-lower-bounds.md mentions n\lceil\lg n\rceil - 2^{\lceil\lg n\rceil} + 1
+OK   comparison-lower-bounds.md mentions \lceil\lg 120\rceil = 7
+OK   comparison-lower-bounds.md mentions 8
+
+ALL OK

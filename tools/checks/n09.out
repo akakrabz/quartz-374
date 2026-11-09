@@ -1,0 +1,88 @@
+== 9.1–9.2  The binary counter
+OK   Increment computes n+1 (all n < 2^13)
+OK   the k-th Increment flips (trailing ones of k-1) + 1 bits
+OK   n Increments from 0 flip B[i] exactly floor(n/2^i) times
+OK   sum_{i=0}^{floor(lg n)} floor(n/2^i) < 2n
+OK   total flips counting 0 -> n is exactly 2n - #1(n)
+OK   potential Phi = #1 bits: every Increment has amortized cost exactly 2
+OK   worked numbers: 0 -> 16 costs 31 flips, 0 -> 1000 costs 1994 (#1(1000) = 6)
+OK   Increment of 2^k - 1 flips k + 1 bits (k = 0..12); binary length of n is floor(lg n) + 1
+OK   from any start v, n Increments cost exactly 2n + #1(v) - #1(v+n) <= 2n + #1(v)
+OK   taxation 1: $2 per 0->1 change; every 1 bit holds exactly the $1 that pays for clearing it
+OK   taxation 2: bit i collects 2^-i per Increment, never goes into debt, and has exactly $1 at each flip
+OK   taxation 2: total tax per Increment sum_{i>=0} 2^-i = 2 (partial sums < 2, -> 2)
+OK   charging: each 1->0 flip of B[j] in Increment k is charged to Increment k - 2^j, the last one to set B[j]
+OK   charging: that block is the first block at height j to the left (the stacks in between are lower)
+OK   charging: after moving, every stack has at most two blocks (its own 0->1 flip + at most one charge)
+OK   standard binary counter alternating 2^k <-> 2^k - 1: every operation flips k + 1 bits
+== 9.3  The double binary counter
+OK   the note's double-counter trace (++ ++ ++ -- -- ++ from P=10001, N=01100) is reproduced exactly  [[('10001', '01100', 5), ('10010', '01100', 6), ('10011', '01100', 7), ('10000', '01000', 8), ('10000', '01001', 7), ('10000', '01010', 6), ('10001', '01010', 7)]]
+OK   zero has exactly one representation (0,0) among all pairs of 7-bit strings with P AND N = 0
+OK   nonzero values have more and more representations as the width grows (infinitely many)  [{-3: [3, 7, 11], -1: [3, 5, 7], 1: [3, 5, 7], 6: [1, 5, 9]}]
+OK   P AND N = 0 is maintained and P - N equals the count (32850 sequences: all of length <= 14, plus long random and adversarial ones)
+OK   every Increment/Decrement sets at most one bit to 1
+OK   potential = #1 bits in P and N: amortized cost = 2 x (#bits set) <= 2 for every operation
+OK   total actual cost of n operations from (0,0) is at most 2n
+OK   the note's lemma: after P[i] or N[i] is set to 1, at least 2^i operations pass before it is reset
+OK   stronger: any two flips of the same bit P[i] or N[i] are >= 2^i operations apart, the first at time >= 2^i
+OK   taxation: every bit P[i], N[i] collecting 2^-i per operation pays for all its own flips (amortized <= 4)
+OK   worst case: after 1023 Increments from (0,0), the 1024th flips 11 bits
+== 9.4  Gray codes and Ehrlich's algorithm
+OK   the note's 4-bit list is the binary reflected Gray code g(k) = k XOR floor(k/2)
+OK   successive Gray codes differ in exactly one bit: the bit a binary counter sets from 0 to 1 (n <= 12)
+OK   naive Gray increment (scan for the lowest 1): correct, Theta(log n) worst case, O(1) amortized (total <= 2n + n/2 over 0 -> n)  [8178]
+OK   naive Gray increment/decrement alternating between 2^k - 1 and 2^k: every operation scans k + 1 bits (Theta(log n) amortized, like the binary counter)
+OK   Ehrlich n = 4: G row of the note's table reproduced
+OK   Ehrlich n = 4: F row of the note's table reproduced (it shows F[3..0]; F[4] = 4 throughout)
+OK   Ehrlich: after k increments G = g(k) for every k < 2^n (n <= 10), F[n] = n always
+OK   Ehrlich: the 2^n-th increment (the j = n branch) flips G[n-1] back and restores the initial state
+OK   the note's invariant for F (B[j] = 0, B[j-1] = 1 -> F[j] = smallest k > j with B[k] = 1) FAILS  [(1, 1, 0, 1, 0)]
+OK   ... first failures: after 1 increment F[0] = 1 (note: 0); after 2 increments (binary 10) F[1] = 2 (note: 1)
+OK   corrected invariant: if B[j] = 1 and B[j-1] = 0 (B[-1] = 0), F[j] = smallest k > j with B[k] = 0; otherwise F[j] = j (all states, n <= 10)
+OK   in particular F[0] is always the index of the lowest 0 bit of the count (the bit to flip next)
+== Concept page: base-b counters and a doubling array
+OK   base-b counter: 0 -> n changes exactly (bn - s_b(n))/(b-1) digits (b = 2..10, n <= 3000)
+OK   base-b counter: potential (digit sum)/(b-1) makes every increment cost exactly b/(b-1) amortized
+OK   odometer example: counting 0 -> 1000 in decimal changes 1111 digits = 1000 + 100 + 10 + 1 < 10/9 * 1000
+OK   odometer example: the step 999 -> 1000 alone changes 4 digits
+OK   doubling array: potential 2*size - capacity gives every append amortized cost exactly 3
+OK   doubling array: the potential never drops below its initial value (valid), so n appends cost <= 3n
+== Pages and figures
+OK   page: the headings are the note's sections, in order
+OK   page: the four subsections of 9.2
+OK   page: numbers 2n - #1(n), 31 flips for 16, 1994 for 1000
+OK   page: naive Gray search is O(1) amortized for increments alone, Theta(log n) when inc/dec alternate
+OK   page: double-counter trace row P = 10001, N = 01100, value 5
+OK   page: double-counter trace row P = 10010, N = 01100, value 6
+OK   page: double-counter trace row P = 10011, N = 01100, value 7
+OK   page: double-counter trace row P = 10000, N = 01000, value 8
+OK   page: double-counter trace row P = 10000, N = 01001, value 7
+OK   page: double-counter trace row P = 10000, N = 01010, value 6
+OK   page: double-counter trace row P = 10001, N = 01010, value 7
+OK   page: Ehrlich table column k = 0: G = 0000, F = 3210
+OK   page: Ehrlich table column k = 1: G = 0001, F = 3211
+OK   page: Ehrlich table column k = 2: G = 0011, F = 3220
+OK   page: Ehrlich table column k = 3: G = 0010, F = 3212
+OK   page: Ehrlich table column k = 4: G = 0110, F = 3310
+OK   page: Ehrlich table column k = 5: G = 0111, F = 3311
+OK   page: Ehrlich table column k = 6: G = 0101, F = 3230
+OK   page: Ehrlich table column k = 7: G = 0100, F = 3213
+OK   page: Ehrlich table column k = 8: G = 1100, F = 4210
+OK   page: Ehrlich table column k = 9: G = 1101, F = 4211
+OK   page: Ehrlich table column k = 10: G = 1111, F = 4220
+OK   page: Ehrlich table column k = 11: G = 1110, F = 4212
+OK   page: Ehrlich table column k = 12: G = 1010, F = 3410
+OK   page: Ehrlich table column k = 13: G = 1011, F = 3411
+OK   page: Ehrlich table column k = 14: G = 1001, F = 3240
+OK   page: Ehrlich table column k = 15: G = 1000, F = 3214
+OK   page: from an arbitrary start v, exactly 2n + #1(v) - #1(v+n) flips
+OK   page: the 1024th Increment from (0,0) flips 11 bits; Gray example k = 3, F[0] = 2, flips G[2]
+OK   page: the note's invariant fails after the first increment (F[0] = 1) and at count 2 (F[1] = 2)
+OK   concept page: odometer numbers 1111 and 10/9
+OK   n09-charging: 16 stacks, 16 white (0->1) and 15 shaded (1->0) blocks, 15 charge arrows; 31 = 2*16 - 1
+OK   n09-gray: the 16 columns show the 4-bit Gray code, highlighted cell = the bit just flipped, F row correct
+OK   n09-charging: inlined on the page and colored only through currentColor / CSS variables
+OK   n09-gray: inlined on the page and colored only through currentColor / CSS variables
+OK   aliases are unique site-wide (case-insensitive)  [[]]
+
+ALL OK

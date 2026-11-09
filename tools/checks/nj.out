@@ -1,0 +1,126 @@
+== J.1 load balancing
+OK   Theorem J.1 / J.2 and the exact ratios 2-1/m, 4/3-1/(3m) hold on random instances (both tie rules)  [2980 runs; worst greedy ratio 36/23 = 1.565, worst sorted 12/11 = 1.091]
+OK   J.2 proof: T[m+1] <= OPT/2 for jobs sorted in decreasing order
+OK   greedy attains 2-1/m for m=2
+OK   sorted greedy attains 4/3-1/(3m) for m=2  [7 vs OPT 6]
+OK     brute force confirms both optima for m=2
+OK   greedy attains 2-1/m for m=3
+OK   sorted greedy attains 4/3-1/(3m) for m=3  [11 vs OPT 9]
+OK     brute force confirms both optima for m=3
+OK   greedy attains 2-1/m for m=4
+OK   sorted greedy attains 4/3-1/(3m) for m=4  [15 vs OPT 12]
+OK   greedy attains 2-1/m for m=5
+OK   sorted greedy attains 4/3-1/(3m) for m=5  [19 vs OPT 15]
+OK   greedy attains 2-1/m for m=6
+OK   sorted greedy attains 4/3-1/(3m) for m=6  [23 vs OPT 18]
+OK   Partition <-> two machines with makespan sum/2
+== J.3 greedy vertex cover
+OK   GreedyVertexCover returns a vertex cover  [34766 graphs (all with <= 6 vertices + random)]
+OK   halving lemma: sum of d_1..d_OPT >= |E|/2
+OK   iterations <= OPT (floor(lg m) + 1)
+OK   |greedy| <= H(Delta) OPT  [worst ratio seen 3/2 = 1.500]
+OK   the note's bound OPT lg|G| fails exactly on graphs with one edge  [76 failures]
+OK   log-n family N=6: greedy 8 vs OPT 6  [ratio 1.33, vertices 14]
+OK   log-n family N=12: greedy 23 vs OPT 12  [ratio 1.92, vertices 35]
+OK   log-n family N=24: greedy 60 vs OPT 24  [ratio 2.50, vertices 84]
+OK   log-n family N=48: greedy 150 vs OPT 48  [ratio 3.12, vertices 198]
+== J.4 set cover and hitting set
+OK   GreedySetCover covers, size <= H(max |S|) OPT  [worst ratio 4/3 = 1.333]
+OK   GreedyHittingSet hits, size <= H(max #sets per element) OPT  [worst ratio 3/2 = 1.500]
+OK   hitting sets of (X,F) = set covers of the dual (F,X*) and vice versa (optimal sizes)
+OK   double dual = original up to renaming exactly when the x* are distinct; X = {a,b}, F = {{a,b}}: 1 element
+OK   set-cover family k=2: greedy picks the k columns, OPT = 2, |F| = k+2, |X| = 2^(k+1)-2  [ratio 2/2; log2|F| = 2.00]
+OK   set-cover family k=3: greedy picks the k columns, OPT = 2, |F| = k+2, |X| = 2^(k+1)-2  [ratio 3/2; log2|F| = 2.32]
+OK   set-cover family k=4: greedy picks the k columns, OPT = 2, |F| = k+2, |X| = 2^(k+1)-2  [ratio 4/2; log2|F| = 2.58]
+OK   set-cover family k=5: greedy picks the k columns, OPT = 2, |F| = k+2, |X| = 2^(k+1)-2  [ratio 5/2; log2|F| = 2.81]
+OK   set-cover family k=6: greedy picks the k columns, OPT = 2, |F| = k+2, |X| = 2^(k+1)-2  [ratio 6/2; log2|F| = 3.00]
+OK   set-cover family k=7: greedy picks the k columns, OPT = 2, |F| = k+2, |X| = 2^(k+1)-2  [ratio 7/2; log2|F| = 3.17]
+OK   set-cover family k=8: greedy picks the k columns, OPT = 2, |F| = k+2, |X| = 2^(k+1)-2  [ratio 8/2; log2|F| = 3.32]
+OK   set-cover family k=9: greedy picks the k columns, OPT = 2, |F| = k+2, |X| = 2^(k+1)-2  [ratio 9/2; log2|F| = 3.46]
+OK   set-cover family k=10: greedy picks the k columns, OPT = 2, |F| = k+2, |X| = 2^(k+1)-2  [ratio 10/2; log2|F| = 3.58]
+OK   set-cover family k=11: greedy picks the k columns, OPT = 2, |F| = k+2, |X| = 2^(k+1)-2  [ratio 11/2; log2|F| = 3.70]
+OK   set-cover family k=12: greedy picks the k columns, OPT = 2, |F| = k+2, |X| = 2^(k+1)-2  [ratio 12/2; log2|F| = 3.81]
+OK   so the greedy set-cover ratio is not O(log |F|): ratio/(log2 |F|) grows
+== J.5 vertex cover redux
+OK   DumbVertexCover: a vertex cover, the chosen edges a matching, size <= 2 OPT  [worst ratio 2]
+OK   dumb hitting set (take all of any unhit set): ratio <= max |S|
+OK   weighted path: greedy weight 10^100, dumb 10^100+1 (either edge), lightest 2
+== J.6 LP rounding
+OK   LP <= OPT; rounding x* >= 1/2 gives a vertex cover of weight <= 2 LP <= 2 OPT  [worst rounded/OPT 2.000]
+OK   C5: LP optimum 5/2 (all 1/2), rounding takes all 5 vertices, OPT 3
+OK   K_n: LP n/2, OPT n-1 (OPT/LP -> 2)
+== J.7 randomized LP rounding
+OK   Pr[edge uncovered] = (1-a)(1-b) <= 1/4, maximized (not minimized) at a = b = 1/2; its minimum is 0
+OK   C5, one round: E[w] = LP = 5/2, E[#covered edges] = 15/4 = 3/4 of 5
+OK   one round: E[w(x')] = LP exactly; at least 3/4 of the edges covered in expectation
+OK   N rounds: Pr[v in C] = 1-(1-x)^N <= N x, so E[w(C)] <= N LP, not = (C5, N=2: 15/4 < 5)
+OK   4^(-N) = n^(-4) for N = 2 lg n
+OK   K_4, x* = 1/2, N = 4: Pr[C is a vertex cover] >= 1 - 1/n^2  [0.97846985]
+OK   K_8, x* = 1/2, N = 6: Pr[C is a vertex cover] >= 1 - 1/n^2  [0.99357900]
+== J.8 traveling salesman: the bad news
+OK   lengths 1/2: tour of length n iff Hamiltonian, otherwise >= n+1 (and 1/2 lengths are metric)  [1256 graphs]
+OK   lengths 1/(n+1): n if Hamiltonian, otherwise >= 2n
+OK   lengths 1/(alpha n + 1), alpha = 3: n if Hamiltonian, otherwise > alpha n
+OK   lengths 1/(n+2) and 1/(2n): non-Hamiltonian optimum > 2n
+OK   factor 2 is not enough: C5+chord has a tour of length 10 = 2n (allowed for a 2-approximation), P5 has OPT 10
+== J.9 traveling salesman: the good news
+OK   tree doubling: walk = 2 MST, tour <= 2 MST, MST <= OPT, tour <= 2 OPT  [700 metric instances (Euclidean and graph metrics), worst ratio 1.443]
+OK   Christofides: |O| even, T+M even degrees, Euler circuit uses every edge; odd-vertex tour <= OPT, MOM <= half of it
+OK   Christofides: tour <= MST + MOM, MOM <= OPT/2, tour <= 3/2 OPT  [worst ratio 1.220]
+OK   unit square: MST 3 < OPT 4 (so 'MST >= OPT' is false in general)
+OK   non-metric instance: tree doubling tour > 2 OPT  [MST [(0, 1), (0, 2), (0, 3), (0, 4)], tour [0, 1, 3, 2, 4] of length 203 vs OPT 5]
+OK   figure: the MST is the note's tree
+OK   figure: the MST is unique (margin > 0)  [margin 0.708]
+OK   figure: DFS from a with alphabetical children: walk a b a c d c e c a f g f a, preorder a..g
+OK   figure: odd vertices a b c d e g; the minimum matching ag, bd, ce is unique
+OK   figure: a b d c e c a g f a is an Euler circuit of T + M
+OK   figure: Christofides tour a b d c e g f, 4 shortcuts for tree doubling and 1 for Christofides
+   figure numbers: {'mst': 25.171, 'dt': 44.949, 'ch': 40.993, 'opt': 34.818, 'mom': 16.111}
+OK   figure: tour lengths obey the bounds
+OK   Christofides tight strip k=2: MST = zigzag 2k, tour = 2k + k(1+e), OPT = 2 + (2k-1)(1+e)  [ratio 1.197]
+OK     strip k=2 has 2k-1 = 3 triangles (E - V + 1 = 3)
+OK   Christofides tight strip k=3: MST = zigzag 2k, tour = 2k + k(1+e), OPT = 2 + (2k-1)(1+e)  [ratio 1.281]
+OK     strip k=3 has 2k-1 = 5 triangles (E - V + 1 = 5)
+OK   Christofides tight strip k=4: MST = zigzag 2k, tour = 2k + k(1+e), OPT = 2 + (2k-1)(1+e)  [ratio 1.327]
+OK     strip k=4 has 2k-1 = 7 triangles (E - V + 1 = 7)
+OK   Christofides tight strip k=5: MST = zigzag 2k, tour = 2k + k(1+e), OPT = 2 + (2k-1)(1+e)  [ratio 1.357]
+OK     strip k=5 has 2k-1 = 9 triangles (E - V + 1 = 9)
+OK   tree doubling on the 6-cycle metric (MST = path, DFS from the middle): tour 2n-2 vs OPT n
+OK   tree doubling on the 10-cycle metric (MST = path, DFS from the middle): tour 2n-2 vs OPT n
+OK   tree doubling on the 20-cycle metric (MST = path, DFS from the middle): tour 2n-2 vs OPT n
+OK   tree doubling on the 40-cycle metric (MST = path, DFS from the middle): tour 2n-2 vs OPT n
+== J.10 k-center clustering
+OK   Gonzalez: cost = r_k, r* <= r_k <= 2 r*  [worst r_k/r* 2.000]
+OK   Gonzalez: r_1 >= r_2 >= ... >= r_k
+OK   Gonzalez: the k+1 centers are pairwise >= r_k apart
+OK   tight: points -1, 0, 1 with p_1 = -1, k = 1: r_1 = 2, OPT = 1
+== J.11 approximation schemes
+OK   grid scheme: r~ <= r*, cost <= r~ + delta sqrt2 <= (1+eps) r*; |Q| <= k (ceil(2r*/delta)+1)^2
+== J.12 an FPTAS for subset sum
+OK   exact SubsetSum (sets of sums) = brute force; |S_i| <= min(2^i, t+1)
+OK   ApproxSubsetSum: r* <= s* <= (1+eps) r*, so r* >= (1-eps) s*  [worst r*/s* 0.8478]
+OK   inductive claim with delta = eps/(2n): every s in S_i has r in R_i with r <= s <= r (1+delta)^i
+OK   |R_i| <= |R_{i-1}| + floor(log_{1+delta} i) + 1
+OK   the note's ceil(log_{1+delta} i) undercounts at i = 1 (R_1 = {0, x_1})
+OK   survivors p of R_{i-1}+x_i: largest/smallest > (1+delta)^(p-1), both in [x_i, i x_i], so p <= floor(L)+1
+OK   the note's ceil(log_{1+delta} i) is a valid count for i >= 2 (wrong only at i = 1)
+OK   one survivor per interval alone allows floor(L)+2: delta = 1, i = 3, x_i = 3, [3, 9] meets 3 intervals
+OK   note's case (2) middle step fails (delta=1/10, i=2, x=5, r=20, r'=17); the corrected chain holds
+OK   (1+eps/2n)^n <= e^(eps/2) <= 1+eps for 0 < eps <= 1
+OK   ln(1+delta) >= delta/2 on [0,1], so log_{1+delta} n <= 2 ln n/delta = 4 n ln n/eps (not n ln n/eps)
+== more evidence for the corrections, and the figures
+OK   set-cover LP gap, m = 6 sets: LP = m/(m/2+1), OPT = m/2, gap (m+2)/4
+OK   set-cover LP gap, m = 8 sets: LP = m/(m/2+1), OPT = m/2, gap (m+2)/4
+OK   set-cover LP gap, m = 10 sets: LP = m/(m/2+1), OPT = m/2, gap (m+2)/4
+OK   load-balance figure: greedy makespan 9 on M2, last job 6 over load 3; sorted 6 = OPT = 18/3
+OK   set-cover figure: greedy C4 C3 C2 C1 with 16 8 4 2 new elements, rows 15 7 3 1; 30 elements, 6 sets, OPT 2
+OK   k-center figure: centers (1,2), (13,2), (7,12), next (10,4); r3 = sqrt13 = 3.61; OPT = sqrt13/2 = 1.80
+== page text
+OK   figure captions carry the recomputed TSP numbers
+OK   figure captions: k-center 3.61 and 1.80; load balance 9, 3, 18/3 = 6
+OK   sources: run counts and worst ratios match this run  [cnt=2980 vc_rand=900 lp=564 tsp_rand=160 inst=700 w2=1.443 w15=1.220 wk=2.00 wss=0.848 wg=1.565 ws=1.091 wvc=1.5]
+OK   page: C5 numbers (LP 5/2, rounding 5, OPT 3; N = 2 gives 15/4 < 5) and the case-(2) numbers  [23.7 vs 23.15]
+OK   page and concept page: TSP inapproximability stated for polynomial-time computable f only; strip of 2k-1
+OK   concept page: the Gonzalez example (r_1 = 2, OPT 1, c_1 = -1 and c_2 = 1 two apart) and the K_n LP remark
+
+ALL OK

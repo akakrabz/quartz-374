@@ -1,0 +1,74 @@
+OK   D.1 example: the Edit table for ALTRUISTIC x ALGORITHM (p. 2) is correct
+OK   D.1 example: the red entries of the Edit table are exactly the match points A[i] = B[j]  [[(1, 1), (2, 2), (3, 7), (4, 5), (6, 6), (8, 7), (9, 6)]]
+OK   D.1 example: the Half table (p. 2) is correct; Half(10, 9) = 5
+OK   D.1 example: split ALTRU/ALGOR (cost 3) + ISTIC/ITHM (cost 3) = 6
+OK   D.1 example: Hirschberg's alignment has cost 6 and spells both strings  [AL-TRUISTIC / ALGOR-I-THM]
+OK   D.1: Half(m, n) always gives an optimal split: Edit(A[..m/2], B[..h]) + Edit(rest) = Edit(A, B) (3000 random pairs)
+OK   D.1: the two-row (linear-space) sweep computes Edit(m, n) and the same Half(m, n)
+OK   D.1: Hirschberg's recursion returns a valid optimal alignment every time
+OK   D.1: total cells computed / the first sweep's (m+1)(n+1) is about 2 (between 2 and 2.4, decreasing to 2.06 at 256 x 256), random strings  [[2.356, 2.242, 2.156, 2.095, 2.119, 2.095, 2.118, 2.055]]
+OK   D.1: recursion depth <= ceil(log2 m)
+OK   D.1: worst case of the recurrence: T(m, n) <= 2mn fails for some (m, n) (subproblems with h = 0 cost m/2)  [1331 of 1521 pairs, e.g. [(5, 2), (5, 3), (5, 4)]]
+OK   D.1: worst case of the recurrence: T(m, n) <= 2mn + (m + n) log2 m for all 2 <= m, n <= 40, and T(5, 40) = 442 > 2mn = 400
+OK   D.1: worst case of the recurrence: T(m, n) / mn <= 2.6 for all 2 <= m, n <= 40 (so O(mn))  [max ratio 2.588]
+OK   D.1: the guess T(m, n) <= 4mn + m + n holds for all 0 <= m, n <= 40 (base cases and rounding included)
+OK   D.1: the induction step for that guess: mn + 4(floor(m/2) h + ceil(m/2)(n - h)) + m + n <= 4mn + m + n for all 2 <= m <= 40, 0 <= h <= n <= 40
+OK   D.2 note error p. 4: Figure D.1 is correct except column O, rows U, I, S, T, I, C, >> (printed 3, correct 2)  [[(5, 4, 3, 2), (6, 4, 3, 2), (7, 4, 3, 2), (8, 4, 3, 2), (9, 4, 3, 2), (10, 4, 3, 2), (11, 4, 3, 2)]]
+OK   D.2 example: LCS(ALTRU, ALGO) = 2 (A, L): the printed 3 is impossible
+OK   D.2 example: LCS(ALGORITHMS, ALTRUISTIC) = 5 = LCS(m+1, n+1) - 1
+OK   D.2 example: K = 8 match points (+ the 2 sentinels), with values 1,2,3,3,4,5,5,4 (row order) as printed in red  [[(1, 1, 1), (2, 2, 2), (3, 7, 3), (4, 5, 3), (6, 6, 4), (7, 10, 5), (8, 7, 5), (9, 6, 4)]]
+OK   D.2: the sparse recurrence (strict for match points, non-strict otherwise) reproduces every entry of the LCS table, sentinels included (400 random pairs)
+OK   D.2: edit distance without substitutions = with substitutions costing 2 = m + n - 2 LCS (1000 random pairs)
+OK   D.2 note error p. 5: FindMatches as printed loops forever, runs off the arrays or misses matches  [{'loop': 1024, 'index': 265, 'wrong': 446, 'right': 265}]
+OK   D.2: corrected FindMatches reports exactly the match points (2000 random pairs)
+OK   D.2: corrected FindMatches merge phase takes <= m + n + K steps (after sorting)
+OK   D.2 note error p. 5: on A = B = AB, printed FindMatches finds only (1, 1) ('i < m' stops early)  [[(1, 1)]]
+OK   D.2: corrected SparseLCS (max, k up to K + 1) equals the plain LCS (1500 random pairs)
+OK   D.2: corrected SparseLCS's inner loop runs exactly K(K+1)/2 times: O(K^2) after the matches
+OK   D.2 note error p. 5: SparseLCS as printed (min; k only up to K) never computes LCS[K+1]  [1500 of 1500 fail]
+OK   D.2: the O(m log m + n log n + K log K) improvement exists (LIS over matches sorted by i, then j decreasing)
+OK   D.3: Knuth's OptRoot[i, j-1] <= OptRoot[i, j] <= OptRoot[i+1, j] holds with the leftmost optimal root (1500 random frequency arrays, many ties)
+OK   D.3: ... and with the rightmost optimal root
+OK   D.3: with ties broken arbitrarily the inequalities can fail (so 'the optimal root' needs a fixed tie rule)  [[1, 2, 1, 1, 1]]
+OK   D.3: f = [1,1,1,1,1]: optimal roots of f[1..4] are {2,3} and of f[1..5] are {2,3,4}; choosing 3 and 2 violates OptRoot[1,4] <= OptRoot[1,5]  [[2, 3], [2, 3, 4]]
+OK   D.3: corrected FasterOptimalSearchTree computes the optimal cost (1500 random inputs)
+OK   D.3: ... and its strict '>' picks exactly the leftmost optimal root in every subproblem
+OK   D.3: for each d, the loop over r runs at most 2n times in all (O(n) per diagonal, O(n^2) total)
+OK   D.3 note error p. 6: as printed ('for i <- 1 downto n', 'for d <- 0 to n', 'for i <- 1 to n') the algorithm reads unset entries or leaves the table  [1500 of 1500 fail]
+OK   D.3: per diagonal d the r-loop runs exactly OptRoot[n-d+1, n] - OptRoot[1, d] + (n - d) times (telescoping)
+OK   D.3 example: f = [5,2,1,3,4]: OptCost[1,5] = 31 and the OptRoot table  [{(1, 1): 1, (1, 2): 1, (1, 3): 1, (1, 4): 1, (1, 5): 4, (2, 2): 2, (2, 3): 2, (2, 4): 4, (2, 5): 4, (3, 3): 3, (3, 4): 4, (3, 5): 4, (4, 4): 4, (4, 5): 5, (5, 5): 5}]
+OK   D.3 example: the r-loop runs 35 times in the plain O(n^3) program, 30 of them for d >= 1, and 24 times with Knuth's ranges (d >= 1)  [plain 35, Knuth 24]
+OK   D.4 example: the 5x5 array is monotone, leftmost row minima in columns 1,2,2,4,4
+OK   D.5 example: the same array is not totally monotone; rows 1,3 x columns 3,5 (the gray 2x2) is a violation
+OK   D.5 example: the first array has 11 violating 2x2 subarrays, the gray one (rows 1,3; columns 3,5) among them  [[(1, 2, 3, 5), (1, 2, 4, 5), (1, 3, 3, 5), (1, 3, 4, 5), (1, 4, 3, 5), (1, 4, 4, 5), (1, 5, 4, 5), (2, 3, 1, 3), (2, 3, 1, 5), (2, 4, 1, 5), (4, 5, 2, 3)]]
+OK   D.5 example: the second array is totally monotone (all 100 2x2 subarrays checked), minima 1,2,2,4,4
+OK   D.4: even-odd algorithm finds every leftmost row minimum of random monotone arrays (up to 20 x 20)
+OK   D.4: even-odd: at most n - 1 comparisons per level and at most ceil(log2 m) + 1 levels: O(m + n log m)
+OK   D.4: divide and conquer (middle row first) is correct
+OK   D.4: divide and conquer: comparisons on level d <= n - 1 + 2^d (the shared boundary columns)
+OK   D.4: for m = 2^k - 1, divide and conquer examines exactly the entries of the variant that recurses on the EVEN rows; the printed odd-row version examines a different set  [[(3, False, True), (7, False, True), (15, False, True)]]
+OK   D.4: for each d, the array M[i, r] = OptCost[i, r-1] + OptCost[r+1, i+d] (inf outside i..i+d) is monotone and its leftmost row minima are the optimal roots
+OK   D.5: every (random) Monge array is totally monotone
+OK   D.5: Monge iff the local condition M[i,j] + M[i+1,j+1] <= M[i,j+1] + M[i+1,j] (1500 random arrays)
+OK   D.5: distances between ordered points on two parallel lines form a Monge array (500 random instances)
+OK   D.5: the segments p_i q_j' and p_i' q_j always meet (the point x of the proof exists)
+OK   D.5: lemma (a)-(g): row-constant, column-constant, upper-right and lower-left corner blocks, positive multiples, sums and transposes are Monge
+OK   D.5: a block of 1s that does not touch the upper-right (or lower-left) corner need not be Monge
+OK   D.5: an upper-LEFT corner block of 1s is not Monge
+OK   D.5: characterization: every Monge array decomposes as row-constant + column-constant + a non-negative combination of upper-right blocks (400 random arrays, exact arithmetic)
+OK   D.6: the two observations (compare M[i,p] and M[i,q]: the right entry and everything above it, or the left entry and everything below it, is dead) hold on random totally monotone arrays
+OK   D.6: corrected Reduce keeps every column that holds a leftmost row minimum, and at most m columns
+OK   D.6: Reduce makes at most 2n comparisons
+OK   D.6: Reduce's three invariants hold before every step (sorted stack; top j-1 entries of S[j] dead; columns left behind are dead)
+OK   D.6 note error p. 12: Reduce as printed (pop on >=) can discard a column holding a leftmost minimum when a row has ties  [433 failures among 1954 arrays with ties (3000 arrays)]
+OK   D.6: ... but never when the entries of each row are distinct
+OK   D.6 note error p. 12: smallest failure [[1,1],[0,5]]: printed Reduce keeps only column 2, but LM = (1, 1)
+OK   D.6: SMAWK finds every leftmost row minimum of random totally monotone (Monge) arrays up to 30 x 60
+OK   D.6: SMAWK makes at most 2.2 (m + n) comparisons (O(m + n)); random arrays up to 1000 x 1000  [small max 2.11; large [1.5, 0.98, 1.94, 1.22, 1.36]]
+OK   D.7: Bellman-Ford on the complete bipartite Euclidean graph matches Dijkstra (60 random instances)
+OK   D.7: ModBellmanFord (row minima of M[v,u] = dist(u) + w(u->v), then dist <- min) matches
+OK   D.7: the blocks U = Q + D and V = P + D^T are Monge in every round (inf replaced by a large constant)
+OK   D.7: SMAWK-based ModBellmanFord matches Dijkstra; entries evaluated per block / n stays bounded (O(n) per round, O(n^2) total)  [small n: max 6.18 per block per n; n = 50, 200, 800: [6.72, 6.46, 6.4]]
+OK   D.7: after k rounds, ModBellmanFord's dist(v) = length of the shortest walk from s to v with at most k edges
+
+ALL OK

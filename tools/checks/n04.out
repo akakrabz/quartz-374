@@ -1,0 +1,100 @@
+OK   Markov's proof: the area under the staircase z -> Pr[Z >= z] is sum_z Pr[Z >= z] = E[Z] (exact)
+OK   Markov: Pr[Z >= z] <= E[Z]/z for z = 1/2, 1, 3/2, ... on all test distributions (exact)
+OK   Markov, multiplicative: Pr[X >= (1+delta)E[X]] <= 1/(1+delta)
+OK   Markov also holds for non-negative real-valued variables (2000 random finite distributions)
+OK   figure: 6 fair coins, Pr[Z >= z] = 63/64, 57/64, 42/64, 22/64, 7/64, 1/64 (z = 1..6); total area 3 = E[Z]
+OK   figure: the rectangle at z = 4 has area 4 * 22/64 = 11/8 <= 3
+OK   Markov for treaps: Pr[some node has depth >= 2n^2 ln n] <= n (2 ln n)/(2 n^2 ln n) = 1/n
+OK   W = (X+Y+Z) mod 2: every 3 of {W, X, Y, Z} are mutually independent (so also pairwise)
+OK   ... but {W, X, Y, Z} is not 4-wise independent: Pr[W=X=Y=Z=1] = 0, not 1/16
+OK   dependent but uncorrelated: X uniform on {-1,0,1}, Y = X^2: E[XY] = 0 = E[X]E[Y], yet Pr[X=0,Y=0] = 1/3 != Pr[X=0]Pr[Y=0] = 1/9 (so the product rule 'need not' fail for dependent variables)
+OK   pairwise-independent families (X, Y, X xor Y; W, X, Y, Z; the 15 XORs of 4 bits) are pairwise independent
+OK   Chebyshev's proof: E[(X - mu)^2] = sum p_i(1 - p_i) < mu for pairwise-independent indicators (exact)
+OK   Chebyshev: Pr[(X - mu)^2 >= z] < mu/z for all z on a grid, on these families
+OK   the four Chebyshev corollaries (additive and multiplicative, upper and lower tails) on all test distributions
+OK   weak law: Pr[|mean of n bits - p| > eps] <= p(1-p)/(n eps^2) (exact binomial tails)
+OK   5 bits with X5 = X1 xor ... xor X4: 4-wise independent, not 5-wise
+OK   4-wise independent family: E[(X - mu)^4] = sum E[Y_i^4] + 6 sum_{i<j} E[Y_i^2]E[Y_j^2] <= mu + 3 mu^2  [m4 = 65/16, mu = 5/2]
+OK   fourth-moment bound Pr[(X - mu)^4 >= z] <= (mu + 3 mu^2)/z, i.e. O(mu^2/z) once mu >= 1
+OK   why mu >= 1 is needed: one bit with Pr = p, Delta = 1/2: Pr[X >= mu + Delta] = p but (mu/Delta^2)^2 = 16p^2; the ratio 1/(16p) is unbounded
+OK   exponential moment: E[alpha^X] = prod((alpha - 1)p_i + 1) <= e^{(alpha-1)mu} for alpha < 1 as well as alpha >= 1 (the lower-tail proof needs alpha < 1)
+OK   Chernoff upper tail Pr[X >= x] <= e^{x-mu}(mu/x)^x for x >= mu (exact tails)
+OK   Chernoff lower tail Pr[X <= x] <= e^{x-mu}(mu/x)^x for 0 < x <= mu
+OK   alpha-forms e^{(alpha-1)mu}/alpha^x (alpha > 1 upper, alpha < 1 lower) hold
+OK   the alpha-forms are minimized at alpha = x/mu (grid search)
+OK   the four traditional Chernoff forms (additive/multiplicative, upper/lower) hold on all test distributions
+OK   they are the absolute form with x = mu + Delta, (1 + delta) mu (algebraic identity)
+OK   simple forms exp(-delta^2 mu/3) (upper) and exp(-delta^2 mu/2) (lower), 0 < delta < 1
+OK   the simple forms follow: delta - (1+delta) ln(1+delta) <= -delta^2/3 and -delta - (1-delta) ln(1-delta) <= -delta^2/2 on (0, 1)
+OK   ... but the upper simple form is not implied for delta = 2: 2 - 3 ln 3 = -1.296 > -4/3
+OK   the note's first 'Taylor' inequality 1/ln(1+delta) <= 1/2 + 1/delta holds on (0, 1)
+OK   the note's second, ln(1-delta) >= -delta + delta^2/2, is false for every delta in (0, 1); (1-delta) ln(1-delta) >= -delta + delta^2/2 is what the lower simple form needs
+OK   Markov: Pr[X >= alpha N] <= 1/(2 alpha): 2/3 at 3/4 and 5/9 at 9/10
+OK   Chebyshev with mu/Delta^2 (Delta = (2alpha - 1)N/2): 2/((2alpha-1)^2 N): 8/N at 3/4, 25/(8N) at 9/10
+OK   Chebyshev with the variance N/4: 1/((2alpha-1)^2 N): 4/N and 25/(16N)
+OK   the note's 1/((2alpha-1)N) (2/N, 5/(4N)) drops the square: it is smaller than both by a factor 2alpha - 1 or 2(2alpha - 1)
+OK   the note's 2/N and 5/(4N) happen to be true (exact tails, N <= 3000; beyond, e^{-N/24} < 2/N)
+OK   the note's general formula 1/((2alpha-1)N) is false: alpha = 0.55, N = 100 gives 0.1 < Pr[X >= 55] = 0.184 (exact)  [0.1841]
+OK   simple Chernoff exponent (2alpha-1)^2/6: 1/24 at 3/4, 8/75 at 9/10, and 8/75 > 1/10
+OK   lower simple exponent (1-2alpha)^2/4: 1/16 at 1/4, 4/25 at 1/10, and 4/25 >= 1/7
+OK   binomial-coefficient bound (2 a^a (1-a)^(1-a))^-N = e^{-c N}: c = 0.13081 at 1/4 (> 1/8), 0.36806 at 1/10 (> 1/3)  [0.130812 0.368064]
+OK   coin flips, N = 1..2000: Pr[X >= 3N/4] < e^{-N/24}, Pr[X >= 9N/10] < e^{-8N/75}, and the general simple form
+OK   coin flips: Pr[X <= N/4] < e^{-N/16}, Pr[X <= N/10] < e^{-4N/25}, and the general lower form
+OK   coin flips: the binomial-coefficient bound holds for both tails (alpha = .55 ... .99)
+OK   binomial-coefficient bound against exact Fraction tails, N <= 40
+OK   figure (N = 100): exact Pr[X >= 75] = 2.8e-7, Pr[X >= 90] = 1.5e-17, Pr[X = 100] = 7.9e-31  [2.818e-07 1.532e-17]
+OK   figure (N = 100) at alpha = 3/4: Markov 2/3, Chebyshev 1/25 (variance 25), Chernoff e^{-100/24} = 0.0155, binomial-coefficient bound e^{-13.08} = 2.1e-6  [2.08e-06]
+OK   concept example (N = 1000, X >= 600): exact 1.36e-10; Markov 5/6; Chebyshev 250/100^2 = 1/40; simple Chernoff e^{-20/3} = 1.3e-3; precise Chernoff 8.3e-5; binomial-coefficient bound e^{-20.14} = 1.8e-9  [1.364e-10 8.33e-05 1.8e-09]
+OK   concept example: the ordering exact < bin.-coeff. < precise Chernoff < simple Chernoff < Chebyshev < Markov
+OK   Lemma 1 (Take 2): for n <= 7 and every k, the indicators [i above k], i > k, are mutually independent, and so are those with i < k (exact, all n! orders)
+OK   ... but not all n - 1 together: n = 3, k = 2: Pr[1 above 2 and 3 above 2] = 1/3, not 1/4
+OK   the count in Lemma 1's proof: of the (n-k+1)! orders of the priorities of nodes k..n, (n-k)! have node n smallest (the note prints (n-k-1)! of the n-k priorities)
+OK   note 4's E[depth(k)] = H_k + H_{n-k} - 2 (p. 8) is wrong for every n, k (n = 2, k = 2 gives -1/2); correct H_k + H_{n-k+1} - 2
+OK   depth_<(k) has the distribution of Z_2 + ... + Z_k and depth_>(k) that of Z_2 + ... + Z_{n-k+1} (exact, n <= 7)
+OK   Lemma 2: Pr[Z > 4 ln n] < n^{3 - 4 ln 4} = n^{-2.545} < 1/n^2 (exact distribution of Z, n from 2 to 5000)
+OK   mu = H_n - 1 < ln n, and Pr[Z > 4 ln n] <= e^{x-mu}(mu/x)^x at x = 4 ln n
+OK   the note's step (e^3/4^4)^mu < (e^3/4^4)^{ln n} (p. 9) is false for every n >= 2: the base is < 1 and mu < ln n
+OK   the fix: e^{x-mu}(mu/x)^x increases with mu on (0, x], so mu may be replaced by ln n; at mu = ln n, x = 4 ln n it equals n^{3 - 4 ln 4}
+OK   height DP agrees with enumeration of all priority orders, n <= 7
+OK   height DP agrees with 4000 simulated random BSTs (n = 200): Pr[height > 14] = 0.5403 vs 0.5425 (tolerance 4.5 standard errors)
+OK   Theorem 3: Pr[height > 8 ln n] <= 2n * n^{3 - 4 ln 4} = 2/n^{1.545} < 2/n (exact height distribution, n <= 4000)
+OK   expected height <= 8 ln n + (n - 1) 2/n: e.g. E[height] = 12.29 (n = 100), 21.04 (n = 1000)  [12.286 21.040 26.532]
+OK   the note's generalization 'depth > c ln n with probability <= 2/n^{c ln c - c}' is false: n = 1000, c = 4: exact Pr = 0.0033 > 2/1000^{4 ln 4 - 4} = 4.6e-5; c = 5: 1.2e-6 > 1.4e-9  [0.003344 1.18e-06]
+OK   the note's bound is below the exact Pr[height > c ln n] for every c in [2.86, 8] (n = 1000), and >= 1 up to 2.81
+OK   figure: the corrected bound is >= the exact tail for every c in [2, 8] and drops below 1 at c = 5.63 (n = 1000)  [5.6338]
+OK   corrected: depth > 2c ln n with probability <= 2n * n^{c - 1 - c ln c} = 2/n^{c ln c - c} (exact, c = 3 ... 8)
+OK   equivalently depth > c ln n with probability <= 2/n^{(c/2) ln(c/2) - c/2}; c = 8 gives Theorem 3's 2/n^{1.545}
+OK   take 1: in a subtree of any size m <= 400, whatever the position of k, the next level is good with probability >= 1/2 (minimum 0.5)
+OK   take 1, the note's labels (coin flip already at i = depth(k)): n = 5, k = 2, level 1 is good with probability 7/15 < 1/2
+OK   take 1, the page's labels (split for i <= depth(k)): Pr[level i good | labels of levels < i] >= 1/2 (exact, n <= 7, i <= 3; minimum 1/2)
+OK   take 1: the levels are not independent: n = 3, k = 1 (page's labels) 5/6, 7/12, both 1/2 != 35/72; n = 4, k = 1 (note's labels) 31/48, 25/48, both 11/32 != 775/2304
+OK   take 1: exp(-(1-2/c)^2 c log_{4/3} n / 4) = n^{-(c-2)^2/(4c ln(4/3))} (algebra, several c and n)
+OK   c = 20 ln(4/3) = 5.75364: c log_{4/3} n = 20 ln n and the exponent is 2.128 > 2  [2.1281]
+OK   specialized bound with c = 10: e^{-10 log_{4/3} n/3} = n^{-10/(3 ln(4/3))} = n^{-11.587} < n^{-11}
+OK   exact depth distribution of x_k (DP, n <= 60) has mean H_k + H_{n-k+1} - 2
+OK   take 1, made precise: Pr[depth(x_k) >= t] <= Pr[at most log_{4/3} n heads in t - 1 fair flips] (exact, n <= 60)
+OK   take 1's conclusions hold (even for the height): Pr[> 20 ln n] < 1/n^2, Pr[> 10 log_{4/3} n] < 1/n^11, n <= 4000
+OK   figure n04-markov mentions E[Z] = 3, 11/8
+OK   figure n04-coins mentions Markov, Chebyshev, Chernoff, exact
+OK   figure n04-height mentions 0.0033, 1000, 2.86, 5.63
+OK   04-tail-inequalities.md states H_k + H_{n-k+1} - 2
+OK   04-tail-inequalities.md states 0.13081
+OK   04-tail-inequalities.md states 0.36806
+OK   04-tail-inequalities.md states 5.75364
+OK   04-tail-inequalities.md states 2.128
+OK   04-tail-inequalities.md states 11.587
+OK   04-tail-inequalities.md states 0.0033
+OK   04-tail-inequalities.md states 8/N
+OK   04-tail-inequalities.md states 25/(8N)
+OK   04-tail-inequalities.md states 4/N
+OK   04-tail-inequalities.md states 25/(16N)
+OK   04-tail-inequalities.md states 7/15
+OK   04-tail-inequalities.md states 0.184
+OK   04-tail-inequalities.md states 35/72
+OK   tail-inequalities.md states 1.36
+OK   tail-inequalities.md states 5/6
+OK   tail-inequalities.md states 1/40
+OK   tail-inequalities.md states 1.8
+OK   tail-inequalities.md states 8.3
+
+ALL OK

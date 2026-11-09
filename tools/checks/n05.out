@@ -1,0 +1,155 @@
+== §5.2 The importance of being random
+OK   any fixed h: some slot receives >= ceil(u/m) keys (u=10, m=3, 50 random h)
+OK   any fixed h: some slot receives >= ceil(u/m) keys (u=100, m=7, 50 random h)
+OK   any fixed h: some slot receives >= ceil(u/m) keys (u=1000, m=32, 50 random h)
+OK   division method x mod m: h(x + a m) = h(x) for all a, x (m = 13, |a|, x < 200)
+OK   the division method with m = 2^l keeps the low-order bits of the KEY x (the note writes 'of m')
+== §5.3 ...But not too random: uniform, universal, near-universal, k-uniform
+OK   constant family K: uniform
+OK   constant family K: not universal (every pair collides with probability 1)
+OK   ideal random functions [4] -> [3]: uniform, universal with Pr = 1/m exactly
+OK   ideal random functions are k-uniform for k = 1, 2, 3, 4 (u = 4, m = 3)
+OK   polynomials of degree < 2 over Z_5 (m = p, 25 functions) are 2-uniform and not 3-uniform
+OK   polynomials of degree < 3 over Z_5 (m = p, 125 functions) are 3-uniform and not 4-uniform
+OK   polynomials of degree < 2 over Z_7 (m = p, 49 functions) are 2-uniform and not 3-uniform
+OK   polynomials of degree < 3 over Z_7 (m = p, 343 functions) are 3-uniform and not 4-uniform
+OK   MB+ with p=5, m=3 is universal but not uniform: Pr[h(x)=0] = 2/5
+OK   MB+ with p=7, m=3 is universal but not uniform: Pr[h(x)=0] = 3/7
+OK   concept example: MB+ with p=7, m=3 has collision probability exactly 5/21 for every pair
+OK   concept example: ... and Pr[h(x) = 0] = 3/7, Pr[h(x) = 1] = Pr[h(x) = 2] = 2/7 for every x
+== §5.4 Chaining: expected chain lengths
+OK   x not in T, |T| = 4, m = 8: E[l(x)] <= alpha over all MB+ salts and <= 2 alpha over all MP salts  [max ratios 0.931, 1.080]
+OK   x not in T, |T| = 8, m = 8: E[l(x)] <= alpha over all MB+ salts and <= 2 alpha over all MP salts  [max ratios 0.931, 0.960]
+OK   x not in T, |T| = 16, m = 8: E[l(x)] <= alpha over all MB+ salts and <= 2 alpha over all MP salts  [max ratios 0.931, 0.960]
+OK   x not in T, |T| = 24, m = 8: E[l(x)] <= alpha over all MB+ salts and <= 2 alpha over all MP salts  [max ratios 0.931, 0.953]
+OK   the note's chained-table figure (p. 4): 10 items in 10 slots, load factor 1, 4 empty slots, longest chain 3
+OK   page example: h(x) = ((23x + 8) mod 101) mod 8 sends 12,23,31,44,58,67,75,89 to 2,0,6,2,5,2,0,3
+OK   page example: chains T[0] = 23,75; T[2] = 12,44,67; T[3] = 89; T[5] = 58; T[6] = 31; three empty slots
+OK   page example: sum of n_i^2 = 16 (<= 3n - 2 = 22), secondary sizes 2 n_i^2 = 8, 18, 2, 2, 2: 32 cells
+OK   page example: a successful search examines (1+2 + 1+2+3 + 1+1+1)/8 = 12/8 = 1.5 list items on average
+== §5.5.1 Prime multiplicative hashing MP
+OK   Lemma 1: every a in [p]^+ has a unique inverse mod p (all primes p < 200)
+OK   Lemma 2, 'only if' direction: a collision implies x = y or multp(x-y) = 0 or multp(y-x) = 0 (p < 32, all m, a)
+OK   Lemma 2, 'if' direction FAILS: the right side does not imply a collision  [209952 counterexamples; smallest (p, m, a, x, y) = (3, 2, 1, 1, 2)]
+OK   the counterexample quoted on the page: p=7, m=3, a=1, x=1, y=2: multp(6) = 0 but multp(1)=1 != multp(2)=2
+OK   Lemma 3: exactly floor((p-1)/m) salts give multp_a(z) = 0, for every z in [p]^+ (p < 100, 2 <= m <= p+1)
+OK   MP is near-universal: max over pairs in [p] of Pr[collision] <= 2/m (all p < 40, 2 <= m <= p+2)  [max m*Pr = 35/18 = 1.9444]
+OK   Carter-Wegman: if p mod (m+1) = 1 then Pr[multp(1) = multp(m+1)] = 2/(m+1) > 1/m (all such p < 400)  [534 pairs (p, m)]
+OK   the table on p. 7 (p=5, m=3, rows a = 0..4, columns x = 1..4) is (a x mod 5) mod 3
+OK   p=5, m=3: Pr_a[multp(1) = multp(4)] = 1/2 over a in [5]^+ (the table's row a = 0 is not a salt)
+== §5.5.2 Actually universal hashing MB+
+OK   Theorem 1 proof: (a,b) -> (ax+b, ay+b) mod p is a bijection from [p]^+ x [p] onto pairs r != s, with the printed formulas for a and b (all p < 60, random x != y)
+OK   Theorem 1: MB+ is universal, exhaustively (all p < 30, 2 <= m <= p+2, all pairs in [p])
+OK   Theorem 1 proof: N <= p(p-1)/m and at most floor(p/m) partners s per r
+OK   ceil(p/m) - 1 <= (p-1)/m for all p, m >= 1; = floor(p/m) when m does not divide p
+OK   exact collision probability (p - p mod m)(p - (m - p mod m)) / (m p (p-1)) for EVERY pair (2 <= m < p < 30)
+OK   ... and it is strictly less than 1/m
+OK   p=5, m=3: the formula gives 1/5
+OK   the five tables on p. 8 (p=5, m=3, b = 0..4, rows a = 0..4, columns x = 1..4) are ((ax+b) mod 5) mod 3
+OK   p. 8 tables: keys 1 and 4 collide for 4 of the 20 salts (a,b), a != 0: probability 1/5
+== §5.5.3 Binary multiplicative hashing MB
+OK   Lemma 4: x -> a x mod 2^w is a bijection on the odd words W (w <= 12, every odd x)
+OK   Theorem 2: MB is near-universal, exhaustively (w <= 8, every l, every pair of words): Pr <= 2/2^l  [max m*Pr = 2]
+OK   MB is not universal: some pair collides with probability > 1/2^l
+OK   MB is universal exactly when l >= w-1: not universal for every l <= w-2, universal for l = w-1, w (exhaustive, 2 <= w <= 8)
+OK   Theorem 2 proof: multb(x) = multb(y) implies multb(y-x) = 0 or m-1 (w <= 8)
+OK   Theorem 2's three cases (w <= 10): r < w-l gives 1/2^l and 1/2^l; r = w-l gives 0 and 2/2^l; r > w-l (printed as 'r < w-l' in the third bullet) gives 0 and 0
+OK   the C macro ((a)*(x) >> (WORDSIZE-HASHBITS)) on w-bit unsigned words computes multb (w = 16, l = 5)
+OK   figure n05-binary-mult: a = 10110101 (181), x = 00101011 (43), a.x = 7783 = 0001111001100111, low word 01100111, hash = top 3 bits = 011 = 3
+== §5.6 Balls and bins
+OK   E[max load], 10 balls in 10 bins, exact by counting all 10^10 functions: 2.7487 (2.75)  [274868911/100000000 = 2.74869]
+OK   E[max load], 100 balls in 100 bins (exact up to < 1e-12): 4.2326 (4.23)  [4.23260]
+OK   Lemma 5 proof: Pr[X_j >= k] <= C(n,k)/n^k <= 1/k! (exact, n in {5,10,30,100,300}, k <= 25)
+OK   k! >= k^(k/2) for 1 <= k <= 300
+OK   the printed '=': k^(k/2) is not (2c lg n/lg lg n)^(2c lg n/lg lg n) = k^k (e.g. k = 8)
+OK   the printed step k^(k/2) >= (sqrt(lg n))^k FAILS: lg n = 64, c = 1, k = 21.33: k^(k/2) = e^32.6 < 8^k = e^44.4  [32.6 vs 44.4]
+OK   the printed conclusion k! >= n^c FAILS for n = 2^16, c = 1: k = 2*16/4 = 8 and 8! = 40320 < 65536
+OK   fix: k! >= n^c does hold for all large n (c = 1: for every lg n >= L1); and (k/e)^k >= (sqrt(lg n))^k for lg n >= L2  [L1 = 36, L2 = 69]
+OK   max_j X_j > k means X_j > k for SOME j: 3 balls in 3 bins, Pr[max >= 2] = 7/9 while Pr[all X_j >= 2] = 0
+OK   Lemma 5 at n = 100, c = 2: k = 9.73; Pr[max >= 10] <= n Pr[X_1 >= 10] < 1/n^(c-1)  [7.63e-06 <= 7.63e-06]
+OK   simulated E[max load] (30 trials each) is between 1.4 and 2.0 times ln n / ln ln n for n = 10^3 ... 10^6  [n=1000: mean 5.53 (range 4-7), ratio 1.55; n=10000: mean 6.67 (range 6-8), ratio 1.61; n=100000: mean 7.90 (range 7-9), ratio 1.68; n=1000000: mean 8.73 (range 8-11), ratio 1.66]
+OK   n = 10^6: the max load averages about 8.7 (between 8.3 and 9.2), while ln n / ln ln n = 5.26
+OK   m = n^2, ideal random: E[C] = C(n,2)/m = (n-1)/(2n) < 1/2 and Pr[some collision] <= E[C] < 1/2 (n < 60)
+OK   near-universal with m = 2n^2: E[C] <= C(n,2) * 2/m = (n-1)/(2n) < 1/2 (n < 200)
+OK   MP (near-universal), n = 4, m = 2n^2 = 32: Pr[some collision] < 1/2 over every salt (20 random sets)  [max 0]
+OK   MP (near-universal), n = 5, m = 2n^2 = 50: Pr[some collision] < 1/2 over every salt (20 random sets)  [max 2/15]
+OK   Lemma 6 proof: Pr[X_j=0] > 1-n/m, Pr[X_j=1] > n/m - n(n-1)/m^2 (equality when n = 2), Pr[X_j>1] < n(n-1)/m^2, Pr[max > 1] < n(n-1)/m (exact, 2 <= n < 25, several m)
+OK   p. 11 typo: (1 - 1/m)^n = sum_{i=0}^n C(n,i)(-1/m)^i; the printed sum from i = 1 is (1-1/m)^n - 1
+OK   Lemma 6: with m = n^(2+eps) bins, Pr[no bin has two balls] >= 1 - 1/n^eps (eps = 1/2, 1; n < 40)
+== §5.7 Perfect hashing
+OK   identity: sum_i n_i^2 = n + 2 (number of colliding pairs) (200 random assignments)
+OK   Lemma 7 exactly over all salts, m = n: E[sum n_i^2] <= 3n - 2 for MP (near-universal) and <= 2n - 1 for MB+ (universal) (n in {3,5,8,13}, random sets in [101])  [max E/n for MP: 3: 1.69, 5: 1.94, 8: 1.86, 13: 1.87]
+OK   Lemma 7 for binary multiplicative hashing MB with m = n = 2^l (w <= 8): E[sum n_i^2] <= 3n - 2
+OK   ideal random hashing, m = n: E[sum n_i^2] = n + n(n-1)/n = 2n - 1 (exact, all functions for n <= 6)
+OK   secondary table of size 2 n_j^2 with MP salts: no collision with probability >= 1/2 (n_j = 2..6)
+OK   page example: secondary salts (a,b) = (43,19), (92,64), (100,16), (19,93), (96,65) for slots 0, 2, 3, 5, 6, each collision-free at the first draw
+OK   page example: T_0 (size 8): 23 -> 3, 75 -> 4; T_2 (size 18): 12 -> 3, 44 -> 0, 67 -> 13
+OK   page example: total size 8 primary + 32 secondary cells; Lemma 7's bound 7n - 4 = 52
+OK   page example: some salts DO collide in T_2 (so the retry step is needed in general)
+OK   trap: 10 keys in 20 cells (ideal hashing) collide with probability 1 - 20!/(10! 20^10) > 0.93  [0.9345]
+OK   Lemma 7: expected total size n + sum 2 n_j^2 <= n + 2(3n - 2) = 7n - 4
+== §5.8 Open addressing
+OK   the recurrence solves to E[T(m,n)] = (m+1)/(m-n+1) <= m/(m-n) (all 0 <= n < m <= 60)
+OK   ... and also for a full table: E[T(m,m)] = m + 1 (the note's bound needs n < m)
+OK   brute force over all probe permutations and occupied sets (m <= 6): unsuccessful search averages (m+1)/(m-n+1) probes
+OK   alpha = 1/2: (m+1)/(m-n+1) -> 2 and the bound 1/(1-alpha) = 2; alpha = 0.9: bound 10
+OK   OpenAddressSearch / insert (second-to-last line replaced by the store): correct on 200 random tables
+== §5.9 Linear and binary probing
+OK   linear probing (h + i) mod m and binary probing h XOR i (m = 2^l) give permutations of the slots
+OK   quadratic probing (h + i^2) mod m, i < m, is NOT a permutation for any m >= 3 (m < 200)
+OK   quadratic probing with m prime visits only (m+1)/2 slots (odd primes < 200)
+OK   double hashing (h + i h') mod m is a permutation iff gcd(h', m) = 1 (m < 40)
+OK   linear probing, alpha = 0.5, m = 4001, 12 trials: unsuccessful ~ (1 + 1/(1-a)^2)/2 = 2.5 and successful ~ (1 + 1/(1-a))/2 = 1.50 (within 10%)  [simulated 2.46, 1.50]
+OK   linear probing, alpha = 0.75, m = 4001, 12 trials: unsuccessful ~ (1 + 1/(1-a)^2)/2 = 8.5 and successful ~ (1 + 1/(1-a))/2 = 2.50 (within 10%)  [simulated 8.70, 2.43]
+OK   linear probing, alpha = 0.9, m = 4001, 12 trials: unsuccessful ~ (1 + 1/(1-a)^2)/2 = 50.5 and successful ~ (1 + 1/(1-a))/2 = 5.50 (within 10%)  [simulated 48.70, 5.17]
+OK   clustering: linear probing's unsuccessful-search cost exceeds the uniform-hashing bound 1/(1-alpha) (2 vs 2.5, 4 vs 8.5, 10 vs 50.5)
+== §5.10 Analysis of binary probing
+OK   Lemma 8 proof: in a binary-probing table every full block is popular or has a popular uncle (3000 random tables, m <= 64)  [47702 full blocks examined]
+OK   binary probing probes B'_0(x), B'_1(x), ... in order: i in [2^k, 2^(k+1)) gives the uncle block B'_k(x)
+OK   LooseBinaryProbe as printed ('if first != Dunno' inside the loop) never sets first: it returns Full for an absent key even when the table has empty cells
+OK   with the inner test 'if first = Dunno' it is right for ABSENT keys (the case the proof analyzes)
+OK   ... but scanning a block in arbitrary order can meet an empty cell before x: a PRESENT key reported absent  [first example (m, key, real, loose) = (32, 13, True, False)]
+OK   order-independent version (a block containing x answers True, else one with an empty cell answers False) agrees with binary probing and probes at least as many cells (2000 random tables)
+OK   Lemma 8 numerically: m = 2^10, n = m/4, ideal random hashing: unsuccessful search averages 1.37 probes (< 1.5)
+OK   Lemma 8 numerically: m = 2^14, n = m/4, ideal random hashing: unsuccessful search averages 1.41 probes (< 1.5)
+OK   P_k: Pr[popular] <= C(n,2^k)(2^k/m)^(2^k) (a union bound -- the note writes '=') < (en/m)^(2^k) (m in {64,256,1024}, n = m/4)
+OK   (e/4)^(2^k) < 4^(-k) holds for k >= 4 and fails for k = 1, 2, 3 ('sufficiently large k')
+OK   Lemma 9: E[Q_y^2] = p(1-p) < p and E[Q_y^4] = p(1-p)((1-p)^3 + p^3) < p
+OK   Lemma 9: E[Q^4] = sum E[Q_y^4] + 6 sum_{y<z} E[Q_y^2] E[Q_z^2] for independent indicators (exact, up to 5 variables)
+OK   Lemma 9 sign error (p. 16): 2^k - 1 - 2^k(n-1)/m = 2^k(1 - n/m + 1/m) - 1, not 2^k(1 - n/m - 1/m) - 1
+OK   Lemma 9: the step to Pr[Q >= 2^(k-1)] needs 2^k(3/4 - 1/m) - 1 >= 2^(k-1); false for k <= 2 (every m)
+OK   ... with the correct sign the threshold 2^k(1 - (n-1)/m) - 1 >= 2^k (3/4) - 1 >= 2^(k-1) for k >= 2
+OK   Lemma 9 (p. 17): with p = 2^k/m, the printed '<' between mp/4 + 3(mp/4)^2 and 2^(k-2) + 3 * 2^(2(k-2)) is an equality
+OK   Lemma 9: 2^(k-2) + 3 * 2^(2(k-2)) < 2^(2(k-1)) holds for k >= 3, with equality at k = 2, false at k = 0, 1
+OK   Lemma 9 (page version, n stored keys): threshold 2^k - p n >= (3/4) 2^k >= 2^(k-1) when n <= m/4 (all k)
+OK   Lemma 9 (page version): n p + 3 n^2 p^2 <= 2^(k-2) + 3 * 2^(2(k-2)) <= 2^(2(k-1)) for k >= 2 (p = 2^k/m, n <= m/4)
+OK   Lemma 9 (page version): E[Q^4] = n E[Q_y^4] + 3 n (n-1) E[Q_y^2]^2 < n p + 3 n^2 p^2
+OK   Lemma 9's conclusion under ideal (hence 5-uniform) hashing: Pr[block popular] <= 2^(-2(k-1)) (exact binomial, m = 2^8, 2^10, 2^12, n = m/4 keys, k >= 2)
+== §5.11 Cuckoo hashing (concept page: standard facts, not in the note)
+OK   cuckoo hashing, two tables of size 1.1n, MaxLoop = 3 log_1.1 r: the build fails (needs a rehash) less often as n grows (n = 250, 1000, 4000), and rarely (<= 3%) at n = 4000  [{(250, 0.1): '0.043', (1000, 0.1): '0.040', (4000, 0.1): '0.000', (1000, 0.5): '0.000'}]
+OK   cuckoo hashing: fewer than 0.7 displacements per insertion on average (eps = 0.1), about 0.34 (eps = 0.5)  [(250, 0.1): 0.59; (1000, 0.1): 0.58; (4000, 0.1): 0.57; (1000, 0.5): 0.35]
+OK   cuckoo hashing above load 1/2 (1000 keys, two tables of 800) fails almost always  [60/60]
+== numbers printed on the pages and in the figures
+OK   page: quotes the counterexample to Lemma 2's 'if' (p = 7, m = 3, a = 1, x = 1, y = 2)
+OK   page: quotes 8! = 40320 < 2^16 = 65536
+OK   page: states the exact solution (m+1)/(m-n+1)
+OK   page: E[max load] 2.75 (n = 10), 4.23 (n = 100), 8.7 (n = 10^6), ln n/ln ln n = 5.3
+OK   page: Knuth's values 2.5, 8.5, 50.5 against 2, 4, 10
+OK   page: binary probing averages about 1.4 probes at load 1/4
+OK   page: lg n >= 36 threshold quoted
+OK   page: MB not universal only for l <= w-2
+OK   page: linear-probing simulations quoted as within about 10%
+OK   page: sum n_j^2 = 16 and 7n - 4 quoted
+OK   concept page: example p = 7, m = 3 with 5/21 and 3/7
+OK   figure n05-chained exists
+OK   figure n05-perfect exists
+OK   figure n05-binary-mult exists
+OK   figure n05-binary-probing exists
+OK   figure n05-probes exists
+OK   figure n05-chained shows exactly the eight keys (plus slot numbers 0-7)
+OK   figure n05-perfect: every key drawn in the cell its secondary salt gives it
+OK   figure n05-binary-probing: probe order for h(x) = 5 is 5,4,7,6,1,0,3,2,13,12,15,14,9,8,11,10
+OK   figure n05-binary-mult: the bit rows are x, a, a*x (16 bits) and h(x) = 011
+OK   figure n05-probes: 8 simulated linear-probing points, each within 10% of Knuth's estimate  [0.2: 1.28/1.28, 0.4: 1.89/1.89, 0.5: 2.59/2.50, 0.6: 3.56/3.62, 0.7: 6.04/6.06, 0.75: 7.79/8.50, 0.8: 12.54/13.00, 0.85: 24.78/22.72]
+
+ALL OK

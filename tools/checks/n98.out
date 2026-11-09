@@ -1,0 +1,138 @@
+OK   1 has exactly one divisor (neither prime nor composite)
+OK   prime <=> exactly two divisors <=> 1 is the only proper divisor, n <= 500
+OK   composite <=> more than one proper divisor, 2 <= n <= 500
+OK   Theorem 1: the proof's recursion returns a prime divisor of n, 2 <= n <= 20000
+OK   n/p = (n/d)*(d/p) is an integer whenever d | n and p | d (n <= 300)
+OK   axiom of induction holds for all 2^12 predicates on 1..12
+OK   well-ordering: some counterexample => a smallest one, all 2^12 predicates
+OK   'every n: hypothesis -> P(n)' <=> 'no smallest counterexample' (same predicates)
+OK   not(p and not q) == (p -> q) for all truth values
+OK   Theorem 2: every amount 24..2000 is a sum of 5s and 7s
+OK   23 cents cannot be made (the threshold is sharp; 23 = 5*7 - 5 - 7)
+OK   non-makeable amounts are 1,2,3,4,6,8,9,11,13,16,18,23
+OK   the five base cases 24..28 as printed
+OK   the Scheme program's base-case lists
+OK   for n > 28: 23 < n - 5 < n (the inductive case applies)
+OK   Postage(n) returns 5s and 7s summing to n, 24 <= n <= 1000
+OK   five consecutive base cases are needed: a step of 5 from 24..28 reaches every n >= 24
+OK   Postage(n) makes floor((n-24)/5) + 1 calls, 24 <= n <= 1000
+OK   four base cases 24..27 would not do: n = 28 + 5k is never reached
+OK   Theorem 3, proof 1: n is the product of the primes returned, 1 <= n <= 5000
+OK   Theorem 3, proof 2: same, 1 <= n <= 5000
+OK   the two proofs give the same multiset of primes (uniqueness is not claimed, but it holds)
+OK   1 is the empty product
+OK   1 is a proper divisor of every n >= 2, has no prime divisor, and d = 1 gives m = n/d = n, not < n (pp. 4, 10)
+OK   every proper divisor d > 1 of a composite n has 1 < d < n and 1 < n/d < n (n <= 500)
+OK   Theorem 4: sum_{i=0}^n 3^i = (3^{n+1}-1)/2, 0 <= n <= 300
+OK   n = 0: sum = 3^0 = 1 = (3^1-1)/2
+OK   inductive step 1: (3^n-1)/2 + 3^n = (3^{n+1}-1)/2, n <= 300
+OK   inductive step 2: 3^0 + 3*(3^n-1)/2 = (3^{n+1}-1)/2, n <= 300
+OK   sum_{i=0}^n 3^i = 3^0 + 3 * sum_{i=0}^{n-1} 3^i, n <= 100
+OK   Theorem 5, n=0: top-down tiling valid for all 1 holes
+OK   Theorem 5, n=0: bottom-up tiling valid for all 1 holes
+OK   n=0: (4^n-1)/3 = 0 triominos
+OK   Theorem 5, n=1: top-down tiling valid for all 4 holes
+OK   Theorem 5, n=1: bottom-up tiling valid for all 4 holes
+OK   n=1: (4^n-1)/3 = 1 triominos
+OK   Theorem 5, n=2: top-down tiling valid for all 16 holes
+OK   Theorem 5, n=2: bottom-up tiling valid for all 16 holes
+OK   n=2: (4^n-1)/3 = 5 triominos
+OK   Theorem 5, n=3: top-down tiling valid for all 64 holes
+OK   Theorem 5, n=3: bottom-up tiling valid for all 64 holes
+OK   n=3: (4^n-1)/3 = 21 triominos
+OK   Theorem 5, n=4: top-down tiling valid for all 256 holes
+OK   Theorem 5, n=4: bottom-up tiling valid for all 256 holes
+OK   n=4: (4^n-1)/3 = 85 triominos
+OK   Theorem 5, n=5: top-down tiling valid for all 1024 holes
+OK   Theorem 5, n=5: bottom-up tiling valid for all 1024 holes
+OK   n=5: (4^n-1)/3 = 341 triominos
+OK   4^n mod 3 = 1, so 4^n is never a multiple of 3 (n <= 50)
+OK   top-down tiling makes (4^{n+1}-1)/3 calls: T(n) = 4T(n-1) + O(1) = Theta(4^n), linear in the board
+OK   figure: top-down and bottom-up tilings of the 8x8 board minus (1,5) are valid, 21 triominos each
+OK   Theorem 6, top-down proof: distinct powers of 2 summing to n, 0 <= n <= 3000
+OK   Theorem 6, bottom-up proof: distinct powers of 2 summing to n, 0 <= n <= 3000
+OK   Theorem 6, by algorithm proof: distinct powers of 2 summing to n, 0 <= n <= 600
+OK   Theorem 6, baby-step proof: distinct powers of 2 summing to n, 0 <= n <= 3000
+OK   all four proofs produce the same set (the binary representation), n <= 600
+OK   baby-step invariants: sum n; only possible duplicate after iteration j is two copies of 2^j
+OK   the j-th iteration (1-indexed) merges two copies of 2^(j-1), not 2^j as printed (p. 17)
+OK   baby-step example n = 8: 7 = 4+2+1, add 1, carry three times -> {8}  [[(0, [1, 1, 2, 4]), (1, [2, 2, 4]), (2, [4, 4]), (3, [8])]]
+OK   binary representation is unique (subsets of {1,2,4,...,2^11} have distinct sums)
+OK   Theorem 7: p^2 != 2q^2 for all 1 <= p, q <= 3000
+OK   case p odd: p^2 = 4i^2 + 4i + 1 is odd (i = floor(p/2))
+OK   case p even, q odd: p^2 = 4i^2 divisible by 4, 2q^2 = 4(2j^2 + 2j) + 2 is not
+OK   case both even: p^2 = 2q^2 <=> i^2 = 2j^2 with i = p/2 < p, j = q/2 < q
+OK   Fibonacci numbers 0,1,1,2,3,5,8,13,21,34,55,89 as printed
+OK   Theorem 8: F_n even <=> 3 | n, 0 <= n <= 3000
+OK   if 3 | n (n >= 3) then neither n-1 nor n-2 is divisible by 3; otherwise exactly one is
+OK   the printed hypothesis 'F_k even iff n divisible by 3' fails for n = 4, k = 3 (p. 18)
+OK   Theorem 9: F(n) = 1 + floor(log2 n) for 1 <= n <= 200000
+OK   F(n) = number of bits of n (= 1 + floor(log2 n)); exact floor log via bit_length, 1 <= n <= 2^20
+OK   1 <= floor(n/2) < n for n >= 2
+OK   odd n > 1: floor(log2 n) = floor(log2 (n-1)) (n is not a power of 2)
+OK   even n: floor(log2(n/2)) = floor(log2 n) - 1
+OK   the formula 1 + floor(log2 n) is undefined at n = 0 (F(0) = 0 is the definition's base case only)
+OK   concept example: f(1)=0, f(n)=f(floor(n/2))+f(ceil(n/2))+1 gives f(n) = n-1, n <= 100000
+OK   concept example: for n >= 2, 1 <= floor(n/2) <= ceil(n/2) < n and they sum to n
+OK   concept example: for n >= 4 neither floor(n/2) nor ceil(n/2) is n-1 (a weak hypothesis does not reach them)
+OK   concept example: MergeSort on n items makes exactly f(n) = n - 1 Merge calls (n < 1500)
+OK   concept trap: for every integer n some k < n is negative, so 'every k < n is >= 0 => n >= 0' holds vacuously, yet -1 >= 0 is false (n in -500..500)
+OK   436 non-isomorphic trees on 1..11 vertices enumerated
+OK   Theorem 10: |V| = |E| + 1 for every tree on <= 11 vertices
+OK   direct proof: orienting away from any root gives in-degree 1 at every other vertex
+OK   proof 1: T minus any edge has exactly two components, both trees (all trees <= 11 vertices)
+OK   proof 2: T minus a vertex of degree d has exactly d components, all trees
+OK   proof 3: a maximal walk without repeated edges never repeats a vertex and ends at a leaf
+OK   every tree with >= 2 vertices has a leaf (in fact >= 2)
+OK   deleting a leaf from a tree leaves a tree with one vertex and one edge fewer
+OK   every tree on <= 9 vertices arises by adding leaves to a 1-vertex tree (the build-up claim is true here)
+OK   build-up 'inductive step' is valid: adding a vertex joined to a connected min-degree-1 graph keeps both
+OK   build-up base case K2 holds, yet two disjoint edges is a counterexample to the false claim
+OK   two disjoint edges cannot be built up: deleting any vertex leaves an isolated vertex
+OK   smallest counterexamples to the false claim have 4 vertices (two disjoint edges)
+OK   Ex 1: every amount > 29 is a sum of 6s, 10s, 15s; 29 is not
+OK   Ex 2: sum r^i = (1 - r^{n+1})/(1 - r) (rational r != 1, n <= 25)
+OK   Ex 3: (sum i)^2 = sum i^3, n <= 500
+OK   Ex 4(a): sum_{i<=n} F_i = F_{n+2} - 1
+OK   Ex 4(b): F_n^2 - F_{n+1}F_{n-1} = (-1)^{n+1}, 0 <= n <= 70 (F_{-1} = 1)
+OK   Ex 4(c): m | n => F_m | F_n (1 <= m <= n <= 70)
+OK   Ex 5 examples: 42 = 3^4-3^3-3^2-3^1, 25 = 3^3-3^1+3^0, 17 = 3^3-3^2-3^0
+OK   Ex 5: every integer |n| <= 5000 is a sum of distinct +-3^i
+OK   Ex 6 example 42 as printed: (-2)^6+(-2)^5+(-2)^4+(-2)^0 = 49, not 42 (p. 22)
+OK   Ex 6: correct is 42 = (-2)^6+(-2)^5+(-2)^4+(-2)^3+(-2)^2+(-2)^1
+OK   Ex 6 examples 25 = (-2)^6+(-2)^5+(-2)^3+(-2)^0 and 17 = (-2)^4+(-2)^0
+OK   Ex 6: every |n| <= 5000 is a sum of distinct powers of -2
+OK   Ex 7(a) examples: 17 = F7+F4+F2, 42 = F9+F6, 54 = F9+F7+F5+F3
+OK   Ex 7(b) examples: 16 = F6+F5+F3+F2, 42 = F8+F7+F5+F3+F1, 54 = F8+...+F1
+OK   Ex 7(c) table F_{-1..-10} = 1,-1,2,-3,5,-8,13,-21,34,-55 and F_{-n} = (-1)^{n+1} F_n
+OK   Ex 7(d) examples 17 = F-7+F-5+F-2 and -42 = F-10+F-7
+OK   Ex 7(d) example 54 as printed: F-9+F-7+F-5+F-3+F-1 = 55, not 54 (p. 23); correct 54 = F-9+F-7+F-5+F-3
+OK   Ex 8 example game: every printed move is legal
+OK   Ex 8(c) example game: every printed move is legal
+OK   Ex 9: |A x B| = |A||B| and |B|^|A| functions A -> B (sizes <= 4)
+OK   Ex 10: in every full binary tree with <= 9 internal nodes, leaves = internal + 1
+OK   Ex 11(a): a binomial tree of order k has 2^k nodes (k <= 12)
+OK   Ex 11(b): a leaf added to every node of B_{k-1} gives B_k (k <= 10)
+OK   Ex 11(c): B_k has C(k, d) nodes at depth d (k <= 12)
+OK   Ex 12(a): the Fibonacci tree F_n has F_n leaves (n <= 20)
+OK   Ex 12(c): right subtree of F_n is F_{n-1} (2 <= n <= 18)
+OK   Ex 12(d): left subtree of F_n is F_{n-2} (3 <= n <= 18)
+OK   Ex 12 figure: the first six Fibonacci trees have 1, 2, 4, 7, 12, 20 nodes (as drawn on p. 25)
+OK   Ex 13: the d-cube has a Hamiltonian cycle for 2 <= d <= 12 (reflected Gray code)
+OK   Ex 13: the 1-cube has no Hamiltonian cycle (a single edge)
+OK   Ex 14(a): every tournament on <= 5 vertices has a Hamiltonian path (all of them)
+OK   Ex 14(b): every tournament on <= 5 vertices has exactly one Hamiltonian path or a directed triangle
+OK   Ex 14 figure: the reconstructed graph is a tournament on 6 vertices
+OK   Ex 14 figure: uvwxzy and yuvxzw are Hamiltonian paths and wxz is a directed triangle  [43 paths in all]
+OK   Ex 15: B = R + 1, G in {R, B}, and G = B iff Rudy is green (all families <= 16 nertices)  [88 family trees]
+OK   Ex 16 example: the two formulas are equivalent
+OK   Ex 19: the table of powers of alpha = -1 + i
+OK   Ex 19: the six examples
+OK   Ex 20: the printed lazy-binary list (53 numbers) matches the rule
+OK   Ex 20(b): digit sum of N in lazy binary = floor(lg(N+1)), N < 20000
+OK   Ex 20(a): between two 2s there is a 0 and between two 0s a 2, N < 20000
+OK   Ex 21: the printed first 17 terms
+OK   Ex 21: no repeats in the first 2^17 terms, and every p/q with p + q <= 16 appears
+OK   Ex 22 as printed is false: f(x) = x^(2 lg pi) > 0 and f(x) = pi f(x/sqrt2) for x > 1, yet f(x)/x -> infinity  [exponent 3.3030]
+
+ALL OK

@@ -1,0 +1,130 @@
+OK   2.1 test-every-nut needs exactly n-1 = 0 tests in the worst case (n = 1)
+OK   2.1 test-every-nut needs exactly n-1 = 1 tests in the worst case (n = 2)
+OK   2.1 test-every-nut needs exactly n-1 = 2 tests in the worst case (n = 3)
+OK   2.1 test-every-nut needs exactly n-1 = 3 tests in the worst case (n = 4)
+OK   2.1 test-every-nut needs exactly n-1 = 4 tests in the worst case (n = 5)
+OK   2.1 test-every-nut needs exactly n-1 = 5 tests in the worst case (n = 6)
+OK   2.1 test-every-nut needs exactly n-1 = 6 tests in the worst case (n = 7)
+OK   2.3 random nut order, n = 1, target 1: Pr[T=k] = 1/n (k < n-1), 2/n (k = n-1); E[T] = (n+1)/2 - 1/n = 0  [{0: Fraction(1, 1)}]
+OK   2.3 random nut order, n = 2, target 1: Pr[T=k] = 1/n (k < n-1), 2/n (k = n-1); E[T] = (n+1)/2 - 1/n = 1  [{1: Fraction(1, 1)}]
+OK   2.3 T(2) always between 1 and n-1
+OK   2.3 random nut order, n = 2, target 2: Pr[T=k] = 1/n (k < n-1), 2/n (k = n-1); E[T] = (n+1)/2 - 1/n = 1  [{1: Fraction(1, 1)}]
+OK   2.3 T(2) always between 1 and n-1
+OK   2.3 random nut order, n = 3, target 1: Pr[T=k] = 1/n (k < n-1), 2/n (k = n-1); E[T] = (n+1)/2 - 1/n = 5/3  [{2: Fraction(2, 3), 1: Fraction(1, 3)}]
+OK   2.3 T(3) always between 1 and n-1
+OK   2.3 random nut order, n = 3, target 3: Pr[T=k] = 1/n (k < n-1), 2/n (k = n-1); E[T] = (n+1)/2 - 1/n = 5/3  [{1: Fraction(1, 3), 2: Fraction(2, 3)}]
+OK   2.3 T(3) always between 1 and n-1
+OK   2.3 random nut order, n = 4, target 1: Pr[T=k] = 1/n (k < n-1), 2/n (k = n-1); E[T] = (n+1)/2 - 1/n = 9/4  [{3: Fraction(1, 2), 2: Fraction(1, 4), 1: Fraction(1, 4)}]
+OK   2.3 T(4) always between 1 and n-1
+OK   2.3 random nut order, n = 4, target 4: Pr[T=k] = 1/n (k < n-1), 2/n (k = n-1); E[T] = (n+1)/2 - 1/n = 9/4  [{1: Fraction(1, 4), 2: Fraction(1, 4), 3: Fraction(1, 2)}]
+OK   2.3 T(4) always between 1 and n-1
+OK   2.3 random nut order, n = 5, target 1: Pr[T=k] = 1/n (k < n-1), 2/n (k = n-1); E[T] = (n+1)/2 - 1/n = 14/5  [{4: Fraction(2, 5), 3: Fraction(1, 5), 2: Fraction(1, 5), 1: Fraction(1, 5)}]
+OK   2.3 T(5) always between 1 and n-1
+OK   2.3 random nut order, n = 5, target 5: Pr[T=k] = 1/n (k < n-1), 2/n (k = n-1); E[T] = (n+1)/2 - 1/n = 14/5  [{1: Fraction(1, 5), 2: Fraction(1, 5), 3: Fraction(1, 5), 4: Fraction(2, 5)}]
+OK   2.3 T(5) always between 1 and n-1
+OK   2.3 random nut order, n = 6, target 1: Pr[T=k] = 1/n (k < n-1), 2/n (k = n-1); E[T] = (n+1)/2 - 1/n = 10/3  [{5: Fraction(1, 3), 4: Fraction(1, 6), 3: Fraction(1, 6), 2: Fraction(1, 6), 1: Fraction(1, 6)}]
+OK   2.3 T(6) always between 1 and n-1
+OK   2.3 random nut order, n = 6, target 6: Pr[T=k] = 1/n (k < n-1), 2/n (k = n-1); E[T] = (n+1)/2 - 1/n = 10/3  [{1: Fraction(1, 6), 2: Fraction(1, 6), 3: Fraction(1, 6), 4: Fraction(1, 6), 5: Fraction(1, 3)}]
+OK   2.3 T(6) always between 1 and n-1
+OK   2.3 random nut order, n = 7, target 1: Pr[T=k] = 1/n (k < n-1), 2/n (k = n-1); E[T] = (n+1)/2 - 1/n = 27/7  [{6: Fraction(2, 7), 5: Fraction(1, 7), 4: Fraction(1, 7), 3: Fraction(1, 7), 2: Fraction(1, 7), 1: Fraction(1, 7)}]
+OK   2.3 T(7) always between 1 and n-1
+OK   2.3 random nut order, n = 7, target 7: Pr[T=k] = 1/n (k < n-1), 2/n (k = n-1); E[T] = (n+1)/2 - 1/n = 27/7  [{1: Fraction(1, 7), 2: Fraction(1, 7), 3: Fraction(1, 7), 4: Fraction(1, 7), 5: Fraction(1, 7), 6: Fraction(2, 7)}]
+OK   2.3 T(7) always between 1 and n-1
+OK   2.3 random nut order, n = 8, target 8: Pr[T=k] = 1/n (k < n-1), 2/n (k = n-1); E[T] = (n+1)/2 - 1/n = 35/8  [{1: Fraction(1, 8), 2: Fraction(1, 8), 3: Fraction(1, 8), 4: Fraction(1, 8), 5: Fraction(1, 8), 6: Fraction(1, 8), 7: Fraction(1, 4)}]
+OK   2.3 T(8) always between 1 and n-1
+OK   2.3 random nut order, n = 8, target 1: Pr[T=k] = 1/n (k < n-1), 2/n (k = n-1); E[T] = (n+1)/2 - 1/n = 35/8  [{7: Fraction(1, 4), 6: Fraction(1, 8), 5: Fraction(1, 8), 4: Fraction(1, 8), 3: Fraction(1, 8), 2: Fraction(1, 8), 1: Fraction(1, 8)}]
+OK   2.3 T(8) always between 1 and n-1
+OK   2.3 sum_(k<=n-2) k/n + 2(n-1)/n = sum_(k<=n) k/n - 1/n = (n+1)/2 - 1/n, n = 2
+OK   2.3 sum_(k<=n-2) k/n + 2(n-1)/n = sum_(k<=n) k/n - 1/n = (n+1)/2 - 1/n, n = 3
+OK   2.3 sum_(k<=n-2) k/n + 2(n-1)/n = sum_(k<=n) k/n - 1/n = (n+1)/2 - 1/n, n = 4
+OK   2.3 sum_(k<=n-2) k/n + 2(n-1)/n = sum_(k<=n) k/n - 1/n = (n+1)/2 - 1/n, n = 10
+OK   2.3 sum_(k<=n-2) k/n + 2(n-1)/n = sum_(k<=n) k/n - 1/n = (n+1)/2 - 1/n, n = 59
+OK   2.3 recurrence E[T(n)] = 1 + (n-1)/n E[T(n-1)], T(1) = 0 gives (n+1)/2 - 1/n for n < 200
+OK   2.3 t(n) = n E[T(n)] satisfies t(n) = n + t(n-1), t(1) = 0, so t(n) = n(n+1)/2 - 1
+OK   2.4 repeated single matching: worst case sum (i-1) = (n^2-n)/2 = 0 tests (n = 1)
+OK   2.4 repeated single matching: worst case sum (i-1) = (n^2-n)/2 = 1 tests (n = 2)
+OK   2.4 repeated single matching: worst case sum (i-1) = (n^2-n)/2 = 3 tests (n = 3)
+OK   2.4 repeated single matching: worst case sum (i-1) = (n^2-n)/2 = 6 tests (n = 4)
+OK   2.4 repeated single matching: worst case sum (i-1) = (n^2-n)/2 = 10 tests (n = 5)
+OK   2.4 repeated single matching: worst case sum (i-1) = (n^2-n)/2 = 15 tests (n = 6)
+OK   2.4 repeated single matching: worst case sum (i-1) = (n^2-n)/2 = 21 tests (n = 7)
+OK   2.4 Rawlins' partitioning (first bolt as pivot) matches and sorts; worst case n^2 = 1 tests (n = 1)  [1]
+OK   2.4 Rawlins' partitioning (first bolt as pivot) matches and sorts; worst case n^2 = 4 tests (n = 2)  [4]
+OK   2.4 Rawlins' partitioning (first bolt as pivot) matches and sorts; worst case n^2 = 9 tests (n = 3)  [9]
+OK   2.4 Rawlins' partitioning (first bolt as pivot) matches and sorts; worst case n^2 = 16 tests (n = 4)  [16]
+OK   2.4 Rawlins' partitioning (first bolt as pivot) matches and sorts; worst case n^2 = 25 tests (n = 5)  [25]
+OK   2.4 Rawlins' partitioning (first bolt as pivot) matches and sorts; worst case n^2 = 36 tests (n = 6)  [36]
+OK   2.4 Rawlins' partitioning (first bolt as pivot) matches and sorts; worst case n^2 = 49 tests (n = 7)  [49]
+OK   2.4 worst-case recurrence T(n) = 2n-1 + max_k (T(k-1)+T(n-k)) = 2n-1 + T(n-1) = sum (2i-1) = n^2
+OK   2.4 the note's sum as printed, sum_(i=1..n) (2n-1), is n(2n-1), not n^2 (n = 5: 45 vs 25)
+OK   2.4 skipping known outcomes, always-smallest pivots still cost at least sum (m-1) = n(n-1)/2 tests (attained), over all nut orders, n <= 7
+OK   2.6 recurrence T(n) = 2n-1 + (1/n) sum_k (T(k-1)+T(n-k)), T(0) = 0, equals 4nH_n - 7n + 4H_n for n <= 300
+OK   2.6 T(1) = 1 in this 'stupid' version (one test of the lone bolt against its nut)
+OK   2.7 randomized matching, n = 1: exact E[tests] = 1 = 4nH_n - 7n + 4H_n, and every run matches+sorts
+OK   2.7 Pr[B_i compared with N_j] = 2/(|i-j|+1) (i != j), 1 (i = j), n = 1
+OK   2.7 no nut-bolt pair is tested twice, n = 1
+OK   2.7 the distribution of the set of tested pairs does not depend on the input order, n = 1
+OK   2.7 iterative version with a uniformly random pivot order performs the same tests (same distribution of tested-pair sets), n = 1
+OK   2.7 key lemma: B_i and N_j are compared iff the first pivot drawn from ranks i..j is i or j, for all 1 orders, n = 1
+OK   2.7 randomized matching, n = 2: exact E[tests] = 4 = 4nH_n - 7n + 4H_n, and every run matches+sorts
+OK   2.7 Pr[B_i compared with N_j] = 2/(|i-j|+1) (i != j), 1 (i = j), n = 2
+OK   2.7 no nut-bolt pair is tested twice, n = 2
+OK   2.7 the distribution of the set of tested pairs does not depend on the input order, n = 2
+OK   2.7 iterative version with a uniformly random pivot order performs the same tests (same distribution of tested-pair sets), n = 2
+OK   2.7 key lemma: B_i and N_j are compared iff the first pivot drawn from ranks i..j is i or j, for all 2 orders, n = 2
+OK   2.7 randomized matching, n = 3: exact E[tests] = 25/3 = 4nH_n - 7n + 4H_n, and every run matches+sorts
+OK   2.7 Pr[B_i compared with N_j] = 2/(|i-j|+1) (i != j), 1 (i = j), n = 3
+OK   2.7 no nut-bolt pair is tested twice, n = 3
+OK   2.7 the distribution of the set of tested pairs does not depend on the input order, n = 3
+OK   2.7 iterative version with a uniformly random pivot order performs the same tests (same distribution of tested-pair sets), n = 3
+OK   2.7 key lemma: B_i and N_j are compared iff the first pivot drawn from ranks i..j is i or j, for all 6 orders, n = 3
+OK   2.7 randomized matching, n = 4: exact E[tests] = 41/3 = 4nH_n - 7n + 4H_n, and every run matches+sorts
+OK   2.7 Pr[B_i compared with N_j] = 2/(|i-j|+1) (i != j), 1 (i = j), n = 4
+OK   2.7 no nut-bolt pair is tested twice, n = 4
+OK   2.7 the distribution of the set of tested pairs does not depend on the input order, n = 4
+OK   2.7 iterative version with a uniformly random pivot order performs the same tests (same distribution of tested-pair sets), n = 4
+OK   2.7 key lemma: B_i and N_j are compared iff the first pivot drawn from ranks i..j is i or j, for all 24 orders, n = 4
+OK   2.7 randomized matching, n = 5: exact E[tests] = 99/5 = 4nH_n - 7n + 4H_n, and every run matches+sorts
+OK   2.7 Pr[B_i compared with N_j] = 2/(|i-j|+1) (i != j), 1 (i = j), n = 5
+OK   2.7 no nut-bolt pair is tested twice, n = 5
+OK   2.7 the distribution of the set of tested pairs does not depend on the input order, n = 5
+OK   2.7 iterative version with a uniformly random pivot order performs the same tests (same distribution of tested-pair sets), n = 5
+OK   2.7 key lemma: B_i and N_j are compared iff the first pivot drawn from ranks i..j is i or j, for all 120 orders, n = 5
+OK   2.7 randomized matching, n = 6: exact E[tests] = 133/5 = 4nH_n - 7n + 4H_n, and every run matches+sorts
+OK   2.7 Pr[B_i compared with N_j] = 2/(|i-j|+1) (i != j), 1 (i = j), n = 6
+OK   2.7 no nut-bolt pair is tested twice, n = 6
+OK   2.7 the distribution of the set of tested pairs does not depend on the input order, n = 6
+OK   2.7 iterative version with a uniformly random pivot order performs the same tests (same distribution of tested-pair sets), n = 6
+OK   2.7 key lemma: B_i and N_j are compared iff the first pivot drawn from ranks i..j is i or j, for all 720 orders, n = 6
+OK   2.7 randomized matching, n = 7: exact E[tests] = 1189/35 = 4nH_n - 7n + 4H_n, and every run matches+sorts
+OK   2.7 Pr[B_i compared with N_j] = 2/(|i-j|+1) (i != j), 1 (i = j), n = 7
+OK   2.7 no nut-bolt pair is tested twice, n = 7
+OK   2.7 the distribution of the set of tested pairs does not depend on the input order, n = 7
+OK   2.7 iterative version with a uniformly random pivot order performs the same tests (same distribution of tested-pair sets), n = 7
+OK   2.7 key lemma: B_i and N_j are compared iff the first pivot drawn from ranks i..j is i or j, for all 5040 orders, n = 7
+OK   2.7 each line of the summation (substitute k = j-i+1, reorder, (n+1)(H_n-1)-(n-1)) equals 4nH_n - 7n + 4H_n (n <= 60 all lines, n <= 300 the last three)
+OK   2.8 every step of the masochistic derivation holds exactly for n <= 300 (full-history form, shift-and-subtract, T(n) = (n+1)/n T(n-1) + 4 - 3/n, t(n) = t(n-1) + 7/(n+1) - 3/n, t(n) = 4H_n - 7 + 7/(n+1))
+OK   2.6 T is convex: T(n+1) + T(n-1) - 2T(n) = 4/(n+1) > 0 for 1 <= n < 300
+OK   2.6 a uniformly random pivot is good (>= n/4 bolts on each side) with probability exactly 1/2 when 4 | n
+OK   2.6 ... but not for other n (n = 5: 1/5, n = 6: 1/3); the fraction tends to 1/2  [1/5, 1/3, 0.4999]
+OK   2.6 algebra: T <= 2n-1 + (T(3n/4)+T(n/4))/2 + T(n)/2  <=>  T <= 4n-2 + T(3n/4) + T(n/4) (2000 random values)
+OK   2.6 the exact T satisfies T(n) <= 4n-2 + T(3n/4) + T(n/4) for every multiple of 4 up to 300
+OK   2.6 the conservative recurrence T(n) = 4n - 2 + T(3n/4) + T(n/4) solves to Theta(n log n): T(n)/n - c ln n stays bounded for n = 4^10 .. 4^35, c = 4/(-(3/4)ln(3/4) - (1/4)ln(1/4)) ≈ 7.11  [c = 7.1132, range -8.040 .. -7.783]
+OK   2.7 4nH_n - 7n + 4H_n = Theta(n log n): ratio to n ln n at n = 10^7 is about 4 (it tends to 4)  [3.709]
+OK   2.7 numbers: E[T(7)] = 32H_7 - 49 ≈ 33.97, E[T(8)] = 36H_8 - 56 = 2929/70 ≈ 41.84
+OK   2.7 examples: 1, 4, 25/3, 41/3 expected tests for n = 1..4
+OK   figure tree: pivot order 3,6,1,5,2,7,4 gives blocks {1..7},{4..7},{1,2},{4,5},{2},{7},{4} and 29 tests  [29]
+OK   figure tree: bolt 2 and nut 5 are never compared; bolt 4 and nut 5 are (when 5 is the pivot of {4,5})
+OK   figure matrix: the 64 entries 2/(|i-j|+1) (1 on the diagonal) sum to 36H_8 - 56 = 2929/70
+OK   2.5 sorted bolts => match every nut by binary search with at most floor(log2 n)+1 tests each (300 random instances, n <= 60)
+OK   2.5 matched pairs => mergesort using only nut-bolt tests (bolt of one pair vs nut of the other) sorts them
+OK   quicksort with a uniformly random pivot (Lomuto partition, n-1 comparisons), n = 1: exact E[comparisons] = 0 = 2(n+1)H_n - 4n; nuts-and-bolts = n + 2 x this
+OK   quicksort with a uniformly random pivot (Lomuto partition, n-1 comparisons), n = 2: exact E[comparisons] = 1 = 2(n+1)H_n - 4n; nuts-and-bolts = n + 2 x this
+OK   quicksort with a uniformly random pivot (Lomuto partition, n-1 comparisons), n = 3: exact E[comparisons] = 8/3 = 2(n+1)H_n - 4n; nuts-and-bolts = n + 2 x this
+OK   quicksort with a uniformly random pivot (Lomuto partition, n-1 comparisons), n = 4: exact E[comparisons] = 29/6 = 2(n+1)H_n - 4n; nuts-and-bolts = n + 2 x this
+OK   quicksort with a uniformly random pivot (Lomuto partition, n-1 comparisons), n = 5: exact E[comparisons] = 37/5 = 2(n+1)H_n - 4n; nuts-and-bolts = n + 2 x this
+OK   quicksort with a uniformly random pivot (Lomuto partition, n-1 comparisons), n = 6: exact E[comparisons] = 103/10 = 2(n+1)H_n - 4n; nuts-and-bolts = n + 2 x this
+OK   quicksort with a uniformly random pivot (Lomuto partition, n-1 comparisons), n = 7: exact E[comparisons] = 472/35 = 2(n+1)H_n - 4n; nuts-and-bolts = n + 2 x this
+OK   quicksort: 2(n+1)H_n - 4n ~ 2n ln n ≈ 1.39 n log2 n
+
+ALL OK

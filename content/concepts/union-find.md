@@ -47,6 +47,6 @@ Each operation takes $O(\alpha(n))$ amortized time (Tarjan, 1975), where $\alpha
 
 **Example.** Eight elements $1, \ldots, 8$ with labels, merged in balanced rounds: Union$(1,2)$, Union$(3,4)$, Union$(5,6)$, Union$(7,8)$, then Union$(1,3)$, Union$(5,7)$, then Union$(1,5)$, where on a tie the set of the second argument takes the first one's label. Each round relabels 4 elements, 12 relabelings in all, and element 8 — labeled $8$, then $7$, then $5$, then $1$ — is relabeled $3 = \log_2 8$ times: the bound is tight. The forest version on the same sequence ends with one tree of rank 3.
 
-**Where it appears.** [[2-algorithms/07-minimum-spanning-trees#75-kruskals-algorithm|§7.5]] (Kruskal's algorithm and the analysis); component labels computed from scratch by CountAndLabel in [[2-algorithms/05-basic-graph-algorithms#56-important-variants|§5.6]] and in Borůvka's algorithm ([[2-algorithms/07-minimum-spanning-trees#73-borůvkas-algorithm|§7.3]]).
+**Where it appears.** [[2-algorithms/07-minimum-spanning-trees#75-kruskals-algorithm|§7.5]] (Kruskal's algorithm and the analysis); component labels computed from scratch by CountAndLabel in [[2-algorithms/05-basic-graph-algorithms#56-important-variants|§5.6]] and in Borůvka's algorithm ([[2-algorithms/07-minimum-spanning-trees#73-borůvkas-algorithm|§7.3]]); all the variants and the $O(\alpha(n))$ analysis in [[4-lecture-notes/11-disjoint-sets|lecture note 11]].
 
-Related: [[concepts/minimum-spanning-trees]] · [[concepts/graphs]] · [[concepts/whatever-first-search]]
+Related: [[concepts/minimum-spanning-trees]] · [[concepts/graphs]] · [[concepts/whatever-first-search]] · [[4-lecture-notes/11-disjoint-sets]]

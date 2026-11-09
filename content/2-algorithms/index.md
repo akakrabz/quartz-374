@@ -29,4 +29,6 @@ A review of Jeff Erickson's [*Algorithms*](https://jeffe.cs.illinois.edu/teachin
 
 Already on this site and used again in Chapter 12: the [[concepts/cook-levin-theorem|Cook–Levin theorem]] and P versus NP in [[1-models-of-computation/09-nondeterministic-turing-machines#96-the-cooklevin-theorem|Models §9.6]], and [[concepts/undecidability-reductions|undecidability reductions]], whose direction rule is the same for NP-hardness.
 
+**Beyond the book:** Erickson's lecture notes on topics the book leaves out — randomized algorithms, amortized analysis, lower bounds, FFT, linear programming, approximation — are summarized in [[4-lecture-notes/index|Part 3]].
+
 **The book:** Jeff Erickson, *Algorithms*, 1st edition (2019), free under CC BY 4.0 — [whole book (PDF)](https://jeffe.cs.illinois.edu/teaching/algorithms/book/Algorithms-JeffE.pdf) · [chapter PDFs](https://jeffe.cs.illinois.edu/teaching/algorithms/). Each chapter page links its own PDF in its first line.

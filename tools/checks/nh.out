@@ -1,0 +1,80 @@
+OK   H.1 conversion to canonical form (split variables, equations -> two inequalities, >= negated) keeps the optimum and the status, 1500 random LPs  [{'optimal': 391, 'infeasible': 733, 'unbounded': 376}]
+OK   H.1 slack form (one slack variable per inequality) keeps the optimum and the status
+OK   H.1 random general LPs include optimal, infeasible and unbounded ones  [{'optimal': 391, 'infeasible': 733, 'unbounded': 376}]
+OK   Figure H.2: max x - y s.t. 2x + y <= 1, x + y >= 2, x, y >= 0 is infeasible
+OK   Figure H.2 certificate: (2x + y) - (x + y) = x and 1 - 2 = -1, so x <= -1
+OK   2D example: optimum 11 at (3, 1)
+OK   2D example: the feasible polygon has exactly the vertices (0,0), (3,0), (3,1), (2,2), (0,3)
+OK   2D example: objective values 0, 9, 11, 10, 6 at those vertices
+OK   2D example: its dual is min 4a + 6b + 3c s.t. a + b + c >= 3, a + 2b >= 2, a, b, c >= 0
+OK   2D example: y = (2, 0, 1) is dual feasible with value 11 = primal value (exact) -> both optimal
+OK   2D example: linprog on the dual gives 11 and y = (2, 0, 1) (unique)
+OK   2D example: c = (3, 2) = 2*(1, 1) + 1*(1, 0), the normals of the two tight constraints
+OK   2D example: complementary slackness — x + 2y = 5 < 6 is loose and b = 0; x, y > 0 and both dual constraints tight (2 + 0 + 1 = 3, 2 + 0 = 2)
+OK   H.6: x = (1, 0, 0) is feasible with value 4
+OK   H.6: x = (0, 0, 3) is feasible with value 9
+OK   H.6: x* = (0, 1/2, 9/2) is feasible, both constraints tight, value 14
+OK   H.6: the dual by Figure H.4 is min 2y1 + 4y2 s.t. y1 + 3y2 >= 4, 4y1 - y2 >= 1, y2 >= 3, y >= 0
+OK   H.6: y* = (1, 3) is dual feasible (10 >= 4, 1 >= 1, 3 >= 3) with value 14 -> both optimal (exact)
+OK   H.6: linprog agrees: primal 14 at (0, 1/2, 9/2), dual 14 at (1, 3)
+OK   H.6: the primal and the dual optimum are unique
+OK   H.6: (*) with y = (1, 3): 4x1 + x2 + 3x3 <= 10x1 + x2 + 3x3 <= 14
+OK   H.6/H.8: complementary slackness holds and is strict: y1, y2 > 0 with both rows tight; x1 = 0 with dual row loose (10 > 4); x2, x3 > 0 with dual rows tight (1 = 1, 3 = 3)
+OK   H.4: the negative-transpose dual of the negative-transpose dual is the primal (involution), 300 LPs
+OK   H.4: min{y.b : yA >= c, y >= 0} and its negative-transpose form max{-b.y : -A^T y <= -c, y >= 0} agree
+OK   Figure H.4: dual built by the table; primal optimal => dual optimal with the same value  [{'opt': 633, 'unb': 611, 'inf': 1256}]
+OK   Figure H.4: primal unbounded => dual infeasible
+OK   Figure H.4: primal infeasible => dual infeasible or unbounded
+OK   Figure H.4: dual of the dual is the primal (both halves of the table), 2500 random LPs
+OK   H.5 weak duality: c.x <= yAx <= y.b for random feasible pairs (2500 pairs)
+OK   H.5: an LP and its dual can both be infeasible, so 'dual infeasible => primal unbounded' is false (the note's 'all these implications are equivalences', p. 12, fails for the second one)
+OK   H.5 min-max theorem with x, y ranging over probability vectors: min_x max_y xAy = max_y min_x xAy, 200 random matrices
+OK   H.5 (note p. 11): over all real vectors min_x max_y xAy = max_y min_x xAy = 0 trivially (inner optimum infinite unless xA = 0, resp. Ay = 0), 100 random matrices
+OK   H.5 Gordan: exactly one of {Ax = 0, x >= 0, x != 0} and {yA > 0} is solvable, 400 random matrices  [[99, 301]]
+OK   H.5/H.7 fundamental theorem: random non-degenerate canonical LPs with an optimum have a dual optimum of the same value  [193 with an optimum]
+OK   H.7 proof: at the optimum exactly d of the n + d constraints are tight, y_B = c A_B^{-1} is positive, and padded with zeros it is a dual optimum
+OK   H.8: in non-degenerate LPs the (unique) optimal pair is strictly complementary
+OK   H.7 (note p. 14): condition (a) 'c not normal to any constraint hyperplane' plus (b) does not give a unique optimum — unit cube, c = (1, 1, 0): optimum 2 on the whole edge x3 in [0, 1]
+OK   H.8 corrected complementary slackness theorem: for feasible x, y — optimal <=> c.x = y.b <=> (c.x = yAx and yAx = y.b) <=> all complementary slackness conditions  [530 optimal pairs, 620 non-optimal]
+OK   H.8 (note p. 16): 'c.x = yAx' alone and 'yAx = y.b' alone are NOT equivalent to optimality (each is half of the slackness conditions; random pairs for the first, the exact example below for the second)  [496, 0 random non-optimal pairs satisfy them]
+OK   H.8 counterexamples: x = 0 has c.x = yAx = 0 (value 0 < 14); x = (1, 1/4, 5/4) is feasible with yAx = y.b = 14 but c.x = 8
+OK   H.8: every feasible bounded LP has a strictly complementary optimal pair, also degenerate ones (200 small integer LPs)  [149 degenerate]
+OK   H.3 one shortest path (max dist(t)): feasible iff no negative cycle anywhere, 700 random graphs  [78 infeasible, 211 unbounded, 411 optimal]
+OK   H.3: when feasible, bounded iff t is reachable from s
+OK   H.3: the optimum is the shortest-path distance (Bellman-Ford)
+OK   H.3 take two (min l.x, unit flow): infeasible iff no s-t path; unbounded iff (path and) a negative cycle; same optimum as take one
+OK   H.4: take two is exactly the dual of take one by Figure H.4 (signed incidence matrix transposed, no constraint for dist(s))
+OK   H.8 on the shortest-path pair: flow only on tight edges (complementary slackness)
+OK   H.3: linprog's vertex optimum of take two is integral
+OK   H.3 (note p. 5): with a negative edge s->a the note's witness dist = 0 on reachable vertices violates dist(a) - dist(s) <= -1
+OK   H.3 corrected witness: adding M to every vertex that s cannot reach keeps a feasible point feasible
+OK   H.3 trap (corrected): min dist(t) s.t. dist(s) = 0 and no tense edge is unbounded below iff t cannot reach s, otherwise its minimum is -delta(t, s) (Bellman-Ford from t; 400 graphs without negative cycles; s<->t of length 1 gives -1)  [{'unbounded': 160, 'optimal': 240}]
+OK   H.3 (note p. 6): the note's uniqueness condition (every vertex on a simple s-t path, all simple s-t paths of equal length) is sufficient
+OK   H.3 (note p. 6): ... but not necessary — unique optima with s-t paths of different lengths exist  [4 of 363 graphs]
+OK   H.3 corrected: with positive lengths the optimum is unique iff every vertex lies on a shortest s-t path  [363 graphs]
+OK   example graph: max dist(t) = 6
+OK   example graph: distances s 0, a 2, b 3, c 4, t 6
+OK   example graph: the s-t paths have lengths 6, 8, 8, 9, 11  [[6, 8, 8, 9, 11]]
+OK   example graph: the optimum dist = (0, 2, 3, 4, 6) is unique although the paths differ in length (counterexample to the note's 'only if', p. 6)
+OK   example graph: take two gives cost 6 with x = 1 on s->a->b->c->t and 0 elsewhere
+OK   example graph: the tight edges are exactly the path edges; slacks of s->b, a->c, b->t are 2, 2, 3
+OK   H.3 single source: max sum dist(v) gives exactly the shortest-path distances (all vertices reachable)  [274 graphs]
+OK   H.3 single source: min l.x with one unit of demand at every v != s has the same optimum, sum of distances
+OK   H.3 single source: x(u->v) = |D_v| on shortest-path-tree edges is feasible and optimal, D_s = V
+OK   H.4: the single-source pair is a dual pair (Figure H.4)
+OK   H.3 max-flow LP: optimum = networkx maximum flow value, 400 random networks
+OK   H.3 min-cut LP: optimum = brute-force minimum cut = maximum flow
+OK   H.3 min-cut LP: the indicator vector of a minimum cut (S = 1 on S, x = 1 on cut edges) is optimal
+OK   H.4: the min-cut LP is the dual of the max-flow LP (Figure H.4, then S(v) = -pi(v), S(s) = 1, S(t) = 0)
+OK   H.3: min-cut LP on s->a->t (capacities 1) has the fractional optimum S(a) = 1/2, x = 1/2, 1/2 of value 1
+OK   H.8 s->a->t: both 0/1 minimum cuts are optimal but not strictly complementary with the maximum flow; the fractional cut S(a) = 1/2 is
+OK   figure nh-shortest-path: dist labels 0, 2, 3, 4, 6 and the seven edge lengths are drawn
+OK   figure nh-geometry: vertex values and the optimum 11 are drawn
+OK   figure nh-dual-forces: shows y = 2 and y = 1 on the tight normals and c = (3, 2)
+OK   page: states the H.6 optimum 14 at (0, 1/2, 9/2) and the dual (1, 3)
+OK   page: states the 2D example optimum 11 at (3, 1) and dual (2, 0, 1)
+OK   page (review R35): the trap says min dist(t) is unbounded below unless t can reach s, then -delta(t, s); the min-max remark says both sides are 0 over real vectors
+OK   concept page: example numbers 11, (3, 1), (2, 0, 1) present
+OK   concept page (review R35): maxflow = mincut needs strong duality AND a 0/1 optimum of the cut LP (checked above: the indicator vector of a minimum cut is optimal)
+
+ALL OK

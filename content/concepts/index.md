@@ -64,4 +64,18 @@ The chapters tell the story in the book's order; **concept pages** are the gloss
 ### NP-hardness
 [[concepts/np-hardness]] · [[concepts/polynomial-time-reductions]] · [[concepts/satisfiability]] · [[concepts/independent-set]] · [[concepts/graph-coloring]] · [[concepts/hamiltonian-cycle]] · [[concepts/subset-sum]] · and from Part 1, [[concepts/cook-levin-theorem]]
 
+## Part 3 · Beyond the book
+
+### Probability and randomized algorithms
+[[concepts/discrete-probability]] · [[concepts/tail-inequalities]] · [[concepts/treaps]] · [[concepts/hashing]] · [[concepts/bloom-filters]] · [[concepts/string-matching]] · [[concepts/randomized-minimum-cut]]
+
+### Amortized analysis and lower bounds
+[[concepts/amortized-analysis]] · [[concepts/splay-trees]] · [[concepts/comparison-lower-bounds]] · [[concepts/adversary-arguments]]
+
+### Proofs and recurrences
+[[concepts/strong-induction]] · [[concepts/linear-recurrences]]
+
+### More advanced algorithms
+[[concepts/fast-fourier-transform]] · [[concepts/cyk-algorithm]] · [[concepts/matroids]] · [[concepts/minimum-cost-flow]] · [[concepts/linear-programming]] · [[concepts/simplex-algorithm]] · [[concepts/approximation-algorithms]]
+
 The four classes of languages and the closure properties of each are drawn together on [[0-toolkit/03-the-big-picture|the big picture]]; the exam boilerplate for each kind of proof is collected on [[0-toolkit/02-proof-templates|proof templates]].
