@@ -1,0 +1,57 @@
+OK   the DPLL solver agrees with exhaustive search on 4000 random formulas (2272 satisfiable, 1728 not)
+OK   test inputs: 700 3CNF formulas with three distinct literals per clause, on 3-5 variables and up to 35 clauses (497 satisfiable, 203 not)
+OK   1 the built formula has exactly four distinct literals per clause, 2k clauses and n + k variables
+OK   1 Phi is satisfiable iff the 4CNF formula is (700 inputs)
+OK   1 =>: a satisfying assignment of Phi with ANY values of the new variables satisfies the 4CNF formula
+OK   1 <=: a satisfying assignment of the 4CNF formula, restricted to the old variables, satisfies Phi
+OK   1 variant: one new variable shared by all clauses also works
+OK   1 the eight clauses on x1, x2, x3 with all sign patterns are unsatisfiable
+OK   1 trap: adding only (C or z) for each clause, without (C or not z), turns this unsatisfiable formula into a satisfiable one (all z True)
+OK   1 trap: repeating a literal, (a or b or c or c), does not give four DISTINCT literals
+OK   1 example: (x1 or not x2 or x3) becomes (x1, not x2, x3, z) and (x1, not x2, x3, not z)
+OK   2 Phi is satisfiable iff the built formula has a balanced satisfying assignment (600 random CNF formulas, 397 satisfiable, 203 not)
+OK   2 the built formula has 2n variables and k + 2n clauses
+OK   2 EVERY satisfying assignment of the built formula makes exactly n of its 2n variables True
+OK   2 =>: a satisfying assignment of Phi with y_i = not x_i is a balanced satisfying assignment
+OK   2 <=: a balanced satisfying assignment, restricted to the x's, satisfies Phi
+OK   2 variant: n new variables that occur only in clauses (y_i or not y_i) also works
+OK   2 the identity is not a reduction: (x1) and (x2) is satisfiable but has no balanced satisfying assignment; (x1 or x2 or x3) is satisfiable and has an odd number of variables
+OK   2 example: (x1) and (x2) becomes a formula on x1, x2, y1, y2 whose only satisfying assignment is x1 = x2 = True, y1 = y2 = False
+OK   3 (tool) the one-in-three solver (DPLL on 'at least one' plus 'no two') agrees with exhaustive search on 1500 random instances
+OK   3 gadget: the three clauses (not a, u, v), (b, v, w), (not c, w, t) can be completed to one True literal each iff a or b or c  [{(False, False, False): 0, (False, False, True): 1, (False, True, False): 1, (False, True, True): 1, (True, False, False): 1, (True, False, True): 2, (True, True, False): 1, (True, True, True): 1}]
+OK   3 gadget: number of completions (u, v, w, t) per (a, b, c): FFF 0, FFT 1, FTF 1, FTT 1, TFF 1, TFT 2, TTF 1, TTT 1  [[0, 1, 1, 1, 1, 2, 1, 1]]
+OK   3 gadget: the page's completion rule (b: u = a, t = c; a and c: v, t; a only: v; c only: w) works in all seven cases
+OK   3 the built formula has three distinct literals per clause, 3k clauses and n + 4k variables
+OK   3 Phi is satisfiable iff the built formula has a one-in-three assignment (700 inputs)
+OK   3 =>: a satisfying assignment of Phi, completed clause by clause by the page's rule, is one-in-three
+OK   3 <=: a one-in-three assignment of the built formula, restricted to the old variables, satisfies Phi
+OK   3 a satisfying assignment need not be one-in-three: (x1 or x2 or x3) and (not x1 or x2 or x3) and (x1 or not x2 or x3) and (x1 or x2 or not x3) is satisfiable (all True) but has no one-in-three assignment
+OK   4 the built formula has at most three literals per clause and every variable in at most three clauses (622 of 700 inputs needed copies)
+OK   4 size: at most 4k clauses and 3k variables
+OK   4 Phi is satisfiable iff the built formula is (700 inputs)
+OK   4 =>: give every copy the value of its variable
+OK   4 <=: in a satisfying assignment all copies of a variable are equal, and that value satisfies Phi
+OK   4 the cycle (not x1 or x2), (not x2 or x3), (not x3 or x4), (not x4 or x1) has exactly two satisfying assignments, all False and all True
+OK   4 example: in (x1 x2 x3)(-x1 x2 x4)(x1 -x3 x4)(-x1 -x2 -x4) only x1 occurs four times; the result has 4 + 4 = 8 clauses, and each copy of x1 is in one old clause and two cycle clauses  [[(5, 2, 3), (-6, 2, 4), (7, -3, 4), (-8, -2, -4), (-5, 6), (-6, 7), (-7, 8), (-8, 5)]]
+OK   5 enforcer: every satisfying assignment has z = False, and there are six of them (p, q, r not all equal)  [6]
+OK   5 enforcer: z = False, p = True, q = r = False satisfies it
+OK   5 enforcer: z occurs in three of its clauses, p, q and r in four each; every clause has three distinct variables  [{1: 3, 2: 4, 3: 4, 4: 4}]
+OK   5 enforcer: with z = True the three implications p -> q -> r -> p force p = q = r, which the last two clauses forbid
+OK   5 the built formula has exactly three distinct literals per clause and every variable in at most four clauses (900 random (<=3,<=3) formulas, 754 satisfiable, 146 not)
+OK   5 size: one padding variable per 2-literal clause and two per 1-literal clause; five clauses and four variables per padding variable
+OK   5 Psi is satisfiable iff the built formula is
+OK   5 =>: padding variables False and (p, q, r) = (True, False, False)
+OK   5 <=: every padding variable is False in every satisfying assignment found, and the rest satisfies Psi
+OK   5 composed with Problem 4: 3Sat -> (<=3,<=3)-Sat -> (3,<=4)-Sat preserves the answer and gives the right shape (the 517 inputs with at most 15 clauses, 124 of them unsatisfiable)
+OK   5 example: (x1 or not x2) becomes (x1, not x2, z) plus the five enforcer clauses: 6 clauses, 6 variables; z occurs four times  [[(1, -2, 3), (-3, -4, 5), (-3, -5, 6), (-3, -6, 4), (4, 5, 6), (-4, -5, -6)]]
+OK   5 trap: padding (a or b) as (a, b, z), (a, b, not z) doubles the occurrences of a and b: a variable in three 2-literal clauses would occur six times
+OK   5 footnote: 400 random formulas with three distinct variables per clause and every variable in at most three clauses are all satisfiable, by matching each clause to a variable of its own
+OK   5 footnote needs distinct variables: (x or x or x) and (not x or not x or not x) is unsatisfiable
+OK   6 Gaussian elimination over GF(2) decides XorSat and returns a satisfying assignment (3000 random XCNF formulas, repeated variables allowed; 1325 satisfiable, 1675 not)
+OK   6 at most m * min(m, n) row additions
+OK   6 example: (x1 xor x2), (x2 xor x3), (x1 xor x3) is unsatisfiable: the three equations add up to 0 = 1
+OK   6 example: as ordinary Or-clauses, (x1 or x2), (x2 or x3), (x1 or x3) are satisfiable
+OK   6 example: (x1 xor not x2 xor x3), (x2 xor x3), (not x1 xor not x3) becomes x1+x2+x3 = 0, x2+x3 = 1, x1+x3 = 1; the unique solution is x1 = True, x2 = True, x3 = False  [{1: True, 2: True, 3: False}]
+OK   6 a negated literal flips the right-hand side: (not x) is the equation x = 0, and (x xor x) is 0 = 1
+
+ALL OK

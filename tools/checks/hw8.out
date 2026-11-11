@@ -1,0 +1,27 @@
+OK   1 Dijkstra on the state graph equals the three-phase formula min dA(s,x) + dB(x,y) + dC(y,t) (1500 random networks, t reachable in 738)
+OK   1 the state graph has 3V vertices and 3E + 2V edges
+OK   1 dist(t, C) is never larger than dist(t, A) or dist(t, B): the free peel edges make (t, C) the one target
+OK   1 ... and an exhaustive search over all walks and all peeling decisions (400 small networks)
+OK   1 handout route: as A on s->b->e costs 1 + 4.5 = 5.5, as B on e->d->c->f costs 5 + 3 + 4 = 12, as C on f->t costs 4; total 21.5
+OK   1 handout route: on these six edges the algorithm returns 21.5
+OK   1 handout route: never peeling costs 33, peeling once at the start 30, both at the start 34.5 - one system for the whole trip is not optimal  [{'A': 33.0, 'B': 30.0, 'C': 34.5}]
+OK   1 trap: s -> x in system C then x -> t in system A, 10 each: the answer is 15, not 10 - the card cannot go back from C to A
+OK   1 an unreachable t gives infinity
+OK   2(a) the function used below is the page's table (rows 0-3, columns 3, 7, 4, other)
+OK   2(a) the DFA ends in state 3 exactly on the strings that contain 374 (131111 strings: all of length <= 5 over ten digits, random longer ones)
+OK   2(a) in a state j < 3, j is the length of the longest suffix of the input that is a prefix of 374
+OK   2(a) '(t, 3) is marked' equals an enumeration of all walks with at most 4V - 1 edges, read as strings and searched for 374 (420 graphs on 3-4 vertices, 93 yes)
+OK   2(a) the marked set is exactly {(v, state of M after sigma(W))} over all walks W from s (the lemma)
+OK   2(a) ... and an independent search that remembers the last two labels (1500 more graphs on 3-9 vertices, 388 yes)
+OK   2(a) the posted solution's 'guess where 374 starts' layers give the same answers
+OK   2(a) at most 4V product vertices are marked
+OK   2(a) example: vertices labeled 5, 3, 7, 4 with edges s->a->b->c->a: the walk s a b c has string 374, so (c, 3) is marked; so is (a, 3) (go round once more); (s, 3) is not
+OK   2(a) example: the first label is not read - starting AT the vertex labeled 3, the walk a b c has string 74 and no walk from a to c of length 2 contains 374, but going round the cycle does
+OK   2(a) with s = t and no edges the answer is False (the empty string does not contain 374)
+OK   2(b) the product V x Q equals an enumeration of all walks with at most V*Q - 1 edges, with the DFA simulated on each label string (900 random graphs and DFAs, 284 yes)
+OK   2(b) at most V*Q product vertices are marked
+OK   2(b) with s = t and no edges, the answer is True exactly when the start state is accepting (the empty walk)
+OK   2(b) with the 374 automaton (Q = 4, accepting state 3) the general algorithm is the algorithm of 2(a)
+OK   2 the full product graph has |V||Q| vertices and |E||Q| edges (5 vertices, 6 edges, Q = 4: 20 and 24)
+
+ALL OK

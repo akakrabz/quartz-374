@@ -388,7 +388,7 @@ One double-sided letter sheet, handwritten — writing it is half the review. Th
 > | Sun Nov 1 | recursion, divide and conquer | §2; Labs 6a, 6b; redo one HW5 problem in 20 minutes with the template; drill A |
 > | Mon Nov 2 | backtracking, dynamic programming | §3–4; Labs 7a, 7b, 8a, 8b; the [[3-homework-and-exams/hw6-dynamic-programming\|HW6]] and [[3-homework-and-exams/hw7-dynamic-programming\|HW7]] write-ups; drill B; check whether the Fall 2026 practice exams are up |
 > | Tue Nov 3 | lecture: Bellman–Ford as DP, Floyd–Warshall | HW9 due; after the lecture, §7 and its two interface boxes; Lab 10a |
-> | Wed Nov 4 | depth-first search, topological sort, strong components | Lab 11, “Solve it both ways” (Nov 4, per the course calendar); §6; Lab 9b; drills C and D |
+> | Wed Nov 4 | depth-first search, topological sort, strong components | [[3-homework-and-exams/lab-11\|Lab 11]], “Solve it both ways” (Nov 4, per the course calendar); §6; Lab 9b; drills C and D |
 > | Thu Nov 5 | review session (optional) | write the whole cheat sheet (§11); first timed practice exam, 120 minutes, only the sheet |
 > | Fri Nov 6 | review session (optional) | grade yesterday's exam with the rubrics; redo every lost point without looking |
 > | Sat Nov 7 | timed exam 2 | another practice exam; fix the cheat sheet where it failed you |

@@ -1,0 +1,52 @@
+OK   6 lecture-day pages found  [2026-10-20, 2026-10-22, 2026-10-27, 2026-10-29, 2026-11-03, 2026-11-10]
+OK   2026-10-20: frontmatter lecture date equals the file name
+OK   2026-10-20: the title starts with the right weekday and date (Tue Oct 20)  [Tue Oct 20 — Graphs,]
+OK   2026-10-20: the meta line gives the date as Tuesday, October 20, 2026
+OK   2026-10-20: previous/next links point to the neighboring lecture days
+OK   2026-10-20: linked from the hub page
+OK   2026-10-20: the transcript named in the sources exists  [686987472 - 1_qk0pqho9 - PID 1329972.txt]
+OK   2026-10-20: all 6 quoted strings occur word for word in the transcript  [[]]
+OK   2026-10-20: the 3 transcript phrases cited in the sources occur in the transcript  [[]]
+OK   2026-10-22: frontmatter lecture date equals the file name
+OK   2026-10-22: the title starts with the right weekday and date (Thu Oct 22)  [Thu Oct 22 — Graph l]
+OK   2026-10-22: the meta line gives the date as Thursday, October 22, 2026
+OK   2026-10-22: previous/next links point to the neighboring lecture days
+OK   2026-10-22: linked from the hub page
+OK   2026-10-22: the transcript named in the sources exists  [687888532 - 1_le4j544a - PID 1329972.txt]
+OK   2026-10-22: all 8 quoted strings occur word for word in the transcript  [[]]
+OK   2026-10-22: the 1 transcript phrases cited in the sources occur in the transcript  [[]]
+OK   2026-10-27: frontmatter lecture date equals the file name
+OK   2026-10-27: the title starts with the right weekday and date (Tue Oct 27)  [Tue Oct 27 — Cycles ]
+OK   2026-10-27: the meta line gives the date as Tuesday, October 27, 2026
+OK   2026-10-27: previous/next links point to the neighboring lecture days
+OK   2026-10-27: linked from the hub page
+OK   2026-10-27: the transcript named in the sources exists  [689453872 - 1_o8kwro5v - PID 1329972.txt]
+OK   2026-10-27: all 3 quoted strings occur word for word in the transcript  [[]]
+OK   2026-10-27: the 4 transcript phrases cited in the sources occur in the transcript  [[]]
+OK   2026-10-29: frontmatter lecture date equals the file name
+OK   2026-10-29: the title starts with the right weekday and date (Thu Oct 29)  [Thu Oct 29 — Negativ]
+OK   2026-10-29: the meta line gives the date as Thursday, October 29, 2026
+OK   2026-10-29: previous/next links point to the neighboring lecture days
+OK   2026-10-29: linked from the hub page
+OK   2026-10-29: the transcript named in the sources exists  [690425642 - 1_2tt9ndya - PID 1329972.txt]
+OK   2026-10-29: all 6 quoted strings occur word for word in the transcript  [[]]
+OK   2026-10-29: the 4 transcript phrases cited in the sources occur in the transcript  [[]]
+OK   2026-11-03: frontmatter lecture date equals the file name
+OK   2026-11-03: the title starts with the right weekday and date (Tue Nov 3)  [Tue Nov 3 — Bellman–]
+OK   2026-11-03: the meta line gives the date as Tuesday, November 3, 2026
+OK   2026-11-03: previous/next links point to the neighboring lecture days
+OK   2026-11-03: linked from the hub page
+OK   2026-11-03: the transcript named in the sources exists  [692290403 - 1_npunx84p - PID 1329972.txt]
+OK   2026-11-03: all 5 quoted strings occur word for word in the transcript  [[]]
+OK   2026-11-03: the 6 transcript phrases cited in the sources occur in the transcript  [[]]
+OK   2026-11-10: frontmatter lecture date equals the file name
+OK   2026-11-10: the title starts with the right weekday and date (Tue Nov 10)  [Tue Nov 10 — Decisio]
+OK   2026-11-10: the meta line gives the date as Tuesday, November 10, 2026
+OK   2026-11-10: previous/next links point to the neighboring lecture days
+OK   2026-11-10: linked from the hub page
+OK   2026-11-10: the transcript named in the sources exists  [694494693 - 1_xa6moxf5 - PID 1329972.txt]
+OK   2026-11-10: all 5 quoted strings occur word for word in the transcript  [[]]
+OK   2026-11-10: the 8 transcript phrases cited in the sources occur in the transcript  [[]]
+OK   33 quotations checked in all
+
+ALL OK

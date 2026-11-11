@@ -1,0 +1,47 @@
+OK   1(a) the scan L = 1 .. V-1 returns the length of the longest simple path (4505 directed graphs: all on <= 4 vertices, random on 5-7)
+OK   1(a) binary search over L returns the same length
+OK   1(a) the box is monotone: True for L implies True for L-1; it is always False for L = V
+OK   1(a) call counts: the scan makes at most V-1 calls, binary search at most ceil(log2 V)  [max scan calls 6, max binary calls 3]
+OK   1(b) after the edge deletions, exactly one simple path of length L* remains, made of edges of G (several edge orders)
+OK   1(b) call count at most (V-1) + E
+OK   1(b) in what remains, deleting any edge destroys every path of length L*
+OK   1 example (a->b, b->c, c->a, c->d, d->e, b->d): the longest path has 4 edges; there are exactly two such paths, a->b->c->d->e and c->a->b->d->e
+OK   1 example, edges tried in the order listed: a->b kept, b->c deleted, c->a kept, c->d deleted, d->e kept, b->d kept; what remains is the path c->a->b->d->e  [(['ab', 'ca', 'de', 'bd'], ['bc', 'cd'])]
+OK   1 example: 4 calls for the length (L = 1, 2, 3, 4, all True) and 6 for the edges: 10 calls  [10]
+OK   1 example, edges tried in the reverse order: the other longest path a->b->c->d->e remains  [[(0, 1), (1, 2), (2, 3), (3, 4)]]
+OK   1 example: Box(G, 5) is not needed (a path has at most V-1 = 4 edges) and would be False
+OK   1 trap: testing every edge against the original G (never deleting) leaves nothing on a->b, a->c (each edge alone is avoidable)  [[]]
+OK   1 the box refuses L = 0 (the handout says positive integer); the algorithms above never ask it
+OK   2(a) the scan k = 1, 2, ... returns the size of the largest independent set (2106 graphs: all on <= 5 vertices, a sample on 6, random on 7-9)
+OK   2(a) binary search over k returns the same size
+OK   2(a) the box is monotone in k (a subset of an independent set is independent); True for k = 0, False for k = V + 1
+OK   2(a) 'an independent set of size exactly k' and 'of size at least k' are the same question
+OK   2(a) call counts: the scan at most V calls, binary search at most ceil(log2(V+1))
+OK   2(b) vertex deletion: the surviving vertices are an independent set of maximum size (three vertex orders)
+OK   2(b) variant: take v and delete its closed neighborhood when Box(G - N[v], k-1), else delete v: a maximum independent set
+OK   2(b) at most 2V calls in all (V for the size, V for the deletions)
+OK   2 example (edges ab, bc, cd, de, bd): the largest independent set has 3 vertices, and vertex deletion in the order a..e returns {a, c, e}  [(3, [0, 2, 4])]
+OK   2 example: 4 calls for the size (k = 1, 2, 3 True, 4 False) and 5 for the deletions  [9]
+OK   2 example: {a, c, e} is the only independent set of size 3  [[21]]
+OK   2 trap: on a single edge uv, 'v is in some maximum independent set' is True for both u and v, and {u, v} is not independent: decisions must update the graph
+OK   3 the smallest k with Box(G, k) is the chromatic number (1245 graphs: all on <= 5 vertices, random on 6-8)
+OK   3 the classes read off the final graph are a proper coloring of G with exactly chi(G) colors
+OK   3 the final graph is complete multipartite: two vertices are adjacent in it iff they got different colors
+OK   3 in the final graph, 'not adjacent' is an equivalence relation
+OK   3 at most V + (V choose 2) - E calls
+OK   3 example, the 5-cycle a b c d e: chromatic number 3 (Box says False for k = 1, 2 and True for 3)
+OK   3 example: the non-adjacent pairs are tried in the order ac, ad, bd, be, ce; ac and ad are added, bd is refused, be is added, ce is refused; the classes are {a}, {b, d}, {c, e}  [([(0, 2), (0, 3), (1, 4)], [0, 1, 2, 1, 2])]
+OK   3 example: 3 calls for the chromatic number and 5 for the pairs: 8 calls  [8]
+OK   3 example: C5 + ac + ad is 3-colorable; adding bd is refused (not 3-colorable); C5 + ac + ad + be is 3-colorable; adding ce to that is refused
+OK   3 example: with bd, the vertices a, b, c, d would be pairwise adjacent (a 4-clique); with ce, the vertices a, c, d, e would be
+OK   3 example: the final graph is the complete 3-partite graph with parts {a}, {b, d}, {c, e}: 8 edges
+OK   3 variant: merge two non-adjacent vertices when the merged graph stays k*-colorable, else add the edge; the final graph is a clique on chi(G) merged vertices, and the groups are an optimal proper coloring
+OK   4 the algorithm returns an input that makes K True whenever one exists (726 circuits: every boolean function of 1, 2 and 3 inputs, random circuits on 4-6 inputs)
+OK   4 it returns None, after one call, exactly when K is unsatisfiable (136 unsatisfiable circuits)
+OK   4 exactly n + 1 calls on a satisfiable circuit; every circuit handed to the box has the same n inputs
+OK   4 the answer is the lexicographically largest satisfying input (True tried first)
+OK   4 example K = (x1 or x2) and not(x1 and x3): the answers are True (K), True (K and x1), True (and x2), False (and x3), and the output is (True, True, False)  [(True, True, False)]
+OK   4 example: K has 4 satisfying inputs out of 8
+OK   4 remark: with a box for Sat, adding the unit clause (x_i) or (not x_i) in each round finds a satisfying assignment of a CNF formula with n + 1 calls (1500 random formulas)
+
+ALL OK

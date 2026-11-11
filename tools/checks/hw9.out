@@ -1,0 +1,24 @@
+OK   1(a) lo[b] and hi[b] are the lengths of the shortest and longest s-b paths (900 random maps)
+OK   1(a) all s-b paths have the same length iff lo[b] = hi[b] (211 maps with equal lengths, 689 without)
+OK   1(a) with one source and one sink, every vertex lies on some s-b path (so the recurrences never see an empty min or max)
+OK   1(a) examples: the diamond s->a->b, s->c->b has lo = hi = 2 (True); with the extra edge a->c (s->a, s->c, a->c, c->b) lo = 2 and hi = 3 (False)
+OK   1(b) R(s, k) equals a simulation of every s-b path (1800 inputs, 462 of them with no surviving path: -inf)
+OK   1(b) at most kE recurrence terms are evaluated: O(k(V + E)) time
+OK   1(b) example (a: relic, damage 2; c: nothing; boss: damage 1): k = 1 gives -inf, k = 2 and 3 give 0, k = 4 gives 1  [[-inf, 0, 0, 1]]
+OK   1(b) example, table for k = 4: R(a, 2) = 0 and R(a, 1) = -inf (the boss deals 1), R(s, 4) = 1 via a, R(s, 3) = 0 via c
+OK   1(b) trap: 'take the path with the most relics' (ignoring health) picks s->a->b, which dies for k = 3; the answer is 0, not 1 and not -inf
+OK   1(b) the boss's own damage counts: with k = 1 even the harmless path s->c->b dies on entering b
+OK   2(a) Bellman-Ford with weights +2 / -1 reports a negative cycle iff some simple cycle is energetic (1300 random two-colored graphs on up to 6 vertices, 713 with an energetic cycle)
+OK   2(c) the layered algorithm (balances -V .. 2V, Dijkstra from every (s, 0)) returns the weight of the shortest energetic simple cycle, or infinity
+OK   2(c) the layered graph has (3V + 1)V vertices and at most (3V + 1)E edges
+OK   2(b) with a much wider balance range (-4V-4 .. 8V+8), which admits many more closed walks, the shortest energetic closed walk still has the weight of the shortest energetic simple cycle
+OK   2(b) splitting an energetic closed walk at a repeated vertex (1360 random walks): two closed walks, each with at least one edge, balances and weights add up, each is strictly lighter, and at least one is energetic
+OK   2(c) the lower end -V is needed: an all-blue triangle is an energetic cycle of weight 3 whose balance reaches -3 = -V; with layers -V .. 2V the algorithm returns 3
+OK   2(c) ... and with layers -V+1 .. 2V-2 (a cycle wrongly assumed to have at most V - 1 edges) it finds nothing
+OK   2(c) remark: the upper layers are generous - balances -V .. V already give the same answers on 600 random graphs (a prefix balance above V could never come back below 0 within V edges)
+OK   2 example: the cycle a b c has balance 2 - 2 = 0 (not energetic, weight 3); the cycle a b c d e has balance 2 - 4 = -2 (energetic, weight 14); there are no other cycles  [[(3, 0, 3), (5, -2, 14)]]
+OK   2 example: part (a) says yes, part (c) returns 14
+OK   2 example: the closed walk a b c a b c d e a (the short cycle, then the long one) has balance -2 and weight 17 - energetic, but longer than the simple cycle inside it
+OK   2(a) a blue loop is an energetic cycle of one edge; a red loop is not
+
+ALL OK

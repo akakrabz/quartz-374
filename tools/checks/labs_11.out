@@ -1,0 +1,32 @@
+OK   1(a) the dynamic program equals an exhaustive search over all subsequences (1428 inputs)
+OK   1(a) at most (k+1) n(n-1)/2 inner steps: O(n^2 k) time for an (n) x (k+1) table
+OK   1(a) a budget k >= n behaves like k = n (so k can be capped at n)
+OK   1(b) the longest s-t path of the layered dag equals the same answer
+OK   1(b) every edge goes from a smaller index to a larger one (s first, t last): the graph is a dag
+OK   1(b) n(k+1) + 2 vertices and at most 1 + n + n(k+1) + (k+1) n(n-1)/2 edges: O(n^2 k)
+OK   1 handout example: 22 numbers, 10 of them icky, k = 2
+OK   1 handout example: the answer is 5 (dynamic program, graph reduction and exhaustive backtracking agree)
+OK   1 handout example: 4, 5*, 6, 7, 9* is an increasing subsequence with exactly two icky numbers
+OK   1 handout example with other budgets: k = 0 gives 3, k = 1 gives 4, k = 3 gives 6, no budget (k = 10) gives 6  [[3, 4, 6, 6]]
+OK   1 small example A = 2*, 5, 3*, 4, 6*, k = 1: the answer is 2  [2]
+OK   1 small example: the table rows (c = 0, c = 1) for i = 1..5  [[[-inf, 2], [1, 2], [-inf, 2], [1, 2], [-inf, 1]]]
+OK   1 small example: the answers for k = 0, 1, 2, 3 are 1, 2, 3, 4 (2*, 3*, 4, 6* needs all three icky numbers)
+OK   1 small example: L(1, 1) = 2 comes from 1 + L(2, 0) or 1 + L(4, 0), both 1 (the budget is spent on 2*)
+OK   1 trap: ignoring the budget overcounts (small example: plain LIS 4, correct answer 2)
+OK   1 trap: deleting every icky number first undercounts (small example: 1 instead of 2)  [1]
+OK   2(a) LongPal, in the stated order, equals an enumeration of all paths (1200 random labeled dags on up to 8 vertices)
+OK   2(a) at most V^2 + E^2 steps
+OK   2(a) the two-step version with Half(x, v) gives the same answers
+OK   2(a) the two-step version takes at most V^2 + 2VE steps
+OK   2(b) the longest s-t path of the pair graph equals the same answer
+OK   2(b) the pair graph is a dag (the first coordinate moves forward along an edge of G)
+OK   2(b) at most V^2 + 2 vertices and 2V^2 + E^2 edges
+OK   2 handout figure: 14 vertices, 27 edges, acyclic
+OK   2 handout figure: the longest palindromic path label has length 6, and the path is H A N N A H (the highlighted one)  [(6, ['H1', 'A1', 'N2', 'N3', 'A2', 'H2'])]
+OK   2 handout figure: the only palindromic path labels with at least 4 letters are ANNA and HANNAH  [['ANNA', 'HANNAH']]
+OK   2 handout figure: dynamic program, two-step version and pair graph all return 6
+OK   2 handout figure: LongPal(N2, N3) = 2, LongPal(A1, A2) = 4, LongPal(H1, H2) = 6
+OK   2 handout figure: 433 directed paths in all were enumerated  [433]
+OK   2 trap: a path whose label merely starts and ends with the same letter need not be a palindrome: H -> A -> E -> T -> H is a path of the figure with label HAETH
+
+ALL OK
